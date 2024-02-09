@@ -1,0 +1,15 @@
+.checkbox {
+  border-color: #cdcdcd;
+}
+
+.checkbox[data-checked] {
+  border-color: none;
+}
+
+.checkbox_dark {
+  border-color: #f8f8f8;
+}
+
+.checkbox_dark[data-checked] {
+  border-color: none;
+}

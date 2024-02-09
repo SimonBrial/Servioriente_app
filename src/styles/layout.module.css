@@ -1,0 +1,17 @@
+.containerLayout {
+  background-color: #fff;
+  max-width: 100%;
+  border: 2px solid #cdcdcd;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 6px;
+}
+
+.containerLayout_dark {
+  background-color: #9a90ef1a;
+  max-width: 100%;
+  border: 2px solid #29363f;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 6px;
+}

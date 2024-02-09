@@ -1,0 +1,21 @@
+@media (max-width: 1280px) {
+  .carousel_container {
+    width: 660px;
+  }
+}
+@media (min-width: 1281px) {
+  .carousel_container {
+    width: 825px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .columnCard_container {
+    width: 705px;
+  }
+}
+@media (min-width: 1281px) {
+  .columnCard_container {
+    width: 870px;
+  }
+}

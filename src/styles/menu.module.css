@@ -1,0 +1,18 @@
+.menuDropdown {
+  background-color: #f8f8f8;
+  transition: all 0.2s ease-in-out;
+}
+.menuDropdown_dark {
+  background-color: #262749;
+}
+.menuDropdown_item:hover {
+  background-color: #efefef;
+  transition: all 0.2s ease-in-out;
+}
+.menuDropdown_item_dark {
+  color: #eff3f5;
+}
+.menuDropdown_item_dark:hover {
+  background-color: #3a4c5a;
+  transition: all 0.2s ease-in-out;
+}

@@ -1,0 +1,60 @@
+.conversationContainer {
+  border: 1px solid #cdcdcd;
+  padding: 0rem;
+  border-radius: 6px;
+  background-color: #696969;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+}
+.conversationContainer_dark {
+  border: 1px solid #29363f;
+  padding: 0rem;
+  border-radius: 6px;
+  background-color: #0b1115;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.cloudContainer {
+  /* border: 1px solid #cdcdcd; */
+  box-shadow: 0px 5px 5px -1px #115dfe;
+  padding: 0.5rem;
+  margin-bottom: 0.4rem;
+  max-width: 350px;
+  background-color: #f8f8f8;
+  margin-right: 0;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+.cloudContainer_dark {
+  /* border: 1px solid #29363f; */
+  box-shadow: 0px 5px 5px -1px #52a5e0;
+  padding: 0.5rem;
+  margin-bottom: 0.4rem;
+  max-width: 350px;
+  background-color: #29363f;
+  margin-right: 0;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+
+.UserContactContainer {
+  border: 1px solid #cdcdcd;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  background-color: white;
+  width: 100%;
+}
+.UserContactContainer_dark {
+  border: 1px solid #29363f;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  background-color: #9a90ef1a;
+  width: 100%;
+}

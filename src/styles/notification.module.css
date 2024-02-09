@@ -1,0 +1,20 @@
+.notificationBody {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: white;
+  max-width: 40rem;
+}
+
+.notificationClose {
+  padding: 0.2rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  border-radius: 6px;
+}
+
+.notificationClose:hover {
+  color: #f8f8f8;
+  background-color: hsla(246, 75%, 75%, 0.3);
+  transition: all 0.2s ease-in-out;
+}

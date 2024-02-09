@@ -1,0 +1,135 @@
+.dayHeader {
+  border: 1px solid #115dfe;
+  background-color: #115dfe64;
+  width: 100%;
+  color: #115dfe;
+  text-align: center;
+}
+
+.dayHeader:hover {
+  background-color: #033eb264;
+  color: #033eb2;
+  cursor: default;
+  transition: all 0.3s ease-in-out;
+}
+
+.dayHeader_dark {
+  border: 1px solid #52a5e0;
+  background-color: #52a5e064;
+  color: #eff3f5;
+  width: 100%;
+  text-align: center;
+}
+
+.dayHeader_dark:hover {
+  background-color: #115dfe64;
+  color: #eff3f5;
+  cursor: default;
+  transition: all 0.3s ease-in-out;
+}
+
+.dayHeader:first-child {
+  border-radius: 6px 0 0 0;
+}
+.dayHeader:last-child {
+  border-radius: 0 6px 0 0;
+}
+
+.dayHeader_dark:first-child {
+  border-radius: 6px 0 0 0;
+}
+.dayHeader_dark:last-child {
+  border-radius: 0 6px 0 0;
+}
+
+.weekday {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #cdcdcd;
+  color: #696969;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.weekday_dark {
+  background-color: #9a90ef1a;
+  border-bottom: 1px solid #3a4c5a;
+  color: #eff3f5;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekday_container {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #cdcdcd;
+  overflow: hidden;
+}
+.weekday_container_dark {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #3a4c5a;
+  overflow: hidden;
+}
+
+.dayEvents {
+  background-color: #ffffff;
+  color: #696969;
+  height: 7rem;
+  padding: 0.3rem;
+  cursor: default;
+}
+.dayEvents:hover {
+  background-color: #efefef;
+  transition: all 0.3s ease-in-out;
+  cursor: default;
+}
+.dayEvents_dark {
+  background-color: #29363f;
+  color: #c8cdd0;
+  height: 7rem;
+  padding: 0.3rem;
+  cursor: default;
+}
+.dayEvents_dark:hover {
+  background-color: #9a90ef1a;
+  transition: all 0.3s ease-in-out;
+  cursor: default;
+}
+
+.eventCard_sm {
+  background-color: #f8f8f8;
+  padding: 0.25rem 0.4rem;
+  border-radius: 3px;
+  width: 100%;
+}
+.eventCard_sm:hover {
+  background-color: red;
+  transition: all 0.3s ease-in-out;
+}
+.eventCard {
+  background-color: #f8f8f8;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  width: 100%;
+}
+.eventCard:hover {
+  background-color: red;
+  transition: all 0.3s ease-in-out;
+}
+
+.dayEventList {
+  width: 100%;
+  border: 1px solid #cdcdcd;
+  background-color: #ffffff;
+  padding: 0.8rem;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.dayEventList_dark {
+  width: 100%;
+  border: 1px solid #3a4c5a;
+  background-color: #262749;
+  padding: 0.8rem;
+  border-radius: 6px;
+}

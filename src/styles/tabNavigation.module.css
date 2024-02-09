@@ -1,0 +1,23 @@
+.tab_label:hover {
+  transition: all 0.1s ease-in-out;
+  color: #115dfe;
+}
+
+.tab_label_dark:hover {
+  transition: all 0.1s ease-in-out;
+  color: #52a5e0;
+}
+
+.tab_item[data-active],
+.tab_item[data-active]:hover {
+  transition: all 0.1s ease-in-out;
+  color: #115dfe;
+  border-bottom-width: 3px;
+}
+
+.tab_item_dark[data-active],
+.tab_item_dark[data-active]:hover {
+  transition: all 0.1s ease-in-out;
+  color: #52a5e0;
+  border-bottom-width: 3px;
+}

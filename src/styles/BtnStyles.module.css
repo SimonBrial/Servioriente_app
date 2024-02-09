@@ -1,0 +1,295 @@
+.btnFilter {
+  background-color: #f8f8f8;
+  border: 1px solid #cdcdcd;
+  color: #696969;
+  padding: 0.2rem 0.8rem;
+  border-radius: 6px;
+  height: 100%;
+}
+
+.btnFilter:hover {
+  background-color: #efefef;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+}
+.btnFilter_dark {
+  background-color: #9a90ef1a;
+  border: 1px solid #2a3b47;
+  color: #eff3f5;
+  padding: 0.2rem 0.8rem;
+  border-radius: 6px;
+  height: 100%;
+}
+/* Corregir los colores cuando se le haga hover */
+.btnFilter_dark:hover {
+  background-color: #3a4c5a;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.FilterIcon {
+  font-size: 1.5rem;
+  margin-bottom: -0.3rem;
+}
+
+.btnAdd {
+  background-color: #004ee5;
+  height: 100%;
+}
+
+.btnAdd:hover {
+  background-color: #52a5e0;
+  transition: all 0.2s ease-in-out;
+}
+.btnAdd_dark {
+  background-color: #52a5e0;
+  height: 100%;
+}
+
+.btnAdd_dark:hover {
+  background-color: #033eb2;
+  transition: all 0.2s ease-in-out;
+}
+.btnCancel {
+  background-color: #fff;
+  border: 1px solid #004ee5;
+  height: 100%;
+}
+.btnCancel:hover {
+  background-color: #eff3f5;
+  transition: all 0.2s ease-in-out;
+}
+.btnCancel_dark {
+  background-color: #fff;
+  border: 1px solid #004ee5;
+  height: 100%;
+}
+.btnCancel_dark:hover {
+  background-color: #c8cdd0;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnEdit_item {
+  color: #696969;
+  font-size: 1.2rem;
+}
+
+.btnEdit_item_dark {
+  color: #f8f8f8;
+  font-size: 1.2rem;
+}
+
+.btnEdit_item:hover {
+  color: orange;
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.btnEdit_item_dark:hover {
+  color: orange;
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.btnDelete_item {
+  color: #696969;
+  font-size: 1.2rem;
+}
+
+.btnDelete_item_dark {
+  color: #f8f8f8;
+  font-size: 1.2rem;
+}
+
+.btnDelete_item_dark:hover {
+  color: red;
+  transition: color 0.3s ease-in-out;
+}
+
+.btnDelete_item:hover {
+  color: red;
+  transition: color 0.3s ease-in-out;
+}
+
+.btnView_item {
+  color: #696969;
+  font-size: 1.2rem;
+}
+
+.btnView_item_dark {
+  color: #f8f8f8;
+  font-size: 1.2rem;
+}
+
+.btnView_item:hover {
+  color: #004ee5;
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.btnView_item_dark:hover {
+  color: #52a5e0;
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.btnMail {
+  color: #696969;
+  margin-bottom: "-0.25rem";
+  padding: 0.3rem;
+  border-radius: 6px;
+}
+
+.btnMail:hover {
+  color: #696969;
+  background-color: #efefef;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnMail_dark {
+  color: #eff3f5;
+  margin-bottom: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 6px;
+}
+
+.btnMail_dark:hover {
+  color: #cdcdcd;
+  background-color: #bbb5f43b;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnFavorite {
+  color: #696969;
+  font-size: 2rem;
+  margin-right: 0.5rem;
+  border-radius: 6px;
+  padding: 0.2rem;
+}
+
+.btnFavorite:hover {
+  color: #004ee5;
+  background-color: #efefef;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnFavorite_dark {
+  color: #efefef;
+  font-size: 2rem;
+  margin-right: 0.5rem;
+  border-radius: 6px;
+  padding: 0.2rem;
+}
+
+.btnFavorite_dark:hover {
+  color: #52a5e0;
+  background-color: #bbb5f43b;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnBackSection {
+  background-color: transparent;
+  color: #696969;
+}
+
+.btnBackSection:hover {
+  background-color: #efefef;
+  color: #696969;
+  transition: all 0.2s ease-in-out;
+}
+.btnBackSection_withStyles {
+  background-color: white;
+  color: #004ee5;
+  border: 2px solid #004ee5;
+}
+
+.btnBackSection_withStyles:hover {
+  background-color: #cdcdcd;
+  color: #004ee5;
+  border: 2px solid #004ee5;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnBackSection_dark {
+  background-color: transparent;
+  color: #eff3f5;
+}
+
+.btnBackSection_dark:hover {
+  background-color: #efefef59;
+  color: #eff3f5;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnMonth {
+  background-color: white;
+  color: #004ee5;
+  border: 1px solid #004ee5;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 1.2rem;
+}
+.btnMonth:hover {
+  background-color: #f8f8f8;
+  color: #033eb2;
+  border: 1px solid #033eb2;
+  transition: all 0.2s ease-in-out;
+}
+.btnMonth_dark {
+  background-color: #bbb5f43b;
+  color: #52a5e0;
+  border: 1px solid #52a5e0;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 1.2rem;
+}
+.btnMonth_dark:hover {
+  background-color: #efefef59;
+  color: #52a5e0;
+  border: 1px solid #52a5e0;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnViewCalendar {
+  padding: 0.5rem;
+  background-color: #f8f8f8;
+  border: 1px solid #cdcdcd;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  color: #696969;
+}
+.btnViewCalendar:hover {
+  background-color: #efefef;
+  border: 1px solid #cdcdcd;
+  transition: all 0.2s ease-in-out;
+  color: #696969;
+}
+.btnViewCalendar_dark {
+  padding: 0.5rem;
+  background-color: #9a90ef1a;
+  border: 1px solid #2a3b47;
+  border-radius: 6px;
+  font-size: 1.2rem;
+}
+.btnViewCalendar_dark:hover {
+  background-color: #3a4c5a;
+  transition: all 0.3s ease-in-out;
+}
+
+/* .btnFavorite_icon {
+  color: #cdcdcd;
+}
+
+.btnFavorite_icon:hover {
+  color: #004ee5;
+  transition: all 0.2s ease-in-out;
+}
+
+.btnFavorite_icon_dark {
+  color: #cdcdcd;
+}
+
+.btnFavorite_icon_dark:hover {
+  color: #52a5e0;
+  transition: all 0.2s ease-in-out;
+} */

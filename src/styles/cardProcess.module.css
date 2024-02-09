@@ -1,0 +1,59 @@
+.card_container {
+  background-color: #efefef;
+  border: 1px solid #cdcdcd;
+  padding: 0rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 6px;
+  position: relative;
+  margin: 0.2rem 0;
+}
+.card_container:hover {
+  border: 1px solid #696969;
+  transition: all 0.2s ease-in-out;
+}
+.card_container_dark {
+  background-color: #9a90ef1a;
+  border: 1px solid #2a3b47;
+  padding: 0rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 6px;
+  position: relative;
+  margin: 0.2rem 0;
+}
+.card_container_dark:hover {
+  border: 1px solid #cdcdcd;
+  transition: all 0.2s ease-in-out;
+}
+
+.card_divider {
+  height: 58px;
+  border-radius: 15px;
+  margin-top: 0.4rem;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+}
+
+.process_col {
+  border-radius: 6px;
+}
+.process_col:hover {
+  background-color: #f8f8f8;
+  transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+}
+.card_container_dark:hover {
+  background-color: #9a90ef1a;
+  transition: all 0.2s ease-in-out;
+}
+
+.process_col {
+  border-radius: 6px;
+}
+.process_col_dark:hover {
+  background-color: #9a90ef1a;
+  transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+}
