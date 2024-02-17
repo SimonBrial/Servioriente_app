@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/array-type */
-import { getFilteredChartTooltipPayload } from '@mantine/charts';
-import { Paper, Text } from '@mantine/core';
+import { getFilteredChartTooltipPayload } from "@mantine/charts";
+import { Paper, Text } from "@mantine/core";
 /* const data = [
   {
     date: 'Mar 22',
@@ -39,8 +39,9 @@ interface ChartTooltipProps {
   payload: Record<string, any>[] | undefined;
 }
 
-export default function ChartTooltip({ label, payload }: ChartTooltipProps) {
+export const ChartTooltip = ({ label, payload }: ChartTooltipProps) => {
   if (!payload) return null;
+  console.log(getFilteredChartTooltipPayload(payload))
 
   return (
     <Paper px="md" py="sm" withBorder shadow="md" radius="md">
@@ -54,4 +55,4 @@ export default function ChartTooltip({ label, payload }: ChartTooltipProps) {
       ))}
     </Paper>
   );
-}
+};

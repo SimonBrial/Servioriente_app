@@ -55,6 +55,7 @@ import {
   IoChevronForward,
   IoLogoInstagram,
   IoLogoFacebook,
+  IoLogoWhatsapp,
   IoChevronBack,
   IoChevronUp,
   IoClose,
@@ -70,6 +71,7 @@ import { TbTemplate, TbMailPlus, TbWorld, TbEdit } from "react-icons/tb";
 import {
   MdOutlineInsertEmoticon,
   MdOutlineMarkChatUnread,
+  MdOutlineDragIndicator,
   MdOutlineEmojiEvents,
   MdOutlineEventNote,
   MdOutlineCategory,
@@ -90,6 +92,7 @@ import {
 } from "react-icons/ai";
 import { BiMailSend, BiBellPlus, BiCrown } from "react-icons/bi";
 import { PiRobot, PiFolderSimpleDashed } from "react-icons/pi";
+import { FaFacebookF } from "react-icons/fa6";
 
 export {
   AiOutlineFundProjectionScreen,
@@ -99,6 +102,7 @@ export {
   IoCheckmarkCircleOutline,
   MdOutlineMarkChatUnread,
   MdOutlineInsertEmoticon,
+  MdOutlineDragIndicator,
   HiOutlineDotsVertical,
   HiOutlineDocumentText,
   MdOutlineEmojiEvents,
@@ -138,6 +142,7 @@ export {
   HiOutlinePencil,
   AiOutlineIdcard,
   IoLogoInstagram,
+  IoLogoWhatsapp,
   LuCalendarPlus,
   HiOutlineClock,
   MdOutlinePlace,
@@ -157,6 +162,7 @@ export {
   HiOutlineCog,
   HiOutlineEye,
   HiOutlineSun,
+  FaFacebookF,
   IoChevronUp,
   BsTelephone,
   HiPaperClip,

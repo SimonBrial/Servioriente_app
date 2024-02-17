@@ -5,6 +5,7 @@ import {
   CardContainerHeader,
   NotificationType,
   degreeType,
+  processTitle,
 } from "../types/types";
 
 interface NavIconProps {
@@ -198,7 +199,37 @@ interface EventCardData {
   id: string;
 }
 
+interface DashboardProcessListItems {
+  process: string | processTitle;
+  processTitle: string;
+  yesterday: number;
+  today: number;
+  id: string;
+}
+
+interface SocialMedia {
+  title: CardContainerHeader;
+  rating: number;
+  id: string;
+}
+
+interface socialMediaData {
+  _id: string;
+  date: string;
+  Instagram: number | null;
+  Facebook: number | null;
+  Whatsapp: number | null;
+}
+
+interface ProcessedConversationItemProps {
+  id: string;
+  socialMediaIcon: React.ReactNode;
+  iconName: CardContainerHeader;
+  totalConversations: number;
+}
 export type {
+  ProcessedConversationItemProps,
+  DashboardProcessListItems,
   NotificationIconsProps,
   CardChatContainerProps,
   HorizontalLayoutProps,
@@ -213,6 +244,7 @@ export type {
   AutoCompleteData,
   TitleLayoutProps,
   CardProcessProps,
+  socialMediaData,
   EventCardProps,
   BtnActionProps,
   AlarmCardProps,
@@ -223,6 +255,7 @@ export type {
   verticalInput,
   NavIconProps,
   sidebarItems,
+  SocialMedia,
   BtnAddProps,
   AlarmProps,
   CardProps,

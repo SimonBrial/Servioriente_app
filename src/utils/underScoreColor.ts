@@ -1,3 +1,5 @@
+// const colorUnderScore = ["Espera", "Generacion", "Pagado", "Entregado", "Rechazado"];
+
 export function underScoreColor(colorEnum: string): string {
   if (colorEnum === "Espera") {
     return "#fad901";
@@ -7,6 +9,8 @@ export function underScoreColor(colorEnum: string): string {
     return "#12E500";
   } else if (colorEnum === "Entregado") {
     return "#004EE5";
+  } else if (colorEnum === "Rechazado") {
+    return "#FF0000";
   } else {
     return "#004EE5";
   }

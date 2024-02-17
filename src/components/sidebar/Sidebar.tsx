@@ -29,7 +29,7 @@ const sections: sidebarItems[] = [
   {
     icon: <HiOutlineTemplate className={sidebarClass.icon} />,
     label: "Dahsboard",
-    direction: "/home",
+    direction: "/",
   },
   {
     icon: <AiOutlineIdcard className={sidebarClass.icon} />,
@@ -74,7 +74,7 @@ const sections: sidebarItems[] = [
 ];
 
 export function Sidebar(): JSX.Element {
-  const [active, setActive] = useState<number>(2);
+  const [active, setActive] = useState<number>(1);
   const { colorScheme } = useMantineColorScheme();
 
   const links = sections.map((section: sidebarItems, index) => {

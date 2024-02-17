@@ -76,7 +76,7 @@ export const ProcessColumnLayout = ({
         width: "100%",
       }}
     >
-      <div>
+      <>
         <Flex gap={5} justify={"center"} align={"center"}>
           <Title
             order={2}
@@ -105,7 +105,7 @@ export const ProcessColumnLayout = ({
             },
           })}
         />
-      </div>
+      </>
       <SortableContext
         id={id}
         items={tasks}

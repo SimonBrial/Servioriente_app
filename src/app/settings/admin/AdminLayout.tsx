@@ -7,7 +7,7 @@ import React from "react";
 export const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <InsideContainer offset={130}>
+    <InsideContainer offset={130} withBackground withBorder>
       <Flex
         gap={16}
         styles={(theme) => ({

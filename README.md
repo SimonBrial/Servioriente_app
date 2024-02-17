@@ -2,6 +2,10 @@
 
 Aplicacion creada para la centralizacion y administracion de las redes sociales de la empresa y para realizar otras funcionalidades
 
+## Extra
+
+[![Dnd Kit - Storybook](https://img.shields.io/badge/Dnd%20kit%20-%20Storybook-000000)](https://5fc05e08a4a65d0021ae0bf2-evxexveqfg.chromatic.com/?path=/story/presets-sortable-grid--basic-setup)
+
 ## Estilos de la Aplicacion
 
 ### Font Size

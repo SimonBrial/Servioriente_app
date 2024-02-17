@@ -5,12 +5,14 @@ import { useViewportSize } from "@mantine/hooks";
 
 export default function InsideContainer({
   withBackground,
+  withBorder,
   children,
   offset,
 }: {
   children: React.ReactNode;
   offset: number;
   withBackground: boolean;
+  withBorder: boolean;
 }): JSX.Element {
   const { height } = useViewportSize();
   const { colorScheme } = useMantineColorScheme();
@@ -30,7 +32,11 @@ export default function InsideContainer({
               : `${theme.colors.darkTheme[7]}`
             : "none",
           borderRadius: "6px",
-          // border: "1px solid red",
+          border: withBorder
+            ? colorScheme === "light"
+              ? `2px solid ${theme.colors.lightTheme[2]}`
+              : `2px solid ${theme.colors.darkTheme[5]}`
+            : "none",
         },
       })}
     >

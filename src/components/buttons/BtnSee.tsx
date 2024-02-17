@@ -28,7 +28,7 @@ export default function BtnSee({
         withCloseButton={false}
         styles={{
           content: {
-            backgroundColor: colorScheme === "light" ? "#F8F8F8" : "#9a90ef1a",
+            backgroundColor: colorScheme === "light" ? "#F8F8F8" : "#262749",
           },
         }}
       >

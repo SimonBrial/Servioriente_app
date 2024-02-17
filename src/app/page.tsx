@@ -1,7 +1,12 @@
+import { Stack } from "@mantine/core";
+import { DashboardContainer } from "./dashboard/DashboardContainer";
+import { TabTimeView } from "./dashboard/TabTimeView";
+
 export default function Home(): JSX.Element {
   return (
-    <main>
-      Hay que modificar el layout y agregar el login page en esta seccion
-    </main>
+    <Stack gap={6}>
+      <TabTimeView />
+      <DashboardContainer />
+    </Stack>
   );
 }

@@ -1,7 +1,9 @@
 import { Group } from "@mantine/core";
 
-function layout(): JSX.Element {
-  return <Group>{/* <NavIcon dir="/home"/> */}</Group>;
+export default function layout({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element {
+  return <Group>{children}</Group>;
 }
-
-export default layout;

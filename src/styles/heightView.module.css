@@ -1,0 +1,34 @@
+/* This is a simple test for mediaQuery implementation*/
+
+/* ----------------------- Section: Dashboard ----------------------- */
+/* ----------------------------- Drawer ----------------------------- */
+@media (min-width: 1280px) {
+  .drawer {
+    height: 100vh;
+  }
+  .drawer_body {
+    height: 100%;
+    padding: 1rem;
+  }
+}
+@media (min-width: 1281px) {
+  .drawer {
+    height: 100vh;
+  }
+  .drawer_body {
+    height: 100%;
+    padding: 1rem;
+  }
+}
+
+/* --------------------------- Scrollarea --------------------------- */
+@media (min-width: 1280px) {
+  .drawer_scrollarea {
+    height: 86vh;
+  }
+}
+@media (min-width: 1281px) {
+  .drawer_scrollarea {
+    height: 82.5vh;
+  }
+}

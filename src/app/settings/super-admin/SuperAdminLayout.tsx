@@ -11,12 +11,15 @@ export const SuperAdminLayout = ({
 }) => {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <InsideContainer offset={130}>
+    <InsideContainer offset={130} withBackground withBorder>
       <Stack
         gap={16}
         styles={(theme) => ({
           root: {
-            border: colorScheme === "light" ? `1px solid ${theme.colors.lightTheme[2]}` : "none",
+            border:
+              colorScheme === "light"
+                ? `1px solid ${theme.colors.lightTheme[2]}`
+                : "none",
             borderRadius: "6px",
             padding: "1rem",
             height: "100%",

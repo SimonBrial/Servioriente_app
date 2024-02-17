@@ -97,7 +97,7 @@ export const DifusionListLayout = (): JSX.Element => {
           </Flex>
         </Stack>
         <Stack gap={8}>
-          <InsideContainer offset={350}>
+          <InsideContainer offset={350} withBackground withBorder>
             <ScrollArea
               h={"98%"}
               maw={"100%"}

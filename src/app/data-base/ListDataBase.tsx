@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollArea, Stack, Table, useMantineColorScheme } from "@mantine/core";
-import BtnFn from "../../components/buttons/BtnFn";
+import BtnFn from "@/components/buttons/BtnFn";
 import { useState } from "react";
 import classes from "@/styles/listStyles.module.css";
 import { listDB as elements } from "@/data/ListDB";
