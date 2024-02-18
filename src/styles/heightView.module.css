@@ -32,3 +32,13 @@
     height: 82.5vh;
   }
 }
+@media (min-width: 1280px) {
+  .InsideContainer_scrollarea {
+    height: 84vh;
+  }
+}
+@media (min-width: 1281px) {
+  .InsideContainer_scrollarea {
+    height: 80vh;
+  }
+}

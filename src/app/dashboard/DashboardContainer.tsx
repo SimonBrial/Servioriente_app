@@ -13,11 +13,11 @@ import { TMRChart } from "./TMRChart";
 
 export const DashboardContainer = () => {
   return (
-    <InsideContainer withBackground offset={112} withBorder>
+    <InsideContainer withBackground offset={118} withBorder>
       <ScrollArea
         offsetScrollbars
         scrollbarSize={2}
-        classNames={{ root: heightViewClass.drawer_scrollarea }}
+        classNames={{ root: heightViewClass.InsideContainer_scrollarea }}
       >
         <Grid gutter="xs" style={{ padding: "1rem" }}>
           <Grid.Col span={8.5}>
@@ -47,12 +47,7 @@ export const DashboardContainer = () => {
               title="TMR"
             />
           </Grid.Col>
-          {/*
-          <Grid.Col span={4}>4</Grid.Col>
-          <Grid.Col span={4}>5</Grid.Col> */}
         </Grid>
-
-        {/* <DonutChartContainer /> */}
       </ScrollArea>
     </InsideContainer>
   );

@@ -170,3 +170,28 @@
   background-color: #484566;
   transition: all 0.3s ease-in-out;
 }
+
+.verticalDots {
+  stroke-width: 2;
+  font-size: 1.8rem;
+  padding: 0.2rem;
+  color: #696969;
+}
+.verticalDots:hover {
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #9a90ef1a;
+  transition: all 0.2s ease-in-out;
+}
+.verticalDots_dark {
+  stroke-width: 1;
+  font-size: 2.5rem;
+  padding: 0.2rem;
+  color: #eff3f5;
+}
+.verticalDots_dark:hover {
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #9a90ef1a;
+  transition: all 0.2s ease-in-out;
+}

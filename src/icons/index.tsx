@@ -92,7 +92,7 @@ import {
 } from "react-icons/ai";
 import { BiMailSend, BiBellPlus, BiCrown } from "react-icons/bi";
 import { PiRobot, PiFolderSimpleDashed } from "react-icons/pi";
-import { FaFacebookF } from "react-icons/fa6";
+import { FaFacebookF, FaChartLine, FaChartColumn } from "react-icons/fa6";
 
 export {
   AiOutlineFundProjectionScreen,
@@ -151,6 +151,7 @@ export {
   CgCornerUpLeft,
   IoLogoFacebook,
   MdOutlineSell,
+  FaChartColumn,
   HiOutlineStar,
   AiOutlinePlus,
   HiOutlineUser,
@@ -163,6 +164,7 @@ export {
   HiOutlineEye,
   HiOutlineSun,
   FaFacebookF,
+  FaChartLine,
   IoChevronUp,
   BsTelephone,
   HiPaperClip,

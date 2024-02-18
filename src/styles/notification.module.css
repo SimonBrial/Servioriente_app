@@ -18,3 +18,16 @@
   background-color: hsla(246, 75%, 75%, 0.3);
   transition: all 0.2s ease-in-out;
 }
+
+.notification_error {
+  background-color: #e93f3f;
+}
+.notification_warning {
+  background-color: #f8e916;
+}
+.notification_info {
+  background-color: #05ebe7;
+}
+.notification_success {
+  background-color: #2bdd66;
+}

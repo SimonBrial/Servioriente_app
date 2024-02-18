@@ -117,7 +117,8 @@ interface SortableItemProps {
 }
 
 interface NotificationIconsProps {
-  title: NotificationType;
+  title: string;
+  type: NotificationType;
   description: string;
   children: React.ReactNode;
 }

@@ -41,7 +41,7 @@ interface ChartTooltipProps {
 
 export const ChartTooltip = ({ label, payload }: ChartTooltipProps) => {
   if (!payload) return null;
-  console.log(getFilteredChartTooltipPayload(payload))
+  // console.log(getFilteredChartTooltipPayload(payload))
 
   return (
     <Paper px="md" py="sm" withBorder shadow="md" radius="md">

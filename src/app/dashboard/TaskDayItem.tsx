@@ -12,9 +12,11 @@ import {
   Flex,
   Text,
   Box,
+  Popover,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import React, { useCallback, useState } from "react";
+import { useState } from "react";
+import { BtnTaskAction } from "./BtnTaskAction";
 
 interface TaskDayCardProps {
   title: string;
@@ -23,68 +25,53 @@ interface TaskDayCardProps {
   userToassign: string;
   admin: boolean;
 }
+
 export const TaskDayItem = ({
-  admin,
-  degree,
-  desription,
-  title,
   userToassign,
+  desription,
+  degree,
+  admin,
+  title,
 }: TaskDayCardProps) => {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { toggle }] = useDisclosure(false);
-  const [heightCard, setHeightCard] = useState<number | undefined>(90);
+  const [openedPop, setOpened] = useState(false);
 
-  const taskCard = useCallback((card: any) => {
-    if (card !== null) {
-      setHeightCard(document.querySelector(".prueba")?.clientHeight);
-    }
-  }, []);
-
-  // useEffect(() => {}, [opened]);
-  // console.log(heightCard);
-  // console.log(taskCard);
   return (
     <>
       <Box
-        ref={taskCard}
         className="prueba"
         style={{
           backgroundColor: degreeColor(degree)[1],
           position: "relative",
           padding: "0.5rem",
+          paddingLeft: "1.2rem",
           borderRadius: "6px",
         }}
       >
         <Flex
           justify={"space-between"}
           align={"center"}
-          style={{ position: "relative" }}
+          // style={{ position: "relative" }}
         >
+          <Divider
+            orientation="vertical"
+            size={"lg"}
+            style={{
+              borderRadius: "10px",
+              height: opened ? "97.5%" : "80%",
+              position: "absolute",
+              transition: "all 0.4s ease-in-out",
+              left: "0.5rem",
+            }}
+            color={degreeColor(degree)[0]}
+          />
           <Flex
             gap={8}
             align={"center"}
             style={{ cursor: "pointer", width: "100%" }}
           >
-            <Divider
-              orientation="vertical"
-              size={"lg"}
-              style={{
-                borderRadius: "10px",
-                height: opened
-                  ? heightCard !== undefined
-                    ? `${heightCard - 10}`
-                    : "100px"
-                  : "",
-                position: opened ? "absolute" : "relative",
-                transition: "height 0.8s ease-in-out",
-                left: "0.5rem",
-              }}
-              color={degreeColor(degree)[0]}
-            />
-            <Stack
-              gap={0}
-              style={{ width: "100%", marginLeft: opened ? "1rem" : "0.26rem" }}
-            >
+            <Stack gap={0} style={{ width: "100%", marginLeft: "0rem" }}>
               <Flex onClick={toggle} style={{ width: "100%" }}>
                 <Flex gap={6}>
                   <Avatar
@@ -116,6 +103,7 @@ export const TaskDayItem = ({
                               ? `${theme.colors.lightTheme[6]}`
                               : `${theme.colors.darkTheme[1]}`,
                           paddingLeft: "0.7rem",
+                          marginTop: "-0.5rem",
                         },
                       })}
                     >
@@ -140,11 +128,31 @@ export const TaskDayItem = ({
               </Text>
             </Stack>
           </Flex>
-          <Center
-            style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
+          <Popover
+            opened={openedPop}
+            onChange={setOpened}
+            shadow="md"
+            width={150}
+            position="left"
+            offset={5}
+            withArrow
+            trapFocus
+            arrowPosition="center"
+            closeOnClickOutside={false}
           >
-            <HiOutlineDotsVertical />
-          </Center>
+            <Popover.Target>
+              <Center
+                onClick={() => setOpened((o) => !o)}
+                style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
+              >
+                <HiOutlineDotsVertical />
+              </Center>
+            </Popover.Target>
+            <Popover.Dropdown>
+              <BtnTaskAction type="complete"/>
+              <BtnTaskAction type="delete"/>
+            </Popover.Dropdown>
+          </Popover>
         </Flex>
         <Collapse
           transitionTimingFunction="linear"
@@ -155,9 +163,9 @@ export const TaskDayItem = ({
             ? classes.containerDay_collapse
             : classes.containerDay_collapse_dark
         } */
-          style={{ paddingLeft: "1.25rem" }}
+          style={{ paddingLeft: "1.25rem", height: "100%" }}
         >
-          <Stack gap={3}>
+          <Stack gap={3} style={{ marginLeft: "1rem" }}>
             {/* <TaskDayItem
             admin
             degree="Muy Importante"
@@ -165,7 +173,31 @@ export const TaskDayItem = ({
             title="Prueba 1"
             userToassign="Mario Hurtado"
           /> */}
-            prueba
+            <ul>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+              <li>prueba</li>
+            </ul>
           </Stack>
         </Collapse>
       </Box>

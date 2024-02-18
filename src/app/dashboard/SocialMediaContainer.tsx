@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { Table, useMantineColorScheme } from "@mantine/core";
+import { Stack, Table, useMantineColorScheme } from "@mantine/core";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { SocialMedia } from "@/interface/interface";
 import classes from "@/styles/dashboard.module.css";
 import { SocialMediaItem } from "./SocialMediaItem";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import { TitleLayout } from "@/components/layout/TitleLayout";
 
 export const SocialMediaContainer = () => {
   const [items, setItems] = useState<SocialMedia[]>([
@@ -34,32 +35,38 @@ export const SocialMediaContainer = () => {
   };
 
   return (
-    <Table
-      classNames={{
-        thead:
-          colorScheme === "light"
-            ? classes.dashboardItem_header
-            : classes.dashboardItem_header_dark,
-        td:
-          colorScheme === "light"
-            ? classes.dashboardItem_row
-            : classes.dashboardItem_row_dark,
-      }}
-      styles={{ td: { textAlign: "center" }, th: { textAlign: "center" } }}
-      horizontalSpacing={5}
-    >
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th></Table.Th>
-          <Table.Th>Red Social</Table.Th>
-          <Table.Th>Rating</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <DndContext onDragEnd={handleDragEnd} modifiers={[restrictToVerticalAxis]}>
-        <SortableContext items={items}>
-          <Table.Tbody>{rows}</Table.Tbody>
-        </SortableContext>
-      </DndContext>
-    </Table>
+    <Stack gap={2}>
+      <TitleLayout color="" icon="" onText title="Redes Sociales" />
+      <Table
+        classNames={{
+          thead:
+            colorScheme === "light"
+              ? classes.dashboardItem_header
+              : classes.dashboardItem_header_dark,
+          td:
+            colorScheme === "light"
+              ? classes.dashboardItem_row
+              : classes.dashboardItem_row_dark,
+        }}
+        styles={{ td: { textAlign: "center" }, th: { textAlign: "center" } }}
+        horizontalSpacing={5}
+      >
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th></Table.Th>
+            <Table.Th>Red Social</Table.Th>
+            <Table.Th>Rating</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <DndContext
+          onDragEnd={handleDragEnd}
+          modifiers={[restrictToVerticalAxis]}
+        >
+          <SortableContext items={items}>
+            <Table.Tbody>{rows}</Table.Tbody>
+          </SortableContext>
+        </DndContext>
+      </Table>
+    </Stack>
   );
 };

@@ -56,7 +56,12 @@ export const HamburgerMenu = (): JSX.Element => {
       withArrow
       arrowPosition="center"
       styles={(theme) => ({
-        root: { color: "#696969" },
+        itemLabel: {
+          color:
+            colorScheme === "light"
+              ? `${theme.colors.lightTheme[3]}`
+              : `${theme.colors.darkTheme[2]}`,
+        },
         itemSection: {
           color:
             colorScheme === "light"
@@ -68,8 +73,8 @@ export const HamburgerMenu = (): JSX.Element => {
         label: {
           color:
             colorScheme === "light"
-              ? `${theme.colors.lightTheme[2]}`
-              : `${theme.colors.darkTheme[3]}`,
+              ? `${theme.colors.lightTheme[3]}`
+              : `${theme.colors.darkTheme[2]}`,
           fontSize: "0.9rem",
         },
       })}

@@ -46,7 +46,7 @@ export const DashboardProcessListContainer = () => {
 
   return (
     <ContainerInside allWhite withBorder width="100%">
-      <Stack gap={8}>
+      <Stack gap={2}>
         <TitleLayout color="" icon="" onText title="Procesos"/>
         <Table
           styles={{ th: { textAlign: "center" }, td: { textAlign: "center" } }}
