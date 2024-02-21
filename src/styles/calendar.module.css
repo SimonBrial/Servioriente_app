@@ -133,3 +133,7 @@
   padding: 0.8rem;
   border-radius: 6px;
 }
+
+.prueba {
+  border: 1px solid blue;
+}

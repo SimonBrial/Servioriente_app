@@ -11,6 +11,7 @@ import {
 import { CardProcess } from "./CardProcess";
 import { SortableItemContainer } from "./SortableItemContainer";
 import {
+  useMantineColorScheme,
   ScrollArea,
   Divider,
   Badge,
@@ -18,13 +19,12 @@ import {
   Title,
   Flex,
   Grid,
-  useMantineColorScheme,
 } from "@mantine/core";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { underScoreColor } from "../../utils/underScoreColor";
+import { underScoreColor } from "@/utils/underScoreColor";
 import { BoardSectionProps, CardProcessProps } from "@/interface/interface";
-import { useMediaQuery } from "@mantine/hooks";
 import classes from "@/styles/cardProcess.module.css";
+import heightClasses from "@/styles/heightView.module.css"
 
 // Contiene los elementos que seran organizados, es decir, es el contenedor
 export const ProcessColumnLayout = ({
@@ -32,7 +32,6 @@ export const ProcessColumnLayout = ({
   title,
   tasks,
 }: BoardSectionProps): JSX.Element => {
-  const matches = useMediaQuery("(max-width: 1280px)");
   const [cardsArray, setCardsArray] = useState<CardProcessProps[]>(tasks);
   const { colorScheme } = useMantineColorScheme();
 
@@ -112,17 +111,13 @@ export const ProcessColumnLayout = ({
         strategy={verticalListSortingStrategy}
       >
         <Stack
+          className={heightClasses.column_process_parent}
           gap={8}
           align="center"
-          style={{
-            marginTop: "0.5rem",
-            height: matches ? "78.8vh" : "74.1vh",
-            width: "100%",
-          }}
         >
           <div ref={setNodeRef} style={{ margin: "0.5rem 3rem" }}>
             <ScrollArea
-              h={matches ? "78.8vh" : "74.1vh"}
+              className={heightClasses.column_process_children}
               scrollbarSize={2}
               offsetScrollbars
               scrollHideDelay={100}

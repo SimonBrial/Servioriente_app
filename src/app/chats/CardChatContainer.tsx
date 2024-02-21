@@ -59,7 +59,6 @@ export const CardChatContainer = ({
           {capitalizeFirstLetter(header)}
         </Button>
       </Group>
-
       <Collapse
         transitionTimingFunction="linear"
         transitionDuration={250}
@@ -68,16 +67,16 @@ export const CardChatContainer = ({
           border:
             colorScheme === "light"
               ? opened
-                ? `1px solid ${theme.colors.lightTheme[3]}`
+                ? `1px solid ${theme.colors.lightTheme[2]}`
                 : ""
               : opened
-                ? `1px solid ${theme.colors.darkTheme[5]}`
+                ? `1px solid ${theme.colors.darkTheme[6]}`
                 : "",
           borderTop: opened ? "none" : "none",
           borderRadius: "0 0 6px 6px",
           backgroundColor:
             colorScheme === "light"
-              ? `${theme.colors.lightTheme[0]}`
+              ? `${theme.colors.lightTheme[1]}`
               : `${theme.colors.darkTheme[7]}`,
           marginTop: "-0.5rem",
           padding: "0.6rem",

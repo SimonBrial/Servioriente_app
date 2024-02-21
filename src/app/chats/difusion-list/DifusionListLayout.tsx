@@ -24,10 +24,7 @@ export const DifusionListLayout = (): JSX.Element => {
 
   return (
     <Stack gap={3}>
-      <TitleLayout
-        color="" icon="" onText
-        title="Crear lista de Difusion"
-      />
+      <TitleLayout color="" icon="" onText title="Crear lista de Difusion" />
       <AsideSearch />
       <Stack gap={6}>
         <Stack gap={2}>
@@ -97,9 +94,13 @@ export const DifusionListLayout = (): JSX.Element => {
           </Flex>
         </Stack>
         <Stack gap={8}>
-          <InsideContainer offset={350} withBackground withBorder>
+          <InsideContainer
+            offset={340}
+            withBackground={false}
+            withBorder={false}
+          >
             <ScrollArea
-              h={"98%"}
+              h={"100%"}
               maw={"100%"}
               offsetScrollbars
               scrollbarSize={2}

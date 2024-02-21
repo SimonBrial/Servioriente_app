@@ -3,18 +3,19 @@ import { DifusionListLayout } from "./DifusionListLayout";
 import { AsideContainer } from "../AsideContainer";
 import { ChatContainer } from "../ChatContainer";
 import { DifusionListChat } from "./DifusionListChat";
+import { Box } from "@mantine/core";
 
 const page = (): JSX.Element => {
   return (
     <>
       <AsideContainer>
-        <div style={{ width: "50%" }}>
+        <Box style={{ width: "45%", marginBottom: "-0.4rem" }}>
           <BtnBackSection
             label="Volver a Chats"
             dir="/chats"
             withStyles={false}
           />
-        </div>
+        </Box>
         <DifusionListLayout />
       </AsideContainer>
       <ChatContainer>

@@ -1,4 +1,4 @@
-import StatusBadge from "@/app/data-base/StatusBadge";
+import StatusBadge from "@/components/badge/StatusBadge";
 
 export const listDB = [
   {

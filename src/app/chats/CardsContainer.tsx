@@ -1,14 +1,11 @@
-"use client";
-
 import { ScrollArea } from "@mantine/core";
 import { CardChatContainer } from "./CardChatContainer";
-import { useMediaQuery } from "@mantine/hooks";
+import heightClasses from "@/styles/heightView.module.css";
 
 export const CardsContainer = (): JSX.Element => {
-  const matches = useMediaQuery("(max-width: 1280px)");
   return (
     <ScrollArea
-      h={matches ? "83vh" : "80vh"}
+      className={heightClasses.chatCard_container}
       scrollbarSize={6}
       offsetScrollbars
       scrollHideDelay={100}

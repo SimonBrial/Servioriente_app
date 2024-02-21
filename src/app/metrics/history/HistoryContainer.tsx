@@ -1,18 +1,15 @@
-"use client";
-
 import { ScrollArea, Stack } from "@mantine/core";
 import { MetricsFilterInput } from "../MetricsFilterInput";
-import { useMediaQuery } from "@mantine/hooks";
 import { HistoryCard } from "./HistoryCard";
+import heightClasses from "@/styles/heightView.module.css"
 
 export const HistoryContainer = () => {
-  const matches = useMediaQuery("(max-width: 1280px)");
   return (
-    <Stack p={0}>
+    <Stack p={0} gap={6}>
       <MetricsFilterInput btnDisable={false} />
       <ScrollArea
+        className={heightClasses.metrics_container}
         scrollbarSize={2}
-        h={matches ? "79.5vh" : "75vh"}
         style={{ padding: "0 0.2rem" }}
       >
         <Stack gap={4}>

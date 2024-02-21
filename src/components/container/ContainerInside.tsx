@@ -11,8 +11,8 @@ export const ContainerInside = ({
   width,
 }: {
   children: ReactNode;
-  allWhite: boolean;
   withBorder: boolean;
+  allWhite: boolean;
   width: string;
 }): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();

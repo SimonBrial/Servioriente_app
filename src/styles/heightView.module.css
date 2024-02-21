@@ -42,3 +42,103 @@
     height: 80vh;
   }
 }
+
+/* -------------------------- Process Section -------------------------- */
+@media (min-width: 1280px) {
+  .card_process {
+    width: 15rem;
+  }
+}
+@media (min-width: 1281px) {
+  .card_process {
+    width: 18.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .column_process_parent {
+    height: 78.8vh;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
+@media (min-width: 1281px) {
+  .column_process_parent {
+    height: 74.1vh;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
+@media (min-width: 1280px) {
+  .column_process_children {
+    height: 78.8vh;
+  }
+}
+@media (min-width: 1281px) {
+  .column_process_children {
+    height: 74.1vh;
+  }
+}
+
+/* -------------------------- Chat Section -------------------------- */
+@media (min-width: 1280px) {
+  .chatCard_container {
+    height: 83vh;
+  }
+}
+@media (min-width: 1281px) {
+  .chatCard_container {
+    height: 80vh;
+  }
+}
+@media (min-width: 1280px) {
+  .chat_container {
+    height: 74vh;
+  }
+}
+@media (min-width: 1281px) {
+  .chat_container {
+    height: 68vh;
+  }
+}
+/* -------------------------- Metrics Section -------------------------- */
+@media (min-width: 1280px) {
+  .metrics_container {
+    height: 81vh;
+  }
+}
+@media (min-width: 1281px) {
+  .metrics_container {
+    height: 75vh;
+  }
+}
+/* -------------------------- Calendar Section -------------------------- */
+@media (min-width: 1280px) {
+  .calendarColumn__right_container {
+    height: 72.3vh;
+  }
+}
+@media (min-width: 1281px) {
+  .calendarColumn__right_container {
+    height: 66.5vh;
+  }
+}
+@media (min-width: 1280px) {
+  .calendarColumn__right_scrollbar {
+    height: 69vh;
+  }
+}
+@media (min-width: 1281px) {
+  .calendarColumn__right_scrollbar {
+    height: 62vh;
+  }
+}
+@media (min-width: 1280px) {
+  .calendarColumn__right_dates {
+    height: 71.5vh;
+  }
+}
+@media (min-width: 1281px) {
+  .calendarColumn__right_dates {
+    height: 65.5vh;
+  }
+}

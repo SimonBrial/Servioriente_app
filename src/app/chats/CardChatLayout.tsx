@@ -29,14 +29,14 @@ export const CardChatLayout = ({
         root: {
           border:
             colorScheme === "light"
-              ? `1px solid ${theme.colors.lightTheme[3]}`
-              : `1px solid ${theme.colors.darkTheme[9]}`,
+              ? `1px solid ${theme.colors.lightTheme[2]}`
+              : `1px solid ${theme.colors.darkTheme[6]}`,
           borderRadius: "6px",
           padding: "0.5rem",
           width: "100%",
           backgroundColor:
             colorScheme === "light"
-              ? "#FFFFFF"
+              ? "#fff"
               : `${theme.colors.darkTheme[7]}`,
         },
       })}

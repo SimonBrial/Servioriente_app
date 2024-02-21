@@ -43,7 +43,9 @@ export default function MailLayout({
       <AutoCompleteFilterContainer
         label={["correo@correo.com", "correo2@correo.com"]}
       />
-      <InsideContainer offset={155}>{children}</InsideContainer>
+      <InsideContainer offset={155} withBackground={false} withBorder={false}>
+        {children}
+      </InsideContainer>
     </ListLayout>
   );
 }

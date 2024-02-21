@@ -1,5 +1,5 @@
 import { Badge } from "@mantine/core";
-import { HiOutlineTrash } from "../icons";
+import { HiOutlineTrash } from "@/icons";
 
 export function BadgeClose ({ status }: { status: boolean }): JSX.Element {
   let badge = <></>;

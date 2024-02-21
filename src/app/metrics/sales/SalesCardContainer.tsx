@@ -74,7 +74,7 @@ export const SalesCardContainer = () => {
           </Center>
         </Flex>
       </Flex>
-      <Collapse in={opened}>
+      <Collapse in={opened} style={{ marginBottom: "0.5rem" }}>
         <ChartContainer />
       </Collapse>
     </Container>

@@ -1,17 +1,15 @@
-"use client";
-
 import { ScrollArea, Stack } from "@mantine/core";
-import InsideContainer from "@/components/container/InsideContainer";
-import { useMediaQuery } from "@mantine/hooks";
 import { SalesCardContainer } from "./SalesCardContainer";
+import { MetricsFilterInput } from "../MetricsFilterInput";
+import heightClasses from "@/styles/heightView.module.css";
 
 export const SalesContainer = () => {
-  const matches = useMediaQuery("(max-width: 1280px)");
   return (
-    <InsideContainer offset={162} withBackground={false}>
+    <Stack gap={6} p={0}>
+      <MetricsFilterInput btnDisable />
       <ScrollArea
-        h={matches ? "81vh" : "77vh"}
-        style={{ borderRadius: "6px", margin: "0", }}
+        className={heightClasses.metrics_container}
+        style={{ borderRadius: "6px", margin: "0" }}
         offsetScrollbars
         scrollbarSize={2}
       >
@@ -35,6 +33,6 @@ export const SalesContainer = () => {
           <SalesCardContainer />
         </Stack>
       </ScrollArea>
-    </InsideContainer>
+    </Stack>
   );
 };

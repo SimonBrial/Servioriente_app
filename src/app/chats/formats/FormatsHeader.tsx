@@ -30,6 +30,7 @@ export const FormatsHeader = () => {
         </Title>
         <TextInput
           variant="unstyled"
+          radius={0}
           styles={(theme) => ({
             root: { width: "100%" },
             input: {

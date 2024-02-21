@@ -3,10 +3,10 @@
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { EventCardProps } from "@/interface/interface";
 import {
-  Container,
-  ScrollArea,
-  Stack,
   useMantineColorScheme,
+  ScrollArea,
+  Container,
+  Stack,
 } from "@mantine/core";
 import React from "react";
 import { EventCardLayout } from "./calendarLayout/EventCardLayout";
@@ -14,11 +14,11 @@ import classes from "@/styles/calendar.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 
 export const DayEventListLayout = ({
-  title,
   dayEventArray,
+  title,
 }: {
-  title: string;
   dayEventArray: EventCardProps[];
+  title: string;
 }) => {
   const { colorScheme } = useMantineColorScheme();
   const matches = useMediaQuery("(max-width: 1280px)");

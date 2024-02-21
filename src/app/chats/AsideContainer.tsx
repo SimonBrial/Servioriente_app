@@ -8,7 +8,9 @@ export const AsideContainer = ({
 }): JSX.Element => {
   return (
     <ContainerInside width="35%" allWhite={false} withBorder>
-      <Stack gap={4}>{children}</Stack>
+      <Stack gap={0}>
+        {children}
+      </Stack>
     </ContainerInside>
   );
 };

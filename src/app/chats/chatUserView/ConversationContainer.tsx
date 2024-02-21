@@ -8,17 +8,15 @@ import {
   Container,
   Stack,
 } from "@mantine/core";
-import React from "react";
 import { CloudDialogue } from "./CloudDialogue";
 import InsideContainer from "@/components/container/InsideContainer";
-import { useMediaQuery } from "@mantine/hooks";
 import classes from "@/styles/container.module.css";
+import heightClasses from "@/styles/heightView.module.css"
 
 export const ConversationContainer = (): JSX.Element => {
-  const matches = useMediaQuery("(max-width: 1280px)");
   const { colorScheme } = useMantineColorScheme();
   return (
-    <InsideContainer offset={222}>
+    <InsideContainer offset={222} withBackground={false} withBorder={false}>
       <Container
         classNames={{
           root:
@@ -41,7 +39,8 @@ export const ConversationContainer = (): JSX.Element => {
           }}
         />
         <ScrollArea
-          h={matches ? "74vh" : "68vh"}
+          // h={matches ? "74vh" : "68vh"}
+          className={heightClasses.chat_container}
           scrollbarSize={0}
           offsetScrollbars
           scrollHideDelay={100}

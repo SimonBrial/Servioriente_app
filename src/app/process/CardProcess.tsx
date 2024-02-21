@@ -6,22 +6,21 @@ import {
   UnstyledButton,
   Divider,
   Avatar,
+  Center,
   Stack,
   Title,
   Flex,
   Text,
   Box,
-  Center,
 } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import { TaskItemProps } from "@/interface/interface";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { useEffect, useState } from "react";
 import classes from "@/styles/cardProcess.module.css";
+import heightClasses from "@/styles/heightView.module.css";
 
 export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
-  const matches = useMediaQuery("(max-width: 1280px)");
   const [colorDivider, setColorDivider] = useState<string>("red");
   const { colorScheme } = useMantineColorScheme();
 
@@ -106,12 +105,11 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
   // console.log(card.columnId);
   return (
     <Box
-      style={{ width: matches ? "15rem" : "18.5rem" }}
       mx="auto"
       className={
         colorScheme === "light"
-          ? `${classes.card_container}`
-          : `${classes.card_container_dark}`
+          ? `${classes.card_container} ${heightClasses.card_process}`
+          : `${classes.card_container_dark} ${heightClasses.card_process}`
       }
       py={5}
       pl={22}
@@ -122,7 +120,7 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
           orientation="vertical"
           size="5px"
           color={underScoreColor(capitalizeFirstLetter(colorDivider))}
-          h={matches ? 50 : 64}
+          style={{ height: "78%" }}
           classNames={{
             root:
               colorScheme === "light"
@@ -130,19 +128,19 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
                 : `${classes.card_divider}`,
           }}
         />
-        <Flex align={"center"} justify={"center"} gap={matches ? 3 : 8}>
+        <Flex align={"center"} justify={"center"} gap={6}>
           <Avatar
             src={null}
             alt="no image here"
             color="blue"
-            size={matches ? "md" : "lg"}
+            size={"md"}
             style={{
               cursor: "pointer",
             }}
           />
           <Stack align="start" gap={0}>
             <Title
-              order={matches ? 5 : 4}
+              order={5}
               styles={(theme) => ({
                 root: {
                   color:
@@ -156,7 +154,7 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
             </Title>
             <Stack gap={0}>
               <Text
-                size={matches ? "sm" : "md"}
+                size={"sm"}
                 styles={(theme) => ({
                   root: {
                     color:
@@ -171,7 +169,7 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
                 {capitalizeFirstLetter(card.vehicle)}
               </Text>
               <Text
-                size={matches ? "sm" : "md"}
+                size={"sm"}
                 styles={(theme) => ({
                   root: {
                     color:
@@ -202,7 +200,7 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
             </Center>
           </UnstyledButton>
           <Text
-            size={matches ? "xs" : "sm"}
+            size={"xs"}
             styles={(theme) => ({
               root: {
                 color:

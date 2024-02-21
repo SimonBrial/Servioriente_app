@@ -10,11 +10,11 @@ import InsideContainer from "@/components/container/InsideContainer";
 export const FormatsContainer = () => {
   return (
     <Stack justify="space-between" align="end">
-      <InsideContainer offset={225}>
+      <InsideContainer offset={220} withBackground withBorder>
         <TextEditor />
       </InsideContainer>
-      <Flex gap={4} justify={"flex-end"} style={{ width: "50%" }}>
-        {/* Añadirle la informacion que se va a mostrar mediante los hijos, es decir, hya que modificar el componente */}
+      <Flex gap={4} justify={"flex-end"} style={{ width: "100%" }}>
+        {/* Añadirle la informacion que se va a mostrar mediante los hijos, es decir, hay que modificar el componente */}
         <BtnSend />
         <BtnPreview />
       </Flex>

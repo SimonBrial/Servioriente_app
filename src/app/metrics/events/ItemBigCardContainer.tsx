@@ -19,7 +19,7 @@ import {
   LuListTodo,
   IoClose,
 } from "@/icons";
-import { PriorityBadge } from "@/components/PriorityBadge";
+import { PriorityBadge } from "@/components/badge/PriorityBadge";
 import classes from "@/styles/metrics.module.css";
 import classesList from "@/styles/listStyles.module.css";
 import BtnSee from "@/components/buttons/BtnSee";

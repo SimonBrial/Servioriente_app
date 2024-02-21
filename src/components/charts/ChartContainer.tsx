@@ -3,7 +3,7 @@
 
 import { AreaChart } from "@mantine/charts";
 import React, { useEffect, useState } from "react";
-import ChartTooltip from "./ChartTooltip";
+import { ChartTooltip } from "./ChartTooltip";
 import { Checkbox, Flex } from "@mantine/core";
 
 const data = [

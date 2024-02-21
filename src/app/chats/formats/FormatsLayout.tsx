@@ -14,8 +14,8 @@ export const FormatsLayout = (): JSX.Element => {
       <AsideSearch />
       <GeneralDivider />
       <Stack gap={8} mt={8}>
-        <InsideContainer offset={262}>
-          <ScrollArea h={"98%"} maw={"100%"} offsetScrollbars scrollbarSize={2}>
+        <InsideContainer offset={262} withBackground={false} withBorder={false}>
+          <ScrollArea h={"99%"} maw={"100%"} offsetScrollbars scrollbarSize={2}>
             <Stack gap={5} h={"50%"} p={6}>
               <TemplateCardLayout />
               <TemplateCardLayout />

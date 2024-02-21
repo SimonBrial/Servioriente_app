@@ -34,7 +34,8 @@
 
 .btnAdd {
   background-color: #004ee5;
-  height: 100%;
+  color: #fff;
+  /* height: 100%; */
 }
 
 .btnAdd:hover {
@@ -43,7 +44,8 @@
 }
 .btnAdd_dark {
   background-color: #52a5e0;
-  height: 100%;
+  color: #fff;
+  /* height: 100%; */
 }
 
 .btnAdd_dark:hover {

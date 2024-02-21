@@ -1,3 +1,5 @@
+"use client";
+
 import { HiOutlineDotsVertical } from "@/icons";
 import {
   useMantineColorScheme,

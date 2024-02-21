@@ -3,11 +3,11 @@
 import { GeneralDivider } from "@/components/GeneralDivider";
 import {
   useMantineColorScheme,
-  Flex,
   Tooltip,
-  Text,
   Switch,
   Stack,
+  Flex,
+  Text,
 } from "@mantine/core";
 import React from "react";
 
@@ -21,7 +21,7 @@ export const OrderByName = () => {
             root: {
               color:
                 colorScheme === "light"
-                  ? `${theme.colors.principalTheme[3]}`
+                  ? `${theme.colors.lightTheme[3]}`
                   : `${theme.colors.darkTheme[2]}`,
             },
           })}

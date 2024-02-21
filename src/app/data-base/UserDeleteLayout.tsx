@@ -1,6 +1,6 @@
 import RegisterInfo from "@/components/RegisterInfo";
 import { Stack } from "@mantine/core";
-import StatusBadge from "./StatusBadge";
+import StatusBadge from "../../components/badge/StatusBadge";
 
 export const UserDeleteLayout = () => {
   const fakeArr = {

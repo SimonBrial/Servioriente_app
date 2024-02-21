@@ -1,16 +1,14 @@
-"use client";
-
 import { EventsBigCard } from "./EventsBigCard";
 import { ScrollArea, Stack } from "@mantine/core";
-import InsideContainer from "@/components/container/InsideContainer";
-import { useMediaQuery } from "@mantine/hooks";
+import { MetricsFilterInput } from "../MetricsFilterInput";
+import heightClasses from "@/styles/heightView.module.css";
 
 export const EventsContainer = () => {
-  const matches = useMediaQuery("(max-width: 1280px)");
   return (
-    <InsideContainer offset={162} withBackground>
+    <Stack gap={6} p={0}>
+      <MetricsFilterInput btnDisable={false} />
       <ScrollArea
-        h={matches ? "81vh" : "77vh"}
+        className={heightClasses.metrics_container}
         style={{ borderRadius: "6px", overflow: "hidden" }}
         offsetScrollbars
         scrollbarSize={2}
@@ -41,6 +39,6 @@ export const EventsContainer = () => {
           <EventsBigCard />
         </Stack>
       </ScrollArea>
-    </InsideContainer>
+    </Stack>
   );
 };

@@ -5,18 +5,19 @@ import { ChatContainer } from "../ChatContainer";
 import { UserChatHeader } from "../chatUserView/UserChatHeader";
 import { ConversationContainer } from "../chatUserView/ConversationContainer";
 import { ChatInputText } from "../chatUserView/ChatInputText";
+import { Box } from "@mantine/core";
 
 const page = (): JSX.Element => {
   return (
     <>
       <AsideContainer>
-        <div style={{ width: "50%" }}>
+        <Box style={{ width: "45%" }}>
           <BtnBackSection
             label="Volver a Chats"
             dir="/chats"
             withStyles={false}
           />
-        </div>
+        </Box>
         <NotReadLayout />
       </AsideContainer>
       <ChatContainer>

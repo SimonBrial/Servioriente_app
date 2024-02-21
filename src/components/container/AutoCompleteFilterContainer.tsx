@@ -8,8 +8,8 @@ import {
   Title,
   Flex,
 } from "@mantine/core";
-import { BadgeClose } from "../BadgeClose";
-import { BadgeFilter } from "../BadgeFilter";
+import { BadgeClose } from "../badge/BadgeClose";
+import { PillFilter } from "../PillFilter";
 import { AutoCompleteData } from "@/interface/interface";
 import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
 import { GeneralDivider } from "../GeneralDivider";
@@ -22,10 +22,10 @@ export default function AutoCompleteFilterContainer({
 
   const pills = (label: string | string[]): JSX.Element | JSX.Element[] => {
     if (typeof label === "string") {
-      resolve = <BadgeFilter tag={label} />;
+      resolve = <PillFilter tag={label} />;
     } else if (Array.isArray(label)) {
       resolve = label.map((value: string, index: number) => {
-        return <BadgeFilter tag={value} key={index} />;
+        return <PillFilter tag={value} key={index} />;
       });
     }
     return resolve;

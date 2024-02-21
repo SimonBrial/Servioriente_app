@@ -9,12 +9,12 @@ export const BtnAcept = (): JSX.Element => {
   return (
     <Button
       leftSection={<HiOutlineCheck />}
-      variant="#004EE5"
+      variant="default"
       fullWidth
       classNames={{
         root: colorScheme === "light" ? classes.btnAdd : classes.btnAdd_dark,
       }}
-      style={(theme) => ({ leftSection: { fontSize: "1.5rem" } })}
+      styles={(theme) => ({ section: { fontSize: "1.5rem" } })}
     >
       Aceptar
     </Button>

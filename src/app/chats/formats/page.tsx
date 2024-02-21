@@ -4,18 +4,19 @@ import { AsideContainer } from "../AsideContainer";
 import { ChatContainer } from "../ChatContainer";
 import { FormatsHeader } from "./FormatsHeader";
 import { FormatsContainer } from "./FormatsContainer";
+import { Box } from "@mantine/core";
 
 const page = (): JSX.Element => {
   return (
     <>
       <AsideContainer>
-        <div style={{ width: "50%", marginBottom: "-0.4rem" }}>
+        <Box style={{ width: "45%", marginBottom: "-0.4rem" }}>
           <BtnBackSection
             label="Volver a Chats"
             dir="/chats"
             withStyles={false}
           />
-        </div>
+        </Box>
         <FormatsLayout />
       </AsideContainer>
       <ChatContainer>

@@ -1,7 +1,7 @@
 import RegisterInfo from "@/components/RegisterInfo";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { ScrollArea, Stack } from "@mantine/core";
-import StatusBadge from "./StatusBadge";
+import StatusBadge from "../../components/badge/StatusBadge";
 
 export const UserDescriptionLayout = () => {
   const fakeArr = {

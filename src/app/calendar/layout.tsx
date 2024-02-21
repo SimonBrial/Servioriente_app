@@ -41,7 +41,7 @@ export default function layout({
           </BtnAdd>
           <ViewCalendarSelection />
         </Flex>
-        <MonthNavigationBar />
+        {/* <MonthNavigationBar /> */}
         {children}
       </Stack>
     </Container>

@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Stack, useMantineColorScheme } from "@mantine/core";
 import React from "react";
 import { ColumnEventTitle } from "./ColumnEventTitle";
@@ -32,6 +34,10 @@ export const ColumnEventContainer = ({
               : `1px solid ${theme.colors.darkTheme[9]}`,
           padding: "0.5rem",
           borderRadius: "6px",
+          backgroundColor:
+            colorScheme === "light"
+              ? `${theme.colors.lightTheme[1]}`
+              : `${theme.colors.darkTheme[9]}`,
         },
       })}
     >

@@ -7,8 +7,8 @@ import {
   Title,
   Flex,
 } from "@mantine/core";
-import { BadgeClose } from "../BadgeClose";
-import { BadgeFilter } from "../BadgeFilter";
+import { BadgeClose } from "../badge/BadgeClose";
+import { PillFilter } from "../PillFilter";
 import { GeneralDivider } from "../GeneralDivider";
 
 export function FilterContainer(): JSX.Element {
@@ -37,8 +37,8 @@ export function FilterContainer(): JSX.Element {
             >
               Filter:{" "}
             </Title>
-            <BadgeFilter tag="Nombre" />
-            <BadgeFilter tag="Apellido" />
+            <PillFilter tag="Nombre" />
+            <PillFilter tag="Apellido" />
           </Flex>
           <BadgeClose status={true} />
         </Flex>

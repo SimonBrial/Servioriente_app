@@ -1,11 +1,30 @@
+.dayContainer {
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  background-color: #ffffff;
+  border: 1px solid #cdcdcd;
+}
+.dayContainer_dark {
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  background-color: #9a90ef1a;
+  border: 1px solid #2a3b47;
+}
+
 @media (max-width: 1280px) {
-  .carousel_container {
-    width: 660px;
+  .dayContainer {
+    width: 680px;
+  }
+  .dayContainer_dark {
+    width: 680px;
   }
 }
 @media (min-width: 1281px) {
-  .carousel_container {
-    width: 825px;
+  .dayContainer {
+    width: 845px;
+  }
+  .dayContainer_dark {
+    width: 845px;
   }
 }
 
@@ -18,4 +37,9 @@
   .columnCard_container {
     width: 870px;
   }
+}
+
+.control[data-inactive] {
+  opacity: 0;
+  cursor: default;
 }
