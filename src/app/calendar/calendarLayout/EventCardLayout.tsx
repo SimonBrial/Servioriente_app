@@ -9,13 +9,14 @@ export const EventCardLayout = ({
   smallSize,
   degree,
   title,
+  date,
   id,
 }: EventCardProps) => {
   return (
     <>
       {smallSize ? (
         <>
-          <EventSmallCard degree={degree} title={title} />
+          <EventSmallCard degree={degree} title={title} date={date} />
         </>
       ) : (
         <EventCard

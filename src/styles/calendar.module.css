@@ -49,10 +49,28 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
+  /* position: relative; */
+}
+.weekday_active {
+  background-color: #115dfe;
+  border-bottom: 1px solid #115dfe;
+  color: #ffffff;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  /* position: relative; */
 }
 .weekday_dark {
-  background-color: #9a90ef1a;
+  background-color: #262749;
   border-bottom: 1px solid #3a4c5a;
+  color: #eff3f5;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.weekday_dark_active {
+  background-color: #52a5e0;
+  border-bottom: 1px solid #52a5e0;
   color: #eff3f5;
   width: 100%;
   text-align: center;
@@ -85,14 +103,14 @@
   cursor: default;
 }
 .dayEvents_dark {
-  background-color: #29363f;
+  background-color: #9a90ef1a;
   color: #c8cdd0;
   height: 7rem;
   padding: 0.3rem;
   cursor: default;
 }
 .dayEvents_dark:hover {
-  background-color: #9a90ef1a;
+  background-color: #9a90ef44;
   transition: all 0.3s ease-in-out;
   cursor: default;
 }
@@ -134,6 +152,22 @@
   border-radius: 6px;
 }
 
-.prueba {
-  border: 1px solid blue;
+/* --------------------------------------------------- Calendar Container --------------------------------------------------- */
+
+.calendarContainer {
+  padding: 1rem;
+  max-width: 100%;
+  color: #000;
+  border-radius: 6px;
+}
+
+@media (min-width: 1280px) {
+  .calendarContainer {
+    height: 740px;
+  }
+}
+@media (min-width: 1281px) {
+  .calendarContainer {
+    height: 580px;
+  }
 }

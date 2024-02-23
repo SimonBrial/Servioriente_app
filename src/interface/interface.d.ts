@@ -184,12 +184,13 @@ interface NotitifacionProps {
 }
 
 interface EventCardProps {
-  title: string;
+  userToassign: string;
   desription: string;
   degree: degreeType;
-  userToassign: string;
-  id: string;
   smallSize: boolean;
+  title: string;
+  id: string;
+  date: Date;
 }
 
 interface EventCardData {

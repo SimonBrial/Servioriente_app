@@ -8,8 +8,9 @@ import { HiOutlineDotsVertical } from "@/icons";
 interface EventSmallCardProps {
   title: string;
   degree: degreeType;
+  date: Date;
 }
-export const EventSmallCard = ({ degree, title }: EventSmallCardProps) => {
+export const EventSmallCard = ({ degree, title, date }: EventSmallCardProps) => {
   return (
     <Flex
       classNames={{

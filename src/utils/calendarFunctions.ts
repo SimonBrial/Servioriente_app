@@ -1,0 +1,36 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+
+import { weekDays } from "@/data/calendarDaysAndMonth";
+
+/* eslint-disable import/no-anonymous-default-export */
+export function range(end: any) {
+  const { result } = Array.from({ length: end }).reduce(
+    ({ result, current }) => ({
+      result: [...result, current],
+      current: current + 1,
+    }),
+    { result: [], current: 1 },
+  );
+  return result;
+}
+
+export function getDaysInMonth(month: number, year: number) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+export function getSortedDays(month: number, year: number) {
+  const dayIndex = new Date(year, month, 1).getDay();
+  return [...weekDays.slice(dayIndex), ...weekDays.slice(0, dayIndex)];
+}
+
+export function getDateObjet(day: number, month: number, year: number) {
+  return new Date(year, month, day);
+}
+
+export function areDateOnSameDay(first: Date, second: Date) {
+  return (
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate()
+  );
+}
