@@ -6,9 +6,9 @@ export default function ColorSelectInput(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex justify={"space-between"} align={"center"}>
-      <Title order={4}>Selecciona un color</Title>
+      <Title order={4}>Seleccionar color</Title>
       <ColorInput
-        placeholder="Selecciona un color"
+        placeholder="Seleccionar color"
         styles={(theme) => ({
           root: { width: "200px" },
           eyeDropperButton: { display: "none" },

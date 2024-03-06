@@ -2,7 +2,7 @@ import TabsNavigation from "@/components/TabsNavigation";
 import { ContainerInside } from "@/components/container/ContainerInside";
 import { HiOutlineCalendar } from "@/icons";
 import { Container, Flex, Stack } from "@mantine/core";
-import { ColumnEventList } from "../calendarLayout/columnView/ColumnEventList";
+import { ColumnEventList } from "../calendarLayout/calendarStructure/columnView/ColumnEventList";
 
 export default function layout({
   children,

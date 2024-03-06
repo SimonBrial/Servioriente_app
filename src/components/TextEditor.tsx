@@ -42,7 +42,7 @@ export default function TextEditor(): JSX.Element {
         },
         toolbar: {
           backgroundColor:
-            colorScheme === "light" ? "#fff" : `${theme.colors.darkTheme[7]}`,
+            colorScheme === "light" ? "#ffffff1a" : `${theme.colors.darkTheme[7]}`,
           borderBottom: "none",
           backdropFilter: "blur(5px)",
         },

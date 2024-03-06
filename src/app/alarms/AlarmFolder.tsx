@@ -98,7 +98,7 @@ export default function AlarmFolder(): JSX.Element {
             styles={(theme) => ({
               tooltip: { backgroundColor: `${"#FD0E78"}` },
             })}
-            transitionProps={{ transition: "skew-up", duration: 300 }}
+            transitionProps={{ transition: "scale", duration: 300 }}
           >
             <BtnEdit buttonStyles="unstyled">
               <CreateFolderLayout title="Editar Carpeta" />

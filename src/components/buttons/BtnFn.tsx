@@ -7,7 +7,7 @@ import { UserDescriptionLayout } from "@/app/data-base/UserDescriptionLayout";
 
 function BtnFn(): JSX.Element {
   return (
-    <Flex gap={"xs"}>
+    <Flex gap={6} align={"center"}>
       <BtnDelete>Prueba</BtnDelete>
       <BtnSee>
         <UserDescriptionLayout />

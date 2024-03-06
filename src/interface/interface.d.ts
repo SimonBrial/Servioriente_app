@@ -4,8 +4,9 @@ import {
   type tagIcon,
   CardContainerHeader,
   NotificationType,
-  degreeType,
   processTitle,
+  degreeType,
+  cardSize,
 } from "../types/types";
 
 interface NavIconProps {
@@ -187,7 +188,7 @@ interface EventCardProps {
   userToassign: string;
   desription: string;
   degree: degreeType;
-  smallSize: boolean;
+  cardSize: cardSize;
   title: string;
   id: string;
   date: Date;
@@ -229,6 +230,26 @@ interface ProcessedConversationItemProps {
   iconName: CardContainerHeader;
   totalConversations: number;
 }
+
+interface EventsArray {
+  date: Date;
+  title: string;
+  degree: degreeType;
+}
+
+/* interface EventCardProps {
+  title: string;
+  desription: string;
+  degree: degreeType;
+  userToassign: string;
+} */
+
+interface SmallEventCardProps {
+  title: string;
+  degree: degreeType;
+  date: Date;
+}
+
 export type {
   ProcessedConversationItemProps,
   DashboardProcessListItems,
@@ -237,6 +258,7 @@ export type {
   HorizontalLayoutProps,
   CardProcessItemProps,
   CountIndicatorProps,
+  SmallEventCardProps,
   TabsSectionesProps,
   colorBackgroundArr,
   NotitifacionProps,
@@ -258,6 +280,7 @@ export type {
   NavIconProps,
   sidebarItems,
   SocialMedia,
+  EventsArray,
   BtnAddProps,
   AlarmProps,
   CardProps,

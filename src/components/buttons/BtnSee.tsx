@@ -1,14 +1,15 @@
 import {
   useMantineColorScheme,
   UnstyledButton,
-  Tooltip,
   Drawer,
+  Center,
   Stack,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlineEye } from "../../icons";
 import btnClass from "@/styles/BtnStyles.module.css";
 import BtnBack from "./BtnBack";
+import TooltipLayout from "../TooltipLayout";
 
 export default function BtnSee({
   children,
@@ -43,20 +44,7 @@ export default function BtnSee({
           <BtnBack close={close} label="Volver" />
         </Stack>
       </Drawer>
-      <Tooltip
-        label="Ver"
-        withArrow
-        position="top"
-        styles={(theme) => ({
-          tooltip: {
-            background:
-              colorScheme === "light"
-                ? `${theme.colors.lightTheme[6]}`
-                : `${theme.colors.darkTheme[1]}`,
-            color: "#fff",
-          },
-        })}
-      >
+      <TooltipLayout label="Ver" position="top" key={crypto.randomUUID()}>
         <UnstyledButton
           variant="transparent"
           color="gray"
@@ -68,9 +56,11 @@ export default function BtnSee({
           }
           onClick={open}
         >
-          <HiOutlineEye />
+          <Center>
+            <HiOutlineEye />
+          </Center>
         </UnstyledButton>
-      </Tooltip>
+      </TooltipLayout>
     </>
   );
 }

@@ -91,7 +91,12 @@ function page(): JSX.Element {
           <CreateAlarmLayout title="Crear Nueva Alarma" />
         </BtnAdd>
       </Flex>
-      <InsideContainer offset={120} withBackground={false}>
+      <InsideContainer
+        offset={120}
+        withBackground={false}
+        withBorder={false}
+        key={crypto.randomUUID()}
+      >
         <Flex gap={"sm"} style={{ height: "100%" }}>
           <FolderContainer />
           <AlarmDescription objAlarm={fakeAlarmDescription} />

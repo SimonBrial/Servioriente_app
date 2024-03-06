@@ -9,6 +9,8 @@ import SelectInput from "@/components/inputs/SelectInput";
 import TextEditor from "@/components/TextEditor";
 import { CalendarInput } from "@/components/inputs/CalendarInput";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
+import { ContainerInside } from "@/components/container/ContainerInside";
+import heightClasses from "@/styles/heightView.module.css";
 
 export default function CreateAlarmLayout({
   title,
@@ -16,40 +18,55 @@ export default function CreateAlarmLayout({
   title: string;
 }): JSX.Element {
   return (
-    <ScrollArea offsetScrollbars scrollbarSize={2} scrollHideDelay={500}>
-      <Stack
-        gap={"0.4rem"}
-        styles={{
-          root: { padding: "0 0.2rem" },
-        }}
-      >
-        <TitleLayout title={title} color="" icon="" onText={false} />
-        <HorizontalInputLayout
-          title="Titulo"
-          icon={<MdTitle />}
-          asterisk={false}
-          inputSize="200px"
-        />
-        <HorizontalInputLayout
-          title="Icono"
-          icon={<MdOutlineInsertEmoticon />}
-          asterisk={false}
-          inputSize="200px"
-        />
-        <CalendarInput title="Title" withTitle width="200px" />
-        <Flex justify={"space-between"} align={"center"}>
-          <Title order={4}>Fecha de Creacion</Title>
-          <Flex gap={4}>
-            <Text>20/9/2023 - 10:58 AM</Text>
-            <WarningInfo description="Este valor no se puede modificar" />
-          </Flex>
+    <Stack
+      gap={"0.4rem"}
+      styles={{
+        root: { padding: "0 0.2rem" },
+      }}
+    >
+      <TitleLayout title={title} color="" icon="" onText={false} />
+      <HorizontalInputLayout
+        title="Titulo"
+        icon={<MdTitle />}
+        asterisk={false}
+        inputSize="200px"
+      />
+      <HorizontalInputLayout
+        title="Icono"
+        icon={<MdOutlineInsertEmoticon />}
+        asterisk={false}
+        inputSize="200px"
+      />
+      <CalendarInput title="Title" withTitle width="200px" />
+      <Flex justify={"space-between"} align={"center"}>
+        <Title order={4}>Fecha de Creacion</Title>
+        <Flex gap={4}>
+          <Text>20/9/2023 - 10:58 AM</Text>
+          <WarningInfo description="Este valor no se puede modificar" />
         </Flex>
-        <TimeSelect label="Hora" />
-        <PrivateInput privateStatus={false} userName="" />
-        <AutomatedInput automatedStatus={false} />
-        <SelectInput title="Selecciona una Carpeta" inputSize="200px" periodeArr={[]} />
-        <TextEditor />
-      </Stack>
-    </ScrollArea>
+      </Flex>
+      <TimeSelect label="Hora" />
+      <PrivateInput privateStatus={false} userName="" />
+      <AutomatedInput automatedStatus={false} />
+      <SelectInput
+        title="Selecciona una Carpeta"
+        inputSize="200px"
+        periodeArr={[]}
+      />
+      <ContainerInside
+        allWhite
+        width="100%"
+        withBorder
+        key={crypto.randomUUID()}
+      >
+        <ScrollArea
+          scrollbarSize={0}
+          p={0}
+          className={heightClasses.createAlarm_scroll_container}
+        >
+          <TextEditor />
+        </ScrollArea>
+      </ContainerInside>
+    </Stack>
   );
 }

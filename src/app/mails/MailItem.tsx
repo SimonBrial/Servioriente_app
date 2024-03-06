@@ -2,7 +2,6 @@
 
 import {
   HiOutlineMailOpen,
-  HiOutlineTrash,
   HiOutlineStar,
   HiOutlineSave,
 } from "@/icons";
@@ -19,6 +18,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
+import BtnMailTrash from "./BtnMailTrash";
 
 export default function MailItem(): JSX.Element {
   const { hovered, ref } = useHover();
@@ -176,23 +176,7 @@ export default function MailItem(): JSX.Element {
             Descripcion del mai...............
           </Text>
         </Stack>
-        {hovered ? (
-          <Center
-            px={4}
-            styles={{
-              root: {
-                backgroundColor: "rgba(255, 0, 0, 0.3)",
-                color: "red",
-                fontSize: "1.2rem",
-                borderRadius: "0 6px 6px 0",
-              },
-            }}
-          >
-            <HiOutlineTrash />
-          </Center>
-        ) : (
-          <></>
-        )}
+        {hovered ? <BtnMailTrash /> : <></>}
       </Flex>
     </Group>
   );

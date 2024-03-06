@@ -11,7 +11,7 @@ import {
   Flex,
 } from "@mantine/core";
 import classes from "@/styles/calendar.module.css";
-import { EventCardLayout } from "../EventCardLayout";
+import { EventCardLayout } from "../cards/EventCardLayout";
 import { eventCardArray } from "@/data/eventCardsData";
 import heightClasses from "@/styles/heightView.module.css"
 
@@ -51,7 +51,8 @@ export const ColumnEventList = () => {
                   eventCard;
                 return (
                   <EventCardLayout
-                    smallSize={false}
+                    cardSize="medium"
+                    date={new Date()}
                     userToassign={userToassign}
                     desription={desription}
                     degree={degree}

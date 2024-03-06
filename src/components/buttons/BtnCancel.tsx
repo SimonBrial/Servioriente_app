@@ -3,18 +3,19 @@
 import { IoClose } from "@/icons";
 import { Button, useMantineColorScheme } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/btnStyles.module.css";
 
-export const BtnCancel = () => {
+export const BtnCancel = ({ fnCancel }: { fnCancel: () => void }) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Button
-      // onClick={close}
+      onClick={fnCancel}
       fullWidth
       variant="white"
       leftSection={<IoClose />}
       classNames={{
-        root: colorScheme === "light" ? classes.btnCancel : classes.btnCancel_dark,
+        root:
+          colorScheme === "light" ? classes.btnCancel : classes.btnCancel_dark,
       }}
       styles={(theme) => ({
         root: {

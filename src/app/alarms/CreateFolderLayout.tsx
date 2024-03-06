@@ -4,6 +4,8 @@ import TextEditor from "@/components/TextEditor";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { ScrollArea, Stack } from "@mantine/core";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
+import { ContainerInside } from "@/components/container/ContainerInside";
+import heightClasses from "@/styles/heightView.module.css"
 
 export default function CreateFolderLayout({
   title,
@@ -11,29 +13,40 @@ export default function CreateFolderLayout({
   title: string;
 }): JSX.Element {
   return (
-    <ScrollArea offsetScrollbars scrollbarSize={2} scrollHideDelay={500}>
-      <Stack
-        gap={"0.4rem"}
-        styles={{
-          root: { padding: "0 0.2rem" },
-        }}
+    <Stack
+      gap={"0.4rem"}
+      styles={{
+        root: { padding: "0 0.2rem" },
+      }}
+    >
+      <TitleLayout title={title} color="" icon="" onText={false} />
+      <HorizontalInputLayout
+        title="Titulo"
+        icon={<MdTitle />}
+        inputSize="200px"
+        asterisk={false}
+      />
+      <HorizontalInputLayout
+        title="Icono"
+        icon={<MdOutlineInsertEmoticon />}
+        inputSize="200px"
+        asterisk={false}
+      />
+      <ColorSelectInput />
+      <ContainerInside
+        allWhite
+        width="100%"
+        withBorder
+        key={crypto.randomUUID()}
       >
-        <TitleLayout title={title} color="" icon="" onText={false} />
-        <HorizontalInputLayout
-          title="Titulo"
-          icon={<MdTitle />}
-          inputSize="200px"
-          asterisk={false}
-        />
-        <HorizontalInputLayout
-          title="Icono"
-          icon={<MdOutlineInsertEmoticon />}
-          inputSize="200px"
-          asterisk={false}
-        />
-        <ColorSelectInput />
-        <TextEditor />
-      </Stack>
-    </ScrollArea>
+        <ScrollArea
+          scrollbarSize={0}
+          p={0}
+          className={heightClasses.createFolder_scroll_container}
+        >
+          <TextEditor />
+        </ScrollArea>
+      </ContainerInside>
+    </Stack>
   );
 }

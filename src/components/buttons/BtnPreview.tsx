@@ -1,13 +1,15 @@
 "use client";
 
 import { HiOutlineEye, IoClose } from "@/icons";
-import { Button, Drawer, Stack } from "@mantine/core";
+import { Button, Drawer, Stack, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 import { TitleLayout } from "../layout/TitleLayout";
+import classes from "@/styles/btnStyles.module.css";
 
 export const BtnPreview = (): JSX.Element => {
   const [opened, { open, close }] = useDisclosure(false);
+  const { colorScheme } = useMantineColorScheme();
   return (
     <>
       <Drawer
@@ -35,13 +37,15 @@ export const BtnPreview = (): JSX.Element => {
       </Drawer>
       <Button
         onClick={open}
-        variant="#004EE5"
+        variant="white"
         fullWidth
         leftSection={<HiOutlineEye />}
         styles={(theme) => ({
           section: { fontSize: "1.2rem" },
-          root: { backgroundColor: `${theme.colors.principalTheme[6]}` },
         })}
+        className={
+          colorScheme === "light" ? classes.btnCancel : classes.btnCancel_dark
+        }
       >
         Vista Previa
       </Button>

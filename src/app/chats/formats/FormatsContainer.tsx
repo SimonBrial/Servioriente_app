@@ -1,22 +1,38 @@
 "use client";
 
-import { Flex, Stack } from "@mantine/core";
+import { Flex, ScrollArea, Stack } from "@mantine/core";
 import React from "react";
 import TextEditor from "@/components/TextEditor";
-import { BtnSend } from "@/components/buttons/BtnSend";
+import BtnSend from "@/components/buttons/BtnSend";
 import { BtnPreview } from "@/components/buttons/BtnPreview";
-import InsideContainer from "@/components/container/InsideContainer";
+import heightClasses from "@/styles/heightView.module.css";
+import { ContainerInside } from "@/components/container/ContainerInside";
 
 export const FormatsContainer = () => {
   return (
-    <Stack justify="space-between" align="end">
-      <InsideContainer offset={220} withBackground withBorder>
-        <TextEditor />
-      </InsideContainer>
+    <Stack gap={6}>
+      <ContainerInside
+        allWhite
+        width="100%"
+        withBorder
+        key={crypto.randomUUID()}
+      >
+        <ScrollArea
+          scrollbarSize={0}
+          p={0}
+          className={heightClasses.formats_scroll_container}
+        >
+          <TextEditor />
+        </ScrollArea>
+      </ContainerInside>
       <Flex gap={4} justify={"flex-end"} style={{ width: "100%" }}>
         {/* Añadirle la informacion que se va a mostrar mediante los hijos, es decir, hay que modificar el componente */}
-        <BtnSend />
         <BtnPreview />
+        <BtnSend
+          close={() => console.log("From FormatsContainer")}
+          label="Crear Plantilla"
+          key={crypto.randomUUID()}
+        />
       </Flex>
     </Stack>
   );

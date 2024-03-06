@@ -1,23 +1,33 @@
-import { IoIosSend } from "@/icons";
-import { Button } from "@mantine/core";
-import React from "react";
+"use client";
 
-export const BtnSend = () => {
+import { IoIosSend } from "@/icons";
+import { Button, useMantineColorScheme } from "@mantine/core";
+import React from "react";
+import classes from "@/styles/BtnStyles.module.css";
+
+export default function BtnSend({
+  close,
+  label = "Volver",
+}: {
+  close: () => void;
+  label: string;
+}): JSX.Element {
+  const { colorScheme } = useMantineColorScheme();
   return (
     <Button
       leftSection={<IoIosSend />}
-      variant="white"
-      // color="#004EE5"
+      onClick={close}
+      variant="filled"
       fullWidth
+      classNames={{
+        root: colorScheme === "light" ? classes.btnAdd : classes.btnAdd_dark,
+      }}
       styles={(theme) => ({
+        /* root: { backgroundColor: `${theme.colors.lightTheme[6]}` }, */
         section: { fontSize: "1.2rem" },
-        root: {
-          color: `${theme.colors.principalTheme[6]}`,
-          border: `2px solid ${theme.colors.principalTheme[6]}`,
-        },
       })}
     >
-      Enviar Mensaje
+      {label}
     </Button>
   );
-};
+}

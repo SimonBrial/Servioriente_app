@@ -2,20 +2,22 @@
 
 import { useDisclosure } from "@mantine/hooks";
 import {
-  Container,
-  Modal,
+  useMantineColorScheme,
+  UnstyledButton,
   ScrollArea,
+  Container,
+  Tooltip,
+  Modal,
   Stack,
   Title,
-  Tooltip,
-  UnstyledButton,
-  useMantineColorScheme,
+  Center,
 } from "@mantine/core";
 import { HiOutlineTrash, HiOutlineCheck } from "../../icons";
 import btnClass from "@/styles/BtnStyles.module.css";
 import { TitleLayout } from "../layout/TitleLayout";
 import BtnActions from "./BtnActions";
 import React from "react";
+import TooltipLayout from "../TooltipLayout";
 
 export default function BtnDelete({
   children,
@@ -77,20 +79,7 @@ export default function BtnDelete({
         </Stack>
       </Modal>
 
-      <Tooltip
-        label="Borrar"
-        withArrow
-        position="top"
-        styles={(theme) => ({
-          tooltip: {
-            color: "white",
-            background:
-              colorScheme === "light"
-                ? `${theme.colors.lightTheme[6]}`
-                : `${theme.colors.darkTheme[1]}`,
-          },
-        })}
-      >
+      <TooltipLayout label="Borrar" position="top" key={crypto.randomUUID()}>
         <UnstyledButton
           variant="transparent"
           color="gray"
@@ -102,9 +91,11 @@ export default function BtnDelete({
               : btnClass.btnDelete_item_dark
           }
         >
-          <HiOutlineTrash />
+          <Center>
+            <HiOutlineTrash />
+          </Center>
         </UnstyledButton>
-      </Tooltip>
+      </TooltipLayout>
     </>
   );
 }

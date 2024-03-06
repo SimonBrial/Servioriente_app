@@ -9,7 +9,7 @@ import {
   Stack,
 } from "@mantine/core";
 import React from "react";
-import { EventCardLayout } from "./calendarLayout/EventCardLayout";
+import { EventCardLayout } from "./calendarLayout/calendarStructure/cards/EventCardLayout";
 import classes from "@/styles/calendar.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 

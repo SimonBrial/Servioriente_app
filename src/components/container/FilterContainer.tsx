@@ -42,7 +42,7 @@ export function FilterContainer(): JSX.Element {
           </Flex>
           <BadgeClose status={true} />
         </Flex>
-        <GeneralDivider />
+        <GeneralDivider orientation="horizontal"/>
       </Stack>
     </Container>
   );

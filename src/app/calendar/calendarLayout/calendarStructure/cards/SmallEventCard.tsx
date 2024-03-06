@@ -2,15 +2,10 @@ import React from "react";
 import classes from "@/styles/calendar.module.css";
 import { Center, Divider, Flex, Title } from "@mantine/core";
 import degreeColor from "@/utils/degreeColor";
-import { degreeType } from "@/types/types";
 import { HiOutlineDotsVertical } from "@/icons";
+import { SmallEventCardProps } from "@/interface/interface";
 
-interface EventSmallCardProps {
-  title: string;
-  degree: degreeType;
-  date: Date;
-}
-export const EventSmallCard = ({ degree, title, date }: EventSmallCardProps) => {
+export const SmallEventCard = ({ degree, title, date }: SmallEventCardProps) => {
   return (
     <Flex
       classNames={{

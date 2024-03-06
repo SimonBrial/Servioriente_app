@@ -8,7 +8,7 @@ export const PillFilter = ({ tag }: { tag: string }): JSX.Element => {
   return (
     <Pill
       withRemoveButton
-      className={colorScheme === "light" ? classes.pill : classes.classes_dark}
+      className={colorScheme === "light" ? classes.pill : classes.pill_dark}
     >
       {tag}
     </Pill>

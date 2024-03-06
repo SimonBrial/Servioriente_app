@@ -4,14 +4,14 @@
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { IoChevronBack, IoChevronForward } from "@/icons";
 import btnClasses from "@/styles/BtnStyles.module.css";
-// import { months } from "@/data/calendarDaysAndMonth";
-
 import {
   useMantineColorScheme,
   UnstyledButton,
+  ScrollArea,
   Container,
   Center,
   Stack,
+  Badge,
   Flex,
   Text,
 } from "@mantine/core";
@@ -20,31 +20,66 @@ import classes from "@/styles/calendar.module.css";
 import InsideContainer from "@/components/container/InsideContainer";
 import {
   areDateOnSameDay,
-  getDateObjet,
-  getDaysInMonth,
   getSortedDays,
-  range,
+  getDateObjet,
 } from "@/utils/calendarFunctions";
-import { months, weekDays } from "@/data/calendarDaysAndMonth";
-import { EventSmallCard } from "../gridView/EventSmallCard";
-// import { DayHeader } from "../DayHeader";
-/* import { DayContainer } from "../DayContainer";
-import { calendarData } from "@/data/calendarData";
-import { eventCardArray } from "@/data/eventCardsData"; */
-// import { ContainerInside } from "@/components/container/ContainerInside";
+import { months, MOCKEVENTS, weekDays } from "@/data/calendarDaysAndMonth";
+import { EventCardLayout } from "./cards/EventCardLayout";
+import heightClasses from "@/styles/heightView.module.css";
+import { EventsArray } from "@/interface/interface";
 
-export const CalendarContainer = ({
-  startingDate,
-  eventsArr,
-}: {
-  startingDate: Date;
-  eventsArr: any[];
-}) => {
+// TODO: Agregar la opcion para añadir eventos.
+// TODO: Ajustar los dias del mes, que no se muevan.
+// TODO: Refactorizar todo el codigo.
+
+export const CalendarContainer = () => {
+  const dt = new Date();
   const { colorScheme } = useMantineColorScheme();
-  const [currentMonth, setCurrentMonth] = useState(startingDate.getMonth());
-  const [currentYear, setCurrentYear] = useState(startingDate.getFullYear());
-  /* const [showPortal, setShowPortal] = useState(false);
-  const [portalData, setPortalData] = useState({}); */
+  const [currentMonth, setCurrentMonth] = useState(dt.getMonth());
+  const [currentYear, setCurrentYear] = useState(dt.getFullYear());
+  const [events, setEvents] = useState<EventsArray[]>(MOCKEVENTS);
+
+  const addEvent = (date: Date, event: any) => {
+    if (!event.target.classList.contains("StyledEvent")) {
+      const text = window.prompt("name");
+      if (text !== null) {
+        date.setHours(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        setEvents((prev) => [
+          ...prev,
+          { date, title: text, degree: "Importante", _id: crypto.randomUUID() },
+        ]);
+      }
+    }
+  };
+
+  function generateEventList(day: number, eventsArray: any[]) {
+    return eventsArray.map((event, index) => {
+      const { date, title, degree } = event;
+      if (day === date.getDate()) {
+        return (
+          <div key={index} className="StyledEvent">
+            {areDateOnSameDay(
+              getDateObjet(day, currentMonth, currentYear),
+              event.date,
+            ) && (
+              <EventCardLayout
+                id={crypto.randomUUID()}
+                cardSize="small"
+                userToassign=""
+                degree={degree}
+                desription=""
+                title={title}
+                key={index}
+                date={date}
+              />
+            )}
+          </div>
+        );
+      }
+    });
+  }
 
   function nextMonth() {
     if (currentMonth < 11) {
@@ -62,6 +97,10 @@ export const CalendarContainer = ({
       setCurrentMonth(11);
       setCurrentYear((prev) => prev - 1);
     }
+  }
+
+  function eventsOfDay(day: number, eventsArray: EventsArray[]) {
+    return eventsArray.filter((event) => day === event.date.getDate());
   }
 
   return (
@@ -128,154 +167,126 @@ export const CalendarContainer = ({
           <Stack gap={0}>
             {/* -------------- Calendar's Day Header -------------- */}
             <Flex gap={0}>
-              {getSortedDays(currentMonth, currentYear).map(
-                (day: string, index: number) => (
-                  <Container
-                    key={index}
-                    classNames={{
-                      root:
-                        colorScheme === "light"
-                          ? classes.dayHeader
-                          : classes.dayHeader_dark,
-                    }}
-                  >
-                    {day}
-                  </Container>
-                ),
-              )}
+              {weekDays.map((day: string, index: number) => (
+                <Container
+                  key={index}
+                  classNames={{
+                    root:
+                      colorScheme === "light"
+                        ? classes.dayHeader
+                        : classes.dayHeader_dark,
+                  }}
+                >
+                  {day}
+                </Container>
+              ))}
             </Flex>
             {/* -------------- Calendar's body -------------- */}
-            <Container p={0} style={{ maxWidth: "100%", margin: "0" }}>
-              <Flex wrap="wrap">
-                {range(getDaysInMonth(currentMonth, currentYear)).map(
-                  (day, index) => {
-                    // console.log(typeof day === "number", day);
-                    const sameDay = areDateOnSameDay(
-                      new Date(),
-                      getDateObjet(day, currentMonth, currentYear),
-                    );
-                    return (
-                      <Container
-                        style={{ width: "calc(100%/7)" }}
-                        key={index}
-                        classNames={{
-                          root:
-                            colorScheme === "light"
-                              ? classes.weekday_container
-                              : classes.weekday_container_dark,
-                        }}
-                        // styles={{ root: { backgroundColor: sameDay ? "red" : "" } }}
-                      >
-                        <Flex
+            <ScrollArea
+              scrollbarSize={2}
+              p={0}
+              // h={matches ? "71.5vh" : "65.5vh"}
+              // classNames={{ root: classes.columnCard_container }}
+              className={heightClasses.calendarGrid_container}
+              offsetScrollbars
+              scrollHideDelay={0}
+            >
+              <Container p={0} style={{ maxWidth: "100%", margin: "0" }}>
+                <Flex wrap="wrap">
+                  {getSortedDays(currentMonth, currentYear).map(
+                    (day, index) => {
+                      // console.log("Prueba: ", day);
+                      // TODO: Se debe mostrar el badge segun el mes al qeu se asigne el evento
+                      const sameDay = areDateOnSameDay(
+                        new Date(),
+                        getDateObjet(day, currentMonth, currentYear),
+                      );
+                      /* console.log(
+                        "Eventos del dia: ",
+                        eventsOfDay(day, events).filter((event: EventsArray, index) => {
+                          return event !== null ? event : null;
+                        }),
+                      ); */
+                      return (
+                        <Container
+                          style={{ width: "calc(100%/7)" }}
+                          key={index}
                           classNames={{
                             root:
                               colorScheme === "light"
-                                ? sameDay
-                                  ? classes.weekday_active
-                                  : classes.weekday
-                                : sameDay
-                                ? classes.weekday_dark_active
-                                : classes.weekday_dark,
+                                ? classes.weekday_container
+                                : classes.weekday_container_dark,
                           }}
-                          /* style={{
-                            position: "relative",
-                          }} */
-                          align={"center"}
+                          onClick={(e) =>
+                            addEvent(
+                              new Date(currentYear, currentMonth, day),
+                              e,
+                            )
+                          }
                         >
-                          <Text
+                          <Flex
+                            classNames={{
+                              root:
+                                colorScheme === "light"
+                                  ? sameDay
+                                    ? classes.weekday_active
+                                    : classes.weekday
+                                  : sameDay
+                                    ? classes.weekday_dark_active
+                                    : classes.weekday_dark,
+                            }}
                             style={{
-                              margin: "0 auto",
+                              position: "relative",
+                            }}
+                            align={"center"}
+                          >
+                            <Text
+                              style={{
+                                margin: "0 auto",
+                              }}
+                            >
+                              {day}
+                            </Text>
+                            {eventsOfDay(day, events).length > 3 ? (
+                              <Badge
+                                style={{
+                                  position: "absolute",
+                                  right: "0.2rem",
+                                }}
+                                color={
+                                  colorScheme === "light"
+                                    ? "#115dfe"
+                                    : "#52A5E0"
+                                }
+                              >
+                                +{eventsOfDay(day, events).length - 3}
+                              </Badge>
+                            ) : (
+                              <></>
+                            )}
+                          </Flex>
+                          <Container
+                            classNames={{
+                              root:
+                                colorScheme === "light"
+                                  ? classes.dayEvents
+                                  : classes.dayEvents_dark,
                             }}
                           >
-                            {day}
-                          </Text>
-                        </Flex>
-                        <Container
-                          classNames={{
-                            root:
-                              colorScheme === "light"
-                                ? classes.dayEvents
-                                : classes.dayEvents_dark,
-                          }}
-                        >
-                          <Stack gap={2} p={0}>
-                            {eventsArr.map((event, index) => {
-                              const { date, title, degree } = event;
-                              return (
-                                <div key={index}>
-                                  {areDateOnSameDay(
-                                    getDateObjet(
-                                      day,
-                                      currentMonth,
-                                      currentYear,
-                                    ),
-                                    event.date,
-                                  ) && (
-                                    <EventSmallCard
-                                      date={date}
-                                      degree={degree}
-                                      title={title}
-                                    />
-                                  )}
-                                </div>
-                              );
-                            })}
-                          </Stack>
+                            <Stack gap={2} p={0}>
+                              {generateEventList(day, events)}
+                            </Stack>
+                          </Container>
                         </Container>
-                      </Container>
-                    );
-                  },
-                )}
-              </Flex>
-            </Container>
+                      );
+                    },
+                  )}
+                </Flex>
+              </Container>
+            </ScrollArea>
           </Stack>
-          {/* <ContainerInside allWhite={false} width="100%" withBorder>
-          </ContainerInside> */}
         </Stack>
       </Container>
     </InsideContainer>
   );
 };
-
-/* onClick={() => {
-  setMonthCount(monthCount === 0 ? 11 : monthCount - 1);
-  setYearCount(monthCount === 0 ? yearCount - 1 : yearCount);
-}} */
-
-/* onClick={() => {
-  setMonthCount((monthCount + 1) % 12);
-  setYearCount(monthCount === 11 ? yearCount + 1 : yearCount);
-}} */
-
-/*
-<DayContainer
-  currentDay
-  dayNumber={5}
-  dayEventArray={[
-    {
-      title: "Generar RCV",
-      desription:
-        "Se debeen generar 5 RCV para el cliente de Caracas",
-      degree: "Muy Importante",
-      userToassign: "Mario Hurtado",
-      id: crypto.randomUUID(),
-    },
-    {
-      title: "Generar RCV",
-      desription:
-        "Se debeen generar 5 RCV para el cliente de Caracas",
-      degree: "Importante",
-      userToassign: "Mario Hurtado",
-      id: crypto.randomUUID(),
-    },
-    {
-      title: "Generar RCV",
-      desription:
-        "Se debeen generar 5 RCV para el cliente de Caracas",
-      degree: "Normal",
-      userToassign: "Mario Hurtado",
-      id: crypto.randomUUID(),
-    },
-  ]}
-/>
-*/

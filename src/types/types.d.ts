@@ -24,7 +24,7 @@ type degreeType =
   | "Nada Importante"
   | "Poco Importante";
 
-type cardSize = "small" | "medium" | "large";
+type cardSize = "small" | "medium" | "big";
 
 export type {
   NotificationsTypes,

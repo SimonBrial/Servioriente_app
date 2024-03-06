@@ -19,11 +19,11 @@ import {
   CgCornerUpRight,
   CgCornerUpLeft,
   HiOutlineStar,
-} from "../../icons";
+} from "@/icons";
 import mailReadViewClasses from "@/styles/BtnStyles.module.css";
+import TooltipLayout from "@/components/TooltipLayout";
 
 export default function MailReadView(): JSX.Element {
-  // const { height } = useViewportSize();
   const { colorScheme } = useMantineColorScheme();
 
   return (
@@ -61,66 +61,96 @@ export default function MailReadView(): JSX.Element {
                 justify={"end"}
                 gap={2}
               >
-                <UnstyledButton
-                  classNames={{
-                    root:
-                      colorScheme === "light"
-                        ? mailReadViewClasses.btnMail
-                        : mailReadViewClasses.btnMail_dark,
-                  }}
+                <TooltipLayout
+                  label="Agregar a favoritos"
+                  position="bottom"
+                  key={crypto.randomUUID()}
                 >
-                  <Center style={{ fontSize: "1.5rem" }}>
-                    <HiOutlineStar />
-                  </Center>
-                </UnstyledButton>
-                <UnstyledButton
-                  classNames={{
-                    root:
-                      colorScheme === "light"
-                        ? mailReadViewClasses.btnMail
-                        : mailReadViewClasses.btnMail_dark,
-                  }}
+                  <UnstyledButton
+                    classNames={{
+                      root:
+                        colorScheme === "light"
+                          ? mailReadViewClasses.btnMail
+                          : mailReadViewClasses.btnMail_dark,
+                    }}
+                  >
+                    <Center style={{ fontSize: "1.5rem" }}>
+                      <HiOutlineStar />
+                    </Center>
+                  </UnstyledButton>
+                </TooltipLayout>
+                <TooltipLayout
+                  label="Responder"
+                  position="bottom"
+                  key={crypto.randomUUID()}
                 >
-                  <Center style={{ fontSize: "1.5rem" }}>
-                    <CgCornerUpLeft />
-                  </Center>
-                </UnstyledButton>
-                <UnstyledButton
-                  classNames={{
-                    root:
-                      colorScheme === "light"
-                        ? mailReadViewClasses.btnMail
-                        : mailReadViewClasses.btnMail_dark,
-                  }}
+                  <UnstyledButton
+                    classNames={{
+                      root:
+                        colorScheme === "light"
+                          ? mailReadViewClasses.btnMail
+                          : mailReadViewClasses.btnMail_dark,
+                    }}
+                  >
+                    <Center style={{ fontSize: "1.5rem" }}>
+                      <CgCornerUpLeft />
+                    </Center>
+                  </UnstyledButton>
+                </TooltipLayout>
+                <TooltipLayout
+                  label="Responder a Todos"
+                  position="bottom"
+                  key={crypto.randomUUID()}
                 >
-                  <Center style={{ fontSize: "1.5rem" }}>
-                    <CgCornerDoubleUpLeft />
-                  </Center>
-                </UnstyledButton>
-                <UnstyledButton
-                  classNames={{
-                    root:
-                      colorScheme === "light"
-                        ? mailReadViewClasses.btnMail
-                        : mailReadViewClasses.btnMail_dark,
-                  }}
+                  <UnstyledButton
+                    classNames={{
+                      root:
+                        colorScheme === "light"
+                          ? mailReadViewClasses.btnMail
+                          : mailReadViewClasses.btnMail_dark,
+                    }}
+                  >
+                    <Center style={{ fontSize: "1.5rem" }}>
+                      <CgCornerDoubleUpLeft />
+                    </Center>
+                  </UnstyledButton>
+                </TooltipLayout>
+                <TooltipLayout
+                  label="Responder"
+                  position="bottom"
+                  key={crypto.randomUUID()}
                 >
-                  <Center style={{ fontSize: "1.5rem" }}>
-                    <CgCornerUpRight />
-                  </Center>
-                </UnstyledButton>
-                <UnstyledButton
-                  classNames={{
-                    root:
-                      colorScheme === "light"
-                        ? mailReadViewClasses.btnMail
-                        : mailReadViewClasses.btnMail_dark,
-                  }}
+                  <UnstyledButton
+                    classNames={{
+                      root:
+                        colorScheme === "light"
+                          ? mailReadViewClasses.btnMail
+                          : mailReadViewClasses.btnMail_dark,
+                    }}
+                  >
+                    <Center style={{ fontSize: "1.5rem" }}>
+                      <CgCornerUpRight />
+                    </Center>
+                  </UnstyledButton>
+                </TooltipLayout>
+                <TooltipLayout
+                  label="Otros"
+                  position="bottom"
+                  key={crypto.randomUUID()}
                 >
-                  <Center style={{ fontSize: "1.5rem" }}>
-                    <HiOutlineDotsVertical />
-                  </Center>
-                </UnstyledButton>
+                  <UnstyledButton
+                    classNames={{
+                      root:
+                        colorScheme === "light"
+                          ? mailReadViewClasses.btnMail
+                          : mailReadViewClasses.btnMail_dark,
+                    }}
+                  >
+                    <Center style={{ fontSize: "1.5rem" }}>
+                      <HiOutlineDotsVertical />
+                    </Center>
+                  </UnstyledButton>
+                </TooltipLayout>
               </Flex>
             </Flex>
             <Flex justify={"space-between"} w={"100%"}>

@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "@/styles/calendar.module.css";
-import { EventCardLayout } from "./EventCardLayout";
+import { EventCardLayout } from "./calendarStructure/cards/EventCardLayout";
 import { EventCardProps } from "@/interface/interface";
 import { useDisclosure } from "@mantine/hooks";
 import { DayEventListLayout } from "../DayEventListLayout";

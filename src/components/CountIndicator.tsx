@@ -1,7 +1,8 @@
 "use client";
 
-import { Tooltip, Button, useMantineColorScheme } from "@mantine/core";
+import { Button, useMantineColorScheme } from "@mantine/core";
 import { CountIndicatorProps } from "@/interface/interface";
+import TooltipLayout from "./TooltipLayout";
 
 export function CountIndicator({
   count,
@@ -10,14 +11,10 @@ export function CountIndicator({
 }: CountIndicatorProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <Tooltip
-      withArrow
-      offset={5}
+    <TooltipLayout
       label={`${description}: ${count}`}
       position="bottom"
-      color="#004EE5"
-      transitionProps={{ transition: "skew-up", duration: 300 }}
-      style={{ color: "#FFF" }}
+      key={crypto.randomUUID()}
     >
       <Button
         leftSection={iconSection}
@@ -51,6 +48,6 @@ export function CountIndicator({
       >
         {count}
       </Button>
-    </Tooltip>
+    </TooltipLayout>
   );
 }

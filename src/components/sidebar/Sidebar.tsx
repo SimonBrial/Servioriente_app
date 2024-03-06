@@ -12,13 +12,13 @@ import {
   HiOutlineLogout,
   AiOutlineIdcard,
   HiOutlineMail,
-  HiOutlineBell,
   HiOutlineUser,
   HiOutlineCog,
 } from "../../icons";
 import sidebarClass from "@/styles/sidebar.module.css";
 import NavIcon from "./NavIcon";
 import { sidebarItems } from "@/interface/interface";
+import NotificationIcon from "./NotificationIcon";
 
 const sections: sidebarItems[] = [
   {
@@ -109,15 +109,11 @@ export function Sidebar(): JSX.Element {
           {links}
         </Stack>
         <Stack justify="center" gap={12}>
+          <NotificationIcon active key={crypto.randomUUID()} />
           <NavIcon
-            dir={"/home"}
+            dir={"/login"}
             icon={<HiOutlineLogout className={sidebarClass.icon} />}
             label={"Logout"}
-          />
-          <NavIcon
-            dir={""}
-            icon={<HiOutlineBell className={sidebarClass.icon} />}
-            label={"Notificaciones"}
           />
         </Stack>
       </Stack>

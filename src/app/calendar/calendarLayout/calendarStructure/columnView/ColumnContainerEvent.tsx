@@ -8,7 +8,7 @@ import {
   Text,
 } from "@mantine/core";
 import React from "react";
-import { BigEventCard } from "../cardLayout/BigEventCard";
+import { EventCardLayout } from "../cards/EventCardLayout";
 import { EventCardData } from "@/interface/interface";
 import { HiOutlineEmojiSad } from "@/icons";
 import { Carousel } from "@mantine/carousel";
@@ -25,13 +25,15 @@ export const ColumnContainerEvent = ({
     const { degree, desription, id, title, userToassign } = eventCard;
     return (
       <Carousel.Slide key={id} /* style={{ border: "1px solid red" }} */>
-        <BigEventCard
+        <EventCardLayout
           userToassign={userToassign}
           desription={desription}
+          date={new Date()}
           degree={degree}
+          cardSize="big"
           title={title}
           key={id}
-          admin
+          id={id}
         />
       </Carousel.Slide>
     );

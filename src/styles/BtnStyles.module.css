@@ -54,8 +54,9 @@
 }
 .btnCancel {
   background-color: #fff;
-  border: 1px solid #004ee5;
-  height: 100%;
+  border: 2px solid #004ee5;
+  color: #004ee5;
+  /* height: 100%; */
 }
 .btnCancel:hover {
   background-color: #eff3f5;
@@ -63,8 +64,9 @@
 }
 .btnCancel_dark {
   background-color: #fff;
-  border: 1px solid #004ee5;
-  height: 100%;
+  border: 2px solid #52a5e0;
+  color: #52a5e0;
+  /* height: 100%; */
 }
 .btnCancel_dark:hover {
   background-color: #c8cdd0;

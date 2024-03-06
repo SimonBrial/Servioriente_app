@@ -100,6 +100,26 @@
     height: 68vh;
   }
 }
+@media (min-width: 1280px) {
+  .difusionList_scroll_container {
+    height: 69.5vh;
+  }
+}
+@media (min-width: 1281px) {
+  .difusionList_scroll_container {
+    height: 63.1vh;
+  }
+}
+@media (min-width: 1280px) {
+  .formats_scroll_container {
+    height: 72.2vh;
+  }
+}
+@media (min-width: 1281px) {
+  .formats_scroll_container {
+    height: 65.5vh;
+  }
+}
 /* -------------------------- Metrics Section -------------------------- */
 @media (min-width: 1280px) {
   .metrics_container {
@@ -109,6 +129,17 @@
 @media (min-width: 1281px) {
   .metrics_container {
     height: 75vh;
+  }
+}
+/* -------------------------- Mail Section -------------------------- */
+@media (min-width: 1280px) {
+  .sendMail_scroll_container {
+    height: 71vh;
+  }
+}
+@media (min-width: 1281px) {
+  .sendMail_scroll_container {
+    height: 64vh;
   }
 }
 /* -------------------------- Calendar Section -------------------------- */
@@ -140,5 +171,47 @@
 @media (min-width: 1281px) {
   .calendarColumn__right_dates {
     height: 65.5vh;
+  }
+}
+@media (min-width: 1280px) {
+  .calendarGrid_container {
+    height: 71.5vh;
+  }
+}
+@media (min-width: 1281px) {
+  .calendarGrid_container {
+    height: 65.5vh;
+  }
+}
+/* -------------------------- Data Base Section -------------------------- */
+@media (min-width: 1280px) {
+  .DB_container {
+    height: 77vh;
+  }
+}
+@media (min-width: 1281px) {
+  .DB_container {
+    height: 72vh;
+  }
+}
+/* -------------------------- Alarm Section -------------------------- */
+@media (min-width: 1280px) {
+  .createFolder_scroll_container {
+    height: 68vh;
+  }
+}
+@media (min-width: 1281px) {
+  .createFolder_scroll_container {
+    height: 60vh;
+  }
+}
+@media (min-width: 1280px) {
+  .createAlarm_scroll_container {
+    height: 45vh;
+  }
+}
+@media (min-width: 1281px) {
+  .createAlarm_scroll_container {
+    height: 31vh;
   }
 }

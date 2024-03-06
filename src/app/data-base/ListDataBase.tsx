@@ -4,10 +4,14 @@ import { ScrollArea, Stack, Table, useMantineColorScheme } from "@mantine/core";
 import BtnFn from "@/components/buttons/BtnFn";
 import { useState } from "react";
 import classes from "@/styles/listStyles.module.css";
+import heightClasses from "@/styles/heightView.module.css";
 import { listDB as elements } from "@/data/ListDB";
+import PaginationLayout from "./PaginationLayout";
+import HeaderRowItem from "./HeaderRowItem";
 
 export default function ListDataBase(): JSX.Element {
   const [scrolled, setScrolled] = useState(false);
+  const [sorted, setSorted] = useState(false);
   const { colorScheme } = useMantineColorScheme();
 
   const rows = elements.map((element) => (
@@ -34,9 +38,10 @@ export default function ListDataBase(): JSX.Element {
   ));
 
   return (
-    <Stack gap={2}>
+    <Stack gap={10}>
       <ScrollArea
-        h={520}
+        // h={620}
+        className={heightClasses.DB_container}
         offsetScrollbars
         scrollbarSize={6}
         onScrollPositionChange={({ y }) => {
@@ -56,8 +61,9 @@ export default function ListDataBase(): JSX.Element {
             thead: {
               color: "#000",
             },
-            th: { textAlign: "center" },
+            th: { textAlign: "center", cursor: "pointer" },
           })}
+          verticalSpacing="sm"
           classNames={{
             thead: classes.thead_row,
           }}
@@ -82,20 +88,39 @@ export default function ListDataBase(): JSX.Element {
                   zIndex: "100",
                 }}
               ></Table.Th>
-              <Table.Th style={{ textAlign: "center" }}>Nombre</Table.Th>
-              <Table.Th>Apellido</Table.Th>
-              <Table.Th>Vehiculo</Table.Th>
+              <Table.Th
+                style={{ textAlign: "center" }}
+                onClick={() => setSorted((s) => !s)}
+              >
+                <HeaderRowItem label="Nombre" sorted={sorted} />
+              </Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+                <HeaderRowItem label="Apellido" sorted={sorted} />
+              </Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+                {" "}
+                <HeaderRowItem label="Vehiculo" sorted={sorted} />
+              </Table.Th>
               <Table.Th>ID Vehiculo</Table.Th>
-              <Table.Th>Lugar</Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+                {" "}
+                <HeaderRowItem label="Lugar" sorted={sorted} />
+              </Table.Th>
               <Table.Th>Telefono</Table.Th>
               <Table.Th>Correo</Table.Th>
-              <Table.Th>Status</Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+                {" "}
+                <HeaderRowItem label="Status" sorted={sorted} />
+              </Table.Th>
               <Table.Th>Cumpleaños</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
       </ScrollArea>
+      <PaginationLayout />
     </Stack>
   );
 }
+
+// https://ui.mantine.dev/category/tables/ -> When i need to create an sorted table

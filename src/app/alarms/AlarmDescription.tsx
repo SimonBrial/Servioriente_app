@@ -3,12 +3,12 @@
 import {
   useMantineColorScheme,
   ScrollArea,
+  Button,
   Stack,
   Title,
   Text,
   Flex,
   Box,
-  Button,
 } from "@mantine/core";
 import { useViewportSize } from "@mantine/hooks";
 import { TitleLayout } from "@/components/layout/TitleLayout";

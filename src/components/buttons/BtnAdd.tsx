@@ -70,6 +70,7 @@ function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {
       <Drawer
         opened={opened}
         onClose={close}
+        closeOnClickOutside={false}
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         withCloseButton={false}

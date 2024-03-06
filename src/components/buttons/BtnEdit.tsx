@@ -1,17 +1,17 @@
 import {
+  useMantineColorScheme,
+  UnstyledButton,
   Button,
   Center,
   Drawer,
   Stack,
-  Tooltip,
-  UnstyledButton,
-  useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlinePencil, HiOutlineSave } from "../../icons";
 import btnClass from "@/styles/BtnStyles.module.css";
 import BtnActions from "./BtnActions";
 import { EditButtonStyles } from "@/types/types";
+import TooltipLayout from "../TooltipLayout";
 
 export default function BtnEdit({
   children,
@@ -45,20 +45,7 @@ export default function BtnEdit({
       );
     } else if (type === "special") {
       buttonSty = (
-        <Tooltip
-          label="Editar"
-          withArrow
-          position="top"
-          styles={(theme) => ({
-            tooltip: {
-              background:
-                colorScheme === "light"
-                  ? `${theme.colors.lightTheme[6]}`
-                  : `${theme.colors.darkTheme[1]}`,
-              color: "#fff",
-            },
-          })}
-        >
+        <TooltipLayout label="Editar" position="top" key={crypto.randomUUID()}>
           <UnstyledButton
             variant="transparent"
             color="gray"
@@ -70,9 +57,11 @@ export default function BtnEdit({
             }
             onClick={open}
           >
-            <HiOutlinePencil />
+            <Center>
+              <HiOutlinePencil />
+            </Center>
           </UnstyledButton>
-        </Tooltip>
+        </TooltipLayout>
       );
     } else if (type === "unstyled") {
       buttonSty = (
@@ -91,6 +80,7 @@ export default function BtnEdit({
       <Drawer
         opened={opened}
         onClose={close}
+        closeOnClickOutside={false}
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         withCloseButton={false}
@@ -103,8 +93,8 @@ export default function BtnEdit({
         <Stack
           justify="space-between"
           style={{
-            padding: "1rem 1rem 0 1rem",
-            height: "96vh",
+            padding: "0 1rem",
+            height: "95vh",
           }}
         >
           {children}
