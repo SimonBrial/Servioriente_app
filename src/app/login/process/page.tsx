@@ -4,7 +4,7 @@ import BtnAdd from "@/components/buttons/BtnAdd";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
 import { Flex, Stack, Container } from "@mantine/core";
-import { CountIndicator } from "../../components/CountIndicator";
+import { CountIndicator } from "../../../components/CountIndicator";
 import { HiOutlineUserCircle } from "@/icons";
 import CreateClientLayout from "./CreateClientLayout";
 import { ProcessLayout } from "./ProcessLayout";

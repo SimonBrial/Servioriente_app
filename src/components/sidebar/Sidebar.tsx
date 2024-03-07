@@ -28,48 +28,48 @@ const sections: sidebarItems[] = [
   },
   {
     icon: <HiOutlineTemplate className={sidebarClass.icon} />,
-    label: "Dahsboard",
-    direction: "/",
+    label: "Dashboard",
+    direction: "/login/dashboard",
   },
   {
     icon: <AiOutlineIdcard className={sidebarClass.icon} />,
     label: "Cards",
-    direction: "/process",
+    direction: "/login/process",
   },
   {
     icon: <HiOutlineChatBubbleLeftRight className={sidebarClass.icon} />,
     label: "Chats",
-    direction: "/chats",
+    direction: "/login/chats",
   },
   {
     icon: <HiOutlineDatabase className={sidebarClass.icon} />,
     label: "Base de Datos",
-    direction: "/data-base",
+    direction: "/login/data-base",
   },
   {
     icon: <HiOutlineCalendar className={sidebarClass.icon} />,
     label: "Calendario",
-    direction: "/calendar",
+    direction: "/login/calendar",
   },
   {
     icon: <HiOutlineChartBar className={sidebarClass.icon} />,
     label: "Metricas",
-    direction: "/metrics",
+    direction: "/login/metrics",
   },
   {
     icon: <HiOutlineMail className={sidebarClass.icon} />,
     label: "Correos",
-    direction: "/mails",
+    direction: "/login/mails",
   },
   {
     icon: <HiOutlineExclamationCircle className={sidebarClass.icon} />,
     label: "Recordatorios",
-    direction: "/alarms",
+    direction: "/login/alarms",
   },
   {
     icon: <HiOutlineCog className={sidebarClass.icon} />,
     label: "Configuraciones",
-    direction: "/settings",
+    direction: "/login/settings",
   },
 ];
 
@@ -111,7 +111,7 @@ export function Sidebar(): JSX.Element {
         <Stack justify="center" gap={12}>
           <NotificationIcon active key={crypto.randomUUID()} />
           <NavIcon
-            dir={"/login"}
+            dir={"/"}
             icon={<HiOutlineLogout className={sidebarClass.icon} />}
             label={"Logout"}
           />

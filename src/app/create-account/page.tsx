@@ -1,10 +1,10 @@
 import { Container, Flex } from "@mantine/core";
-import LoginForm from "./LoginForm";
 import Image from "next/image";
 import LoginImg from "../../../public/loginImg.jpg";
 import classes from "@/styles/login.module.css";
+import CreateAccountForm from "./CreateAccountForm";
 
-function LoginPage(): JSX.Element {
+function CreateAccountPage(): JSX.Element {
   return (
     <Flex style={{ position: "relative" }}>
       <Container
@@ -18,7 +18,7 @@ function LoginPage(): JSX.Element {
           color: "#F8F8F8",
         }}
       >
-        <LoginForm />
+        <CreateAccountForm />
       </Container>
       <Image
         alt="bg login app"
@@ -34,4 +34,4 @@ function LoginPage(): JSX.Element {
   );
 }
 
-export default LoginPage;
+export default CreateAccountPage;

@@ -25,7 +25,7 @@ import { getCardById } from "@/utils/tasks";
 import {
   findBoardSectionContainer,
   initializeColumns,
-} from "../../utils/board";
+} from "../../../utils/board";
 import { ProcessColumnLayout } from "./ProcessColumnLayout";
 import { CardProcess } from "./CardProcess";
 import { Container, Grid, useMantineColorScheme } from "@mantine/core";

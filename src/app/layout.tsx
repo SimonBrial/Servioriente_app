@@ -2,8 +2,8 @@
 // - Conservar esta estructura para que no se vean afectados los estilos -
 // <--------------------------------------------------------------------->
 // Basic Components
-import { Sidebar } from "@/components/sidebar/Sidebar";
-import { GlobalContainer } from "@/components/container/GlobalContainer";
+/* import { Sidebar } from "@/components/sidebar/Sidebar";
+import { GlobalContainer } from "@/components/container/GlobalContainer"; */
 // App Global Styles
 import "./globals.css";
 // Mantine configuration
@@ -11,7 +11,6 @@ import {
   MantineProvider,
   ColorSchemeScript,
   Container,
-  Flex,
 } from "@mantine/core";
 // Mantine Global theme configuration
 import { theme } from "../theme/CustomTheme";
@@ -20,14 +19,16 @@ import "@mantine/core/styles.css";
 import "@mantine/tiptap/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
-import '@mantine/charts/styles.css';
-import '@mantine/carousel/styles.css';
+import "@mantine/charts/styles.css";
+import "@mantine/carousel/styles.css";
 // <--------------------------------------------------------------------->
 // Next/Metadata
 import type { Metadata } from "next";
 // Next/fonts
 import { Inter } from "next/font/google";
 import { Notifications } from "@mantine/notifications";
+import { MainContainer } from "@/components/container/MainContainer";
+// import LoginPage from "./login/page";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -49,10 +50,12 @@ export default function RootLayout({
         <MantineProvider theme={theme} defaultColorScheme="light">
           <Container fluid px={0}>
             <Notifications />
-            <Flex p={0} >
+            {/* <Flex p={0}>
               <Sidebar />
               <GlobalContainer>{children}</GlobalContainer>
-            </Flex>
+            </Flex> */}
+            {/* <LoginPage /> */}
+            <MainContainer>{children}</MainContainer>
           </Container>
         </MantineProvider>
       </body>

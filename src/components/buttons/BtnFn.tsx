@@ -2,8 +2,8 @@ import { Flex } from "@mantine/core";
 import BtnEdit from "./BtnEdit";
 import BtnSee from "./BtnSee";
 import BtnDelete from "./BtnDelete";
-import RegisterEditLayout from "@/app/data-base/RegisterEditLayout";
-import { UserDescriptionLayout } from "@/app/data-base/UserDescriptionLayout";
+import RegisterEditLayout from "@/app/login/data-base/RegisterEditLayout";
+import { UserDescriptionLayout } from "@/app/login/data-base/UserDescriptionLayout";
 
 function BtnFn(): JSX.Element {
   return (

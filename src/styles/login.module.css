@@ -1,0 +1,7 @@
+.login_img::before {
+  content: "";
+  background-image: linear-gradient(to top right, #1a1a1a, transparent);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}

@@ -1,12 +1,15 @@
-import { Stack } from "@mantine/core";
+/* import { Stack } from "@mantine/core";
 import { DashboardContainer } from "./dashboard/DashboardContainer";
-import { TabTimeView } from "./dashboard/TabTimeView";
+import { TabTimeView } from "./dashboard/TabTimeView"; */
+import LoginPage from "./login/page";
 
 export default function Home(): JSX.Element {
-  return (
-    <Stack gap={6}>
-      <TabTimeView />
-      <DashboardContainer />
-    </Stack>
-  );
+  return <LoginPage />;
+}
+
+{
+  /* <Stack gap={6}>
+    <TabTimeView />
+    <DashboardContainer />
+  </Stack> */
 }

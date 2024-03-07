@@ -1,6 +1,6 @@
 import { Group } from "@mantine/core";
 
-export default function layout({
+export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
