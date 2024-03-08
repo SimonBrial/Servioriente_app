@@ -71,7 +71,7 @@ export default function CreateAccountForm() {
             <Text>Recodar mi contraseña</Text>
           </Flex>
           <Stack gap={4} align="end">
-            <Link href={"/login"} style={{ width: "100%" }}>
+            <Link href={"/login/dashboard"} style={{ width: "100%" }}>
               <Button type="submit" mt="sm" fullWidth color="#115dfe">
                 Crear Usuario
               </Button>

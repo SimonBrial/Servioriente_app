@@ -1,16 +1,16 @@
-import NewEmailLayout from "@/app/mails/NewEmailLayout";
 import {
   useMantineColorScheme,
   Button,
   Drawer,
-  Flex,
   Stack,
+  Flex,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 import classes from "@/styles/btnStyles.module.css";
 import BtnSend from "./BtnSend";
 import { BtnCancel } from "./BtnCancel";
+import NewEmailLayout from "@/app/login/mails/NewEmailLayout";
 
 export default function BtnMail() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -34,7 +34,7 @@ export default function BtnMail() {
         <Stack gap={4}>
           <NewEmailLayout />
           <Flex gap={4}>
-            <BtnCancel fnCancel={close} key={crypto.randomUUID()}/>
+            <BtnCancel fnCancel={close} key={crypto.randomUUID()} />
             <BtnSend
               label="Enviar Mensaje"
               close={() => console.log("FromBtnSend")}

@@ -34,7 +34,7 @@ export default function LoginForm() {
         border: "1px solid #343434",
         borderRadius: "6px",
         padding: "1.8rem 1.2rem",
-        boxShadow: "0px 10px 12px -5px rgba(255,255,255,0.4)"
+        boxShadow: "0px 10px 12px -5px rgba(255,255,255,0.4)",
       }}
       mx="auto"
     >
@@ -57,16 +57,39 @@ export default function LoginForm() {
             <Text>Recodar mi contraseña</Text>
           </Flex>
           <Stack gap={4} align="end">
-            <Link href={"login/data-base"} style={{ width: "100%" }}>
+            <Link href={"login/dashboard"} style={{ width: "100%" }}>
               <Button type="submit" mt="sm" fullWidth color="#115dfe">
                 Iniciar Sesion
               </Button>
             </Link>
-            <Link href={"create-account"}>
-              <Text style={{ fontSize: "0.8rem", cursor: "pointer", marginTop: "0.2rem" }}>
-                Olvide mi Contraseña
-              </Text>
-            </Link>
+            <Flex
+              align={"center"}
+              justify={"space-between"}
+              style={{ width: "100%" }}
+            >
+              <Link href={"create-account"}>
+                <Text
+                  style={{
+                    fontSize: "0.8rem",
+                    cursor: "pointer",
+                    marginTop: "0.2rem",
+                  }}
+                >
+                  Crear Cuenta
+                </Text>
+              </Link>
+              <Link href={"reset-password"}>
+                <Text
+                  style={{
+                    fontSize: "0.8rem",
+                    cursor: "pointer",
+                    marginTop: "0.2rem",
+                  }}
+                >
+                  Olvide mi Contraseña
+                </Text>
+              </Link>
+            </Flex>
           </Stack>
         </Stack>
       </form>

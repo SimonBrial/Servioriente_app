@@ -1,7 +1,8 @@
 "use client";
 
-import { Center, Tooltip, useMantineColorScheme } from "@mantine/core";
+import { Center, useMantineColorScheme } from "@mantine/core";
 import { IoWarningOutline } from "../icons";
+import TooltipLayout from "./TooltipLayout";
 
 export default function WarningInfo({
   description,
@@ -10,20 +11,7 @@ export default function WarningInfo({
 }): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <Tooltip
-      label={description}
-      color="blue"
-      styles={(theme) => ({
-        tooltip: {
-          backgroundColor: `${theme.colors.lightTheme[6]}`,
-          color: "#FFF",
-        },
-      })}
-      arrowOffset={5}
-      arrowSize={4}
-      withArrow
-      position="top-end"
-    >
+    <TooltipLayout label={description} position="top-end">
       <Center
         styles={(theme) => ({
           root: {
@@ -36,6 +24,6 @@ export default function WarningInfo({
       >
         <IoWarningOutline />
       </Center>
-    </Tooltip>
+    </TooltipLayout>
   );
 }
