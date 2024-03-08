@@ -83,7 +83,7 @@ const totalData = [
     goal: 150,
   },
 ];
-console.log(totalData);
+// console.log(totalData);
 
 const colors01 = ["#b182ca", "transparent"]; // Data01
 const colors02 = ["#8884d8", "transparent"]; // Data02
