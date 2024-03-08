@@ -1,4 +1,4 @@
-import sidebarClass from "@/styles/sidebar.module.css";
+import classes from "@/styles/generalStyles.module.css";
 import { HiOutlineBell } from "@/icons";
 import { Box } from "@mantine/core";
 import NavIcon from "./NavIcon";
@@ -8,7 +8,7 @@ export default function NotificationIcon({ active }: { active: boolean }) {
     <Box style={{ position: "relative" }}>
       <NavIcon
         dir={""}
-        icon={<HiOutlineBell className={sidebarClass.icon} />}
+        icon={<HiOutlineBell className={classes.icon} />}
         label={"Notificaciones"}
       />
       {active ? (

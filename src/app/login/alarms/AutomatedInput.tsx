@@ -9,7 +9,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { PiRobot } from "@/icons";
-import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export default function AutomatedInput({
   automatedStatus,
@@ -66,8 +66,8 @@ export default function AutomatedInput({
           classNames={{
             input:
               colorScheme === "light"
-                ? checkboxClasses.checkbox
-                : checkboxClasses.checkbox_dark,
+                ? classes.checkbox
+                : classes.checkbox_dark,
           }}
         />
       </Flex>

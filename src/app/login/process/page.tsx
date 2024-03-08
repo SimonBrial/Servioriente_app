@@ -29,7 +29,11 @@ function page(): JSX.Element {
           </BtnFilter>
           <BtnReportGenerate>prueba</BtnReportGenerate>
 
-          <BtnAdd iconTag="add-user" label="Nuevo Cliente">
+          <BtnAdd
+            iconTag="add-user"
+            label="Nuevo Cliente"
+            key={crypto.randomUUID()}
+          >
             <CreateClientLayout />
           </BtnAdd>
         </Flex>

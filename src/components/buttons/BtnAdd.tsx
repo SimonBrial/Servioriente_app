@@ -88,7 +88,7 @@ function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {
           }}
         >
           {children}
-          <BtnActions icon={<HiOutlineCheck />} title="Aceptar" close={close} />
+          <BtnActions icon={<HiOutlineCheck />} title="Aceptar" close={close} key={crypto.randomUUID()}/>
         </Stack>
       </Drawer>
       <Button

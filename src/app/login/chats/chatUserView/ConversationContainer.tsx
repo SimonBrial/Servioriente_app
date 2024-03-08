@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { CloudDialogue } from "./CloudDialogue";
 import InsideContainer from "@/components/container/InsideContainer";
-import classes from "@/styles/container.module.css";
+import classes from "@/styles/generalStyles.module.css";
 import heightClasses from "@/styles/heightView.module.css"
 
 export const ConversationContainer = (): JSX.Element => {

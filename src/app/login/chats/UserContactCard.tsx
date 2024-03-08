@@ -13,8 +13,7 @@ import {
   Text,
 } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/container.module.css";
-import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export const UserContactCard = ({
   favorite,
@@ -81,8 +80,8 @@ export const UserContactCard = ({
           classNames={{
             input:
               colorScheme === "light"
-                ? checkboxClasses.checkbox
-                : checkboxClasses.checkbox_dark,
+                ? classes.checkbox
+                : classes.checkbox_dark,
           }}
         />
       </Flex>

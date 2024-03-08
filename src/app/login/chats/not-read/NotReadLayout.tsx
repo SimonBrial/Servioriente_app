@@ -12,7 +12,7 @@ import {
   Text,
 } from "@mantine/core";
 import { UserContactCard } from "../UserContactCard";
-import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
+import classes from "@/styles/generalStyles.module.css";
 import { GeneralDivider } from "@/components/GeneralDivider";
 
 export const NotReadLayout = (): JSX.Element => {
@@ -44,8 +44,8 @@ export const NotReadLayout = (): JSX.Element => {
           classNames={{
             input:
               colorScheme === "light"
-                ? checkboxClasses.checkbox
-                : checkboxClasses.checkbox_dark,
+                ? classes.checkbox
+                : classes.checkbox_dark,
           }}
         />
       </Flex>

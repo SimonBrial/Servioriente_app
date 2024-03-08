@@ -16,7 +16,7 @@ import { UserContactCard } from "../UserContactCard";
 import { BtnAcept } from "@/components/buttons/BtnAcept";
 import InsideContainer from "@/components/container/InsideContainer";
 import { GeneralDivider } from "@/components/GeneralDivider";
-import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
+import classes from "@/styles/generalStyles.module.css";
 // import { useListState } from "@mantine/hooks";
 
 export const DifusionListLayout = (): JSX.Element => {
@@ -87,8 +87,8 @@ export const DifusionListLayout = (): JSX.Element => {
               classNames={{
                 input:
                   colorScheme === "light"
-                    ? checkboxClasses.checkbox
-                    : checkboxClasses.checkbox_dark,
+                    ? classes.checkbox
+                    : classes.checkbox_dark,
               }}
             />
           </Flex>

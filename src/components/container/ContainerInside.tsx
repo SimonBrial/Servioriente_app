@@ -2,7 +2,7 @@
 
 import { Container, useMantineColorScheme } from "@mantine/core";
 import React, { ReactNode } from "react";
-import containerInside from "@/styles/containerInside.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export const ContainerInside = ({
   withBorder,
@@ -38,8 +38,8 @@ export const ContainerInside = ({
       classNames={{
         root:
           colorScheme === "light"
-            ? containerInside.container_inside
-            : containerInside.container_inside_dark,
+            ? classes.container_inside
+            : classes.container_inside_dark,
       }}
     >
       {children}

@@ -11,7 +11,7 @@ import {
 import { BadgeClose } from "../badge/BadgeClose";
 import { PillFilter } from "../PillFilter";
 import { AutoCompleteData } from "@/interface/interface";
-import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
+import classes from "@/styles/generalStyles.module.css";
 import { GeneralDivider } from "../GeneralDivider";
 
 export default function AutoCompleteFilterContainer({
@@ -47,8 +47,8 @@ export default function AutoCompleteFilterContainer({
               classNames={{
                 input:
                   colorScheme === "light"
-                    ? checkboxClasses.checkbox
-                    : checkboxClasses.checkbox_dark,
+                    ? classes.checkbox
+                    : classes.checkbox_dark,
               }}
             />
             <Title

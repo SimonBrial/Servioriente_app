@@ -2,7 +2,7 @@
 
 import { Checkbox, Flex, useMantineColorScheme } from "@mantine/core";
 import React from "react";
-import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export const SidebarSectionSelection = ({ label }: { label: string }) => {
   const { colorScheme } = useMantineColorScheme();
@@ -14,8 +14,8 @@ export const SidebarSectionSelection = ({ label }: { label: string }) => {
         classNames={{
           input:
             colorScheme === "light"
-              ? checkboxClasses.checkbox
-              : checkboxClasses.checkbox_dark,
+              ? classes.checkbox
+              : classes.checkbox_dark,
         }}
       />
     </Flex>

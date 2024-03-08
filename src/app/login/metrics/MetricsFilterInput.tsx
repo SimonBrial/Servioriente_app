@@ -88,14 +88,18 @@ export const MetricsFilterInput = ({
             </Badge>
           </Flex>
           {btnDisable ? (
-            <BtnAdd iconTag="add-event" label="Nueva Meta">
+            <BtnAdd
+              iconTag="add-event"
+              label="Nueva Meta"
+              key={crypto.randomUUID()}
+            >
               <GoalsLayout />
             </BtnAdd>
           ) : (
             <></>
           )}
         </Flex>
-        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
+        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>
     </Container>
   );

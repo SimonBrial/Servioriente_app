@@ -86,7 +86,7 @@ export default function CreateAccountForm() {
               >
                 Ya tengo una cuenta,
               </Text>
-              <Link href={"login"}>
+              <Link href={"/"}>
                 <Text
                   style={{
                     fontSize: "0.8rem",

@@ -1,7 +1,7 @@
 "use client";
 
 import { Container, useMantineColorScheme } from "@mantine/core";
-import styles from "@/styles/layout.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export const GlobalContainer = ({
   children,
@@ -15,8 +15,8 @@ export const GlobalContainer = ({
       mx={"1rem"}
       className={
         colorScheme === "light"
-          ? styles.containerLayout
-          : styles.containerLayout_dark
+          ? classes.containerLayout
+          : classes.containerLayout_dark
       }
     >
       {children}

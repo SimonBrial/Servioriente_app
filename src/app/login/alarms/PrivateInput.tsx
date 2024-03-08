@@ -10,7 +10,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "@/icons";
-import checkboxClasses from "@/styles/sidebarSectionSelection.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export default function PrivateInput({
   userName,
@@ -92,8 +92,8 @@ export default function PrivateInput({
           classNames={{
             input:
               colorScheme === "light"
-                ? checkboxClasses.checkbox
-                : checkboxClasses.checkbox_dark,
+                ? classes.checkbox
+                : classes.checkbox_dark,
           }}
         />
       </Flex>

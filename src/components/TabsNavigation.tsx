@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Tabs, useMantineColorScheme } from "@mantine/core";
 import { SectionsArray, TabsSectionesProps } from "@/interface/interface";
-import classTabs from "../styles/tabNavigation.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export default function TabsNavigation({
   sectionsArray,
@@ -15,7 +15,7 @@ export default function TabsNavigation({
     return (
       <Tabs.List
       /* classNames={{
-          list: classTabs.tab_list_dark,
+          list: classes.tab_list_dark,
         }} */
       >
         {sectionsArray.map((section: TabsSectionesProps, index: number) => (
@@ -25,14 +25,14 @@ export default function TabsNavigation({
               leftSection={section.icon}
               className={
                 colorScheme === "light"
-                  ? classTabs.tab_label
-                  : classTabs.tab_label_dark
+                  ? classes.tab_label
+                  : classes.tab_label_dark
               }
               classNames={{
                 tab:
                   colorScheme === "light"
-                    ? classTabs.tab_item
-                    : classTabs.tab_item_dark,
+                    ? classes.tab_item
+                    : classes.tab_item_dark,
               }}
             >
               {section.value}
@@ -48,7 +48,7 @@ export default function TabsNavigation({
       orientation={orientation ? "horizontal" : "vertical"}
       defaultValue={sectionsArray[0].value}
       /* classNames={{
-        tab: classTabs.tab_item,
+        tab: classes.tab_item,
       }} */
       styles={{
         tabSection: {

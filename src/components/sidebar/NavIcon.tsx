@@ -1,9 +1,10 @@
 "use Client";
 
-import { useMantineColorScheme, UnstyledButton, Tooltip } from "@mantine/core";
+import { useMantineColorScheme, UnstyledButton } from "@mantine/core";
 import Link from "next/link";
-import sidebarClass from "@/styles/sidebar.module.css";
+import sidebarClass from "@/styles/generalStyles.module.css";
 import { NavIconProps } from "@/interface/interface";
+import TooltipLayout from "../TooltipLayout";
 
 function NavIcon({
   onClick,
@@ -14,15 +15,7 @@ function NavIcon({
 }: NavIconProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <Tooltip
-      withArrow
-      offset={26}
-      label={label}
-      position="right"
-      color="#004EE5"
-      transitionProps={{ transition: "skew-up", duration: 300 }}
-      styles={{ tooltip: { color: "#fff" } }}
-    >
+    <TooltipLayout label={label} position="right">
       <Link
         href={dir}
         // className={sidebarClass.icon}
@@ -53,7 +46,7 @@ function NavIcon({
           </span>
         </UnstyledButton>
       </Link>
-    </Tooltip>
+    </TooltipLayout>
   );
 }
 

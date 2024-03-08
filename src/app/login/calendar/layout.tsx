@@ -36,7 +36,11 @@ export default function layout({
           <AutoCompleteInput />
           <BtnFilter>Prueba</BtnFilter>
           <BtnReportGenerate>Prueba</BtnReportGenerate>
-          <BtnAdd iconTag="add-event" label="Nuevo Evento">
+          <BtnAdd
+            iconTag="add-event"
+            label="Nuevo Evento"
+            key={crypto.randomUUID()}
+          >
             Prueba Prueba Prueba
           </BtnAdd>
           <ViewCalendarSelection />

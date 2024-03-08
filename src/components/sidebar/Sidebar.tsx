@@ -15,59 +15,59 @@ import {
   HiOutlineUser,
   HiOutlineCog,
 } from "../../icons";
-import sidebarClass from "@/styles/sidebar.module.css";
+import classes from "@/styles/generalStyles.module.css";
 import NavIcon from "./NavIcon";
 import { sidebarItems } from "@/interface/interface";
 import NotificationIcon from "./NotificationIcon";
 
 const sections: sidebarItems[] = [
   {
-    icon: <HiOutlineUser className={sidebarClass.icon} />,
+    icon: <HiOutlineUser className={classes.icon} />,
     label: "UserName",
     direction: "",
   },
   {
-    icon: <HiOutlineTemplate className={sidebarClass.icon} />,
+    icon: <HiOutlineTemplate className={classes.icon} />,
     label: "Dashboard",
     direction: "/login/dashboard",
   },
   {
-    icon: <AiOutlineIdcard className={sidebarClass.icon} />,
+    icon: <AiOutlineIdcard className={classes.icon} />,
     label: "Cards",
     direction: "/login/process",
   },
   {
-    icon: <HiOutlineChatBubbleLeftRight className={sidebarClass.icon} />,
+    icon: <HiOutlineChatBubbleLeftRight className={classes.icon} />,
     label: "Chats",
     direction: "/login/chats",
   },
   {
-    icon: <HiOutlineDatabase className={sidebarClass.icon} />,
+    icon: <HiOutlineDatabase className={classes.icon} />,
     label: "Base de Datos",
     direction: "/login/data-base",
   },
   {
-    icon: <HiOutlineCalendar className={sidebarClass.icon} />,
+    icon: <HiOutlineCalendar className={classes.icon} />,
     label: "Calendario",
     direction: "/login/calendar",
   },
   {
-    icon: <HiOutlineChartBar className={sidebarClass.icon} />,
+    icon: <HiOutlineChartBar className={classes.icon} />,
     label: "Metricas",
     direction: "/login/metrics",
   },
   {
-    icon: <HiOutlineMail className={sidebarClass.icon} />,
+    icon: <HiOutlineMail className={classes.icon} />,
     label: "Correos",
     direction: "/login/mails",
   },
   {
-    icon: <HiOutlineExclamationCircle className={sidebarClass.icon} />,
+    icon: <HiOutlineExclamationCircle className={classes.icon} />,
     label: "Recordatorios",
     direction: "/login/alarms",
   },
   {
-    icon: <HiOutlineCog className={sidebarClass.icon} />,
+    icon: <HiOutlineCog className={classes.icon} />,
     label: "Configuraciones",
     direction: "/login/settings",
   },
@@ -96,8 +96,8 @@ export function Sidebar(): JSX.Element {
     <nav
       className={
         colorScheme === "light"
-          ? sidebarClass.sidebar
-          : sidebarClass.sidebar_dark
+          ? classes.sidebar
+          : classes.sidebar_dark
       }
     >
       <Stack
@@ -112,7 +112,7 @@ export function Sidebar(): JSX.Element {
           <NotificationIcon active key={crypto.randomUUID()} />
           <NavIcon
             dir={"/"}
-            icon={<HiOutlineLogout className={sidebarClass.icon} />}
+            icon={<HiOutlineLogout className={classes.icon} />}
             label={"Logout"}
           />
         </Stack>

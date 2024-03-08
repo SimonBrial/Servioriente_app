@@ -9,11 +9,11 @@ import {
 } from "@/icons";
 import { Box, Center, Divider, Flex, Stack, Text, Title } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/notification.module.css";
+import classes from "@/styles/generalStyles.module.css";
 import {
+  colorBackgroundArr,
   NotitifacionProps,
   ReturnFn,
-  colorBackgroundArr,
 } from "@/interface/interface";
 import { NotificationsTypes } from "@/types/types";
 // import toast, { Toaster } from "react-hot-toast";

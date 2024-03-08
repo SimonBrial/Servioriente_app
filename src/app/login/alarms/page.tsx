@@ -84,10 +84,14 @@ function page(): JSX.Element {
           <GeneralFilterLayout />
         </BtnFilter>
 
-        <BtnAdd iconTag="folder" label="Nueva Carpeta">
+        <BtnAdd
+          iconTag="folder"
+          label="Nueva Carpeta"
+          key={crypto.randomUUID()}
+        >
           <CreateFolderLayout title="Crear Nueva Carpeta" />
         </BtnAdd>
-        <BtnAdd iconTag="add" label="Nueva Alarma">
+        <BtnAdd iconTag="add" label="Nueva Alarma" key={crypto.randomUUID()}>
           <CreateAlarmLayout title="Crear Nueva Alarma" />
         </BtnAdd>
       </Flex>

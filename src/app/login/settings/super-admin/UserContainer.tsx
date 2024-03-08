@@ -94,6 +94,7 @@ export const UserContainer = ({ label }: { label: labelType }) => {
                   label === "Super Admin" ? "Nuevo Super Admin" : "Nuevo Admin"
                 }
                 addFn={toggle}
+                key={crypto.randomUUID()}
               >
                 <AdminDescriptionLayout size="200px" />
               </BtnAdd>

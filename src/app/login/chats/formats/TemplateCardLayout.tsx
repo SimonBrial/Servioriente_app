@@ -3,15 +3,15 @@
 import { HiOutlineDocumentText, HiOutlineDotsVertical } from "@/icons";
 import {
   useMantineColorScheme,
+  Container,
   Center,
   Title,
   Stack,
   Flex,
   Text,
-  Container,
 } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/container.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export const TemplateCardLayout = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();

@@ -7,7 +7,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { HiOutlineSearch } from "../../icons";
-import autoCompleteClass from "@/styles/autoComplete.module.css";
+import classes from "@/styles/generalStyles.module.css";
 
 export function AutoCompleteInput(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
@@ -15,12 +15,12 @@ export function AutoCompleteInput(): JSX.Element {
     <Flex
       className={
         colorScheme === "light"
-          ? autoCompleteClass.container
-          : autoCompleteClass.container_dark
+          ? classes.container
+          : classes.container_dark
       }
       align={"center"}
     >
-      <Center className={autoCompleteClass.icon}>
+      <Center className={classes.icon}>
         <HiOutlineSearch />
       </Center>
       <Autocomplete
@@ -45,8 +45,8 @@ export function AutoCompleteInput(): JSX.Element {
         classNames={{
           input:
             colorScheme === "light"
-              ? autoCompleteClass.input_placeholder
-              : autoCompleteClass.input_placeholder_dark,
+              ? classes.input_placeholder
+              : classes.input_placeholder_dark,
         }}
       />
     </Flex>
