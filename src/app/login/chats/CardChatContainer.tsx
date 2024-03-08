@@ -13,7 +13,7 @@ import {
 import { CardChatLayout } from "./CardChatLayout";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { socialRedColor } from "@/utils/socialRedColor";
-import { CardChatContainerProps } from "../../interface/interface";
+import { CardChatContainerProps } from "@/interface/interface";
 import { IoChevronDownOutline } from "@/icons";
 
 export const CardChatContainer = ({

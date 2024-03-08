@@ -40,9 +40,10 @@ export const DayContainer = ({
           desription={desription}
           degree={degree}
           title={title}
-          smallSize
+          cardSize="small"
           key={id}
           id={id}
+          date={new Date()}
         />
       );
     });

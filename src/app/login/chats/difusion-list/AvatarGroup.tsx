@@ -133,7 +133,7 @@ export const AvatarGroup = ({
   return (
     <Stack style={{ width: "100%" }} gap={5}>
       {generateAvatarGroup(usersArr)}
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
       <Flex gap={4}>{generateNameGroup(usersArr)}</Flex>
     </Stack>
   );

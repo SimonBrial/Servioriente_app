@@ -33,7 +33,7 @@ export const FontSizeSelection = () => {
           })}
         />
       </Flex>
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
     </Stack>
   );
 };

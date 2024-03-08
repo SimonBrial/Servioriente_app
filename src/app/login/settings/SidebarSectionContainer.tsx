@@ -7,7 +7,7 @@ export const SidebarSectionContainer = () => {
   return (
     <Stack gap={4}>
       <Text>Secciones de la Sidebar</Text>
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
       <SidebarSectionSelection label="Dashboard" />
       <SidebarSectionSelection label="Process" />
       <SidebarSectionSelection label="Chats" />
@@ -16,7 +16,7 @@ export const SidebarSectionContainer = () => {
       <SidebarSectionSelection label="Correo" />
       <SidebarSectionSelection label="Recordatorios" />
       <SidebarSectionSelection label="Bloc de Notas" />
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
     </Stack>
   );
 };

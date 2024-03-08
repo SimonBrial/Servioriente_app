@@ -45,7 +45,7 @@ export const AdminDescriptionContainer = () => {
           <MunicipalitySelect estado="Amazonas" inputSize="300px" />
         </Stack>
         <Flex gap={6}>
-          <BtnCancel />
+          <BtnCancel fnCancel={() => console.log("From AdminDescriptionContainer")} key={crypto.randomUUID()}/>
           <BtnSave />
         </Flex>
       </Stack>

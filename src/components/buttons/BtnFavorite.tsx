@@ -3,7 +3,7 @@
 import { HiHeart } from "@/icons";
 import { Center, UnstyledButton, useMantineColorScheme } from "@mantine/core";
 import React, { useState } from "react";
-import btnFavoriteClasses from "@/styles/BtnStyles.module.css";
+import btnFavoriteClasses from "@/styles/btnStyles.module.css";
 import { notifications } from "@mantine/notifications";
 
 export const BtnFavorite = () => {

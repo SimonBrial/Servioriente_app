@@ -3,7 +3,7 @@
 import { Button, Modal, useMantineColorScheme } from "@mantine/core";
 import { HiOutlineDocumentText } from "@/icons";
 import { useDisclosure } from "@mantine/hooks";
-import btnClass from "@/styles/BtnStyles.module.css";
+import btnClass from "@/styles/btnStyles.module.css";
 
 export const BtnReportGenerate = ({
   children,

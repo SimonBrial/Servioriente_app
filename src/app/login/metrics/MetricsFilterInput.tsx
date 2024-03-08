@@ -95,7 +95,7 @@ export const MetricsFilterInput = ({
             <></>
           )}
         </Flex>
-        <GeneralDivider />
+        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
       </Stack>
     </Container>
   );

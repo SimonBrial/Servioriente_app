@@ -60,7 +60,7 @@ export const ColumnEventTitle = ({
           <></>
         )}
       </Flex>
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
     </Stack>
   );
 };

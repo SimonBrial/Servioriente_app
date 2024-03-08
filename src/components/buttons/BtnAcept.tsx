@@ -2,7 +2,7 @@
 
 import { Button, useMantineColorScheme } from "@mantine/core";
 import { HiOutlineCheck } from "@/icons";
-import classes from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/btnStyles.module.css";
 
 export const BtnAcept = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();

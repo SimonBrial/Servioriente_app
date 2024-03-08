@@ -21,7 +21,7 @@ export const NotReadLayout = (): JSX.Element => {
     <Stack gap={3}>
       <TitleLayout color="" icon="" onText title="No Leidos" />
       <AsideSearch />
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
       <Flex
         justify={"space-between"}
         align={"center"}

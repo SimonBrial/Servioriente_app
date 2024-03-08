@@ -4,7 +4,7 @@ import { Button, useMantineColorScheme } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
 import { IoArrowBackOutline } from "../../icons";
-import btnClasses from "@/styles/BtnStyles.module.css";
+import btnClasses from "@/styles/btnStyles.module.css";
 
 export const BtnBackSection = ({
   withStyles,

@@ -7,7 +7,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlineEye } from "../../icons";
-import btnClass from "@/styles/BtnStyles.module.css";
+import btnClass from "@/styles/btnStyles.module.css";
 import BtnBack from "./BtnBack";
 import TooltipLayout from "../TooltipLayout";
 

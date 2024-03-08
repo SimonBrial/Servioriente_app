@@ -58,7 +58,7 @@ export const GoalsLayout = () => {
               <Title order={4}>Total</Title>
               <Badge>20</Badge>
             </Flex>
-            <GeneralDivider />
+            <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
           </Stack>
           <Stack gap={6}>
             <NumberHorizontalInput

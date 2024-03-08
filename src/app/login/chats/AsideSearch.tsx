@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import { HamburgerMenu } from "./HamburgerMenu";
-import btnStyles from "@/styles/BtnStyles.module.css";
+import btnStyles from "@/styles/btnStyles.module.css";
 
 export const AsideSearch = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();

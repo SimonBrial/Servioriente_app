@@ -3,7 +3,7 @@
 
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { IoChevronBack, IoChevronForward } from "@/icons";
-import btnClasses from "@/styles/BtnStyles.module.css";
+import btnClasses from "@/styles/btnStyles.module.css";
 import {
   useMantineColorScheme,
   UnstyledButton,
@@ -161,7 +161,7 @@ export const CalendarContainer = () => {
                   {months[currentMonth]} {currentYear}
                 </Text>
               </Flex>
-              <GeneralDivider />
+              <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
             </Stack>
           </Container>
           <Stack gap={0}>

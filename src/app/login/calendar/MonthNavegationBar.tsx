@@ -12,7 +12,7 @@ import {
   Text,
 } from "@mantine/core";
 import React, { useState } from "react";
-import classes from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/btnStyles.module.css";
 import { months } from "@/data/calendarDaysAndMonth";
 
 export const MonthNavigationBar = () => {

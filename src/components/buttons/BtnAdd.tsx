@@ -13,7 +13,7 @@ import {
   LuGoal,
 } from "../../icons";
 import BtnActions from "./BtnActions";
-import classes from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/btnStyles.module.css";
 import { BtnAddProps, iconList } from "@/interface/interface";
 
 function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {

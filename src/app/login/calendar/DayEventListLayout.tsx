@@ -46,7 +46,8 @@ export const DayEventListLayout = ({
                   eventCard;
                 return (
                   <EventCardLayout
-                    smallSize={false}
+                    cardSize="small"
+                    date={new Date()}
                     userToassign={userToassign}
                     desription={desription}
                     degree={degree}

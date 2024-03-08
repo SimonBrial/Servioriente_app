@@ -145,7 +145,12 @@ export const ProcessLayout = (): JSX.Element => {
   const task = activeCardId ? getCardById(tasks, activeCardId) : null;
 
   return (
-    <InsideContainer offset={124}>
+    <InsideContainer
+      key={crypto.randomUUID()}
+      withBackground
+      offset={124}
+      withBorder
+    >
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}

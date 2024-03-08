@@ -48,7 +48,7 @@ export const OrderByName = () => {
           />
         </Tooltip>
       </Flex>
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
     </Stack>
   );
 };

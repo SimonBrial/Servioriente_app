@@ -3,7 +3,7 @@
 import { IoIosSend } from "@/icons";
 import { Button, useMantineColorScheme } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/btnStyles.module.css";
 
 export default function BtnSend({
   close,

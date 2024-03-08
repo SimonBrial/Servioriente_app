@@ -4,7 +4,7 @@ import React from "react";
 import { Modal, Button, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { BsFilter } from "../../icons";
-import classes from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/btnStyles.module.css";
 
 export function BtnFilter({
   children,

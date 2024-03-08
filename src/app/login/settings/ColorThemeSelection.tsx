@@ -31,7 +31,7 @@ export const ColorThemeSelection = () => {
           {colorPickerGenerator(colorArr)}
         </Flex>
       </Flex>
-      <GeneralDivider />
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
     </Stack>
   );
 };

@@ -3,7 +3,7 @@
 import { Button, Flex, useMantineColorScheme } from "@mantine/core";
 import { IoClose } from "../../icons";
 import { BtnActionProps } from "@/interface/interface";
-import classes from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/btnStyles.module.css";
 
 export default function BtnActions({
   title,

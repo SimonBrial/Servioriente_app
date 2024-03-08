@@ -1,7 +1,7 @@
 "use client";
 
 import { TitleLayout } from "@/components/layout/TitleLayout";
-import { EventCardProps } from "@/interface/interface";
+// import { EventCardProps } from "@/interface/interface";
 import {
   useMantineColorScheme,
   ScrollArea,
@@ -46,7 +46,7 @@ export const ColumnEventList = () => {
             scrollbarSize={2}
           >
             <Stack gap={4}>
-              {eventCardArray.map((eventCard: EventCardProps) => {
+              {eventCardArray.map((eventCard: any) => {
                 const { degree, desription, id, title, userToassign } =
                   eventCard;
                 return (
