@@ -4,7 +4,7 @@ import React from "react";
 import { Modal, Button, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { BsFilter } from "../../icons";
-import btnClass from "@/styles/BtnStyles.module.css";
+import classes from "@/styles/BtnStyles.module.css";
 
 export function BtnFilter({
   children,
@@ -34,8 +34,8 @@ export function BtnFilter({
         classNames={{
           root:
             colorScheme === "light"
-              ? btnClass.btnFilter
-              : btnClass.btnFilter_dark,
+              ? classes.btnFilter
+              : classes.btnFilter_dark,
         }}
         onClick={open}
         // fullWidth
