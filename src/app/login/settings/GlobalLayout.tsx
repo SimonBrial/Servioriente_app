@@ -1,10 +1,15 @@
 import InsideContainer from "@/components/container/InsideContainer";
 import { Stack } from "@mantine/core";
-import React, { ReactNode } from "react";
+import React from "react";
 
-export const GlobalLayout = ({ children }: { children: ReactNode }) => {
+export const GlobalLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <InsideContainer offset={130} withBackground={false} withBorder>
+    <InsideContainer
+      key={crypto.randomUUID()}
+      withBackground
+      offset={130}
+      withBorder
+    >
       <Stack
         gap={4}
         style={{
@@ -17,21 +22,6 @@ export const GlobalLayout = ({ children }: { children: ReactNode }) => {
       >
         {children}
       </Stack>
-      {/* <Container
-        styles={(theme) => ({
-          root: {
-            // border: "1px solid #cdcdcd",
-            borderRadius: "6px",
-            padding: "1rem",
-            height: "100%",
-            border:
-              colorScheme === "light"
-                ? "1px solid #cdcdcd"
-                : `1px solid ${theme.colors.darkTheme[7]}`,
-          },
-        })}
-      >
-      </Container> */}
     </InsideContainer>
   );
 };

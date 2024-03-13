@@ -1,12 +1,25 @@
 /* eslint-disable no-unreachable */
 "use client";
 
-import { AreaChart } from "@mantine/charts";
-import React, { useEffect, useState } from "react";
-import { ChartTooltip } from "./ChartTooltip";
-import { Checkbox, Flex } from "@mantine/core";
+// import { ChartTooltip } from "./ChartTooltip";
+import { Container } from "@mantine/core";
 
-const data = [
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { faker } from "@faker-js/faker";
+import { months } from "@/data/calendarDaysAndMonth";
+
+/* const data = [
   {
     date: "Mar 22",
     "Meta Planteada": 2890,
@@ -45,20 +58,54 @@ const data = [
     "Meta Planteada": 2756,
     "Ventas Actuales": 2103,
   },
-];
+]; */
+const options = {
+  responsive: true,
+  tension: 0.4,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+    title: {
+      display: false,
+      text: "Chart.js Line Chart",
+    },
+  },
+};
 
-const seriesArr = [
+const labels = months;
+const dataLine = {
+  labels,
+  datasets: [
+    {
+      fill: true,
+      label: "Meta Planteada",
+      data: labels.map(() => faker.number.int({ min: 0, max: 3500 })),
+      borderColor: "rgb(216, 99, 255)",
+      backgroundColor: "rgba(216, 99, 255, 0.5)",
+    },
+    {
+      fill: true,
+      label: "Ventas Actuales",
+      data: months.map(() => faker.number.int({ min: 0, max: 3500 })),
+      borderColor: "rgb(53, 162, 235)",
+      backgroundColor: "rgba(53, 162, 235, 0.5)",
+    },
+  ],
+};
+
+/* const seriesArr = [
   { name: "Meta Planteada", color: "indigo.6" },
   { name: "Ventas Actuales", color: "green.6" },
-  /* { name: "r: "teal.6" }, */
+  { name: "r: "teal.6" },
 ];
 interface SeriesArray {
   name: string;
   color: string;
-}
+} */
 
 export const ChartContainer = () => {
-  const [value, setValue] = useState<string[]>([]);
+  /* const [value, setValue] = useState<string[]>([]);
   const [series, setSeries] = useState<SeriesArray[]>(seriesArr);
 
   useEffect(() => {
@@ -73,11 +120,21 @@ export const ChartContainer = () => {
         }
       });
     }
-  }, [value]);
+  }, [value]); */
+  ChartJS.register(
+    CategoryScale,
+    PointElement,
+    LineElement,
+    LinearScale,
+    Tooltip,
+    Filler,
+    Legend,
+    Title,
+  );
 
   return (
-    <>
-      <AreaChart
+    <Container style={{ maxWidth: "100%", width: "100%" }}>
+      {/* <AreaChart
         h={400}
         withLegend
         legendProps={{ verticalAlign: "bottom", height: 50 }}
@@ -94,9 +151,11 @@ export const ChartContainer = () => {
         }}
         tooltipAnimationDuration={200}
         valueFormatter={(value) => new Intl.NumberFormat("es-VE").format(value)}
-        yAxisProps={{ domain: [0, 3500] }}
+        // yAxisProps={{ domain: [0, 3500] }}
+        yAxisProps={<YAxis type="number" domain={[0, 2000]} />}
         referenceLines={[{ y: 3200, label: "Meta", color: "red.6" }]}
         styles={(theme) => ({
+          root: { padding: "1rem 1rem 0 0" },
           tooltipBody: { backgroundColor: "red" },
           tooltip: { backgroundColor: "blue", padding: "0.5rem" },
           legend: {
@@ -113,7 +172,8 @@ export const ChartContainer = () => {
           <Checkbox value={"meta planteada"} label={"Meta Planteada"} />
           <Checkbox value={"ventas actuales"} label={"Ventas Actuales"} />
         </Flex>
-      </Checkbox.Group>
-    </>
+      </Checkbox.Group> */}
+      <Line options={options} data={dataLine} />
+    </Container>
   );
 };

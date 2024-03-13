@@ -26,6 +26,8 @@ type degreeType =
 
 type cardSize = "small" | "medium" | "big";
 
+type labelType = "Super Admin" | "Admin";
+
 export type {
   NotificationsTypes,
   CardContainerHeader,
@@ -33,6 +35,7 @@ export type {
   EditButtonStyles,
   processTitle,
   degreeType,
+  labelType,
   cardSize,
   tagIcon,
 };

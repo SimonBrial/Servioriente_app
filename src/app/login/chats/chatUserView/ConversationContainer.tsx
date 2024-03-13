@@ -16,7 +16,7 @@ import heightClasses from "@/styles/heightView.module.css"
 export const ConversationContainer = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <InsideContainer offset={222} withBackground={false} withBorder={false}>
+    <InsideContainer offset={222} withBackground={false} withBorder={false} key={crypto.randomUUID()}>
       <Container
         classNames={{
           root:

@@ -22,17 +22,13 @@ import { sortableKeyboardCoordinates, arrayMove } from "@dnd-kit/sortable";
 import { INITIAL_CARDS } from "@/data/initialCards";
 import { ColumnSection as BoardSectionsType } from "@/interface/interface";
 import { getCardById } from "@/utils/tasks";
-import {
-  findBoardSectionContainer,
-  initializeColumns,
-} from "../../../utils/board";
+import { findBoardSectionContainer, initializeColumns } from "@/utils/board";
 import { ProcessColumnLayout } from "./ProcessColumnLayout";
 import { CardProcess } from "./CardProcess";
-import { Container, Grid, useMantineColorScheme } from "@mantine/core";
+import { Container, Grid } from "@mantine/core";
 import InsideContainer from "@/components/container/InsideContainer";
 
 export const ProcessLayout = (): JSX.Element => {
-  const { colorScheme } = useMantineColorScheme();
   const tasks = INITIAL_CARDS;
   const initialBoardSections = initializeColumns(INITIAL_CARDS);
   const [boardSections, setBoardSections] =
@@ -148,8 +144,8 @@ export const ProcessLayout = (): JSX.Element => {
     <InsideContainer
       key={crypto.randomUUID()}
       withBackground
-      offset={124}
-      withBorder
+      offset={116}
+      withBorder={true}
     >
       <DndContext
         sensors={sensors}
@@ -163,15 +159,14 @@ export const ProcessLayout = (): JSX.Element => {
           styles={(theme) => ({
             root: {
               maxWidth: "100%",
-              border:
+              /* border:
                 colorScheme === "light"
                   ? `1px solid ${theme.colors.lightTheme[2]}` // `1px solid ${theme.colors.lightTheme[2]}`
-                  : `1px solid ${theme.colors.darkTheme[9]}`,
-              backgroundColor:
-                colorScheme === "light"
+                  : `1px solid ${theme.colors.darkTheme[9]}`, */
+              backgroundColor: "transparent",
+              /* colorScheme === "light"
                   ? "#fff"
-                  : `${theme.colors.darkTheme[7]}`,
-              borderRadius: "6px",
+                  : `${theme.colors.darkTheme[7]}` */ borderRadius: "6px",
               padding: "0.5rem",
             },
           })}

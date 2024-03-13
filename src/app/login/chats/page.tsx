@@ -16,7 +16,7 @@ function page(): JSX.Element {
       <ChatContainer>
         <UserChatHeader colorUser="instagram" status={true} />
         <ConversationContainer />
-        <ChatInputText />
+        <ChatInputText key={crypto.randomUUID()} />
       </ChatContainer>
     </>
   );

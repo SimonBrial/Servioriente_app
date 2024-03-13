@@ -1,9 +1,10 @@
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { BtnColorPicker } from "@/components/buttons/BtnColorPicker";
-import { Flex, Stack, Text } from "@mantine/core";
+import { Flex, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import React from "react";
 
 export const ColorThemeSelection = () => {
+  const { colorScheme } = useMantineColorScheme();
   const colorArr: string[] = [
     "#F06418",
     "#FFA903",
@@ -26,12 +27,23 @@ export const ColorThemeSelection = () => {
   return (
     <Stack gap={4}>
       <Flex justify={"space-between"} align={"center"}>
-        <Text>Color del Tema</Text>
+        <Text
+          styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}
+        >
+          Color del Tema
+        </Text>
         <Flex gap={2} align={"center"}>
           {colorPickerGenerator(colorArr)}
         </Flex>
       </Flex>
-      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
     </Stack>
   );
 };

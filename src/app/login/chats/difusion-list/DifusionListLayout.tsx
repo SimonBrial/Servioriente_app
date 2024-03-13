@@ -95,6 +95,7 @@ export const DifusionListLayout = (): JSX.Element => {
         </Stack>
         <Stack gap={8}>
           <InsideContainer
+            key={crypto.randomUUID()}
             offset={340}
             withBackground={false}
             withBorder={false}

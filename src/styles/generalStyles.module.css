@@ -428,6 +428,13 @@
 }
 
 /* ------------------ tabNavigation.module.css ------------------ */
+.tab_label {
+  color: #696969;
+}
+
+.tab_label_dark {
+  color: #eff3f5;
+}
 .tab_label:hover {
   transition: all 0.1s ease-in-out;
   color: #115dfe;
@@ -450,4 +457,69 @@
   transition: all 0.1s ease-in-out;
   color: #52a5e0;
   border-bottom-width: 3px;
+}
+
+/* ------------------ ChatInputText.module.css ------------------ */
+.chatInputText {
+  border: 1px solid #cdcdcd;
+  padding: 0.5rem 1rem;
+  border-radius: 35px;
+  background-color: #efefef4c;
+}
+/* #efefef4c */
+.chatInputText:hover {
+  transition: all 0.2s ease-in-out;
+  background-color: #efefef;
+}
+.chatInputText_dark {
+  border: 1px solid #29363f;
+  padding: 0.5rem 1rem;
+  border-radius: 35px;
+  background-color: #9a90ef1a;
+}
+.chatInputText_dark:hover {
+  transition: all 0.2s ease-in-out;
+  background-color: #484566;
+}
+.chatInputText_icon {
+  color: #004ee5;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1.6rem;
+}
+.chatInputText_icon:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.05);
+}
+.chatInputText_icon_dark {
+  color: #52a5e0;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1.6rem;
+}
+.chatInputText_icon_dark:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.05);
+}
+.chatInputText_sendIcon {
+  color: #004ee5;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transform: rotate(-45deg);
+  margin-left: 0.6rem;
+}
+.chatInputText_sendIcon:hover {
+  transition: all 0.2s ease-in-out;
+  transform: rotate(-45deg);
+}
+.chatInputText_sendIcon_dark {
+  color: #52a5e0;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transform: rotate(-45deg);
+  margin-left: 0.6rem;
+}
+.chatInputText_sendIcon_dark:hover {
+  transition: all 0.2s ease-in-out;
+  transform: rotate(-45deg);
 }

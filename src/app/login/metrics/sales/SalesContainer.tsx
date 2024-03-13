@@ -1,7 +1,8 @@
 import { ScrollArea, Stack } from "@mantine/core";
-import { SalesCardContainer } from "./SalesCardContainer";
+// import { SalesCardContainer } from "./SalesCardContainer";
 import { MetricsFilterInput } from "../MetricsFilterInput";
 import heightClasses from "@/styles/heightView.module.css";
+import { SalesCardContainer } from "./SalesCardContainer";
 
 export const SalesContainer = () => {
   return (
@@ -20,17 +21,17 @@ export const SalesContainer = () => {
             width: "100%",
           }}
         >
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
-          <SalesCardContainer />
+          {/* <ChartContainer key={crypto.randomUUID()} /> */}
+
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
+          <SalesCardContainer key={crypto.randomUUID()} />
         </Stack>
       </ScrollArea>
     </Stack>

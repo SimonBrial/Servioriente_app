@@ -26,6 +26,7 @@ import BtnSee from "@/components/buttons/BtnSee";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import { DatePickerInput } from "@mantine/dates";
 import WarningInfo from "@/components/WarningInfo";
+import { GeneralDivider } from "@/components/GeneralDivider";
 
 type ItemBigCardStatus = "Completada" | "No Completada";
 
@@ -75,6 +76,14 @@ const elements: ItemBigCardProps[] = [
     id: crypto.randomUUID(),
     title: "Generar RCV al cliente de Caracas",
     priority: <PriorityBadge title="Normal" />,
+    status: "No Completada",
+    actions: "Cerium",
+    date: "Febrero 06, 2024",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Generar RCV al cliente de Caracas",
+    priority: <PriorityBadge title="Poco Importante" />,
     status: "No Completada",
     actions: "Cerium",
     date: "Febrero 06, 2024",
@@ -130,10 +139,18 @@ export const ItemBigCardContainer = () => {
     </Table.Tr>
   ));
   return (
-    <Container style={{ maxWidth: "100%", width: "100%", paddingTop: "0.8rem", paddingBottom: "0.8rem" }}>
+    <Container
+      style={{
+        maxWidth: "100%",
+        width: "100%",
+        paddingTop: "0.8rem",
+        paddingBottom: "0.8rem",
+      }}
+    >
       <Stack gap={8}>
         <Flex gap={8} align={"center"}>
           <MetricsFilterInput btnDisable={false} />
+          <GeneralDivider orientation="vertical" key={crypto.randomUUID()} />
           <Select
             styles={(theme) => ({
               section: {
@@ -148,13 +165,14 @@ export const ItemBigCardContainer = () => {
             classNames={{
               input: classes.filter_input,
             }}
-            variant="unstyled"
+            variant="default"
             leftSection={<LuListTodo />}
             value={valueSelected}
             onChange={setValueSelected}
             placeholder="Filtrar tareas..."
             data={selectValueArr}
           />
+          <GeneralDivider orientation="vertical" key={crypto.randomUUID()} />
           <WarningInfo description="Seleccionar Rango de fechas" />
           <DatePickerInput
             styles={(theme) => ({
@@ -173,6 +191,7 @@ export const ItemBigCardContainer = () => {
             onChange={setValue}
             leftSection={<HiOutlineCalendar />}
             leftSectionPointerEvents="none"
+            placeholder="Seleccionar 2 de fechas"
           />
         </Flex>
         <ScrollArea

@@ -2,6 +2,7 @@
 
 import { useDisclosure } from "@mantine/hooks";
 import {
+  useMantineColorScheme,
   Container,
   Collapse,
   Center,
@@ -10,15 +11,13 @@ import {
   Flex,
   Text,
   Box,
-  useMantineColorScheme,
 } from "@mantine/core";
 import { BiCrown } from "@/icons";
 import BtnAdd from "@/components/buttons/BtnAdd";
 import { SuperAdminCard } from "./SuperAdminCard";
 import { AdminDescriptionLayout } from "../admin/AdminDescriptionLayout";
 import { GeneralDivider } from "@/components/GeneralDivider";
-
-type labelType = "Super Admin" | "Admin";
+import { labelType } from "@/types/types";
 
 export const UserContainer = ({ label }: { label: labelType }) => {
   const [opened, { toggle }] = useDisclosure(false);
@@ -26,9 +25,10 @@ export const UserContainer = ({ label }: { label: labelType }) => {
   return (
     <Container
       p={12}
-      w={"100%"}
       styles={(theme) => ({
         root: {
+          width: "100%",
+          maxWidth: "100%",
           border:
             colorScheme === "light"
               ? `2px solid ${theme.colors.lightTheme[2]}`
@@ -104,15 +104,16 @@ export const UserContainer = ({ label }: { label: labelType }) => {
         </Stack>
         <Collapse in={opened}>
           <Stack gap={5}>
-            <SuperAdminCard admin />
-            <SuperAdminCard admin={false} />
-            <SuperAdminCard admin />
-            <SuperAdminCard admin />
-            <SuperAdminCard admin={false} />
-            <SuperAdminCard admin />
-            <SuperAdminCard admin={false} />
-            <SuperAdminCard admin />
-            <SuperAdminCard admin={false} />
+            {/* Esto es solo para mostrar los valores en la interfaz */}
+            {new Array(10)
+              .fill(1)
+              .map((item, index) =>
+                index % 2 === 0 ? (
+                  <SuperAdminCard admin={false} key={index} />
+                ) : (
+                  <SuperAdminCard admin key={index} />
+                ),
+              )}
           </Stack>
         </Collapse>
       </Stack>

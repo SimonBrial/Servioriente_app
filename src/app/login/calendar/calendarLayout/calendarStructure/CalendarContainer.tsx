@@ -104,7 +104,7 @@ export const CalendarContainer = () => {
   }
 
   return (
-    <InsideContainer withBackground withBorder={false} offset={114}>
+    <InsideContainer withBackground withBorder={false} offset={114} key={crypto.randomUUID()}>
       <Container className={classes.calendarContainer}>
         <Stack style={{ width: "100%" }}>
           {/* -------------- Calendar's title -------------- */}

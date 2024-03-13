@@ -14,22 +14,22 @@ export default function layout({
     {
       value: "Semana 1",
       icon: <HiOutlineCalendar />,
-      dir: "/calendar/weeks",
+      dir: "/login/calendar/weeks",
     },
     {
       value: "Semana 2",
       icon: <HiOutlineCalendar />,
-      dir: "/calendar/weeks/02",
+      dir: "/login/calendar/weeks/02",
     },
     {
       value: "Semana 3",
       icon: <HiOutlineCalendar />,
-      dir: "/calendar/weeks/03",
+      dir: "/login/calendar/weeks/03",
     },
     {
       value: "Semana 4",
       icon: <HiOutlineCalendar />,
-      dir: "/calendar/weeks/04",
+      dir: "/login/calendar/weeks/04",
     },
   ];
   return (

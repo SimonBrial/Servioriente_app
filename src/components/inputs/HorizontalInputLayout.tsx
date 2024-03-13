@@ -13,7 +13,19 @@ export default function HorizontalInputLayout({
   return (
     <Flex align={"center"} justify={"space-between"} w={"100%"}>
       <Flex>
-        <Title order={4}>{title}</Title>{" "}
+        <Title
+          order={4}
+          styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}
+        >
+          {title}
+        </Title>{" "}
         {asterisk ? <span style={{ color: "red" }}>*</span> : <></>}
       </Flex>
       <TextInput

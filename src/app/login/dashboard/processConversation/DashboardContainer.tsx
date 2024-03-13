@@ -13,7 +13,7 @@ import { TMRChart } from "../charts/TMRChart";
 
 export const DashboardContainer = () => {
   return (
-    <InsideContainer withBackground offset={118} withBorder>
+    <InsideContainer withBackground offset={118} withBorder key={crypto.randomUUID()}>
       <ScrollArea
         offsetScrollbars
         scrollbarSize={2}

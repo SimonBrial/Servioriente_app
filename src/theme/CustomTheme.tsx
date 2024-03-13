@@ -27,7 +27,7 @@ export const theme = createTheme({
       "#3a4c5a", // --> Semejanza al blanco
       "#262749", // --> El gris oscuro para los backgrounds - Para hover
       "#0b1115",
-      "#484566" // --> Card hover
+      "#484566" // --> Card HOVER
     ],
     lightTheme: [
       "#F8F8F8", // --> Sidebar bg

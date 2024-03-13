@@ -1,14 +1,15 @@
 "use client";
 
 import {
-  Box,
-  Flex,
-  Center,
-  TextInput,
-  FileInput,
   useMantineColorScheme,
+  FileInput,
+  TextInput,
+  Center,
+  Flex,
+  Box,
 } from "@mantine/core";
 import { IoSend, HiOutlineFaceSmile, HiPaperClip } from "@/icons";
+import classes from "@/styles/generalStyles.module.css";
 
 export const ChatInputText = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
@@ -16,52 +17,33 @@ export const ChatInputText = (): JSX.Element => {
     <Box>
       <Flex
         gap={8}
-        styles={(theme) => ({
-          root: {
-            border:
-              colorScheme === "light"
-                ? `1px solid ${theme.colors.lightTheme[3]}`
-                : `1px solid ${theme.colors.darkTheme[5]}`,
-            padding: "0.5rem 1rem",
-            borderRadius: "35px",
-            backgroundColor:
-              colorScheme === "light"
-                ? "#efefef4c"
-                : `${theme.colors.darkTheme[7]}`,
-          },
-        })}
+        className={
+          colorScheme === "light"
+            ? classes.chatInputText
+            : classes.chatInputText_dark
+        }
       >
-        <Center
-          styles={(theme) => ({
-            root: {
-              color:
-                colorScheme === "light"
-                  ? `${theme.colors.lightTheme[6]}`
-                  : `${theme.colors.darkTheme[1]}`,
-            },
-            cursor: "pointer",
-          })}
-        >
+        <Center>
           <HiOutlineFaceSmile
-            style={{ fontSize: "1.5rem", cursor: "pointer" }}
+            className={
+              colorScheme === "light"
+                ? classes.chatInputText_icon
+                : classes.chatInputText_icon_dark
+            }
           />
         </Center>
         <FileInput
           variant="unstyled"
           leftSectionPointerEvents="none"
           leftSection={
-            <Center
-              styles={(theme) => ({
-                root: {
-                  color:
-                    colorScheme === "light"
-                      ? `${theme.colors.lightTheme[6]}`
-                      : `${theme.colors.darkTheme[1]}`,
-                  cursor: "pointer",
-                },
-              })}
-            >
-              <HiPaperClip style={{ fontSize: "1.5rem" }} />
+            <Center>
+              <HiPaperClip
+                className={
+                  colorScheme === "light"
+                    ? classes.chatInputText_icon
+                    : classes.chatInputText_icon_dark
+                }
+              />
             </Center>
           }
         />
@@ -92,12 +74,17 @@ export const ChatInputText = (): JSX.Element => {
           })}
         >
           <IoSend
-            style={{
+            /* style={{
               fontSize: "1.5rem",
               transform: "rotate(-45deg)",
               cursor: "pointer",
               marginLeft: "0.6rem",
-            }}
+            }} */
+            className={
+              colorScheme === "light"
+                ? classes.chatInputText_sendIcon
+                : classes.chatInputText_sendIcon_dark
+            }
           />
         </Center>
       </Flex>

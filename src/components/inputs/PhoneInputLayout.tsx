@@ -13,7 +13,19 @@ export default function PhoneInputLayout(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex align={"center"} justify={"space-between"} w={"100%"}>
-      <Title order={4}>Telefono</Title>
+      <Title
+        order={4}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
+          },
+        })}
+      >
+        Telefono
+      </Title>
       <Flex gap={4}>
         <Select
           w={80}

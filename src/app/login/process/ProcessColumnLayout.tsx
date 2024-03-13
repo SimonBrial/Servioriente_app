@@ -24,7 +24,7 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { BoardSectionProps, CardProcessProps } from "@/interface/interface";
 import classes from "@/styles/cardProcess.module.css";
-import heightClasses from "@/styles/heightView.module.css"
+import heightClasses from "@/styles/heightView.module.css";
 
 // Contiene los elementos que seran organizados, es decir, es el contenedor
 export const ProcessColumnLayout = ({
@@ -69,11 +69,6 @@ export const ProcessColumnLayout = ({
           : `${classes.process_col_dark}`
       }
       span={12}
-      style={{
-        // backgroundColor: "#fafafa",
-        padding: "0.5rem",
-        width: "100%",
-      }}
     >
       <>
         <Flex gap={5} justify={"center"} align={"center"}>
@@ -112,6 +107,7 @@ export const ProcessColumnLayout = ({
       >
         <Stack
           className={heightClasses.column_process_parent}
+          // style={{paddingBottom: "1rem"}}
           gap={8}
           align="center"
         >

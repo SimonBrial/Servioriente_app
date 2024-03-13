@@ -23,9 +23,27 @@ export const GlobalTheme = () => {
   return (
     <Stack gap={4}>
       <Flex justify={"space-between"} align={"center"}>
-        <Text>Tema Global</Text>
+        <Text
+          styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}
+        >
+          Tema Global
+        </Text>
         <Flex gap={6} align={"center"}>
-          <Center>
+          <Center styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}>
             <HiOutlineSun style={{ fontSize: "1.8rem" }} />
           </Center>
           <Switch
@@ -36,12 +54,19 @@ export const GlobalTheme = () => {
               setColorScheme(computedColorScheme === "light" ? "dark" : "light")
             }
           />
-          <Center>
+          <Center styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}>
             <BsMoonStars style={{ fontSize: "1.4rem" }} />
           </Center>
         </Flex>
       </Flex>
-      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
     </Stack>
   );
 };

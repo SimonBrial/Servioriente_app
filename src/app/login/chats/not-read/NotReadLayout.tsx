@@ -50,7 +50,7 @@ export const NotReadLayout = (): JSX.Element => {
         />
       </Flex>
       <Stack gap={8}>
-        <InsideContainer offset={257} withBackground={false} withBorder={false}>
+        <InsideContainer offset={257} withBackground={false} withBorder={false} key={crypto.randomUUID()}>
           <ScrollArea h={"100%"} maw={"100%"} offsetScrollbars scrollbarSize={2}>
             <Stack gap={5} h={"50%"} p={6}>
               <UserContactCard favorite />

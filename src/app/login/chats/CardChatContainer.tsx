@@ -72,8 +72,7 @@ export const CardChatContainer = ({
               : opened
                 ? `1px solid ${theme.colors.darkTheme[6]}`
                 : "",
-          borderTop: opened ? "none" : "none",
-          borderRadius: "0 0 6px 6px",
+          borderRadius: "6px",
           backgroundColor:
             colorScheme === "light"
               ? `${theme.colors.lightTheme[1]}`

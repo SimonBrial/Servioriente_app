@@ -36,7 +36,19 @@ export const StateSelect = ({ inputSize }: { inputSize: string }) => {
   ];
   return (
     <Flex align={"center"} justify={"space-between"}>
-      <Title order={4}>Estado</Title>
+      <Title
+        order={4}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
+          },
+        })}
+      >
+        Estado
+      </Title>
       <Select
         leftSection={<MdOutlinePlace />}
         w={inputSize}

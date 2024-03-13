@@ -8,7 +8,20 @@ export function SelectSocialRed(): JSX.Element {
 
   return (
     <Flex justify={"space-between"} align={"center"} w={"100%"}>
-      <Title order={4}> Red social</Title>
+      <Title
+        order={4}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
+          },
+        })}
+      >
+        {" "}
+        Red social
+      </Title>
       <Select
         w={200}
         placeholder="Seleeciona una red"

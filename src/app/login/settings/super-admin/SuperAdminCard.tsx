@@ -33,7 +33,8 @@ export const SuperAdminCard = ({ admin }: { admin: boolean }) => {
               : `${theme.colors.darkTheme[7]}`,
           borderRadius: "6px",
           padding: "0.6rem 1rem",
-          width: "100%",
+          width: "95%",
+          maxWidth: "100%",
         },
       })}
     >

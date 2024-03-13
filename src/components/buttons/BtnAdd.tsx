@@ -51,7 +51,7 @@ function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {
     },
   ];
 
-  const selectIcon = (tag: string): React.ReactNode => {
+  /*  const selectIcon = (tag: string): React.ReactNode => {
     const iconSelected: React.ReactNode = iconList.map(
       (icon: iconList, index: number) => {
         let iconName: React.ReactNode;
@@ -63,6 +63,11 @@ function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {
     );
 
     return iconSelected;
+  };
+ */
+  const selectIcon = (tag: string): React.ReactNode => {
+    const icon = iconList.find((icon) => icon.tag === tag);
+    return icon ? icon.icon : null;
   };
 
   return (
@@ -79,6 +84,7 @@ function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {
             backgroundColor: colorScheme === "light" ? "#F8F8F8" : "#262749",
           },
         }}
+        // key={crypto.randomUUID()}
       >
         <Stack
           justify="space-between"
@@ -88,7 +94,12 @@ function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {
           }}
         >
           {children}
-          <BtnActions icon={<HiOutlineCheck />} title="Aceptar" close={close} key={crypto.randomUUID()}/>
+          <BtnActions
+            icon={<HiOutlineCheck />}
+            title="Aceptar"
+            close={close}
+            key={crypto.randomUUID()}
+          />
         </Stack>
       </Drawer>
       <Button
@@ -102,6 +113,7 @@ function BtnAdd({ iconTag, label, children, addFn }: BtnAddProps): JSX.Element {
         classNames={{
           root: colorScheme === "light" ? classes.btnAdd : classes.btnAdd_dark,
         }}
+        key={crypto.randomUUID()}
       >
         {label}
       </Button>

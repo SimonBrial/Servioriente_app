@@ -13,11 +13,7 @@ export default function TabsNavigation({
 
   const sections = (): JSX.Element => {
     return (
-      <Tabs.List
-      /* classNames={{
-          list: classes.tab_list_dark,
-        }} */
-      >
+      <Tabs.List>
         {sectionsArray.map((section: TabsSectionesProps, index: number) => (
           <Link href={section.dir} key={index}>
             <Tabs.Tab

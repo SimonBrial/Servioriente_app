@@ -18,7 +18,19 @@ export function CalendarInput({
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex justify={"space-between"} align={"center"} w={"100%"}>
-      <Title order={4}>{withTitle ? <>{title}</> : <></>}</Title>
+      <Title
+        order={4}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
+          },
+        })}
+      >
+        {withTitle ? <>{title}</> : <></>}
+      </Title>
       <DateInput
         w={width}
         size="sm"

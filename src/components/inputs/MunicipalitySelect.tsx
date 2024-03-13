@@ -14,7 +14,19 @@ export const MunicipalitySelect = ({
 
   return (
     <Flex align={"center"} justify={"space-between"}>
-      <Title order={4}>Municipio</Title>
+      <Title
+        order={4}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
+          },
+        })}
+      >
+        Municipio
+      </Title>
       <Select
         w={inputSize}
         placeholder="Seleccione un Estado de Venezuela"

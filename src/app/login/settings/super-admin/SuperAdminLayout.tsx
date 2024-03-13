@@ -11,7 +11,12 @@ export const SuperAdminLayout = ({
 }) => {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <InsideContainer offset={130} withBackground withBorder>
+    <InsideContainer
+      key={crypto.randomUUID()}
+      withBorder={false}
+      withBackground
+      offset={130}
+    >
       <Stack
         gap={16}
         styles={(theme) => ({

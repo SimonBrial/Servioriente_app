@@ -8,7 +8,19 @@ export const AgeInput = ({ inputSize }: { inputSize: string }) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex justify={"space-between"} align={"center"}>
-      <Title order={4}>Edad</Title>
+      <Title
+        order={4}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
+          },
+        })}
+      >
+        Edad
+      </Title>
       <NumberInput
         w={inputSize}
         placeholder="Indique su edad"

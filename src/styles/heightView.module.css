@@ -56,26 +56,26 @@
 }
 @media (min-width: 1280px) {
   .column_process_parent {
-    height: 78.8vh;
+    height: 77vh;
     margin-top: 0.5rem;
     width: 100%;
   }
 }
 @media (min-width: 1281px) {
   .column_process_parent {
-    height: 74.1vh;
+    height: 72vh;
     margin-top: 0.5rem;
     width: 100%;
   }
 }
 @media (min-width: 1280px) {
   .column_process_children {
-    height: 78.8vh;
+    height: 75vh;
   }
 }
 @media (min-width: 1281px) {
   .column_process_children {
-    height: 74.1vh;
+    height: 70vh;
   }
 }
 
