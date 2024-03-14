@@ -1,13 +1,11 @@
 "use client";
 
-import { ChartContainer } from "@/components/charts/ChartContainer";
-import { ChartTooltip } from "@/components/charts/ChartTooltip";
+import LineChart from "@/components/charts/LineChart";
 import { ContainerInside } from "@/components/container/ContainerInside";
 import {
   FaChartLine,
   FaChartColumn /* HiOutlineDotsVertical */,
 } from "@/icons";
-import { BarChart } from "@mantine/charts";
 import {
   useMantineColorScheme,
   Center,
@@ -15,9 +13,11 @@ import {
   Title,
   Flex,
   Switch,
+  Box,
 } from "@mantine/core";
 // import classes from "@/styles/dashboard.module.css";
 import { useState } from "react";
+import { BarChart } from "@/components/charts/BarChart";
 
 interface DashboardChartContainerProps {
   dataArr: any[];
@@ -48,7 +48,7 @@ export const DashboardChartContainer = ({
         <Flex
           justify={"space-between"}
           align={"center"}
-          style={{ padding: "0 1rem" }}
+          style={{ padding: "0 1rem", marginTop: "1rem" }}
           styles={(theme) => ({
             root: {
               color:
@@ -59,75 +59,7 @@ export const DashboardChartContainer = ({
           })}
         >
           <Title order={2}>{title}</Title>
-          {/* <Menu
-            shadow="md"
-            width={200}
-            position="right-start"
-            offset={5}
-            withArrow
-            arrowPosition="center"
-            styles={(theme) => ({
-              itemLabel: {
-                color:
-                  colorScheme === "light"
-                    ? `${theme.colors.lightTheme[3]}`
-                    : `${theme.colors.darkTheme[2]}`,
-              },
-              itemSection: {
-                color:
-                  colorScheme === "light"
-                    ? `${theme.colors.lightTheme[6]}`
-                    : `${theme.colors.darkTheme[1]}`,
-                fontSize: "1.3rem",
-                marginRight: "0.5rem",
-              },
-              label: {
-                color:
-                  colorScheme === "light"
-                    ? `${theme.colors.lightTheme[3]}`
-                    : `${theme.colors.darkTheme[2]}`,
-                fontSize: "0.9rem",
-              },
-            })}
-            classNames={{
-              dropdown:
-                colorScheme === "light"
-                  ? classes.menuDropdown
-                  : classes.menuDropdown_dark,
-              item:
-                colorScheme === "light"
-                  ? classes.menuDropdown_item
-                  : classes.menuDropdown_item_dark,
-            }}
-          >
-            <Menu.Target>
-              <Center>
-                <HiOutlineDotsVertical
-                  className={
-                    colorScheme === "light"
-                      ? classes.verticalDots
-                      : classes.verticalDots_dark
-                  }
-                />
-              </Center>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Label>Tipo de Grafica</Menu.Label>
-              <Menu.Divider />
-              <Menu.Item
-                leftSection={<FaChartLine />}
-                onClick={() => setChartType(false)}
-              >
-                Grafica de Lineas
-              </Menu.Item>
-              <Menu.Item
-                leftSection={<FaChartColumn />}
-                onClick={() => setChartType(true)}
-              >
-                Grafica de Barras
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu> */}
+
           <Flex gap={6} align={"center"}>
             <Center
               styles={(theme) => ({
@@ -187,9 +119,95 @@ export const DashboardChartContainer = ({
           </Flex>
         </Flex>
         {!checked ? (
-          <ChartContainer />
+          <Box style={{ paddingTop: "1rem" }}>
+            <LineChart key={crypto.randomUUID()} />
+          </Box>
         ) : (
-          <BarChart
+          <Box style={{ paddingTop: "1rem" }}>
+            <BarChart key={crypto.randomUUID()} />
+          </Box>
+        )}
+      </Stack>
+    </ContainerInside>
+  );
+};
+
+{
+  /*
+<Menu
+  shadow="md"
+  width={200}
+  position="right-start"
+  offset={5}
+  withArrow
+  arrowPosition="center"
+  styles={(theme) => ({
+    itemLabel: {
+      color:
+        colorScheme === "light"
+          ? `${theme.colors.lightTheme[3]}`
+          : `${theme.colors.darkTheme[2]}`,
+    },
+    itemSection: {
+      color:
+        colorScheme === "light"
+          ? `${theme.colors.lightTheme[6]}`
+          : `${theme.colors.darkTheme[1]}`,
+      fontSize: "1.3rem",
+      marginRight: "0.5rem",
+    },
+    label: {
+      color:
+        colorScheme === "light"
+          ? `${theme.colors.lightTheme[3]}`
+          : `${theme.colors.darkTheme[2]}`,
+      fontSize: "0.9rem",
+    },
+  })}
+  classNames={{
+    dropdown:
+      colorScheme === "light"
+        ? classes.menuDropdown
+        : classes.menuDropdown_dark,
+    item:
+      colorScheme === "light"
+        ? classes.menuDropdown_item
+        : classes.menuDropdown_item_dark,
+  }}
+>
+  <Menu.Target>
+    <Center>
+      <HiOutlineDotsVertical
+        className={
+          colorScheme === "light"
+            ? classes.verticalDots
+            : classes.verticalDots_dark
+        }
+      />
+    </Center>
+  </Menu.Target>
+  <Menu.Dropdown>
+    <Menu.Label>Tipo de Grafica</Menu.Label>
+    <Menu.Divider />
+    <Menu.Item
+      leftSection={<FaChartLine />}
+      onClick={() => setChartType(false)}
+    >
+      Grafica de Lineas
+    </Menu.Item>
+    <Menu.Item
+      leftSection={<FaChartColumn />}
+      onClick={() => setChartType(true)}
+    >
+      Grafica de Barras
+    </Menu.Item>
+  </Menu.Dropdown>
+</Menu>
+*/
+}
+
+/*
+<BarChart
             h={400}
             withLegend
             legendProps={{ verticalAlign: "bottom", height: 50 }}
@@ -244,8 +262,4 @@ export const DashboardChartContainer = ({
               },
             })}
           />
-        )}
-      </Stack>
-    </ContainerInside>
-  );
-};
+*/

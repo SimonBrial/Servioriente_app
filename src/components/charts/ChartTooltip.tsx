@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/array-type */
-import { getFilteredChartTooltipPayload } from "@mantine/charts";
 import { Paper, Text } from "@mantine/core";
 /* const data = [
   {
@@ -48,11 +47,11 @@ export const ChartTooltip = ({ label, payload }: ChartTooltipProps) => {
       <Text fw={500} mb={5}>
         {label}
       </Text>
-      {getFilteredChartTooltipPayload(payload).map((item: any) => (
+      {/* {getFilteredChartTooltipPayload(payload).map((item: any) => (
         <Text key={item.name} c={item.color} fz="sm">
           {item.name}: {item.value}
         </Text>
-      ))}
+      ))} */}
     </Paper>
   );
 };

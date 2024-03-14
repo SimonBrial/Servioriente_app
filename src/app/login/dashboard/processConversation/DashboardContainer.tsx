@@ -9,11 +9,16 @@ import heightViewClass from "@/styles/heightView.module.css";
 import { data, tmrArry, tmrPerHour } from "@/data/socialMediaData";
 import { ProcessedConversationContainer } from "./ProcessedConversationContainer";
 import { DonutChartContainer } from "../charts/DonutChartContainer";
-import { TMRChart } from "../charts/TMRChart";
+import TMRChartContainer from "../charts/TMRChartContainer";
 
 export const DashboardContainer = () => {
   return (
-    <InsideContainer withBackground offset={118} withBorder key={crypto.randomUUID()}>
+    <InsideContainer
+      withBackground
+      offset={118}
+      withBorder
+      key={crypto.randomUUID()}
+    >
       <ScrollArea
         offsetScrollbars
         scrollbarSize={2}
@@ -21,7 +26,7 @@ export const DashboardContainer = () => {
       >
         <Grid gutter="xs" style={{ padding: "1rem" }}>
           <Grid.Col span={8.5}>
-            <Stack gap={"xs"}>
+            <Stack gap={"xs"} style={{ height: "100%" }}>
               <ProcessedConversationContainer />
               <DashboardChartContainer
                 dataArr={data}
@@ -32,20 +37,17 @@ export const DashboardContainer = () => {
           <Grid.Col span={3.5}>
             <DashboardProcessListContainer />
           </Grid.Col>
-          <Grid.Col span={4}>
+          <Grid.Col span={3.5}>
             <DonutChartContainer />
           </Grid.Col>
-          <Grid.Col span={8}>
+          <Grid.Col span={8.5}>
             <DashboardChartContainer
               dataArr={tmrArry}
               title="Tiempo medio de Respuesta"
             />
           </Grid.Col>
           <Grid.Col span={12}>
-            <TMRChart
-              dataArr={tmrPerHour}
-              title="TMR"
-            />
+            <TMRChartContainer dataArr={tmrPerHour} title="TMR" />
           </Grid.Col>
         </Grid>
       </ScrollArea>
