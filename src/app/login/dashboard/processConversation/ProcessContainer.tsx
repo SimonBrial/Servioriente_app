@@ -1,58 +1,62 @@
 "use client";
 
-import React, { useState, useId } from "react";
+import React, { useId, useState } from "react";
 import {
   useMantineColorScheme,
   Container,
   Stack,
-  Grid,
   Text,
+  Grid,
 } from "@mantine/core";
 import { DndContext } from "@dnd-kit/core";
-import { SortableContext, arrayMove } from "@dnd-kit/sortable";
-import { SocialMedia } from "@/interface/interface";
-import SocialMediaItem from "./SocialMediaItem";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { TitleLayout } from "@/components/layout/TitleLayout";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import { DashboardProcessListItems } from "@/interface/interface";
+import { dashboardProcessList } from "@/data/dashboardProcessList";
+import { DashboardProcessListItem } from "./DashboardProcessListItem";
 import { GeneralDivider } from "@/components/GeneralDivider";
 
-export const SocialMediaContainer = () => {
+export default function ProcessContainer() {
   const id = useId();
-  const [items, setItems] = useState<SocialMedia[]>([
-    { title: "instagram", rating: 3, id: crypto.randomUUID() },
-    { title: "facebook", rating: 3, id: crypto.randomUUID() },
-    { title: "whatsapp", rating: 3, id: crypto.randomUUID() },
-  ]);
+  const [itemsTable, setItemsTable] =
+    useState<DashboardProcessListItems[]>(dashboardProcessList);
   const { colorScheme } = useMantineColorScheme();
 
-  const rows = items.map((item) => {
-    const { rating, title, id } = item;
+  const rows = itemsTable.map((item) => {
+    const { id, process, today, yesterday, processTitle } = item;
     return (
       <Stack key={id} gap={1}>
-        <SocialMediaItem id={id} rating={rating} title={title} />
+        <DashboardProcessListItem
+          processTitle={processTitle}
+          yesterday={yesterday}
+          process={process}
+          today={today}
+          key={id}
+          id={id}
+        />
         <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>
     );
   });
+  /*
 
+*/
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!active.id !== over.id) {
-      setItems((item) => {
+      setItemsTable((item) => {
         const oldIndex = item.findIndex((it) => it.id === active.id);
         const newIndex = item.findIndex((it) => it.id === over.id);
         return arrayMove(item, oldIndex, newIndex);
       });
     }
   };
-
   return (
     <Stack gap={2} p={0}>
-      <TitleLayout color="" icon="" onText title="Redes Sociales" />
       <Stack gap={1}>
-        <Grid gutter="xs" style={{ width: "100%" }}>
-          <Grid.Col span={4}></Grid.Col>
-          <Grid.Col span={4}>
+        <Grid gutter="xs" style={{ width: "100%", paddingRight: "0.4rem" }}>
+          <Grid.Col span={2}></Grid.Col>
+          <Grid.Col span={6}>
             <Text
               styles={(theme) => ({
                 root: {
@@ -65,24 +69,39 @@ export const SocialMediaContainer = () => {
                 },
               })}
             >
-              Red Social
+              Proceso
             </Text>
           </Grid.Col>
-          <Grid.Col span={4}>
+          <Grid.Col span={2}>
             <Text
               styles={(theme) => ({
                 root: {
-                  textAlign: "end",
+                  textAlign: "center",
                   color:
                     colorScheme === "light"
                       ? theme.colors.lightTheme[3]
                       : theme.colors.darkTheme[2],
                   cursor: "default",
-                  paddingRight: "0.4rem",
                 },
               })}
             >
-              Rating
+              Hoy
+            </Text>
+          </Grid.Col>
+          <Grid.Col span={2}>
+            <Text
+              styles={(theme) => ({
+                root: {
+                  textAlign: "center",
+                  color:
+                    colorScheme === "light"
+                      ? theme.colors.lightTheme[3]
+                      : theme.colors.darkTheme[2],
+                  cursor: "default",
+                },
+              })}
+            >
+              Ayer
             </Text>
           </Grid.Col>
         </Grid>
@@ -93,7 +112,7 @@ export const SocialMediaContainer = () => {
         onDragEnd={handleDragEnd}
         modifiers={[restrictToVerticalAxis]}
       >
-        <SortableContext items={items}>
+        <SortableContext items={itemsTable}>
           <Container style={{ maxWidth: "100%", width: "100%", padding: "0" }}>
             {rows}
           </Container>
@@ -101,4 +120,4 @@ export const SocialMediaContainer = () => {
       </DndContext>
     </Stack>
   );
-};
+}

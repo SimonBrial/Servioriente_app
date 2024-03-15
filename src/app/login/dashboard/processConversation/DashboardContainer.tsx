@@ -6,12 +6,12 @@ import { DashboardChartContainer } from "../charts/DashboardChartContainer";
 import { Grid, ScrollArea, Stack } from "@mantine/core";
 import InsideContainer from "@/components/container/InsideContainer";
 import heightViewClass from "@/styles/heightView.module.css";
-import { data, tmrArry, tmrPerHour } from "@/data/socialMediaData";
+import { data, tmrArray, tmrPerHour } from "@/data/socialMediaData";
 import { ProcessedConversationContainer } from "./ProcessedConversationContainer";
 import { DonutChartContainer } from "../charts/DonutChartContainer";
 import TMRChartContainer from "../charts/TMRChartContainer";
 
-export const DashboardContainer = () => {
+export default function DashboardContainer() {
   return (
     <InsideContainer
       withBackground
@@ -35,14 +35,12 @@ export const DashboardContainer = () => {
             </Stack>
           </Grid.Col>
           <Grid.Col span={3.5}>
-            <DashboardProcessListContainer />
+            <DashboardProcessListContainer key={crypto.randomUUID()} />
           </Grid.Col>
-          <Grid.Col span={3.5}>
-            <DonutChartContainer />
-          </Grid.Col>
+          <Grid.Col span={3.5}><DonutChartContainer /></Grid.Col>
           <Grid.Col span={8.5}>
             <DashboardChartContainer
-              dataArr={tmrArry}
+              dataArr={tmrArray}
               title="Tiempo medio de Respuesta"
             />
           </Grid.Col>
@@ -53,4 +51,4 @@ export const DashboardContainer = () => {
       </ScrollArea>
     </InsideContainer>
   );
-};
+}

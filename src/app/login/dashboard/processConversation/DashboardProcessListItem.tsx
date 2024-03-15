@@ -1,7 +1,15 @@
 "use client";
 
 import { MdOutlineDragIndicator } from "@/icons";
-import { Badge, Center, Table, useMantineColorScheme } from "@mantine/core";
+import {
+  useMantineColorScheme,
+  Center,
+  Badge,
+  Text,
+  Flex,
+  Grid,
+  Box,
+} from "@mantine/core";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -31,29 +39,35 @@ export const DashboardProcessListItem = ({
     transition,
   };
   return (
-    <Table.Tr
-      key={id}
+    <Box
+      // key={id}
       ref={setNodeRef}
       style={style}
-      classNames={{
-        tr:
-          colorScheme === "light"
-            ? classes.dashboardItem_row
-            : classes.dashboardItem_row_dark,
-      }}
+      className={
+        colorScheme === "light"
+          ? classes.dashboardItem_row
+          : classes.dashboardItem_row_dark
+      }
+      p={0}
     >
-      <Table.Td {...attributes} {...listeners}>
-        <Center>
-          <MdOutlineDragIndicator />
-        </Center>
-      </Table.Td>
-      <Table.Td >
-        <Badge color={underScoreColor(capitalizeFirstLetter(process))}>
-          {processTitle}
-        </Badge>
-      </Table.Td>
-      <Table.Td>{today}</Table.Td>
-      <Table.Td>{yesterday}</Table.Td>
-    </Table.Tr>
+      <Flex justify={"space-between"} align={"center"} p={0}>
+        <Grid.Col span={1}>
+          <Center {...attributes} {...listeners}>
+            <MdOutlineDragIndicator />
+          </Center>
+        </Grid.Col>
+        <Grid.Col span={7} style={{ textAlign: "center" }}>
+          <Badge color={underScoreColor(capitalizeFirstLetter(process))}>
+            {processTitle}
+          </Badge>
+        </Grid.Col>
+        <Grid.Col span={2} style={{ textAlign: "center" }}>
+          <Text>{today}</Text>
+        </Grid.Col>
+        <Grid.Col span={2} style={{ textAlign: "center" }}>
+          <Text>{yesterday}</Text>
+        </Grid.Col>
+      </Flex>
+    </Box>
   );
 };

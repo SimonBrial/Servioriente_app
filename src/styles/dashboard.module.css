@@ -116,9 +116,11 @@
   cursor: default;
 }
 .dashboardItem_row {
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
   color: #696969;
   cursor: default;
-  border-top: 1px solid #cdcdcd;
 }
 .dashboardItem_row:hover {
   background-color: #efefef;
@@ -127,7 +129,8 @@
 .dashboardItem_row_dark {
   color: #eff3f5;
   cursor: default;
-  border-top: 1px solid #3a4c5a;
+  padding: 0.5rem 1rem;
+  /* border-top: 1px solid #3a4c5a; */
 }
 .dashboardItem_row_dark:hover {
   background-color: #484566;

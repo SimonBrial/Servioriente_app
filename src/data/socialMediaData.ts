@@ -1,6 +1,6 @@
 import { socialMediaData } from "@/interface/interface";
 
-export const tmrArry: socialMediaData[] = [
+export const tmrArray: socialMediaData[] = [
   /* {
     _id: "65cbdb5109207dbccc93d9f4",
     date: "",

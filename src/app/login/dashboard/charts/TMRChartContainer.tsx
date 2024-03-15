@@ -55,7 +55,7 @@ export default function TMRChartContainer({
           </Flex>
           <Flex gap={12}>
             <Select
-              variant="unstyled"
+              variant="default"
               allowDeselect={false}
               defaultValue={["Mario Hurtado", "Simon Briceño"][0]}
               placeholder="Selecciona un admin"

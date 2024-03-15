@@ -1,7 +1,7 @@
 "use client";
 
 import { ContainerInside } from "@/components/container/ContainerInside";
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import { ProcessedConversationItem } from "./ProcessedConversationItem";
 import { FaFacebookF, IoLogoInstagram, IoLogoWhatsapp } from "@/icons";
 import { Flex, Stack, Title, useMantineColorScheme } from "@mantine/core";
@@ -33,6 +33,7 @@ const mediaSocialArray: ProcessedConversationItemProps[] = [
 ];
 
 export const ProcessedConversationContainer = () => {
+  const id = useId()
   const { colorScheme } = useMantineColorScheme();
   const [socialMedia, setSocialMedia] =
     useState<ProcessedConversationItemProps[]>(mediaSocialArray);
@@ -41,11 +42,11 @@ export const ProcessedConversationContainer = () => {
     const { iconName, id, totalConversations, socialMediaIcon } = itemMedia;
     return (
       <ProcessedConversationItem
-        key={id}
-        id={id}
-        iconName={iconName}
         totalConversations={totalConversations}
         socialMediaIcon={socialMediaIcon}
+        iconName={iconName}
+        key={id}
+        id={id}
       />
     );
   });
@@ -80,6 +81,7 @@ export const ProcessedConversationContainer = () => {
           <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
         </Stack>
         <DndContext
+          id={id}
           onDragEnd={handleDragEnd}
           modifiers={[restrictToHorizontalAxis]}
         >
