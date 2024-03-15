@@ -11,7 +11,7 @@ import {
 import { IoSend, HiOutlineFaceSmile, HiPaperClip } from "@/icons";
 import classes from "@/styles/generalStyles.module.css";
 
-export const ChatInputText = (): JSX.Element => {
+export default function ChatInputText(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Box>
@@ -90,4 +90,4 @@ export const ChatInputText = (): JSX.Element => {
       </Flex>
     </Box>
   );
-};
+}

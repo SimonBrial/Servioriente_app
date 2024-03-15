@@ -11,12 +11,17 @@ import {
 import { CloudDialogue } from "./CloudDialogue";
 import InsideContainer from "@/components/container/InsideContainer";
 import classes from "@/styles/generalStyles.module.css";
-import heightClasses from "@/styles/heightView.module.css"
+import heightClasses from "@/styles/heightView.module.css";
 
-export const ConversationContainer = (): JSX.Element => {
+export default function ConversationContainer(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <InsideContainer offset={222} withBackground={false} withBorder={false} key={crypto.randomUUID()}>
+    <InsideContainer
+      offset={222}
+      withBackground={false}
+      withBorder={false}
+      key={crypto.randomUUID()}
+    >
       <Container
         classNames={{
           root:
@@ -61,7 +66,7 @@ export const ConversationContainer = (): JSX.Element => {
       </Container>
     </InsideContainer>
   );
-};
+}
 
 /* styles={(theme) => ({
   root: {

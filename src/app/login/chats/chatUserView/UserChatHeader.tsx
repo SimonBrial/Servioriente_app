@@ -21,10 +21,10 @@ interface UserChatHeaderProps {
   status: boolean;
 }
 
-export const UserChatHeader = ({
+export default function UserChatHeader({
   colorUser,
   status,
-}: UserChatHeaderProps): JSX.Element => {
+}: UserChatHeaderProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex style={{ width: "100%" }} justify={"space-around"}>
@@ -99,4 +99,4 @@ export const UserChatHeader = ({
       </Flex>
     </Flex>
   );
-};
+}

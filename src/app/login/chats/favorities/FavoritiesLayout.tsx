@@ -1,7 +1,7 @@
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { ScrollArea, Stack } from "@mantine/core";
 import React from "react";
-import { AsideSearch } from "../AsideSearch";
+import AsideSearch from "../AsideSearch";
 import InsideContainer from "@/components/container/InsideContainer";
 import { UserContactCard } from "../UserContactCard";
 import { OrderByName } from "./OrderByName";

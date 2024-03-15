@@ -1,7 +1,7 @@
 "use client";
 
 import { TitleLayout } from "@/components/layout/TitleLayout";
-import { AsideSearch } from "../AsideSearch";
+import AsideSearch from "../AsideSearch";
 import InsideContainer from "@/components/container/InsideContainer";
 import {
   useMantineColorScheme,

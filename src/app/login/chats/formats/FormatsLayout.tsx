@@ -1,5 +1,5 @@
 import { TitleLayout } from "@/components/layout/TitleLayout";
-import { AsideSearch } from "../AsideSearch";
+import AsideSearch from "../AsideSearch";
 import { BtnBackSection } from "@/components/buttons/BtnBackSection";
 import InsideContainer from "@/components/container/InsideContainer";
 import { Flex, ScrollArea, Stack } from "@mantine/core";

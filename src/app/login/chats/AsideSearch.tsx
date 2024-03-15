@@ -9,10 +9,10 @@ import {
   Flex,
 } from "@mantine/core";
 import React from "react";
-import { HamburgerMenu } from "./HamburgerMenu";
+import HamburgerMenu from "./HamburgerMenu";
 import classes from "@/styles/btnStyles.module.css";
 
-export const AsideSearch = (): JSX.Element => {
+export default function AsideSearch(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex align={"center"} gap={4}>
@@ -22,9 +22,7 @@ export const AsideSearch = (): JSX.Element => {
         aria-label="Search"
         classNames={{
           root:
-            colorScheme === "light"
-              ? classes.btnMail
-              : classes.btnMail_dark,
+            colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
         }}
       >
         <Center
@@ -56,4 +54,4 @@ export const AsideSearch = (): JSX.Element => {
       <HamburgerMenu />
     </Flex>
   );
-};
+}

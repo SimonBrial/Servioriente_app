@@ -2,9 +2,9 @@ import { BtnBackSection } from "@/components/buttons/BtnBackSection";
 import { FavoritiesLayout } from "./FavoritiesLayout";
 import { AsideContainer } from "../AsideContainer";
 import { ChatContainer } from "../ChatContainer";
-import { UserChatHeader } from "../chatUserView/UserChatHeader";
-import { ConversationContainer } from "../chatUserView/ConversationContainer";
-import { ChatInputText } from "../chatUserView/ChatInputText";
+import UserChatHeader from "../chatUserView/UserChatHeader";
+import ConversationContainer from "../chatUserView/ConversationContainer";
+import ChatInputText from "../chatUserView/ChatInputText";
 import { Box } from "@mantine/core";
 
 const page = (): JSX.Element => {

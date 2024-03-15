@@ -16,7 +16,7 @@ import {
   Flex,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import btnClasses from "@/styles/btnStyles.module.css";
+import btnClasses from "../../../../styles/btnStyles.module.css";
 import classes from "@/styles/generalStyles.module.css";
 
 export const SearchInChat = (): JSX.Element => {

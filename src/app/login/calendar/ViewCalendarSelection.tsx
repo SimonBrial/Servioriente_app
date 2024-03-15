@@ -7,7 +7,7 @@ import {
   Flex,
 } from "@mantine/core";
 import React, { useRef, useState } from "react";
-import classes from "@/styles/btnStyles.module.css";
+import classes from "../../../styles/btnStyles.module.css";
 import { useRouter } from "next/navigation";
 import { HiOutlineViewBoards, HiOutlineViewGrid } from "@/icons";
 

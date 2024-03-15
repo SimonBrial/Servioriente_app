@@ -10,9 +10,9 @@ import {
 import { TabsSectionesProps } from "@/interface/interface";
 import { ActionIcon, Menu, useMantineColorScheme } from "@mantine/core";
 import Link from "next/link";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "../../../styles/generalStyles.module.css";
 
-export const HamburgerMenu = (): JSX.Element => {
+export default function HamburgerMenu(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const menuOptions = [
     {
@@ -109,4 +109,4 @@ export const HamburgerMenu = (): JSX.Element => {
       {sections()}
     </Menu>
   );
-};
+}

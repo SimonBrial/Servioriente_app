@@ -3,7 +3,7 @@
 
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { IoChevronBack, IoChevronForward } from "@/icons";
-import btnClasses from "@/styles/btnStyles.module.css";
+import btnClasses from "../../../../../styles/btnStyles.module.css";
 import {
   useMantineColorScheme,
   UnstyledButton,
@@ -32,7 +32,7 @@ import { EventsArray } from "@/interface/interface";
 // TODO: Ajustar los dias del mes, que no se muevan.
 // TODO: Refactorizar todo el codigo.
 
-export const CalendarContainer = () => {
+export default function CalendarContainer() {
   const dt = new Date();
   const { colorScheme } = useMantineColorScheme();
   const [currentMonth, setCurrentMonth] = useState(dt.getMonth());
@@ -104,7 +104,12 @@ export const CalendarContainer = () => {
   }
 
   return (
-    <InsideContainer withBackground withBorder={false} offset={114} key={crypto.randomUUID()}>
+    <InsideContainer
+      withBackground
+      withBorder={false}
+      offset={114}
+      key={crypto.randomUUID()}
+    >
       <Container className={classes.calendarContainer}>
         <Stack style={{ width: "100%" }}>
           {/* -------------- Calendar's title -------------- */}
@@ -161,7 +166,10 @@ export const CalendarContainer = () => {
                   {months[currentMonth]} {currentYear}
                 </Text>
               </Flex>
-              <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
+              <GeneralDivider
+                orientation="horizontal"
+                key={crypto.randomUUID()}
+              />
             </Stack>
           </Container>
           <Stack gap={0}>
@@ -289,4 +297,4 @@ export const CalendarContainer = () => {
       </Container>
     </InsideContainer>
   );
-};
+}
