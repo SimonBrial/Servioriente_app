@@ -23,8 +23,8 @@ import {
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { BoardSectionProps, CardProcessProps } from "@/interface/interface";
-import classes from "@/styles/cardProcess.module.css";
-import heightClasses from "@/styles/heightView.module.css";
+import classes from "@/styles/card-process.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 
 // Contiene los elementos que seran organizados, es decir, es el contenedor
 export const ProcessColumnLayout = ({

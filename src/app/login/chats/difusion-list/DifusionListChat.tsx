@@ -4,7 +4,7 @@ import { Flex, ScrollArea, Stack } from "@mantine/core";
 import { AvatarGroup } from "./AvatarGroup";
 import TextEditor from "@/components/TextEditor";
 import { ContainerInside } from "@/components/container/ContainerInside";
-import heightClasses from "@/styles/heightView.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 import BtnSend from "@/components/buttons/BtnSend";
 import { BtnPreview } from "@/components/buttons/BtnPreview";
 

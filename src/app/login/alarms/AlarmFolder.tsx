@@ -6,7 +6,7 @@ import {
   Container,
   Collapse,
   Divider,
-  Tooltip,
+  // Tooltip,
   Center,
   Title,
   Stack,
@@ -34,7 +34,7 @@ export default function AlarmFolder(): JSX.Element {
       return (
         <Grid.Col key={item.id} span={4}>
           <AlarmCard
-            key={item.id}
+            // key={item.id}
             id={item.id}
             createHour={item.createHour}
             createdAt={item.createdAt}
@@ -89,7 +89,7 @@ export default function AlarmFolder(): JSX.Element {
             </Flex>
             <Divider size="md" color="#FD0E78" />
           </Stack>
-          <Tooltip
+          {/* <Tooltip
             label="Editar"
             withArrow
             offset={5}
@@ -100,15 +100,10 @@ export default function AlarmFolder(): JSX.Element {
             })}
             transitionProps={{ transition: "scale", duration: 300 }}
           >
-            <BtnEdit buttonStyles="unstyled">
-              <CreateFolderLayout title="Editar Carpeta" />
-            </BtnEdit>
-            {/* <UnstyledButton style={{ fontSize: "1.5rem" }}>
-              <Center>
-                <HiOutlinePencil />
-              </Center>
-            </UnstyledButton> */}
-          </Tooltip>
+          </Tooltip> */}
+          <BtnEdit buttonStyles="unstyled">
+            <CreateFolderLayout title="Editar Carpeta" />
+          </BtnEdit>
         </Flex>
         <Text
           size="sm"

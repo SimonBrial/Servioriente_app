@@ -1,7 +1,7 @@
 "use client";
 
 import { Container, useMantineColorScheme } from "@mantine/core";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export const GlobalContainer = ({
   children,

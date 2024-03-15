@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "@/styles/dashboard.module.css";
-import heightViewClass from "@/styles/heightView.module.css";
+import heightViewClass from "@/styles/height-view.module.css";
 import { TaskListLayout } from "./TaskListLayout";
 
 export const TaskContainer = () => {

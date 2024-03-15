@@ -9,7 +9,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { PiRobot } from "@/icons";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export default function AutomatedInput({
   automatedStatus,

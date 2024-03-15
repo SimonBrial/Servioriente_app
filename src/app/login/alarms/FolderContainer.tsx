@@ -13,10 +13,10 @@ export default function FolderContainer(): JSX.Element {
         offsetScrollbars
       >
         <Stack gap={12}>
-          <AlarmFolder />
-          <AlarmFolder />
-          <AlarmFolder />
-          <AlarmFolder />
+          <AlarmFolder key={crypto.randomUUID()} />
+          <AlarmFolder key={crypto.randomUUID()} />
+          <AlarmFolder key={crypto.randomUUID()} />
+          <AlarmFolder key={crypto.randomUUID()} />
         </Stack>
       </ScrollArea>
     </ContainerInside>

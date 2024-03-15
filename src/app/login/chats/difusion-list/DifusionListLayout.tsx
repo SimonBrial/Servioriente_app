@@ -16,7 +16,7 @@ import { UserContactCard } from "../UserContactCard";
 import { BtnAcept } from "@/components/buttons/BtnAcept";
 import InsideContainer from "@/components/container/InsideContainer";
 import { GeneralDivider } from "@/components/GeneralDivider";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 // import { useListState } from "@mantine/hooks";
 
 export const DifusionListLayout = (): JSX.Element => {

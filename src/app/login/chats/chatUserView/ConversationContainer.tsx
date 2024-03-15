@@ -10,8 +10,8 @@ import {
 } from "@mantine/core";
 import { CloudDialogue } from "./CloudDialogue";
 import InsideContainer from "@/components/container/InsideContainer";
-import classes from "@/styles/generalStyles.module.css";
-import heightClasses from "@/styles/heightView.module.css";
+import classes from "@/styles/general-styles.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 
 export default function ConversationContainer(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();

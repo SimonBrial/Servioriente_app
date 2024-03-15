@@ -84,7 +84,6 @@ export default function AlarmCardContainer(): JSX.Element {
       return (
         <Grid.Col key={item.id} span={4}>
           <AlarmCard
-            key={item.id}
             id={item.id}
             createHour={item.createHour}
             createdAt={item.createdAt}

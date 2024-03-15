@@ -7,7 +7,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { HiOutlineSearch } from "../../icons";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export function AutoCompleteInput(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();

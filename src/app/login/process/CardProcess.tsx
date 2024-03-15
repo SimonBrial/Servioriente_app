@@ -17,8 +17,8 @@ import { TaskItemProps } from "@/interface/interface";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { useEffect, useState } from "react";
-import classes from "@/styles/cardProcess.module.css";
-import heightClasses from "@/styles/heightView.module.css";
+import classes from "@/styles/card-process.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 
 export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
   const [colorDivider, setColorDivider] = useState<string>("red");

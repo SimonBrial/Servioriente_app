@@ -15,7 +15,7 @@ import {
   HiOutlineUser,
   HiOutlineCog,
 } from "../../icons";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 import NavIcon from "./NavIcon";
 import { sidebarItems } from "@/interface/interface";
 import NotificationIcon from "./NotificationIcon";

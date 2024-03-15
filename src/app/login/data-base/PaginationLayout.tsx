@@ -1,5 +1,5 @@
 import { Group, Pagination, useMantineColorScheme } from "@mantine/core";
-import classes from "@/styles/listStyles.module.css";
+import classes from "@/styles/list-styles.module.css";
 
 export default function PaginationLayout() {
   const { colorScheme } = useMantineColorScheme();

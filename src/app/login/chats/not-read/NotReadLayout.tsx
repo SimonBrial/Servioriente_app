@@ -12,7 +12,7 @@ import {
   Text,
 } from "@mantine/core";
 import { UserContactCard } from "../UserContactCard";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 import { GeneralDivider } from "@/components/GeneralDivider";
 
 export const NotReadLayout = (): JSX.Element => {

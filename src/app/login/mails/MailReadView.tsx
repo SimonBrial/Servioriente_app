@@ -20,7 +20,7 @@ import {
   CgCornerUpLeft,
   HiOutlineStar,
 } from "@/icons";
-import mailReadViewClasses from "@/styles/btnStyles.module.css";
+import mailReadViewClasses from "@/styles/btn-styles.module.css";
 import TooltipLayout from "@/components/TooltipLayout";
 
 export default function MailReadView(): JSX.Element {

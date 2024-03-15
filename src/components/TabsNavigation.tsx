@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Tabs, useMantineColorScheme } from "@mantine/core";
 import { SectionsArray, TabsSectionesProps } from "@/interface/interface";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export default function TabsNavigation({
   sectionsArray,

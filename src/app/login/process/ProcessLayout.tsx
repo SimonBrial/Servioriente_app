@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import {
   defaultDropAnimation,
   KeyboardSensor,
@@ -29,6 +29,7 @@ import { Container, Grid } from "@mantine/core";
 import InsideContainer from "@/components/container/InsideContainer";
 
 export const ProcessLayout = (): JSX.Element => {
+  const idDnd = useId()
   const tasks = INITIAL_CARDS;
   const initialBoardSections = initializeColumns(INITIAL_CARDS);
   const [boardSections, setBoardSections] =
@@ -148,6 +149,7 @@ export const ProcessLayout = (): JSX.Element => {
       withBorder={true}
     >
       <DndContext
+        id={idDnd}
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={handleDragStart}

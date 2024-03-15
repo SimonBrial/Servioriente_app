@@ -1,7 +1,7 @@
 import TextEditor from "@/components/TextEditor";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { ScrollArea, Title } from "@mantine/core";
-import heightClasses from "@/styles/heightView.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 import { ContainerInside } from "@/components/container/ContainerInside";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
 import { HiOutlineMail, MdOutlineTitle } from "@/icons";

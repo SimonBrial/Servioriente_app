@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import React, { useState } from "react";
 import { months } from "@/data/calendarDaysAndMonth";
-import btnClasses from "@/styles/btnStyles.module.css";
+import btnClasses from "@/styles/btn-styles.module.css";
 
 export const MonthNavigationBar = () => {
   const { colorScheme } = useMantineColorScheme();

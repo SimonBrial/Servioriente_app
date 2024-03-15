@@ -10,7 +10,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "@/icons";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export default function PrivateInput({
   userName,

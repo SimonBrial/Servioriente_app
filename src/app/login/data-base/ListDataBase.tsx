@@ -3,8 +3,8 @@
 import { ScrollArea, Stack, Table, useMantineColorScheme } from "@mantine/core";
 import BtnFn from "@/components/buttons/BtnFn";
 import { useState } from "react";
-import classes from "@/styles/listStyles.module.css";
-import heightClasses from "@/styles/heightView.module.css";
+import classes from "@/styles/list-styles.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 import { listDB as elements } from "@/data/ListDB";
 import PaginationLayout from "./PaginationLayout";
 import HeaderRowItem from "./HeaderRowItem";

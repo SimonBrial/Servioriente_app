@@ -21,7 +21,7 @@ import {
 } from "@/icons";
 import { PriorityBadge } from "@/components/badge/PriorityBadge";
 import classes from "@/styles/metrics.module.css";
-import classesList from "@/styles/listStyles.module.css";
+import classesList from "@/styles/list-styles.module.css";
 import BtnSee from "@/components/buttons/BtnSee";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import { DatePickerInput } from "@mantine/dates";

@@ -9,7 +9,7 @@ import {
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { HiOutlineViewBoards, HiOutlineViewGrid } from "@/icons";
-import btnClasses from "@/styles/btnStyles.module.css";
+import btnClasses from "@/styles/btn-styles.module.css";
 
 export const ViewCalendarSelection = () => {
   const [btnSelected, setBtnSelected] = useState<string | undefined>("grid");

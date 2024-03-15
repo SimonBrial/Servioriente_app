@@ -2,7 +2,7 @@
 
 import { Button, useMantineColorScheme } from "@mantine/core";
 import { IoArrowBackOutline } from "@/icons";
-import classes from "@/styles/btnStyles.module.css";
+import classes from "@/styles/btn-styles.module.css";
 
 export default function BtnBack({
   close,

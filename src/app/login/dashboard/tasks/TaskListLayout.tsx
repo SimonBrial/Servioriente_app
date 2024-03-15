@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@mantine/core";
 import classes from "@/styles/dashboard.module.css";
-import heightViewClass from "@/styles/heightView.module.css";
+import heightViewClass from "@/styles/height-view.module.css";
 import { TaskDaycontainer } from "./TaskDaycontainer";
 
 export const TaskListLayout = () => {

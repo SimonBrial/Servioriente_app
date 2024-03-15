@@ -23,9 +23,9 @@ import {
 } from "@/utils/calendarFunctions";
 import { months, MOCKEVENTS, weekDays } from "@/data/calendarDaysAndMonth";
 import { EventCardLayout } from "./cards/EventCardLayout";
-import btnClasses from "@/styles/btnStyles.module.css";
+import btnClasses from "@/styles/btn-styles.module.css";
 import classes from "@/styles/calendar.module.css";
-import heightClasses from "@/styles/heightView.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 import { EventsArray } from "@/interface/interface";
 
 // TODO: Agregar la opcion para añadir eventos.

@@ -2,7 +2,7 @@
 
 import { Checkbox, Flex, useMantineColorScheme } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export const SidebarSectionSelection = ({
   selected,

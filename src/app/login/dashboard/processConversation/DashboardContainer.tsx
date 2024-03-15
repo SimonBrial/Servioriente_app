@@ -5,7 +5,7 @@ import { DashboardProcessListContainer } from "./DashboardProcessListContainer";
 import { DashboardChartContainer } from "../charts/DashboardChartContainer";
 import { Grid, ScrollArea, Stack } from "@mantine/core";
 import InsideContainer from "@/components/container/InsideContainer";
-import heightViewClass from "@/styles/heightView.module.css";
+import heightViewClass from "@/styles/height-view.module.css";
 import { data, tmrArray, tmrPerHour } from "@/data/socialMediaData";
 import { ProcessedConversationContainer } from "./ProcessedConversationContainer";
 import { DonutChartContainer } from "../charts/DonutChartContainer";

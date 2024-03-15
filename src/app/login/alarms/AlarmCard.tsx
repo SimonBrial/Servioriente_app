@@ -17,7 +17,7 @@ export default function AlarmCard({
   return (
     <Container
       ref={ref}
-      id={id}
+      // id={id}
       p={10}
       style={{
         border: "1px solid red",
@@ -28,14 +28,20 @@ export default function AlarmCard({
       }}
     >
       <Stack gap={4}>
-        <AlarmCardTitle label={title} hover={hovered} />
+        <AlarmCardTitle
+          key={crypto.randomUUID()}
+          label={title}
+          hover={hovered}
+        />
         <AlarmCardDate
+          key={crypto.randomUUID()}
           date={createdAt}
           hour={createHour}
           label="Creado"
           hover={hovered}
         />
         <AlarmCardDate
+          key={crypto.randomUUID()}
           date={forDate}
           hour={forHour}
           label="Para"

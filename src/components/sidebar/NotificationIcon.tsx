@@ -1,4 +1,4 @@
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 import { HiOutlineBell } from "@/icons";
 import { Box } from "@mantine/core";
 import NavIcon from "./NavIcon";

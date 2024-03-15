@@ -3,7 +3,7 @@
 import { IoClose } from "@/icons";
 import { Button, useMantineColorScheme } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/btnStyles.module.css";
+import classes from "@/styles/btn-styles.module.css";
 
 export const BtnCancel = ({ fnCancel }: { fnCancel: () => void }) => {
   const { colorScheme } = useMantineColorScheme();

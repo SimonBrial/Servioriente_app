@@ -3,7 +3,7 @@ import React from "react";
 import classes from "@/styles/carousel.module.css";
 import { ColumnEventContainer } from "./ColumnEventContainer";
 import { calendarData } from "@/data/calendarData";
-import heightClasses from "@/styles/heightView.module.css"
+import heightClasses from "@/styles/height-view.module.css"
 
 export const ColumnContainerList = () => {
   return (

@@ -11,7 +11,7 @@ import {
 import { BadgeClose } from "../badge/BadgeClose";
 import { PillFilter } from "../PillFilter";
 import { AutoCompleteData } from "@/interface/interface";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 import { GeneralDivider } from "../GeneralDivider";
 
 export default function AutoCompleteFilterContainer({

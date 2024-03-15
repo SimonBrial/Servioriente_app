@@ -1,6 +1,6 @@
 import { ScrollArea } from "@mantine/core";
 import { CardChatContainer } from "./CardChatContainer";
-import heightClasses from "@/styles/heightView.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 
 export default function CardsContainer (): JSX.Element {
   return (

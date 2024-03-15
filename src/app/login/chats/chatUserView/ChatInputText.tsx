@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mantine/core";
 import { IoSend, HiOutlineFaceSmile, HiPaperClip } from "@/icons";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export default function ChatInputText(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();

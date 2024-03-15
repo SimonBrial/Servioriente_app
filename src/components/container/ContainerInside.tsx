@@ -2,7 +2,7 @@
 
 import { Container, useMantineColorScheme } from "@mantine/core";
 import React, { ReactNode } from "react";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export const ContainerInside = ({
   withBorder,

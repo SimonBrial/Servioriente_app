@@ -5,7 +5,7 @@ import React from "react";
 import TextEditor from "@/components/TextEditor";
 import BtnSend from "@/components/buttons/BtnSend";
 import { BtnPreview } from "@/components/buttons/BtnPreview";
-import heightClasses from "@/styles/heightView.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 import { ContainerInside } from "@/components/container/ContainerInside";
 
 export const FormatsContainer = () => {

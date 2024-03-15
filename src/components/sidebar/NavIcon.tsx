@@ -2,7 +2,7 @@
 
 import { useMantineColorScheme, UnstyledButton } from "@mantine/core";
 import Link from "next/link";
-import sidebarClass from "@/styles/generalStyles.module.css";
+import sidebarClass from "@/styles/general-styles.module.css";
 import { NavIconProps } from "@/interface/interface";
 import TooltipLayout from "../TooltipLayout";
 

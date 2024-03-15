@@ -2,7 +2,7 @@
 
 import { Box, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import React from "react";
-import classes from "@/styles/generalStyles.module.css";
+import classes from "@/styles/general-styles.module.css";
 
 export const CloudDialogue = ({
   ubication,

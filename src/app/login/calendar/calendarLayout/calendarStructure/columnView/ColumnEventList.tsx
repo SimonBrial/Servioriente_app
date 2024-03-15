@@ -13,7 +13,7 @@ import {
 import classes from "@/styles/calendar.module.css";
 import { EventCardLayout } from "../cards/EventCardLayout";
 import { eventCardArray } from "@/data/eventCardsData";
-import heightClasses from "@/styles/heightView.module.css"
+import heightClasses from "@/styles/height-view.module.css"
 
 export const ColumnEventList = () => {
   const { colorScheme } = useMantineColorScheme();

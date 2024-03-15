@@ -12,7 +12,7 @@ import {
   Title,
 } from "@mantine/core";
 import { HiOutlineTrash, HiOutlineCheck } from "../../icons";
-import btnClass from "@/styles/btnStyles.module.css";
+import btnClass from "@/styles/btn-styles.module.css";
 import { TitleLayout } from "../layout/TitleLayout";
 import BtnActions from "./BtnActions";
 import React from "react";

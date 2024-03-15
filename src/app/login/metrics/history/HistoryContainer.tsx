@@ -1,7 +1,7 @@
 import { ScrollArea, Stack } from "@mantine/core";
 import { MetricsFilterInput } from "../MetricsFilterInput";
 import { HistoryCard } from "./HistoryCard";
-import heightClasses from "@/styles/heightView.module.css"
+import heightClasses from "@/styles/height-view.module.css"
 
 export const HistoryContainer = () => {
   return (

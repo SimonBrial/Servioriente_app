@@ -7,7 +7,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
-import classes from "@/styles/btnStyles.module.css";
+import classes from "@/styles/btn-styles.module.css";
 import BtnSend from "./BtnSend";
 import { BtnCancel } from "./BtnCancel";
 import NewEmailLayout from "@/app/login/mails/NewEmailLayout";

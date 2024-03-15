@@ -10,7 +10,7 @@ import TextEditor from "@/components/TextEditor";
 import { CalendarInput } from "@/components/inputs/CalendarInput";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
 import { ContainerInside } from "@/components/container/ContainerInside";
-import heightClasses from "@/styles/heightView.module.css";
+import heightClasses from "@/styles/height-view.module.css";
 
 export default function CreateAlarmLayout({
   title,
