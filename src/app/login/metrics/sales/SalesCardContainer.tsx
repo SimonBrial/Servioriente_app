@@ -13,7 +13,7 @@ import {
 import classes from "@/styles/metrics.module.css";
 import { HiOutlineDotsVertical } from "@/icons";
 import { useDisclosure } from "@mantine/hooks";
-import { ChartContainer } from "@/components/charts/LineChart";
+import ChartContainer from "@/components/charts/LineChart";
 
 export const SalesCardContainer = () => {
   const { colorScheme } = useMantineColorScheme();

@@ -7,11 +7,7 @@ import { GlobalContainer } from "@/components/container/GlobalContainer"; */
 // App Global Styles
 import "./globals.css";
 // Mantine configuration
-import {
-  ColorSchemeScript,
-  MantineProvider,
-  Container,
-} from "@mantine/core";
+import { ColorSchemeScript, MantineProvider, Container } from "@mantine/core";
 // Mantine Global theme configuration
 import { theme } from "../theme/CustomTheme";
 // Mantine Dependencies Styles
@@ -24,11 +20,14 @@ import "@mantine/carousel/styles.css";
 // Next/Metadata
 import type { Metadata } from "next";
 // Next/fonts
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import { Notifications } from "@mantine/notifications";
 import { MainContainer } from "@/components/container/MainContainer";
 // import LoginPage from "./login/page";
-const inter = Inter({ subsets: ["latin"] });
+/* const inter = Inter({
+  weight: ["100", "900"],
+  subsets: ["latin"]
+}); */
 
 export const metadata: Metadata = {
   title: "ServiOriente",
@@ -45,7 +44,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={inter.className}>
+      <body>
         <MantineProvider theme={theme} defaultColorScheme="light">
           <Container fluid px={0}>
             <Notifications />
@@ -54,7 +53,9 @@ export default function RootLayout({
               <GlobalContainer>{children}</GlobalContainer>
             </Flex> */}
             {/* <LoginPage /> */}
-            <MainContainer>{children}</MainContainer>
+            <main /* className={inter.className} */>
+              <MainContainer>{children}</MainContainer>
+            </main>
           </Container>
         </MantineProvider>
       </body>
