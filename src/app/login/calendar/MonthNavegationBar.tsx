@@ -12,8 +12,8 @@ import {
   Text,
 } from "@mantine/core";
 import React, { useState } from "react";
-import classes from "../../../styles/btnStyles.module.css";
 import { months } from "@/data/calendarDaysAndMonth";
+import btnClasses from "@/styles/btnStyles.module.css";
 
 export const MonthNavigationBar = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -35,8 +35,8 @@ export const MonthNavigationBar = () => {
               classNames={{
                 root:
                   colorScheme === "light"
-                    ? classes.btnMonth
-                    : classes.btnMonth_dark,
+                    ? btnClasses.btnMonth
+                    : btnClasses.btnMonth_dark,
               }}
             >
               <Center>
@@ -53,8 +53,8 @@ export const MonthNavigationBar = () => {
               classNames={{
                 root:
                   colorScheme === "light"
-                    ? classes.btnMonth
-                    : classes.btnMonth_dark,
+                    ? btnClasses.btnMonth
+                    : btnClasses.btnMonth_dark,
               }}
             >
               <Center>

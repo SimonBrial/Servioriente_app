@@ -7,9 +7,9 @@ import {
   Flex,
 } from "@mantine/core";
 import React, { useRef, useState } from "react";
-import classes from "../../../styles/btnStyles.module.css";
 import { useRouter } from "next/navigation";
 import { HiOutlineViewBoards, HiOutlineViewGrid } from "@/icons";
+import btnClasses from "@/styles/btnStyles.module.css";
 
 export const ViewCalendarSelection = () => {
   const [btnSelected, setBtnSelected] = useState<string | undefined>("grid");
@@ -24,8 +24,8 @@ export const ViewCalendarSelection = () => {
         classNames={{
           root:
             colorScheme === "light"
-              ? classes.btnViewCalendar
-              : classes.btnViewCalendar_dark,
+              ? btnClasses.btnViewCalendar
+              : btnClasses.btnViewCalendar_dark,
         }}
         id="grid"
         ref={refGrid}
@@ -52,8 +52,8 @@ export const ViewCalendarSelection = () => {
         classNames={{
           root:
             colorScheme === "light"
-              ? classes.btnViewCalendar
-              : classes.btnViewCalendar_dark,
+              ? btnClasses.btnViewCalendar
+              : btnClasses.btnViewCalendar_dark,
         }}
         id="column"
         ref={refCol}

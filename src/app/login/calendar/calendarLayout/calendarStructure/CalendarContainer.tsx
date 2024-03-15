@@ -3,7 +3,6 @@
 
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { IoChevronBack, IoChevronForward } from "@/icons";
-import btnClasses from "../../../../../styles/btnStyles.module.css";
 import {
   useMantineColorScheme,
   UnstyledButton,
@@ -16,7 +15,6 @@ import {
   Text,
 } from "@mantine/core";
 import React, { useState } from "react";
-import classes from "@/styles/calendar.module.css";
 import InsideContainer from "@/components/container/InsideContainer";
 import {
   areDateOnSameDay,
@@ -25,6 +23,8 @@ import {
 } from "@/utils/calendarFunctions";
 import { months, MOCKEVENTS, weekDays } from "@/data/calendarDaysAndMonth";
 import { EventCardLayout } from "./cards/EventCardLayout";
+import btnClasses from "@/styles/btnStyles.module.css";
+import classes from "@/styles/calendar.module.css";
 import heightClasses from "@/styles/heightView.module.css";
 import { EventsArray } from "@/interface/interface";
 

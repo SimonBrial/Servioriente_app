@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import HamburgerMenu from "./HamburgerMenu";
-import classes from "@/styles/btnStyles.module.css";
+import btnClasses from "@/styles/btnStyles.module.css";
 
 export default function AsideSearch(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
@@ -22,7 +22,7 @@ export default function AsideSearch(): JSX.Element {
         aria-label="Search"
         classNames={{
           root:
-            colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
+            colorScheme === "light" ? btnClasses.btnMail : btnClasses.btnMail_dark,
         }}
       >
         <Center
