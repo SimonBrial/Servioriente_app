@@ -6,6 +6,7 @@
 import { GlobalContainer } from "@/components/container/GlobalContainer"; */
 // App Global Styles
 import "./globals.css";
+import "@/styles/btnStyles.module.css"
 // Mantine configuration
 import { ColorSchemeScript, MantineProvider, Container } from "@mantine/core";
 // Mantine Global theme configuration
