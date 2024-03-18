@@ -10,8 +10,9 @@ import {
   Filler,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
+import { useMantineColorScheme } from "@mantine/core";
 
 /* interface DashboardChartContainerProps {
   dataArr: any[];
@@ -20,7 +21,8 @@ import { faker } from "@faker-js/faker";
 
 // 07:00AM
 
-export default function TMRChart() {
+export default function TMRChart({ isChartLine }: { isChartLine: boolean }) {
+  const { colorScheme } = useMantineColorScheme();
   ChartJS.register(
     CategoryScale,
     PointElement,
@@ -34,9 +36,39 @@ export default function TMRChart() {
   const options = {
     responsive: true,
     tension: 0.4,
+    scales: {
+      y: {
+        border: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          dash: [5, 5],
+        },
+        ticks: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          beginAtZero: true,
+        },
+        gridLines: {
+          display: true,
+          color: "black",
+          borderDash: [5, 5],
+        },
+      },
+      x: {
+        border: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          dash: [10, 5],
+        },
+        ticks: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          beginAtZero: true,
+        },
+      },
+    },
     plugins: {
       legend: {
         position: "top" as const,
+        labels: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+        },
       },
       title: {
         display: false,
@@ -76,7 +108,7 @@ export default function TMRChart() {
             "rgba(253, 14, 120, 0.7)",
             "rgba(253, 14, 120, 0.8)",
             "rgba(253, 14, 120, 0.9)",
-            "hsl(284.24581005586595, 100%, 35.09803921568627%)",
+            "rgba(253, 14, 120,1)",
           ].reverse();
           if (!context.chart.chartArea) return null;
           const {
@@ -155,6 +187,34 @@ export default function TMRChart() {
       },
     ],
   };
+  const dataBar = {
+    labels,
+    datasets: [
+      {
+        label: "Instagram",
+        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        backgroundColor: "rgba(253, 14, 120, 0.7)",
+      },
+      {
+        label: "Facebook",
+        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        backgroundColor: "rgba(0, 102, 168, 0.7)",
+      },
+      {
+        label: "Whatsapp",
+        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        backgroundColor: "rgba(0, 188, 38, 0.7)",
+      },
+    ],
+  };
 
-  return <Line options={options} data={dataLine} />;
+  return (
+    <>
+      {isChartLine ? (
+        <Line options={options} data={dataLine} />
+      ) : (
+        <Bar options={options} data={dataBar} />
+      )}
+    </>
+  );
 }

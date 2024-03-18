@@ -123,7 +123,11 @@ export const DashboardChartContainer = ({
             <LineChart key={crypto.randomUUID()} />
           </Box>
         ) : (
-          <Box style={{ paddingTop: "1rem" }}>
+          <Box
+            style={{
+              paddingTop: "1rem",
+            }}
+          >
             <BarChart key={crypto.randomUUID()} />
           </Box>
         )}

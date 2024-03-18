@@ -122,6 +122,24 @@
   color: #696969;
   cursor: default;
 }
+.donut_row {
+  color: #696969;
+  cursor: default;
+  padding: 0.5rem 1rem;
+}
+.donut_row_dark {
+  color: #eff3f5;
+  cursor: default;
+  padding: 0.5rem 1rem;
+}
+.donut_row:hover {
+  background-color: #efefef;
+  transition: all 0.2s ease-in-out;
+}
+.donut_row_dark:hover {
+  background-color: #484566;
+  transition: all 0.2s ease-in-out;
+}
 .dashboardItem_row:hover {
   background-color: #efefef;
   transition: all 0.2s ease-in-out;
@@ -130,25 +148,11 @@
   color: #eff3f5;
   cursor: default;
   padding: 0.5rem 1rem;
-  /* border-top: 1px solid #3a4c5a; */
 }
 .dashboardItem_row_dark:hover {
   background-color: #484566;
   transition: all 0.2s ease-in-out;
 }
-
-/* .proccessedConversation_icon {
-  font-size: 1.3rem;
-  color: white;
-  border-radius: 6px;
-  background-clip: text;
-  background: linear-gradient(
-    45deg,
-    rgba(250, 199, 93, 1) 0%,
-    rgba(253, 14, 120, 1) 50%,
-    rgba(45, 104, 221, 1) 100%
-  );
-} */
 
 .proccessedConversation_item {
   width: 100%;

@@ -2,7 +2,7 @@
 "use client";
 
 // import { ChartTooltip } from "./ChartTooltip";
-import { Container } from "@mantine/core";
+import { Container, useMantineColorScheme } from "@mantine/core";
 
 import {
   Chart as ChartJS,
@@ -19,62 +19,8 @@ import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import { months } from "@/data/calendarDaysAndMonth";
 
-/* const data = [
-  {
-    date: "Mar 22",
-    "Meta Planteada": 2890,
-    "Ventas Actuales": 2338,
-  },
-  {
-    date: "Mar 23",
-    "Meta Planteada": 2756,
-    "Ventas Actuales": 2103,
-  },
-  {
-    date: "Mar 24",
-    "Meta Planteada": 3180,
-    "Ventas Actuales": 986,
-  },
-  {
-    date: "Mar 25",
-    "Meta Planteada": 3140,
-    "Ventas Actuales": 2108,
-  },
-  {
-    date: "Mar 26",
-    "Meta Planteada": 3129,
-    "Ventas Actuales": 1726,
-  },
-  {
-    date: "Mar 27",
-  },
-  {
-    date: "Mar 28",
-    "Meta Planteada": 3139,
-    "Ventas Actuales": 1736,
-  },
-  {
-    date: "Mar 29",
-    "Meta Planteada": 2756,
-    "Ventas Actuales": 2103,
-  },
-]; */
-const options = {
-  responsive: true,
-  tension: 0.4,
-  plugins: {
-    legend: {
-      position: "top" as const,
-    },
-    title: {
-      display: false,
-      text: "Chart.js Line Chart",
-    },
-  },
-};
-
 const labels = months;
-const dataLine = {
+const data = {
   labels,
   datasets: [
     {
@@ -143,33 +89,8 @@ const dataLine = {
   ],
 };
 
-/* const seriesArr = [
-  { name: "Meta Planteada", color: "indigo.6" },
-  { name: "Ventas Actuales", color: "green.6" },
-  { name: "r: "teal.6" },
-];
-interface SeriesArray {
-  name: string;
-  color: string;
-} */
-
 export default function LineChart() {
-  /* const [value, setValue] = useState<string[]>([]);
-  const [series, setSeries] = useState<SeriesArray[]>(seriesArr);
-
-  useEffect(() => {
-    if (value === undefined || value.length === 0 || value.length === 2) {
-      setSeries(seriesArr);
-    }
-
-    if (value.length < 2) {
-      seriesArr.filter((serie: SeriesArray) => {
-        if (serie.name.toLowerCase() === value[0]) {
-          setSeries([serie]);
-        }
-      });
-    }
-  }, [value]); */
+  const { colorScheme } = useMantineColorScheme();
   ChartJS.register(
     CategoryScale,
     PointElement,
@@ -181,51 +102,48 @@ export default function LineChart() {
     Title,
   );
 
+  const options = {
+    responsive: true,
+    tension: 0.4,
+    scales: {
+      y: {
+        border: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          dash: [5, 5],
+        },
+        ticks: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          beginAtZero: true,
+        },
+      },
+      x: {
+        border: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          dash: [5, 5],
+        },
+        ticks: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+          beginAtZero: true,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        position: "top" as const,
+        labels: {
+          color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+        },
+      },
+      title: {
+        display: false,
+        text: "Chart.js Line Chart",
+      },
+    },
+  };
+
   return (
     <Container style={{ maxWidth: "100%", width: "100%" }}>
-      <Line options={options} data={dataLine} />
+      <Line options={options} data={data} />
     </Container>
   );
-}
-
-{
-  /* <AreaChart
-        h={400}
-        withLegend
-        legendProps={{ verticalAlign: "bottom", height: 50 }}
-        data={data}
-        dataKey="date"
-        series={series}
-        curveType="monotone"
-        tickLine="xy"
-        gridAxis="xy"
-        tooltipProps={{
-          content: ({ label, payload }) => (
-            <ChartTooltip label={label} payload={payload} />
-          ),
-        }}
-        tooltipAnimationDuration={200}
-        valueFormatter={(value) => new Intl.NumberFormat("es-VE").format(value)}
-        // yAxisProps={{ domain: [0, 3500] }}
-        yAxisProps={<YAxis type="number" domain={[0, 2000]} />}
-        referenceLines={[{ y: 3200, label: "Meta", color: "red.6" }]}
-        styles={(theme) => ({
-          root: { padding: "1rem 1rem 0 0" },
-          tooltipBody: { backgroundColor: "red" },
-          tooltip: { backgroundColor: "blue", padding: "0.5rem" },
-          legend: {
-            display: "flex",
-            gap: "1rem",
-            justifyContent: "end",
-            padding: "0.5rem",
-          },
-        })}
-        // connectNulls={false}
-      />
-      <Checkbox.Group value={value} onChange={setValue}>
-        <Flex gap={8} justify={"center"}>
-          <Checkbox value={"meta planteada"} label={"Meta Planteada"} />
-          <Checkbox value={"ventas actuales"} label={"Ventas Actuales"} />
-        </Flex>
-      </Checkbox.Group> */
 }

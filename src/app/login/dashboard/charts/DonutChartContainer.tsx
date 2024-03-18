@@ -74,12 +74,8 @@ export const DonutChartContainer = () => {
               : classes.dashboardItem_header_dark,
           tr:
             colorScheme === "light"
-              ? classes.dashboardItem_row
-              : classes.dashboardItem_row_dark,
-          td:
-            colorScheme === "light"
-              ? classes.dashboardItem_row
-              : classes.dashboardItem_row_dark,
+              ? classes.donut_row
+              : classes.donut_row_dark,
         }}
         styles={{ td: { textAlign: "center" }, th: { textAlign: "center" } }}
       >

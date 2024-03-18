@@ -9,7 +9,7 @@ export default function DonutChart() {
       {
         label: "Total",
         data: [120],
-        backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+        backgroundColor: ["rgba(255, 99, 132, 0.5)"],
         borderColor: ["rgba(255, 99, 132, 1)"],
         borderWidth: 1,
         circumference: (120 * 360) / 150,
@@ -17,7 +17,7 @@ export default function DonutChart() {
       {
         label: "Generacion de RCV",
         data: [30],
-        backgroundColor: ["rgba(136, 132, 216, 0.2)"],
+        backgroundColor: ["rgba(136, 132, 216, 0.5)"],
         borderColor: ["rgba(136, 132, 216, 1)"],
         borderWidth: 1,
         circumference: (30 * 360) / 50,
@@ -25,7 +25,7 @@ export default function DonutChart() {
       {
         label: "Clientes captados",
         data: [80],
-        backgroundColor: ["rgba(130, 202, 157, 0.2)"],
+        backgroundColor: ["rgba(130, 202, 157, 0.5)"],
         borderColor: ["rgba(130, 202, 157, 1)"],
         borderWidth: 1,
         circumference: (80 * 360) / 100,

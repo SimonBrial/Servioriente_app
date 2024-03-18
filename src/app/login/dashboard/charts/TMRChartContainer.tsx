@@ -144,7 +144,11 @@ export default function TMRChartContainer({
             </Flex>
           </Flex>
         </Flex>
-        {!checked ? <TMRChart /> : <>prueba</>}
+        {!checked ? (
+          <TMRChart isChartLine key={crypto.randomUUID()} />
+        ) : (
+          <TMRChart isChartLine={false} key={crypto.randomUUID()} />
+        )}
       </Stack>
     </ContainerInside>
   );
