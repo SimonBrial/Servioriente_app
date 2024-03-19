@@ -4,7 +4,6 @@ import { HiOutlineDotsVertical } from "@/icons";
 import {
   useMantineColorScheme,
   Container,
-  Divider,
   Avatar,
   Center,
   Stack,
@@ -12,6 +11,7 @@ import {
   Text,
 } from "@mantine/core";
 import classes from "@/styles/metrics.module.css";
+import { GeneralDivider } from "@/components/GeneralDivider";
 
 export const HistoryCard = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -64,7 +64,7 @@ export const HistoryCard = () => {
                   fontSize: "1.1rem",
                   color:
                     colorScheme === "light"
-                      ? `${theme.colors.lightTheme[3]}`
+                      ? `${theme.colors.lightTheme[6]}`
                       : `${theme.colors.darkTheme[2]}`,
                 },
               })}
@@ -87,11 +87,7 @@ export const HistoryCard = () => {
           </Stack>
         </Flex>
         <Flex align={"center"} gap={6}>
-          <Divider
-            orientation="vertical"
-            color={colorScheme === "light" ? "#cdcdcd" : "#f8f8f8"}
-            style={{ marginRight: "0.5rem" }}
-          />
+          <GeneralDivider orientation="vertical" key={crypto.randomUUID()} />
           <Stack gap={0} align="center">
             <Text
               styles={(theme) => ({

@@ -10,18 +10,11 @@ import {
   Filler,
   Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import { useMantineColorScheme } from "@mantine/core";
 
-/* interface DashboardChartContainerProps {
-  dataArr: any[];
-  title: string;
-} */
-
-// 07:00AM
-
-export default function TMRChart({ isChartLine }: { isChartLine: boolean }) {
+export default function TMRLineChart() {
   const { colorScheme } = useMantineColorScheme();
   ChartJS.register(
     CategoryScale,
@@ -187,34 +180,6 @@ export default function TMRChart({ isChartLine }: { isChartLine: boolean }) {
       },
     ],
   };
-  const dataBar = {
-    labels,
-    datasets: [
-      {
-        label: "Instagram",
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
-        backgroundColor: "rgba(253, 14, 120, 0.7)",
-      },
-      {
-        label: "Facebook",
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
-        backgroundColor: "rgba(0, 102, 168, 0.7)",
-      },
-      {
-        label: "Whatsapp",
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
-        backgroundColor: "rgba(0, 188, 38, 0.7)",
-      },
-    ],
-  };
 
-  return (
-    <>
-      {isChartLine ? (
-        <Line options={options} data={dataLine} />
-      ) : (
-        <Bar options={options} data={dataBar} />
-      )}
-    </>
-  );
+  return <Line options={options} data={dataLine} />;
 }

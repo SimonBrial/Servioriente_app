@@ -14,7 +14,7 @@ import {
   HiOutlineMail,
   HiOutlineUser,
   HiOutlineCog,
-} from "../../icons";
+} from "@/icons";
 import classes from "@/styles/general-styles.module.css";
 import NavIcon from "./NavIcon";
 import { sidebarItems } from "@/interface/interface";
@@ -101,7 +101,7 @@ export function Sidebar(): JSX.Element {
       }
     >
       <Stack
-        style={{ height: "100%" /* paddingBottom: "1rem" */ }}
+        style={{ height: "100%" }}
         justify="space-between"
         align="center"
       >

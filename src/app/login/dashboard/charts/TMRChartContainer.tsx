@@ -16,8 +16,8 @@ import {
   Text,
 } from "@mantine/core";
 import { useState } from "react";
-// import classes from "@/styles/dashboard.module.css";
-import TMRChart from "@/components/charts/TMRChart";
+import TMRLineChart from "@/components/charts/TMRLineChart";
+import TMRBarChart from "@/components/charts/TMRBarChart";
 
 interface DashboardChartContainerProps {
   dataArr: any[];
@@ -145,9 +145,9 @@ export default function TMRChartContainer({
           </Flex>
         </Flex>
         {!checked ? (
-          <TMRChart isChartLine key={crypto.randomUUID()} />
+          <TMRLineChart key={crypto.randomUUID()} />
         ) : (
-          <TMRChart isChartLine={false} key={crypto.randomUUID()} />
+          <TMRBarChart key={crypto.randomUUID()} />
         )}
       </Stack>
     </ContainerInside>

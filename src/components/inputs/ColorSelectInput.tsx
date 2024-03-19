@@ -6,7 +6,19 @@ export default function ColorSelectInput(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex justify={"space-between"} align={"center"}>
-      <Title order={4}>Seleccionar color</Title>
+      <Title
+        order={4}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? `${theme.colors.lightTheme[3]}`
+                : `${theme.colors.darkTheme[2]}`,
+          },
+        })}
+      >
+        Seleccionar color
+      </Title>
       <ColorInput
         placeholder="Seleccionar color"
         styles={(theme) => ({

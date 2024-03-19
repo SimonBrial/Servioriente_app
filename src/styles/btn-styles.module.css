@@ -280,10 +280,16 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* .btnFavorite_icon {
-  color: #cdcdcd;
+.btnDot_icon {
+  padding: 0.1rem 0.05rem;
+  border-radius: 6px;
+}
+.btnDot_icon:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #9a90ef1a;
 }
 
+/* 
 .btnFavorite_icon:hover {
   color: #004ee5;
   transition: all 0.2s ease-in-out;

@@ -3,7 +3,6 @@ import {
   FloatingPosition,
   Tooltip,
 } from "@mantine/core";
-import React from "react";
 
 export default function TooltipLayout({
   label,

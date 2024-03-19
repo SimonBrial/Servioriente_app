@@ -6,7 +6,6 @@ import {
   Container,
   Collapse,
   Divider,
-  // Tooltip,
   Center,
   Title,
   Stack,
