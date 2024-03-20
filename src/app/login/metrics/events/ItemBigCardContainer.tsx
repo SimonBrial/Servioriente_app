@@ -27,6 +27,8 @@ import BtnEdit from "@/components/buttons/BtnEdit";
 import { DatePickerInput } from "@mantine/dates";
 import WarningInfo from "@/components/WarningInfo";
 import { GeneralDivider } from "@/components/GeneralDivider";
+import EventDescriptionLayout from "./EventDescriptionLayout";
+import EventEditLayout from "./EventEditLayout";
 
 type ItemBigCardStatus = "Completada" | "No Completada";
 
@@ -117,8 +119,12 @@ export const ItemBigCardContainer = () => {
       <Table.Td>{element.date}</Table.Td>
       <Table.Td>
         <Flex gap={6}>
-          <BtnSee>prueba</BtnSee>
-          <BtnEdit buttonStyles="special">prueba</BtnEdit>
+          <BtnSee>
+            <EventDescriptionLayout />
+          </BtnSee>
+          <BtnEdit buttonStyles="special">
+            <EventEditLayout />
+          </BtnEdit>
           {element.status === "No Completada" ? (
             <>
               <Divider orientation="vertical" />

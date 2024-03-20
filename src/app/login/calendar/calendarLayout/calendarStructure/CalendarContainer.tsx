@@ -10,7 +10,7 @@ import {
   Container,
   Center,
   Stack,
-  Badge,
+  // Badge,
   Flex,
   Text,
 } from "@mantine/core";
@@ -99,9 +99,9 @@ export default function CalendarContainer() {
     }
   }
 
-  function eventsOfDay(day: number, eventsArray: EventsArray[]) {
+  /* function eventsOfDay(day: number, eventsArray: EventsArray[]) {
     return eventsArray.filter((event) => day === event.date.getDate());
-  }
+  } */
 
   return (
     <InsideContainer
@@ -232,6 +232,7 @@ export default function CalendarContainer() {
                             )
                           }
                         >
+                          {/* -------------- Header's Container -------------- */}
                           <Flex
                             classNames={{
                               root:
@@ -243,9 +244,6 @@ export default function CalendarContainer() {
                                     ? classes.weekday_dark_active
                                     : classes.weekday_dark,
                             }}
-                            style={{
-                              position: "relative",
-                            }}
                             align={"center"}
                           >
                             <Text
@@ -255,7 +253,7 @@ export default function CalendarContainer() {
                             >
                               {day}
                             </Text>
-                            {eventsOfDay(day, events).length > 3 ? (
+                            {/* {eventsOfDay(day, events).length > 3 ? (
                               <Badge
                                 style={{
                                   position: "absolute",
@@ -271,8 +269,10 @@ export default function CalendarContainer() {
                               </Badge>
                             ) : (
                               <></>
-                            )}
+                            )} */}
                           </Flex>
+                          {/* -------------- Header's Container -------------- */}
+                          {/* -------------- Events's Container -------------- */}
                           <Container
                             classNames={{
                               root:
@@ -285,6 +285,7 @@ export default function CalendarContainer() {
                               {generateEventList(day, events)}
                             </Stack>
                           </Container>
+                          {/* -------------- Events's Container -------------- */}
                         </Container>
                       );
                     },

@@ -12,7 +12,7 @@ import {
   HiOutlineUser,
   AiOutlineCar,
   HiLink,
-} from "../../../icons";
+} from "@/icons";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 
 export default function RegisterEditLayout(): JSX.Element {
@@ -112,7 +112,6 @@ export default function RegisterEditLayout(): JSX.Element {
           }}
         >
           <TextInput size="xs" placeholder="Facebook" />
-
           <ActionIcon
             variant="transparent"
             color="#696969"

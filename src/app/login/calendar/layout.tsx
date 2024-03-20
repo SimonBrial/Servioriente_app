@@ -7,6 +7,7 @@ import { BtnFilter } from "@/components/buttons/BtnFilter";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
 import { ViewCalendarSelection } from "./ViewCalendarSelection";
 import BtnAdd from "@/components/buttons/BtnAdd";
+import CalendarFilterLayout from "./CalendarFilterLayout";
 // import { MonthNavigationBar } from "./MonthNavegationBar";
 
 export default function layout({
@@ -34,7 +35,7 @@ export default function layout({
             iconSection={<HiOutlineCalendar />}
           />
           <AutoCompleteInput />
-          <BtnFilter>Prueba</BtnFilter>
+          <BtnFilter><CalendarFilterLayout /></BtnFilter>
           <BtnReportGenerate>Prueba</BtnReportGenerate>
           <BtnAdd
             iconTag="add-event"

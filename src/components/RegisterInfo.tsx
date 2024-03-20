@@ -1,7 +1,8 @@
 "use client";
 
 import { RegisterInfoProps } from "@/interface/interface";
-import { Flex, Divider, Title, useMantineColorScheme } from "@mantine/core";
+import { Box, Flex, Title, useMantineColorScheme } from "@mantine/core";
+import { GeneralDivider } from "./GeneralDivider";
 
 export default function RegisterInfo({
   keyInput,
@@ -10,18 +11,23 @@ export default function RegisterInfo({
   const { colorScheme } = useMantineColorScheme();
 
   return (
-    <div style={{ marginBottom: "-1.5rem" }}>
+    <Box>
       <Flex
         justify={"space-between"}
-        style={{ color: colorScheme === "light" ? "#696969" : "#f8f8f8" }}
+        styles={(theme) => ({
+          root: {
+            color:
+              colorScheme === "light"
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
+            marginBottom: "0.2rem",
+          },
+        })}
       >
         <Title order={5}>{keyInput}</Title>
         <Title order={5}>{valueInput}</Title>
       </Flex>
-      <Divider
-        my="sm"
-        color={colorScheme === "light" ? "#696969" : "#f8f8f8"}
-      />
-    </div>
+      <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
+    </Box>
   );
 }

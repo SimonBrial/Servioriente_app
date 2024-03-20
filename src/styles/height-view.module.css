@@ -131,6 +131,26 @@
     height: 75vh;
   }
 }
+@media (min-width: 1280px) {
+  .metrics_event_container {
+    height: 61vh;
+  }
+}
+@media (min-width: 1281px) {
+  .metrics_event_container {
+    height: 52vh;
+  }
+}
+@media (min-width: 1280px) {
+  .metrics_event_container_edit {
+    height: 56vh;
+  }
+}
+@media (min-width: 1281px) {
+  .metrics_event_container_edit {
+    height: 46vh;
+  }
+}
 /* -------------------------- Mail Section -------------------------- */
 @media (min-width: 1280px) {
   .sendMail_scroll_container {

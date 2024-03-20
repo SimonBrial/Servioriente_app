@@ -49,6 +49,8 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
+  position: absolute;
+  top: 0;
   /* position: relative; */
 }
 .weekday_active {
@@ -58,6 +60,8 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
+  position: absolute;
+  top: 0;
   /* position: relative; */
 }
 .weekday_dark {
@@ -67,6 +71,8 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
+  position: absolute;
+  top: 0;
 }
 .weekday_dark_active {
   background-color: #52a5e0;
@@ -75,6 +81,8 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
+  position: absolute;
+  top: 0;
 }
 
 .weekday_container {
@@ -82,19 +90,21 @@
   margin: 0;
   border: 1px solid #cdcdcd;
   overflow: hidden;
+  position: relative;
 }
 .weekday_container_dark {
   padding: 0;
   margin: 0;
   border: 1px solid #3a4c5a;
   overflow: hidden;
+  position: relative;
 }
 
 .dayEvents {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #696969;
-  height: 7rem;
-  padding: 0.3rem;
+  height: 9rem;
+  padding: 2rem 0.3rem 0.3rem 0.3rem;
   cursor: default;
 }
 .dayEvents:hover {
@@ -105,8 +115,8 @@
 .dayEvents_dark {
   background-color: #9a90ef1a;
   color: #c8cdd0;
-  height: 7rem;
-  padding: 0.3rem;
+  height: 9rem;
+  padding: 2rem 0.3rem 0.3rem 0.3rem;
   cursor: default;
 }
 .dayEvents_dark:hover {

@@ -9,9 +9,9 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlinePencil, HiOutlineSave } from "@/icons";
 import btnClass from "@/styles/btn-styles.module.css";
-import BtnActions from "./BtnActions";
 import { EditButtonStyles } from "@/types/types";
 import TooltipLayout from "../TooltipLayout";
+import BtnActions from "./BtnActions";
 
 export default function BtnEdit({
   children,

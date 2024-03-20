@@ -29,6 +29,19 @@ export function BtnFilter({
         }}
       >
         {children}
+        <Button
+          onClick={close}
+          leftSection={<BsFilter />}
+          fullWidth
+          styles={(theme) => ({
+            section: { fontSize: "1.8rem" },
+            root: {
+              backgroundColor: `${theme.colors.principalTheme[6]}`,
+            },
+          })}
+        >
+          Aplicar Filtros
+        </Button>
       </Modal>
       <Button
         classNames={{
