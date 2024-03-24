@@ -1,0 +1,122 @@
+/* eslint-disable object-shorthand */
+"use client";
+// DnD
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { useSortable } from "@dnd-kit/sortable";
+// Mantine
+import {
+  useMantineColorScheme,
+  ScrollArea,
+  Divider,
+  Stack,
+  Title,
+  Badge,
+  Flex,
+} from "@mantine/core";
+// Others
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import heightClasses from "@/styles/height-view.module.css";
+import classes from "@/styles/card-process.module.css";
+import { underScoreColor } from "@/utils/underScoreColor";
+
+interface ContainerProps {
+  id: UniqueIdentifier;
+  children: React.ReactNode;
+  title: string;
+  lengthArray: number;
+}
+
+export function ColumnContainer({
+  children,
+  title,
+  id,
+  lengthArray,
+}: ContainerProps) {
+  const { colorScheme } = useMantineColorScheme();
+  const { setNodeRef } = useSortable({
+    id: id,
+    data: {
+      type: "container",
+    },
+  });
+
+  function bgContainersSelected(bgColor: string) {
+    const colorsArray = [
+      {
+        degreeStr: "Espera",
+        classSelected: classes.espera,
+      },
+      {
+        degreeStr: "Generacion",
+        classSelected: classes.generacion,
+      },
+      {
+        degreeStr: "Pagado",
+        classSelected: classes.pagado,
+      },
+      {
+        degreeStr: "Entregado",
+        classSelected: classes.entregado,
+      },
+      {
+        degreeStr: "Rechazado",
+        classSelected: classes.rechazado,
+      },
+    ];
+
+    const colorSelected = colorsArray.find(
+      (colorDegree) =>
+        colorDegree.degreeStr.toLowerCase() === bgColor.toLowerCase(),
+    );
+
+    return colorSelected;
+  }
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={{ padding: "0.3rem 0.5rem" }}
+      className={`${heightClasses.column_process_parent} ${
+        bgContainersSelected(title)?.classSelected
+      }`}
+    >
+      <Stack gap={0}>
+        <Flex gap={5} justify={"center"} align={"center"}>
+          <Title
+            order={2}
+            styles={(theme) => ({
+              root: {
+                textAlign: "center",
+                color:
+                  colorScheme === "light"
+                    ? `${theme.colors.lightTheme[3]}`
+                    : `${theme.colors.darkTheme[2]}`,
+              },
+            })}
+          >
+            {capitalizeFirstLetter(title)}
+          </Title>
+          <Badge radius="sm" styles={{ label: { fontSize: "0.9rem" } }}>
+            {lengthArray}
+          </Badge>
+        </Flex>
+        <Divider
+          size="md"
+          styles={{
+            root: {
+              borderColor: underScoreColor(capitalizeFirstLetter(title)),
+              borderRadius: "10px",
+              // marginTop: "-0.3rem",
+            },
+          }}
+        />
+      </Stack>
+      <ScrollArea
+        scrollbarSize={2}
+        className={heightClasses.column_process_children}
+      >
+        {children}
+      </ScrollArea>
+    </div>
+  );
+}

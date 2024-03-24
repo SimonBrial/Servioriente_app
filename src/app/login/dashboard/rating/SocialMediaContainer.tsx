@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useId } from "react";
+import React, { RefObject } from "react";
 import {
   useMantineColorScheme,
   Container,
@@ -8,22 +8,28 @@ import {
   Grid,
   Text,
 } from "@mantine/core";
-import { DndContext } from "@dnd-kit/core";
-import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { SocialMedia } from "@/interface/interface";
 import SocialMediaItem from "./SocialMediaItem";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { GeneralDivider } from "@/components/GeneralDivider";
+import { animations } from "@formkit/drag-and-drop";
+import { useDragAndDrop } from "@formkit/drag-and-drop/react";
+
+const SocialMediaRed: SocialMedia[] = [
+  { title: "instagram", rating: 3, id: crypto.randomUUID() },
+  { title: "facebook", rating: 3, id: crypto.randomUUID() },
+  { title: "whatsapp", rating: 3, id: crypto.randomUUID() },
+];
 
 export const SocialMediaContainer = () => {
-  const id = useId();
-  const [items, setItems] = useState<SocialMedia[]>([
-    { title: "instagram", rating: 3, id: crypto.randomUUID() },
-    { title: "facebook", rating: 3, id: crypto.randomUUID() },
-    { title: "whatsapp", rating: 3, id: crypto.randomUUID() },
-  ]);
   const { colorScheme } = useMantineColorScheme();
+  const [parent, items] = useDragAndDrop<HTMLUListElement, SocialMedia>(
+    SocialMediaRed,
+    {
+      plugins: [animations()],
+      dragHandle: ".handler",
+    },
+  );
 
   const rows = items.map((item) => {
     const { rating, title, id } = item;
@@ -34,17 +40,6 @@ export const SocialMediaContainer = () => {
       </Stack>
     );
   });
-
-  const handleDragEnd = (event: any) => {
-    const { active, over } = event;
-    if (!active.id !== over.id) {
-      setItems((item) => {
-        const oldIndex = item.findIndex((it) => it.id === active.id);
-        const newIndex = item.findIndex((it) => it.id === over.id);
-        return arrayMove(item, oldIndex, newIndex);
-      });
-    }
-  };
 
   return (
     <Stack gap={2} p={0}>
@@ -88,17 +83,12 @@ export const SocialMediaContainer = () => {
         </Grid>
         <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>
-      <DndContext
-        id={id}
-        onDragEnd={handleDragEnd}
-        modifiers={[restrictToVerticalAxis]}
+      <Container
+        style={{ maxWidth: "100%", width: "100%", padding: "0" }}
+        ref={parent as RefObject<any>}
       >
-        <SortableContext items={items}>
-          <Container style={{ maxWidth: "100%", width: "100%", padding: "0" }}>
-            {rows}
-          </Container>
-        </SortableContext>
-      </DndContext>
+        {rows}
+      </Container>
     </Stack>
   );
 };

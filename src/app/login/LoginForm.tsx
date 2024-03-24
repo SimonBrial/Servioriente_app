@@ -2,6 +2,7 @@
 
 import { useForm } from "@mantine/form";
 import {
+  useMantineColorScheme,
   PasswordInput,
   TextInput,
   Checkbox,
@@ -16,6 +17,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function LoginForm() {
+  const { colorScheme } = useMantineColorScheme();
   const form = useForm({
     initialValues: {
       password: "",
@@ -35,6 +37,7 @@ export default function LoginForm() {
         borderRadius: "6px",
         padding: "1.8rem 1.2rem",
         boxShadow: "0px 10px 12px -5px rgba(255,255,255,0.4)",
+        cursor: "default",
       }}
       mx="auto"
     >
@@ -46,11 +49,26 @@ export default function LoginForm() {
             label="Correo"
             placeholder="Correo"
             {...form.getInputProps("email")}
+            styles={(theme) => ({
+              input: {
+                backgroundColor:
+                  colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
+                color: `${theme.colors.lightTheme[3]}`,
+              },
+            })}
           />
           <PasswordInput
             label="Contraseña"
             placeholder="Contraseña"
             {...form.getInputProps("password")}
+            styles={(theme) => ({
+              input: {
+                backgroundColor:
+                  colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
+                color: theme.colors.lightTheme[3],
+              },
+              visibilityToggle: { color: theme.colors.lightTheme[3] },
+            })}
           />
           <Flex align={"center"} gap={6}>
             <Checkbox color="#115dfe" />

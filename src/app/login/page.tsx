@@ -12,6 +12,7 @@ function LoginPage(): JSX.Element {
           width: "50%",
           height: "100vh",
           position: "absolute",
+          zIndex: "10",
           backgroundColor: "#343434",
           display: "flex",
           alignItems: "center",

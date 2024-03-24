@@ -10,32 +10,14 @@ import {
   Text,
   Box,
 } from "@mantine/core";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import { SocialMedia } from "@/interface/interface";
 import classes from "@/styles/dashboard.module.css";
 import { socialRedColor } from "@/utils/socialRedColor";
 
 export default function SocialMediaItem({ rating, title, id }: SocialMedia) {
   const { colorScheme } = useMantineColorScheme();
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id,
-      transition: {
-        duration: 250,
-        easing: "linear",
-      },
-    });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
   return (
     <Box
-      // key={id}
-      ref={setNodeRef}
-      style={style}
       className={
         colorScheme === "light"
           ? classes.dashboardItem_row
@@ -44,7 +26,7 @@ export default function SocialMediaItem({ rating, title, id }: SocialMedia) {
       p={4}
     >
       <Flex justify={"space-between"} align={"center"}>
-        <Center {...attributes} {...listeners}>
+        <Center className="handler">
           <MdOutlineDragIndicator />
         </Center>
         <Badge

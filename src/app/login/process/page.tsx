@@ -7,7 +7,7 @@ import { Flex, Stack, Container } from "@mantine/core";
 import { CountIndicator } from "../../../components/CountIndicator";
 import { HiOutlineUserCircle } from "@/icons";
 import CreateClientLayout from "./CreateClientLayout";
-import { ProcessLayout } from "./ProcessLayout";
+import { ProcessContainer } from "./prueba/ProcessContainer";
 
 function page(): JSX.Element {
   return (
@@ -37,7 +37,7 @@ function page(): JSX.Element {
             <CreateClientLayout />
           </BtnAdd>
         </Flex>
-        <ProcessLayout />
+        <ProcessContainer />
       </Stack>
     </Container>
   );

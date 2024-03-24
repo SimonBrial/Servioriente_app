@@ -55,27 +55,40 @@
   }
 }
 @media (min-width: 1280px) {
-  .column_process_parent {
-    height: 77vh;
+  .column_process_container {
+    height: 85.5vh;
     margin-top: 0.5rem;
     width: 100%;
   }
 }
 @media (min-width: 1281px) {
-  .column_process_parent {
-    height: 72vh;
+  .column_process_container {
+    height: 82vh;
     margin-top: 0.5rem;
     width: 100%;
   }
 }
 @media (min-width: 1280px) {
+  .column_process_parent {
+    height: 82.5vh;
+    width: 100%;
+  }
+}
+@media (min-width: 1281px) {
+  .column_process_parent {
+    height: 78.8vh;
+    width: 100%;
+  }
+}
+@media (min-width: 1280px) {
   .column_process_children {
-    height: 75vh;
+    margin-top: 0.2rem;
+    height: 76vh;
   }
 }
 @media (min-width: 1281px) {
   .column_process_children {
-    height: 70vh;
+    height: 72vh;
   }
 }
 

@@ -1,10 +1,10 @@
 "use client";
 
-import { HiHeart } from "@/icons";
+import { TbStarFilled, TbStarOff } from "@/icons";
 import { Center, UnstyledButton, useMantineColorScheme } from "@mantine/core";
 import React, { useState } from "react";
 import btnFavoriteClasses from "@/styles/btn-styles.module.css";
-import { notifications } from "@mantine/notifications";
+import notificationsFn from "@/utils/notificationFn";
 
 export const BtnFavorite = () => {
   // Falta agregarle que cuando se le haga click, se muestre una notificacion de "Agregado a Favoritos" y que cambie su color al del tema principal
@@ -19,15 +19,23 @@ export const BtnFavorite = () => {
         variant="transparent"
         onClick={() => {
           setColorState(!colorState);
-          // notify();
-          notifications.show({
+          notificationsFn({
+            color: colorState ? "red" : "green",
+            description: colorState
+              ? "Eliminado de favoritos"
+              : "Agregado a favoritos",
+            id: crypto.randomUUID(),
+            title: colorState ? "Eliminado" : "Agregado",
+            icon: colorState ? <TbStarOff /> : <TbStarFilled />,
+          });
+          /* notifications.show({
             color: colorState ? "red" : "blue",
             autoClose: 3000,
             title: colorState ? "Eliminado" : "Agregado",
             message: colorState
               ? "Eliminado de favoritos"
               : "Agregado a favoritos",
-          });
+          }); */
         }}
         styles={(theme) => ({
           root: {
@@ -47,9 +55,7 @@ export const BtnFavorite = () => {
               : btnFavoriteClasses.btnFavorite_dark,
         }}
       >
-        <Center>
-          <HiHeart />
-        </Center>
+        <Center><TbStarFilled /></Center>
       </UnstyledButton>
     </>
   );

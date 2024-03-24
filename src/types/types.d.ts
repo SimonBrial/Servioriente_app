@@ -7,7 +7,7 @@ type tagIcon =
   | "goal"
   | "add";
 
-type processTitle = "espera" | "generacion" | "pagado" | "entregado";
+type processTitle = "Espera" | "Generacion" | "Pagado" | "Entregado" | "Rechazado";
 
 type NotificationType = "Aviso" | "Error" | "Completado" | "Informacion";
 

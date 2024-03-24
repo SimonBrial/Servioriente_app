@@ -1,13 +1,14 @@
 import { Container, Flex, Stack } from "@mantine/core";
 import React from "react";
 import { CountIndicator } from "@/components/CountIndicator";
-import { HiOutlineCalendar } from "@/icons";
+import { HiOutlineCalendar, LuCalendarPlus } from "@/icons";
 import { AutoCompleteInput } from "@/components/inputs/AutoCompleteInput";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
 import { ViewCalendarSelection } from "./ViewCalendarSelection";
 import BtnAdd from "@/components/buttons/BtnAdd";
 import CalendarFilterLayout from "./CalendarFilterLayout";
+import CalendarNewEventLayout from "./CalendarNewEventLayout";
 // import { MonthNavigationBar } from "./MonthNavegationBar";
 
 export default function layout({
@@ -35,14 +36,22 @@ export default function layout({
             iconSection={<HiOutlineCalendar />}
           />
           <AutoCompleteInput />
-          <BtnFilter><CalendarFilterLayout /></BtnFilter>
+          <BtnFilter>
+            <CalendarFilterLayout />
+          </BtnFilter>
           <BtnReportGenerate>Prueba</BtnReportGenerate>
           <BtnAdd
+            title="Evento Creado"
+            icon={<LuCalendarPlus />}
+            color="green"
+            description="El evento ha sido añadido al calendario"
+            labelBtn="Crear Evento"
             iconTag="add-event"
             label="Nuevo Evento"
             key={crypto.randomUUID()}
+            id={crypto.randomUUID()}
           >
-            Prueba Prueba Prueba
+            <CalendarNewEventLayout />
           </BtnAdd>
           <ViewCalendarSelection />
         </Flex>

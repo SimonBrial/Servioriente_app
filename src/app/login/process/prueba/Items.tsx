@@ -1,110 +1,53 @@
+/* eslint-disable object-shorthand */
 "use client";
 
-import { HiOutlineDotsVertical } from "@/icons";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+// Mantine
 import {
   useMantineColorScheme,
   UnstyledButton,
   Divider,
-  Avatar,
   Center,
+  Avatar,
   Stack,
   Title,
   Flex,
   Text,
   Box,
 } from "@mantine/core";
-import { TaskItemProps } from "@/interface/interface";
+// Others
+import { HiOutlineDotsVertical } from "@/icons";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { underScoreColor } from "@/utils/underScoreColor";
-import { useEffect, useState } from "react";
 import classes from "@/styles/card-process.module.css";
 import heightClasses from "@/styles/height-view.module.css";
+import { underScoreColor } from "@/utils/underScoreColor";
+import { CardProcessProps } from "@/interface/interface";
 
-export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
-  const [colorDivider, setColorDivider] = useState<string>("red");
+export function Items({
+  clientName,
+  columnId,
+  vehicle,
+  date,
+  tag,
+  id,
+}: CardProcessProps) {
   const { colorScheme } = useMantineColorScheme();
-
-  useEffect(() => {
-    setColorDivider(card.columnId);
-  }, [card.columnId]);
-
-  /*  let data: JSX.Element | null;
-  const cardContainerView = (
-    arr: CardProcessItemProps[],
-  ): JSX.Element | null => {
-    if (arr.length > 0) {
-      if (arr.length > 3) {
-        data = (
-          <Collapse
-            p={5}
-            pb={15}
-            pr={12}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-            }}
-            in={opened}
-            transitionDuration={300}
-            transitionTimingFunction="linear"
-          >
-            <ScrollArea h={190} offsetScrollbars scrollbarSize={6}>
-              <Stack gap={5} pl={18}>
-                {arr.map((item: CardProcessItemProps, index) => {
-                  return (
-                    <CardItemProcess
-                      key={crypto.randomUUID()}
-                      date={item.date}
-                      direction={item.direction}
-                      tag={item.tag}
-                      vehicle={item.vehicle}
-                    />
-                  );
-                })}
-              </Stack>
-            </ScrollArea>
-          </Collapse>
-        );
-      } else {
-        data = (
-          <Collapse
-            p={5}
-            pb={15}
-            pr={12}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-            }}
-            in={opened}
-            transitionDuration={300}
-            transitionTimingFunction="linear"
-          >
-            <Stack gap={5} pl={18}>
-              {arr.map((item) => {
-                return (
-                  <CardItemProcess
-                    key={crypto.randomUUID()}
-                    date={item.date}
-                    direction={item.direction}
-                    tag={item.tag}
-                    vehicle={item.vehicle}
-                  />
-                );
-              })}
-            </Stack>
-          </Collapse>
-        );
-      }
-    } else {
-      return null;
-    }
-    return data;
-  }; */
-
-  // console.log(card.columnId);
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: id,
+      data: {
+        type: "item",
+      },
+    });
   return (
     <Box
+      ref={setNodeRef}
+      {...attributes}
+      style={{
+        transition,
+        transform: CSS.Translate.toString(transform),
+      }}
       mx="auto"
       className={
         colorScheme === "light"
@@ -115,18 +58,14 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
       pl={22}
       pr={10}
     >
-      <Flex align={"center"} justify={"space-between"}>
+      <Flex align={"center"} justify={"space-between"} gap={0}>
         <Divider
+          {...listeners}
           orientation="vertical"
-          size="5px"
-          color={underScoreColor(capitalizeFirstLetter(colorDivider))}
+          size="8px"
+          color={underScoreColor(capitalizeFirstLetter("red"))}
           style={{ height: "78%" }}
-          classNames={{
-            root:
-              colorScheme === "light"
-                ? `${classes.card_divider}`
-                : `${classes.card_divider}`,
-          }}
+          className={classes.card_divider}
         />
         <Flex align={"center"} justify={"center"} gap={6}>
           <Avatar
@@ -150,7 +89,7 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
                 },
               })}
             >
-              {card.clientName}
+              {clientName}
             </Title>
             <Stack gap={0}>
               <Text
@@ -166,7 +105,7 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
                   },
                 })}
               >
-                {capitalizeFirstLetter(card.vehicle)}
+                {capitalizeFirstLetter(vehicle)}
               </Text>
               <Text
                 size={"sm"}
@@ -179,7 +118,7 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
                   },
                 })}
               >
-                Tarifa: {card.tag}$
+                Tarifa: {tag}$
               </Text>
             </Stack>
           </Stack>
@@ -210,10 +149,10 @@ export const CardProcess = ({ card }: TaskItemProps): JSX.Element => {
               },
             })}
           >
-            {card.date}
+            {date}
           </Text>
         </Stack>
       </Flex>
     </Box>
   );
-};
+}

@@ -1,15 +1,14 @@
 "use client";
 
-import { ContainerInside } from "@/components/container/ContainerInside";
-import React, { useId, useState } from "react";
-import { ProcessedConversationItem } from "./ProcessedConversationItem";
+import { useDragAndDrop } from "@formkit/drag-and-drop/react";
+import { animations } from "@formkit/drag-and-drop";
+import { ProcessedConversationItem } from "../processConversation/ProcessedConversationItem";
 import { FaFacebookF, IoLogoInstagram, IoLogoWhatsapp } from "@/icons";
+import { ProcessedConversationItemProps } from "@/interface/interface";
+import { ContainerInside } from "@/components/container/ContainerInside";
 import { Flex, Stack, Title, useMantineColorScheme } from "@mantine/core";
 import { GeneralDivider } from "@/components/GeneralDivider";
-import { DndContext } from "@dnd-kit/core";
-import { SortableContext, arrayMove } from "@dnd-kit/sortable";
-import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
-import { ProcessedConversationItemProps } from "@/interface/interface";
+import { RefObject } from "react";
 
 const mediaSocialArray: ProcessedConversationItemProps[] = [
   {
@@ -33,12 +32,16 @@ const mediaSocialArray: ProcessedConversationItemProps[] = [
 ];
 
 export const ProcessedConversationContainer = () => {
-  const id = useId()
   const { colorScheme } = useMantineColorScheme();
-  const [socialMedia, setSocialMedia] =
-    useState<ProcessedConversationItemProps[]>(mediaSocialArray);
+  const [parent, items] = useDragAndDrop<
+  HTMLUListElement,
+  ProcessedConversationItemProps
+  >(mediaSocialArray, {
+    plugins: [animations()],
+    dragHandle: ".handler",
+  });
 
-  const rows = socialMedia.map((itemMedia) => {
+  const rows = items.map((itemMedia) => {
     const { iconName, id, totalConversations, socialMediaIcon } = itemMedia;
     return (
       <ProcessedConversationItem
@@ -50,17 +53,6 @@ export const ProcessedConversationContainer = () => {
       />
     );
   });
-
-  const handleDragEnd = (event: any) => {
-    const { active, over } = event;
-    if (!active.id !== over.id) {
-      setSocialMedia((item) => {
-        const oldIndex = item.findIndex((it) => it.id === active.id);
-        const newIndex = item.findIndex((it) => it.id === over.id);
-        return arrayMove(item, oldIndex, newIndex);
-      });
-    }
-  };
   return (
     <ContainerInside allWhite width="100%" withBorder>
       <Stack gap={4}>
@@ -80,15 +72,9 @@ export const ProcessedConversationContainer = () => {
           </Title>
           <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
         </Stack>
-        <DndContext
-          id={id}
-          onDragEnd={handleDragEnd}
-          modifiers={[restrictToHorizontalAxis]}
-        >
-          <SortableContext items={socialMedia}>
-            <Flex gap={4}>{rows}</Flex>
-          </SortableContext>
-        </DndContext>
+        <Flex gap={4} ref={parent as RefObject<any>}>
+          {rows}
+        </Flex>
       </Stack>
     </ContainerInside>
   );

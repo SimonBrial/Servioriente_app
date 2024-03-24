@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 import { type ReactNode } from "react";
+import { MantineColor } from "@mantine/core";
+import { UniqueIdentifier } from "@dnd-kit/core";
 import {
   type tagIcon,
   CardContainerHeader,
@@ -28,9 +30,10 @@ interface iconList {
   icon: ReactNode;
 }
 
-interface BtnAddProps {
+interface BtnAddProps extends NotificationsFnProps {
   iconTag: tagIcon;
   label: string;
+  labelBtn: string;
   addFn?: () => void;
   children: ReactNode;
 }
@@ -75,16 +78,19 @@ interface CardProcessItemProps {
   date: string;
   tag: number;
 }
+
+interface DNDType {
+  id: UniqueIdentifier;
+  title: string | processTitle;
+  items: CardProcessProps[];
+}
 interface CardProcessProps {
-  /* dragHandleProps: DraggableProvidedDragHandleProps | null | undefined;
-  draggableProps: DraggableProvidedDraggableProps;
-  innerRef: (element: HTMLElement | null) => void; // HTMLElement | LegacyRef<HTMLDivElement> */
+  id: UniqueIdentifier;
   clientName: string;
   columnId: string;
   vehicle: string;
   date: string;
   tag: number;
-  id: string;
 }
 
 interface CardProps {
@@ -249,6 +255,15 @@ interface SmallEventCardProps {
   degree: degreeType;
   date: Date;
 }
+interface NotificationsFnProps {
+  color: MantineColor | string;
+  icon?: React.ReactNode;
+  description: string;
+  loading?: boolean;
+  classes?: string;
+  title: string;
+  id: string;
+}
 
 export type {
   ProcessedConversationItemProps,
@@ -256,6 +271,7 @@ export type {
   NotificationIconsProps,
   CardChatContainerProps,
   HorizontalLayoutProps,
+  NotificationsFnProps,
   CardProcessItemProps,
   CountIndicatorProps,
   SmallEventCardProps,
@@ -287,4 +303,5 @@ export type {
   ReturnFn,
   AlarmObj,
   iconList,
+  DNDType,
 };

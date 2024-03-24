@@ -11,8 +11,6 @@ import {
   Box,
 } from "@mantine/core";
 import { underScoreColor } from "@/utils/underScoreColor";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { DashboardProcessListItems } from "@/interface/interface";
 import classes from "@/styles/dashboard.module.css";
@@ -25,24 +23,9 @@ export const DashboardProcessListItem = ({
   id,
 }: DashboardProcessListItems) => {
   const { colorScheme } = useMantineColorScheme();
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id,
-      transition: {
-        duration: 250,
-        easing: "linear",
-      },
-    });
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
   return (
     <Box
-      // key={id}
-      ref={setNodeRef}
-      style={style}
       className={
         colorScheme === "light"
           ? classes.dashboardItem_row
@@ -52,7 +35,7 @@ export const DashboardProcessListItem = ({
     >
       <Flex justify={"space-between"} align={"center"} p={0}>
         <Grid.Col span={1}>
-          <Center {...attributes} {...listeners}>
+          <Center className="handler">
             <MdOutlineDragIndicator />
           </Center>
         </Grid.Col>

@@ -1,9 +1,16 @@
 import { CardProcessProps } from "@/interface/interface";
+import { processTitle } from "@/types/types";
+import { UniqueIdentifier } from "@dnd-kit/core";
 
+interface DNDType {
+  id: UniqueIdentifier;
+  title: string | processTitle;
+  items: CardProcessProps[];
+}
 export const INITIAL_CARDS: CardProcessProps[] = [
   {
     columnId: "espera",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 1,
@@ -12,7 +19,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
 
   {
     columnId: "espera",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 2,
@@ -20,7 +27,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "generacion",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 3,
@@ -28,7 +35,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "generacion",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 4,
@@ -36,7 +43,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "generacion",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 4,
@@ -44,7 +51,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "generacion",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 4,
@@ -52,7 +59,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "pagado",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 5,
@@ -60,7 +67,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "pagado",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 6,
@@ -68,7 +75,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "entregado",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 7,
@@ -76,7 +83,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "entregado",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 8,
@@ -84,7 +91,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "entregado",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 8,
@@ -92,7 +99,7 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "entregado",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 8,
@@ -100,10 +107,141 @@ export const INITIAL_CARDS: CardProcessProps[] = [
   },
   {
     columnId: "entregado",
-    id: crypto.randomUUID(),
+    id: `item-${crypto.randomUUID()}`,
     vehicle: "spark",
     date: "06/11/2023",
     tag: 8,
     clientName: "Simon 9",
+  },
+];
+
+export const dataFakeCard: DNDType[] = [
+  {
+    id: `container-${crypto.randomUUID()}`,
+    title: "Espera",
+    items: [
+      {
+        columnId: "espera",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 1,
+        clientName: "Simon 1",
+      },
+      {
+        columnId: "espera",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 2,
+        clientName: "Simon 2",
+      },
+    ],
+  },
+  {
+    id: `container-${crypto.randomUUID()}`,
+    title: "Generacion",
+    items: [
+      {
+        columnId: "generacion",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 3,
+        clientName: "Simon 3",
+      },
+      {
+        columnId: "generacion",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 4,
+        clientName: "Simon 4",
+      },
+      {
+        columnId: "generacion",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 4,
+        clientName: "Simon 4",
+      },
+      {
+        columnId: "generacion",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 4,
+        clientName: "Simon 4",
+      },
+    ],
+  },
+  {
+    id: `container-${crypto.randomUUID()}`,
+    title: "Pagado",
+    items: [
+      {
+        columnId: "pagado",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 5,
+        clientName: "Simon 5",
+      },
+      {
+        columnId: "pagado",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 6,
+        clientName: "Simon 6",
+      },
+    ],
+  },
+  {
+    id: `container-${crypto.randomUUID()}`,
+    title: "Entregado",
+    items: [
+      {
+        columnId: "entregado",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 7,
+        clientName: "Simon 7",
+      },
+      {
+        columnId: "entregado",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 8,
+        clientName: "Simon 8",
+      },
+      {
+        columnId: "entregado",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 8,
+        clientName: "Simon 9",
+      },
+      {
+        columnId: "entregado",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 8,
+        clientName: "Simon 9",
+      },
+      {
+        columnId: "entregado",
+        id: `item-${crypto.randomUUID()}`,
+        vehicle: "spark",
+        date: "06/11/2023",
+        tag: 8,
+        clientName: "Simon 9",
+      },
+    ],
   },
 ];

@@ -1,6 +1,8 @@
 // const colorUnderScore = ["Espera", "Generacion", "Pagado", "Entregado", "Rechazado"];
 
-export function underScoreColor(colorEnum: string): string {
+import { processTitle } from "@/types/types";
+
+export function underScoreColor(colorEnum: processTitle | string): string {
   if (colorEnum === "Espera") {
     return "#fad901";
   } else if (colorEnum === "Generacion") {

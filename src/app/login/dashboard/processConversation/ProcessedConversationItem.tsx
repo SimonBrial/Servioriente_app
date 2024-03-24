@@ -8,8 +8,6 @@ import {
   Flex,
 } from "@mantine/core";
 import React from "react";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import { ProcessedConversationItemProps } from "@/interface/interface";
 import classes from "@/styles/dashboard.module.css";
 
@@ -22,35 +20,19 @@ export const ProcessedConversationItem = ({
   const adminArr: string[] = ["Mario Hurtado", "Simon Briceño"];
   const { colorScheme } = useMantineColorScheme();
 
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id,
-      transition: {
-        duration: 250,
-        easing: "linear",
-      },
-    });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    padding: "0.5rem 0.8rem",
-  };
-
   return (
     <Flex
       gap={8}
       justify={"space-between"}
       align={"center"}
-      ref={setNodeRef}
-      style={style}
+      style={{ padding: "0.5rem 0.8rem" }}
       className={
         colorScheme === "light"
           ? classes.proccessedConversation_item
           : classes.proccessedConversation_item_dark
       }
     >
-      <Center {...attributes} {...listeners}>
+      <Center /* {...attributes} {...listeners} */ className="handler">
         <MdOutlineDragIndicator />
       </Center>
       <Center

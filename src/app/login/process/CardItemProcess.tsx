@@ -1,10 +1,10 @@
 import {
-  Group,
-  Text,
-  Flex,
   Divider,
   Avatar,
   Stack,
+  Group,
+  Text,
+  Flex,
 } from "@mantine/core";
 import { CardProcessItemProps } from "@/interface/interface";
 

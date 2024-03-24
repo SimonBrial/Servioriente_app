@@ -2,6 +2,7 @@
 
 import { useForm } from "@mantine/form";
 import {
+  useMantineColorScheme,
   PasswordInput,
   Checkbox,
   Button,
@@ -15,6 +16,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function ResetPasswordForm() {
+  const { colorScheme } = useMantineColorScheme();
   const form = useForm({
     initialValues: {
       newPassword: "",
@@ -36,6 +38,7 @@ export default function ResetPasswordForm() {
         borderRadius: "6px",
         padding: "1.8rem 1.2rem",
         boxShadow: "0px 10px 12px -5px rgba(255,255,255,0.4)",
+        cursor: "default"
       }}
       mx="auto"
     >
@@ -46,7 +49,7 @@ export default function ResetPasswordForm() {
           <Stack gap={2} py={"0.5rem"}>
             <Flex justify={"space-between"}>
               <Text style={{ fontSize: "1rem" }}>Usuario:</Text>
-              <Text style={{ fontSize: "1rem", color: "#115dfe" }}>
+              <Text style={{ fontSize: "1.2rem", color: "#115dfe" }}>
                 Mario Hurtado
               </Text>
             </Flex>
@@ -55,11 +58,27 @@ export default function ResetPasswordForm() {
             label="Nueva Contraseña"
             placeholder="Nueva Contraseña"
             {...form.getInputProps("newPassword")}
+            styles={(theme) => ({
+              input: {
+                backgroundColor:
+                  colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
+                color: theme.colors.lightTheme[3],
+              },
+              visibilityToggle: { color: theme.colors.lightTheme[3] },
+            })}
           />
           <PasswordInput
             label="Repetir Contraseña"
             placeholder="Repetir Contraseña"
             {...form.getInputProps("repeatNewPassword")}
+            styles={(theme) => ({
+              input: {
+                backgroundColor:
+                  colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
+                color: theme.colors.lightTheme[3],
+              },
+              visibilityToggle: { color: theme.colors.lightTheme[3] },
+            })}
           />
           <Flex align={"center"} gap={6}>
             <Checkbox color="#115dfe" />

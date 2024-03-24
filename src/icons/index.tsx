@@ -65,17 +65,25 @@ import {
   IoSend,
 } from "react-icons/io5";
 import {
-  LuGoal,
+  LuChevronsUpDown,
   LuCalendarPlus,
   LuListTodo,
-  LuChevronsUpDown,
+  LuGoal,
 } from "react-icons/lu";
 import {
   CgCornerDoubleUpLeft,
   CgCornerUpRight,
   CgCornerUpLeft,
 } from "react-icons/cg";
-import { TbTemplate, TbMailPlus, TbWorld, TbEdit } from "react-icons/tb";
+import {
+  TbStarFilled,
+  TbTemplate,
+  TbMailPlus,
+  TbStarOff,
+  TbWorld,
+  TbEdit,
+  TbStar,
+} from "react-icons/tb";
 import {
   MdOutlineInsertEmoticon,
   MdOutlineMarkChatUnread,
@@ -99,7 +107,7 @@ import {
   AiOutlinePlus,
   AiOutlineCar,
 } from "react-icons/ai";
-import { BiMailSend, BiBellPlus, BiCrown } from "react-icons/bi";
+import { BiMailSend, BiBellPlus, BiCrown, BiTask } from "react-icons/bi";
 import { PiRobot, PiFolderSimpleDashed } from "react-icons/pi";
 import { FaFacebookF, FaChartLine, FaChartColumn } from "react-icons/fa6";
 
@@ -177,6 +185,7 @@ export {
   HiOutlineCog,
   HiOutlineEye,
   HiOutlineSun,
+  TbStarFilled,
   FaFacebookF,
   FaChartLine,
   IoChevronUp,
@@ -191,6 +200,7 @@ export {
   MdHistory,
   HiHashtag,
   IoIosSend,
+  TbStarOff,
   BsFilter,
   MdCircle,
   PiRobot,
@@ -199,6 +209,8 @@ export {
   HiHeart,
   BiCrown,
   TbWorld,
+  TbStar,
+  BiTask,
   LuGoal,
   TbEdit,
   HiLink,

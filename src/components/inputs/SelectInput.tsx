@@ -14,7 +14,7 @@ export default function SelectInput({
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex justify={"space-between"} align={"center"}>
-      <Title order={5}>{title}</Title>
+      <Title order={4}>{title}</Title>
       <Select
         placeholder={title}
         data={periodeArr}

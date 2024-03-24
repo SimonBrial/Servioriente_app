@@ -1,5 +1,5 @@
 .card_container {
-  background-color: #efefef;
+  background-color: #f8f8f8;
   border: 1px solid #cdcdcd;
   padding: 0rem;
   text-align: center;
@@ -7,6 +7,7 @@
   border-radius: 6px;
   position: relative;
   margin: 0.2rem 0;
+  box-shadow: 0px 5px 6px -6px #696969bf;
 }
 .card_container:hover {
   border: 1px solid #696969;
@@ -58,4 +59,70 @@
 .process_col_dark:hover {
   background-color: #9a90ef1a;
   transition: all 0.2s ease-in-out;
+}
+.verticalDots {
+  stroke-width: 2;
+  font-size: 1rem;
+  padding: 0.2rem;
+  color: #696969;
+}
+.verticalDots:hover {
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #9a90ef1a;
+  transition: all 0.2s ease-in-out;
+}
+.verticalDots_dark {
+  stroke-width: 2;
+  font-size: 1rem;
+  padding: 0.2rem;
+  color: #eff3f5;
+}
+.verticalDots_dark:hover {
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #9a90ef1a;
+  transition: all 0.2s ease-in-out;
+}
+
+/* -------------------------------------- These classes are  special considerations for the app -------------------------------------- */
+
+.containercolumns {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 2px solid #cdcdcd;
+  padding: 0.5rem;
+}
+.containercolumns_dark {
+  width: 100%;
+  background-color: #9a90ef1a;
+  border-radius: 6px;
+  border: 2px solid #29363f;
+  padding: 0.5rem;
+}
+.espera:hover {
+  background-color: #e5db004d;
+  transition: all 0.3s ease-in-out;
+  border-radius: 6px;
+}
+.generacion:hover {
+  background-color: #e660004d;
+  transition: all 0.3s ease-in-out;
+  border-radius: 6px;
+}
+.pagado:hover {
+  background-color: #12e5004d;
+  transition: all 0.3s ease-in-out;
+  border-radius: 6px;
+}
+.entregado:hover {
+  background-color: #033eb24d;
+  transition: all 0.3s ease-in-out;
+  border-radius: 6px;
+}
+.rechazado:hover {
+  background-color: #ff00004d;
+  transition: all 0.3s ease-in-out;
+  border-radius: 6px;
 }

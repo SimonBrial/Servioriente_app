@@ -4,6 +4,7 @@ import { Button, Flex, useMantineColorScheme } from "@mantine/core";
 import { IoClose } from "../../icons";
 import { BtnActionProps } from "@/interface/interface";
 import classes from "@/styles/btn-styles.module.css";
+import { notifications } from "@mantine/notifications";
 
 export default function BtnActions({
   title,
@@ -38,6 +39,15 @@ export default function BtnActions({
         styles={(theme) => ({
           section: { fontSize: "1.2rem" },
         })}
+
+        onClick={() =>
+          notifications.show({
+            color: 'blue',
+            title: 'I will never close',
+            message: 'unless you click X',
+            autoClose: 1000
+          })
+        }
       >
         {title}
       </Button>
