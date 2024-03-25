@@ -8,8 +8,8 @@ import {
   verticalListSortingStrategy,
   SortableContext,
 } from "@dnd-kit/sortable";
-import { CardProcess } from "./CardProcess";
-import { SortableItemContainer } from "./SortableItemContainer";
+/* import { CardProcess } from "./CardProcess";
+import { SortableItemContainer } from "./SortableItemContainer"; */
 import {
   useMantineColorScheme,
   ScrollArea,
@@ -123,9 +123,9 @@ export const ProcessColumnLayout = ({
                   card, // Si se cambia ese array por el de tasks, el ordenamiento queda en la posicion que se deje
                 ) => (
                   <div key={card.id} style={{ marginBottom: "0.2rem" }}>
-                    <SortableItemContainer id={card.id}>
+                    {/* <SortableItemContainer id={card.id}>
                       <CardProcess card={card} />
-                    </SortableItemContainer>
+                    </SortableItemContainer> */}
                   </div>
                 ),
               )}

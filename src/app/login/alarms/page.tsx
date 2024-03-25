@@ -88,10 +88,24 @@ function page(): JSX.Element {
           iconTag="folder"
           label="Nueva Carpeta"
           key={crypto.randomUUID()}
+          color=""
+          description=""
+          id={crypto.randomUUID()}
+          labelBtn=""
+          title=""
         >
           <CreateFolderLayout title="Crear Nueva Carpeta" />
         </BtnAdd>
-        <BtnAdd iconTag="add" label="Nueva Alarma" key={crypto.randomUUID()}>
+        <BtnAdd
+          iconTag="add"
+          label="Nueva Alarma"
+          key={crypto.randomUUID()}
+          color=""
+          description=""
+          id={crypto.randomUUID()}
+          labelBtn=""
+          title=""
+        >
           <CreateAlarmLayout title="Crear Nueva Alarma" />
         </BtnAdd>
       </Flex>

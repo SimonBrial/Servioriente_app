@@ -92,6 +92,11 @@ export const MetricsFilterInput = ({
               iconTag="add-event"
               label="Nueva Meta"
               key={crypto.randomUUID()}
+              color=""
+              description=""
+              id={crypto.randomUUID()}
+              labelBtn=""
+              title=""
             >
               <GoalsLayout />
             </BtnAdd>

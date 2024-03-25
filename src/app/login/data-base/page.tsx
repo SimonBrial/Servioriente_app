@@ -35,6 +35,11 @@ function page(): JSX.Element {
           iconTag="add-user"
           label="Nuevo Usuario"
           key={crypto.randomUUID()}
+          color=""
+          description=""
+          id={crypto.randomUUID()}
+          labelBtn=""
+          title=""
         >
           <ClientRegister />
         </BtnAdd>

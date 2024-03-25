@@ -95,6 +95,11 @@ export const UserContainer = ({ label }: { label: labelType }) => {
                 }
                 addFn={toggle}
                 key={crypto.randomUUID()}
+                color=""
+                description=""
+                id={crypto.randomUUID()}
+                labelBtn=""
+                title=""
               >
                 <AdminDescriptionLayout size="200px" />
               </BtnAdd>
