@@ -1,6 +1,5 @@
 "use client";
 
-import React, { RefObject } from "react";
 import {
   useMantineColorScheme,
   Container,
@@ -12,21 +11,48 @@ import { DashboardProcessListItems } from "@/interface/interface";
 import { dashboardProcessList } from "@/data/dashboardProcessList";
 import { DashboardProcessListItem } from "./DashboardProcessListItem";
 import { GeneralDivider } from "@/components/GeneralDivider";
-import { useDragAndDrop } from "@formkit/drag-and-drop/react";
-import { animations } from "@formkit/drag-and-drop";
+import {
+  KeyboardSensor,
+  PointerSensor,
+  useSensors,
+  DndContext,
+  useSensor,
+} from "@dnd-kit/core";
+import {
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  SortableContext,
+  arrayMove,
+} from "@dnd-kit/sortable";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import { useId, useState } from "react";
 
 export default function ProcessContainer() {
+  const idDnD = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [parent, items] = useDragAndDrop<
-  HTMLUListElement,
-  DashboardProcessListItems
-  >(dashboardProcessList, {
-    plugins: [animations()],
-    dragHandle: ".handler",
-  });
+  const [process, setProcess] =
+    useState<DashboardProcessListItems[]>(dashboardProcessList);
 
-  const rows = items.map((item) => {
-    const { id, process, today, yesterday, processTitle } = item;
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+    if (!active.id !== over.id) {
+      setProcess((process) => {
+        const oldIndex = process.findIndex((p) => p.id === active.id);
+        const newIndex = process.findIndex((p) => p.id === over.id);
+        return arrayMove(process, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const rows = process.map((p) => {
+    const { id, process, today, yesterday, processTitle } = p;
     return (
       <Stack key={id} gap={1}>
         <DashboardProcessListItem
@@ -98,11 +124,20 @@ export default function ProcessContainer() {
         </Grid>
         <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>
-      <Container
-        style={{ maxWidth: "100%", width: "100%", padding: "0" }}
-        ref={parent as RefObject<any>}
-      >
-        {rows}
+      <Container style={{ maxWidth: "100%", width: "100%", padding: "0" }}>
+        <DndContext
+          modifiers={[restrictToVerticalAxis]}
+          onDragEnd={handleDragEnd}
+          sensors={sensors}
+          id={idDnD}
+        >
+          <SortableContext
+            strategy={verticalListSortingStrategy}
+            items={process}
+          >
+            {rows}
+          </SortableContext>
+        </DndContext>
       </Container>
     </Stack>
   );

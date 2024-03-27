@@ -6,6 +6,7 @@ import {
   type tagIcon,
   CardContainerHeader,
   NotificationType,
+  EditButtonStyles,
   processTitle,
   degreeType,
   cardSize,
@@ -146,10 +147,26 @@ interface SectionsArray {
   orientation: boolean;
 }
 
-interface BtnActionProps {
+interface BtnActionProps extends NotificationsFnProps {
+  labelBtn: string;
   title: string;
   icon: React.ReactNode;
   close: () => void;
+}
+interface BtnDeleteProps extends NotificationsFnProps {
+  labelBtn: string;
+  title: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+  // closeFn: () => void;
+}
+interface BtnEditProps extends NotificationsFnProps {
+  labelBtn: string;
+  title: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+  buttonStyles: EditButtonStyles;
+  // closeFn: () => void;
 }
 interface AutoCompleteData {
   label: string | string[];
@@ -213,7 +230,7 @@ interface DashboardProcessListItems {
   processTitle: string;
   yesterday: number;
   today: number;
-  id: string;
+  id: UniqueIdentifier | string;
 }
 
 interface SocialMedia {
@@ -285,6 +302,7 @@ export type {
   TitleLayoutProps,
   CardProcessProps,
   socialMediaData,
+  BtnDeleteProps,
   EventCardProps,
   BtnActionProps,
   AlarmCardProps,
@@ -295,6 +313,7 @@ export type {
   verticalInput,
   NavIconProps,
   sidebarItems,
+  BtnEditProps,
   SocialMedia,
   EventsArray,
   BtnAddProps,

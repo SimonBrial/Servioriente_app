@@ -14,10 +14,9 @@ import AlarmCardDate from "./AlarmCardDate";
 import { AlarmCardProps } from "../../../interface/interface";
 import { useHover } from "@mantine/hooks";
 import classes from "@/styles/btn-styles.module.css";
-import { HiOutlineDotsVertical } from "@/icons";
+import { HiOutlineDotsVertical, HiOutlinePencil } from "@/icons";
 import { useRef } from "react";
 import BtnDeleteAlarm from "./buttons/BtnDeleteAlarm";
-import BtnEditAlarm from "./buttons/BtnEditAlarm";
 
 export default function AlarmCard({
   description,
@@ -72,8 +71,9 @@ export default function AlarmCard({
               />
             </Stack>
             <Menu
+              withArrow
               shadow="md"
-              closeOnClickOutside={false}
+              closeOnClickOutside
               closeOnItemClick={false}
               zIndex={
                 deleteRef.current !== undefined || editRef.current !== undefined
@@ -93,9 +93,14 @@ export default function AlarmCard({
               </Menu.Target>
               <Menu.Dropdown>
                 <Menu.Item color="#F06418">
-                  <BtnEditAlarm key={crypto.randomUUID()} editRef={editRef} />
+                  <Flex gap={6}>
+                    <Center style={{ fontSize: "1.2rem" }}>
+                      <HiOutlinePencil />
+                    </Center>
+                    <Text>Editar</Text>
+                  </Flex>
                 </Menu.Item>
-                <Menu.Item color="red">
+                <Menu.Item color="#F0185C">
                   <BtnDeleteAlarm
                     key={crypto.randomUUID()}
                     deleteRef={deleteRef}

@@ -1,5 +1,3 @@
-"use client";
-
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import {
@@ -7,20 +5,20 @@ import {
   ScrollArea,
   Container,
   Stack,
-  Title,
   Flex,
   Text,
 } from "@mantine/core";
+import React from "react";
 
-export default function DeleteAlarmLayout() {
+export const TaskDeleteLayout = () => {
   const { colorScheme } = useMantineColorScheme();
   return (
-    <>
+    <Stack>
       <TitleLayout
         color=""
         icon=""
         onText
-        title="Eliminar Alarma"
+        title="Eliminar Tarea"
         key={crypto.randomUUID()}
       />
       <Container
@@ -34,15 +32,13 @@ export default function DeleteAlarmLayout() {
             padding: "0.5rem",
             marginTop: "-0.2rem",
             backgroundColor:
-              colorScheme === "light"
-                ? "#fff"
-                : theme.colors.darkTheme[7],
+              colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
           },
         })}
       >
         <Stack gap={4}>
           <Stack gap={2} w={"100%"}>
-            <Flex align={"center"} gap={5}>
+            <Flex align={"center"} gap={10}>
               <Text
                 size="1.3rem"
                 styles={(theme) => ({
@@ -54,23 +50,21 @@ export default function DeleteAlarmLayout() {
                   },
                 })}
               >
-                Titulo:
+                Asignado a:
               </Text>
-              <Text size="1.3rem">🎂</Text>
-              <Title
-                order={6}
+              <Text
+                size="1.1rem"
                 styles={(theme) => ({
                   root: {
                     color:
                       colorScheme === "light"
-                        ? theme.colors.lightTheme[3]
-                        : theme.colors.darkTheme[2],
-                    fontSize: "1.5rem",
+                        ? theme.colors.lightTheme[6]
+                        : theme.colors.darkTheme[1],
                   },
                 })}
               >
-                Titulo 1
-              </Title>
+                Mario Hurtado
+              </Text>
             </Flex>
             <GeneralDivider
               orientation="horizontal"
@@ -90,7 +84,7 @@ export default function DeleteAlarmLayout() {
                   },
                 })}
               >
-                Creado:
+                Tipo:
               </Text>
               <Text
                 size="1.1rem"
@@ -103,41 +97,7 @@ export default function DeleteAlarmLayout() {
                   },
                 })}
               >
-                19/03/2024 - 03:34PM
-              </Text>
-            </Flex>
-            <GeneralDivider
-              orientation="horizontal"
-              key={crypto.randomUUID()}
-            />
-          </Stack>
-          <Stack gap={1} w={"100%"}>
-            <Flex align={"center"} gap={10}>
-              <Text
-                size="1.3rem"
-                styles={(theme) => ({
-                  root: {
-                    color:
-                      colorScheme === "light"
-                        ? theme.colors.lightTheme[3]
-                        : theme.colors.darkTheme[2],
-                  },
-                })}
-              >
-                Para:
-              </Text>
-              <Text
-                size="1.1rem"
-                styles={(theme) => ({
-                  root: {
-                    color:
-                      colorScheme === "light"
-                        ? theme.colors.lightTheme[6]
-                        : theme.colors.darkTheme[1],
-                  },
-                })}
-              >
-                19/03/2024 - 03:34PM
+                Admin
               </Text>
             </Flex>
             <GeneralDivider
@@ -146,6 +106,27 @@ export default function DeleteAlarmLayout() {
             />
           </Stack>
           <Container style={{ overflow: "hidden" }} p={0}>
+            <Stack gap={1} w={"100%"}>
+              <Flex align={"center"} gap={10}>
+                <Text
+                  size="1.3rem"
+                  styles={(theme) => ({
+                    root: {
+                      color:
+                        colorScheme === "light"
+                          ? theme.colors.lightTheme[3]
+                          : theme.colors.darkTheme[2],
+                    },
+                  })}
+                >
+                  Descripcion de la tarea
+                </Text>
+              </Flex>
+              <GeneralDivider
+                orientation="horizontal"
+                key={crypto.randomUUID()}
+              />
+            </Stack>
             <ScrollArea
               scrollbarSize={2}
               h={250}
@@ -178,15 +159,10 @@ export default function DeleteAlarmLayout() {
               aperiam eos magni culpa quis dicta accusantium.Lorem ipsum, dolor
               sit amet consectetur adipisicing elit. Repellendus non eius dolore
               nemo magnam cum, debitis consequatur quibusdam esse officia!
-              Sapiente enim repellat aperiam eos magni culpa quis dicta
-              accusantium.Lorem ipsum, dolor sit amet consectetur adipisicing
-              elit. Repellendus non eius dolore nemo magnam cum, debitis
-              consequatur quibusdam esse officia! Sapiente enim repellat aperiam
-              eos magni culpa quis dicta accusantium.
             </ScrollArea>
           </Container>
         </Stack>
       </Container>
-    </>
+    </Stack>
   );
-}
+};

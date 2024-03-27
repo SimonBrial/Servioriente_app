@@ -10,9 +10,8 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlinePencil } from "@/icons";
-import CreateFolderLayout from "../CreateFolderLayout";
 
-export default function BtnEditAlarm({ editRef }: { editRef: any }) {
+export function BtnEditCard({ editRef }: { editRef: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -20,6 +19,7 @@ export default function BtnEditAlarm({ editRef }: { editRef: any }) {
       <Drawer
         opened={opened}
         onClose={close}
+        keepMounted
         // closeOnClickOutside={false}
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
@@ -31,13 +31,14 @@ export default function BtnEditAlarm({ editRef }: { editRef: any }) {
         }}
       >
         <Stack gap={4}>
-          <CreateFolderLayout title="Editar Carpeta" />
-          {/* <BtnActions
+          {/* <CreateFolderLayout title="Editar Carpeta" />
+          <BtnActions
             icon={<HiOutlineSave />}
             title="Guardar"
             close={close}
             key={crypto.randomUUID()}
           /> */}
+          prueba
         </Stack>
       </Drawer>
 

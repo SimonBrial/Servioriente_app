@@ -15,9 +15,9 @@ import {
 import { BiCrown } from "@/icons";
 import BtnAdd from "@/components/buttons/BtnAdd";
 import { SuperAdminCard } from "./SuperAdminCard";
-import { AdminDescriptionLayout } from "../admin/AdminDescriptionLayout";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { labelType } from "@/types/types";
+import { SuperAdminUserLayout } from "./SuperAdminUserLayout";
 
 export const UserContainer = ({ label }: { label: labelType }) => {
   const [opened, { toggle }] = useDisclosure(false);
@@ -95,13 +95,21 @@ export const UserContainer = ({ label }: { label: labelType }) => {
                 }
                 addFn={toggle}
                 key={crypto.randomUUID()}
-                color=""
-                description=""
                 id={crypto.randomUUID()}
-                labelBtn=""
-                title=""
+                labelBtn="Crear Usuario"
+                color="green"
+                title={
+                  label === "Super Admin"
+                    ? "Creado Nuevo Super Admin"
+                    : "Creado Nuevo Admin"
+                }
+                description={
+                  label === "Super Admin"
+                    ? "El registro del usuario (SUPER ADMIN), ha sido creado satisfactoriamente 😎!"
+                    : "El registro del usuario (ADMIN), ha sido creado satisfactoriamente 😎!"
+                }
               >
-                <AdminDescriptionLayout size="200px" />
+                <SuperAdminUserLayout />
               </BtnAdd>
             </Box>
           </Flex>

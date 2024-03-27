@@ -9,7 +9,7 @@ export default function BtnMailTrash() {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Authentication">
+      <Modal centered opened={opened} onClose={close} title="Authentication">
         prueba
       </Modal>
       <UnstyledButton

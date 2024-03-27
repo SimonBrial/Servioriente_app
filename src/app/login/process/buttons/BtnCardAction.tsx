@@ -2,6 +2,7 @@
 
 import {
   HiOutlineDotsVertical,
+  HiOutlinePencil,
   HiOutlineCheck,
   HiOutlineTrash,
   IoClose,
@@ -19,14 +20,15 @@ import {
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
-import { TaskDeleteLayout } from "./TaskDeleteLayout";
+import { EditCardLayout } from "../EditCardLayout";
 
-export const BtnTaskAction = () => {
+export default function BtnCardAction() {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   return (
     <>
       <Modal
+        centered
         opened={opened}
         onClose={close}
         withCloseButton={false}
@@ -37,7 +39,7 @@ export const BtnTaskAction = () => {
         }}
       >
         <Stack>
-          <TaskDeleteLayout />
+          <EditCardLayout />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
@@ -64,15 +66,13 @@ export const BtnTaskAction = () => {
                     ? classes.btnAdd
                     : classes.btnAdd_dark,
               }}
-              styles={(theme) => ({
-                section: { fontSize: "1.2rem" },
-              })}
+              styles={{ section: { fontSize: "1.2rem" } }}
               onClick={() => {
                 notifications.show({
                   id: crypto.randomUUID(),
                   color: "#2BDD66",
-                  title: "Tarea Eliminada",
-                  message: "Tarea eliminada satisfactoriamente!",
+                  title: "Tarjeta Eliminada",
+                  message: "Tarjeta de proceso eliminada satisfactoriamente!",
                   autoClose: 1000,
                   withCloseButton: true,
                 });
@@ -86,11 +86,11 @@ export const BtnTaskAction = () => {
       </Modal>
 
       <Menu
-        withArrow
-        shadow="md"
+        position="bottom-end"
         closeOnClickOutside
         closeOnItemClick
-        position="bottom-end"
+        shadow="md"
+        withArrow
       >
         <Menu.Target>
           <Center
@@ -100,7 +100,7 @@ export const BtnTaskAction = () => {
                 position: "absolute",
                 right: "0.4rem",
                 top: "0.5rem",
-                fontSize: "1.2rem",
+                fontSize: "0.9rem",
               },
             }}
           >
@@ -108,24 +108,12 @@ export const BtnTaskAction = () => {
           </Center>
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Item
-            color="#2BDD66"
-            onClick={() =>
-              notifications.show({
-                id: crypto.randomUUID(),
-                color: "#2BDD66",
-                title: "Tarea Completada",
-                message: "La tarea ha sido completada satisfactoriamente 😎!",
-                autoClose: 1000,
-                withCloseButton: true,
-              })
-            }
-          >
+          <Menu.Item color="#F06418">
             <Flex gap={6}>
               <Center style={{ fontSize: "1.2rem" }}>
-                <HiOutlineCheck />
+                <HiOutlinePencil />
               </Center>
-              <Text>Completado</Text>
+              <Text>Editar</Text>
             </Flex>
           </Menu.Item>
           <Menu.Item color="#F0185C" onClick={open}>
@@ -140,4 +128,4 @@ export const BtnTaskAction = () => {
       </Menu>
     </>
   );
-};
+}

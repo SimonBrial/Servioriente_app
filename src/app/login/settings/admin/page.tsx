@@ -7,7 +7,7 @@ export default function page() {
   return (
     <AdminLayout>
       <AsideAdminContainer />
-      <AdminDescriptionContainer />
+      <AdminDescriptionContainer editing={false} />
     </AdminLayout>
   );
 }

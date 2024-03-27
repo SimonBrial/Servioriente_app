@@ -5,6 +5,7 @@ import { Modal, Button, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { BsFilter } from "../../icons";
 import classes from "@/styles/btn-styles.module.css";
+import { notifications } from "@mantine/notifications";
 
 export function BtnFilter({
   children,
@@ -17,6 +18,7 @@ export function BtnFilter({
   return (
     <>
       <Modal
+        centered
         opened={opened}
         onClose={close}
         withCloseButton={false}
@@ -30,7 +32,17 @@ export function BtnFilter({
       >
         {children}
         <Button
-          onClick={close}
+          onClick={() => {
+            close();
+            notifications.show({
+              id: crypto.randomUUID(),
+              color: "#2BDD66",
+              title: "Filtros Aplicados",
+              message: "Los filtros se aplicaron satisfactoriamente 😎!",
+              autoClose: 1000,
+              withCloseButton: true,
+            });
+          }}
           leftSection={<BsFilter />}
           fullWidth
           styles={(theme) => ({

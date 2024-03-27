@@ -1,14 +1,26 @@
 "use client";
 
-import { useDragAndDrop } from "@formkit/drag-and-drop/react";
-import { animations } from "@formkit/drag-and-drop";
 import { ProcessedConversationItem } from "../processConversation/ProcessedConversationItem";
 import { FaFacebookF, IoLogoInstagram, IoLogoWhatsapp } from "@/icons";
 import { ProcessedConversationItemProps } from "@/interface/interface";
 import { ContainerInside } from "@/components/container/ContainerInside";
 import { Flex, Stack, Title, useMantineColorScheme } from "@mantine/core";
 import { GeneralDivider } from "@/components/GeneralDivider";
-import { RefObject } from "react";
+import {
+  KeyboardSensor,
+  PointerSensor,
+  useSensors,
+  DndContext,
+  useSensor,
+} from "@dnd-kit/core";
+import {
+  sortableKeyboardCoordinates,
+  horizontalListSortingStrategy,
+  SortableContext,
+  arrayMove,
+} from "@dnd-kit/sortable";
+import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
+import { useId, useState } from "react";
 
 const mediaSocialArray: ProcessedConversationItemProps[] = [
   {
@@ -32,16 +44,30 @@ const mediaSocialArray: ProcessedConversationItemProps[] = [
 ];
 
 export const ProcessedConversationContainer = () => {
+  const idDnD = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [parent, items] = useDragAndDrop<
-  HTMLUListElement,
-  ProcessedConversationItemProps
-  >(mediaSocialArray, {
-    plugins: [animations()],
-    dragHandle: ".handler",
-  });
+  const [socialMedia, setSocialMedia] =
+    useState<ProcessedConversationItemProps[]>(mediaSocialArray);
 
-  const rows = items.map((itemMedia) => {
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+    if (!active.id !== over.id) {
+      setSocialMedia((socialMedia) => {
+        const oldIndex = socialMedia.findIndex((p) => p.id === active.id);
+        const newIndex = socialMedia.findIndex((p) => p.id === over.id);
+        return arrayMove(socialMedia, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const rows = socialMedia.map((itemMedia) => {
     const { iconName, id, totalConversations, socialMediaIcon } = itemMedia;
     return (
       <ProcessedConversationItem
@@ -72,9 +98,19 @@ export const ProcessedConversationContainer = () => {
           </Title>
           <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
         </Stack>
-        <Flex gap={4} ref={parent as RefObject<any>}>
-          {rows}
-        </Flex>
+        <DndContext
+          modifiers={[restrictToHorizontalAxis]}
+          onDragEnd={handleDragEnd}
+          sensors={sensors}
+          id={idDnD}
+        >
+          <SortableContext
+            strategy={horizontalListSortingStrategy}
+            items={socialMedia}
+          >
+            <Flex gap={4}>{rows}</Flex>
+          </SortableContext>
+        </DndContext>
       </Stack>
     </ContainerInside>
   );

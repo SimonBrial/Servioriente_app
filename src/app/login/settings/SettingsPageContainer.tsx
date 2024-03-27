@@ -24,7 +24,13 @@ export default function SettingsPageContainer() {
           fnCancel={() => console.log("From settings/page.tsx")}
           key={crypto.randomUUID()}
         />
-        <BtnSave />
+        <BtnSave
+          key={crypto.randomUUID()}
+          id={crypto.randomUUID()}
+          description=""
+          color=""
+          title=""
+        />
       </Flex>
     </>
   );

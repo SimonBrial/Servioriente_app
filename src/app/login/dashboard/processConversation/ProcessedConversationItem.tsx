@@ -10,6 +10,8 @@ import {
 import React from "react";
 import { ProcessedConversationItemProps } from "@/interface/interface";
 import classes from "@/styles/dashboard.module.css";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 
 export const ProcessedConversationItem = ({
   totalConversations,
@@ -19,20 +21,33 @@ export const ProcessedConversationItem = ({
 }: ProcessedConversationItemProps) => {
   const adminArr: string[] = ["Mario Hurtado", "Simon Briceño"];
   const { colorScheme } = useMantineColorScheme();
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    padding: "0.5rem 0.8rem",
+  };
 
   return (
     <Flex
+      style={style}
+      ref={setNodeRef}
+      {...attributes}
       gap={8}
       justify={"space-between"}
       align={"center"}
-      style={{ padding: "0.5rem 0.8rem" }}
       className={
         colorScheme === "light"
           ? classes.proccessedConversation_item
           : classes.proccessedConversation_item_dark
       }
     >
-      <Center /* {...attributes} {...listeners} */ className="handler">
+      <Center
+        /* {...attributes} {...listeners} */ className="handler"
+        {...listeners}
+      >
         <MdOutlineDragIndicator />
       </Center>
       <Center

@@ -8,11 +8,30 @@ import { UserDescriptionLayout } from "@/app/login/data-base/UserDescriptionLayo
 function BtnFn(): JSX.Element {
   return (
     <Flex gap={6} align={"center"}>
-      <BtnDelete>Prueba</BtnDelete>
+      <BtnDelete
+        key={crypto.randomUUID()}
+        description=""
+        labelBtn=""
+        color=""
+        title=""
+        id=""
+        icon
+      >
+        Prueba
+      </BtnDelete>
       <BtnSee>
         <UserDescriptionLayout />
       </BtnSee>
-      <BtnEdit buttonStyles="special">
+      <BtnEdit
+        key={crypto.randomUUID()}
+        buttonStyles="special"
+        description=""
+        labelBtn=""
+        color=""
+        title=""
+        id=""
+        icon
+      >
         <RegisterEditLayout />
       </BtnEdit>
     </Flex>

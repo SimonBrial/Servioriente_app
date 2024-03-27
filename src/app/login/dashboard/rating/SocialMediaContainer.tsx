@@ -1,6 +1,5 @@
 "use client";
 
-import React, { RefObject } from "react";
 import {
   useMantineColorScheme,
   Container,
@@ -12,8 +11,21 @@ import { SocialMedia } from "@/interface/interface";
 import SocialMediaItem from "./SocialMediaItem";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { GeneralDivider } from "@/components/GeneralDivider";
-import { animations } from "@formkit/drag-and-drop";
-import { useDragAndDrop } from "@formkit/drag-and-drop/react";
+import {
+  KeyboardSensor,
+  PointerSensor,
+  useSensors,
+  DndContext,
+  useSensor,
+} from "@dnd-kit/core";
+import {
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  SortableContext,
+  arrayMove,
+} from "@dnd-kit/sortable";
+import { useId, useState } from "react";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 const SocialMediaRed: SocialMedia[] = [
   { title: "instagram", rating: 3, id: crypto.randomUUID() },
@@ -22,16 +34,29 @@ const SocialMediaRed: SocialMedia[] = [
 ];
 
 export const SocialMediaContainer = () => {
+  const idDnD = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [parent, items] = useDragAndDrop<HTMLUListElement, SocialMedia>(
-    SocialMediaRed,
-    {
-      plugins: [animations()],
-      dragHandle: ".handler",
-    },
+  const [socialMedia, setSocialMedia] = useState<SocialMedia[]>(SocialMediaRed);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
   );
 
-  const rows = items.map((item) => {
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+    if (!active.id !== over.id) {
+      setSocialMedia((socialMedia) => {
+        const oldIndex = socialMedia.findIndex((p) => p.id === active.id);
+        const newIndex = socialMedia.findIndex((p) => p.id === over.id);
+        return arrayMove(socialMedia, oldIndex, newIndex);
+      });
+    }
+  };
+
+  const rows = socialMedia.map((item) => {
     const { rating, title, id } = item;
     return (
       <Stack key={id} gap={1}>
@@ -83,11 +108,20 @@ export const SocialMediaContainer = () => {
         </Grid>
         <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>
-      <Container
-        style={{ maxWidth: "100%", width: "100%", padding: "0" }}
-        ref={parent as RefObject<any>}
-      >
-        {rows}
+      <Container style={{ maxWidth: "100%", width: "100%", padding: "0" }}>
+        <DndContext
+          modifiers={[restrictToVerticalAxis]}
+          onDragEnd={handleDragEnd}
+          sensors={sensors}
+          id={idDnD}
+        >
+          <SortableContext
+            strategy={verticalListSortingStrategy}
+            items={socialMedia}
+          >
+            {rows}
+          </SortableContext>
+        </DndContext>
       </Container>
     </Stack>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 "use client";
 
 import { Button, Flex, useMantineColorScheme } from "@mantine/core";
@@ -7,9 +8,14 @@ import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 
 export default function BtnActions({
+  description,
+  labelBtn,
+  loading,
   title,
   close,
+  color,
   icon,
+  id,
 }: BtnActionProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -39,17 +45,18 @@ export default function BtnActions({
         styles={(theme) => ({
           section: { fontSize: "1.2rem" },
         })}
-
         onClick={() =>
           notifications.show({
-            color: 'blue',
-            title: 'I will never close',
-            message: 'unless you click X',
-            autoClose: 1000
+            id: id,
+            color: color,
+            title: title,
+            message: description,
+            autoClose: 1000,
+            withCloseButton: true,
           })
         }
       >
-        {title}
+        {labelBtn}
       </Button>
     </Flex>
   );

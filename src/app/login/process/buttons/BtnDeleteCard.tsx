@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  HiOutlineDotsVertical,
   HiOutlineCheck,
   HiOutlineTrash,
   IoClose,
@@ -14,19 +13,18 @@ import {
   Stack,
   Text,
   Flex,
-  Menu,
 } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
-import { TaskDeleteLayout } from "./TaskDeleteLayout";
 
-export const BtnTaskAction = () => {
+export default function BtnDeleteCard() {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   return (
     <>
       <Modal
+        centered
         opened={opened}
         onClose={close}
         withCloseButton={false}
@@ -37,7 +35,7 @@ export const BtnTaskAction = () => {
         }}
       >
         <Stack>
-          <TaskDeleteLayout />
+          prueba
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
@@ -84,60 +82,12 @@ export const BtnTaskAction = () => {
           </Flex>
         </Stack>
       </Modal>
-
-      <Menu
-        withArrow
-        shadow="md"
-        closeOnClickOutside
-        closeOnItemClick
-        position="bottom-end"
-      >
-        <Menu.Target>
-          <Center
-            className={classes.btnDot_icon}
-            styles={{
-              root: {
-                position: "absolute",
-                right: "0.4rem",
-                top: "0.5rem",
-                fontSize: "1.2rem",
-              },
-            }}
-          >
-            <HiOutlineDotsVertical />
-          </Center>
-        </Menu.Target>
-        <Menu.Dropdown>
-          <Menu.Item
-            color="#2BDD66"
-            onClick={() =>
-              notifications.show({
-                id: crypto.randomUUID(),
-                color: "#2BDD66",
-                title: "Tarea Completada",
-                message: "La tarea ha sido completada satisfactoriamente 😎!",
-                autoClose: 1000,
-                withCloseButton: true,
-              })
-            }
-          >
-            <Flex gap={6}>
-              <Center style={{ fontSize: "1.2rem" }}>
-                <HiOutlineCheck />
-              </Center>
-              <Text>Completado</Text>
-            </Flex>
-          </Menu.Item>
-          <Menu.Item color="#F0185C" onClick={open}>
-            <Flex gap={6}>
-              <Center style={{ fontSize: "1.2rem" }}>
-                <HiOutlineTrash />
-              </Center>
-              <Text>Eliminar</Text>
-            </Flex>
-          </Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
+      <Flex gap={6} onClick={open}>
+        <Center style={{ fontSize: "1.2rem" }}>
+          <HiOutlineTrash />
+        </Center>
+        <Text>Eliminar</Text>
+      </Flex>
     </>
   );
-};
+}

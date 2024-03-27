@@ -3,11 +3,11 @@
 
 import { useDisclosure } from "@mantine/hooks";
 import {
+  useMantineColorScheme,
   Button,
   Drawer,
-  Flex,
   Stack,
-  useMantineColorScheme,
+  Flex,
 } from "@mantine/core";
 import {
   HiOutlineFolderAdd,
@@ -16,10 +16,10 @@ import {
   TbTemplate,
   TbMailPlus,
   BiBellPlus,
-  LuGoal,
-  BiTask,
   IoClose,
-} from "../../icons";
+  LuGoal,
+  // BiTask,
+} from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
 import { BtnAddProps, iconList } from "@/interface/interface";
 import { notifications } from "@mantine/notifications";
@@ -134,7 +134,7 @@ function BtnAdd({
             <Button
               fullWidth
               variant="filled"
-              leftSection={<BiTask />}
+              leftSection={selectIcon(iconTag)}
               classNames={{
                 root:
                   colorScheme === "light"
@@ -155,7 +155,6 @@ function BtnAdd({
                   withCloseButton: true,
                   onClose: () => console.log("unmounted"),
                   onOpen: () => console.log("mounted"),
-                  icon: icon,
                   className: classes,
                   // style: { backgroundColor: "red" },
                   loading: loading,
@@ -171,7 +170,11 @@ function BtnAdd({
         leftSection={selectIcon(iconTag)}
         styles={(theme) => ({
           section: { fontSize: "1.2rem" },
-          root: { width: `${label.length * 1.3}rem` },
+          root: {
+            padding: "0.6rem 1.5rem",
+            height: "100%",
+            width: "100%",
+          },
         })}
         // fullWidth
         onClick={open}

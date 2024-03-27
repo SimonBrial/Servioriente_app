@@ -1,4 +1,4 @@
-import { Flex, Stack } from "@mantine/core";
+import { Box, Flex, Stack } from "@mantine/core";
 import InsideContainer from "@/components/container/InsideContainer";
 import { CountIndicator } from "@/components/CountIndicator";
 import { HiOutlineExclamationCircle } from "@/icons";
@@ -83,31 +83,34 @@ function page(): JSX.Element {
         <BtnFilter>
           <GeneralFilterLayout />
         </BtnFilter>
-
-        <BtnAdd
-          iconTag="folder"
-          label="Nueva Carpeta"
-          key={crypto.randomUUID()}
-          color=""
-          description=""
-          id={crypto.randomUUID()}
-          labelBtn=""
-          title=""
-        >
-          <CreateFolderLayout title="Crear Nueva Carpeta" />
-        </BtnAdd>
-        <BtnAdd
-          iconTag="add"
-          label="Nueva Alarma"
-          key={crypto.randomUUID()}
-          color=""
-          description=""
-          id={crypto.randomUUID()}
-          labelBtn=""
-          title=""
-        >
-          <CreateAlarmLayout title="Crear Nueva Alarma" />
-        </BtnAdd>
+        <Box>
+          <BtnAdd
+            iconTag="folder"
+            label="Nueva Carpeta"
+            key={crypto.randomUUID()}
+            id={crypto.randomUUID()}
+            labelBtn="Crear Carpeta"
+            title="Carpeta Creada 📂!"
+            description="La carpeta ha sido creada satisfactoriamente, añadele recordatorios 😎!"
+            color="green"
+          >
+            <CreateFolderLayout title="Crear Nueva Carpeta" />
+          </BtnAdd>
+        </Box>
+        <Box>
+          <BtnAdd
+            iconTag="add"
+            label="Nueva Alarma"
+            key={crypto.randomUUID()}
+            id={crypto.randomUUID()}
+            labelBtn="Crear Alarma"
+            color="green"
+            title="Recordatorio Creado 🔔"
+            description="el recordatorio ha sido creado satisfactoriamente 😎!"
+          >
+            <CreateAlarmLayout title="Crear Nueva Alarma" />
+          </BtnAdd>
+        </Box>
       </Flex>
       <InsideContainer
         offset={120}

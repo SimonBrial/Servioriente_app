@@ -3,11 +3,11 @@ import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
 import BtnAdd from "@/components/buttons/BtnAdd";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
-import { Flex, Stack, Container } from "@mantine/core";
+import { Flex, Stack, Container, Box } from "@mantine/core";
 import { CountIndicator } from "../../../components/CountIndicator";
 import { HiOutlineUserCircle } from "@/icons";
 import CreateClientLayout from "./CreateClientLayout";
-import { ProcessContainer } from "./prueba/ProcessContainer";
+import { ProcessContainer } from "./ProcessContainer";
 
 function page(): JSX.Element {
   return (
@@ -27,20 +27,21 @@ function page(): JSX.Element {
           <BtnFilter>
             <GeneralFilterLayout />
           </BtnFilter>
-          <BtnReportGenerate>prueba</BtnReportGenerate>
-
-          <BtnAdd
-            iconTag="add-user"
-            label="Nuevo Cliente"
-            key={crypto.randomUUID()}
-            color=""
-            description=""
-            id={crypto.randomUUID()}
-            labelBtn=""
-            title=""
-          >
-            <CreateClientLayout />
-          </BtnAdd>
+          <BtnReportGenerate />
+          <Box>
+            <BtnAdd
+              iconTag="add-user"
+              label="Nuevo Cliente"
+              key={crypto.randomUUID()}
+              id={crypto.randomUUID()}
+              labelBtn="Crear Registro"
+              color="green"
+              title="El registro ha sido creado 📄"
+              description="La tarjeta del registro para la generacion de la RCV, ha sido creado satisfactoriamente 😎!"
+            >
+              <CreateClientLayout />
+            </BtnAdd>
+          </Box>
         </Flex>
         <ProcessContainer />
       </Stack>

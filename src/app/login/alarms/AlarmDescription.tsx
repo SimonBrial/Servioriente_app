@@ -135,7 +135,16 @@ export default function AlarmDescription({
             >
               Cancelar
             </Button>
-            <BtnEdit buttonStyles="normal">
+            <BtnEdit
+              key={crypto.randomUUID()}
+              id={crypto.randomUUID()}
+              buttonStyles="normal"
+              description=""
+              labelBtn=""
+              color=""
+              title=""
+              icon
+            >
               <CreateAlarmLayout title="Editar Alarma" />
             </BtnEdit>
           </Flex>

@@ -14,6 +14,8 @@ import { underScoreColor } from "@/utils/underScoreColor";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { DashboardProcessListItems } from "@/interface/interface";
 import classes from "@/styles/dashboard.module.css";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 
 export const DashboardProcessListItem = ({
   processTitle,
@@ -23,9 +25,19 @@ export const DashboardProcessListItem = ({
   id,
 }: DashboardProcessListItems) => {
   const { colorScheme } = useMantineColorScheme();
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   return (
     <Box
+      style={style}
+      ref={setNodeRef}
+      {...attributes}
       className={
         colorScheme === "light"
           ? classes.dashboardItem_row
@@ -35,7 +47,7 @@ export const DashboardProcessListItem = ({
     >
       <Flex justify={"space-between"} align={"center"} p={0}>
         <Grid.Col span={1}>
-          <Center className="handler">
+          <Center className="handler" {...listeners}>
             <MdOutlineDragIndicator />
           </Center>
         </Grid.Col>

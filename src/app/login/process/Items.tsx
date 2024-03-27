@@ -6,9 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 // Mantine
 import {
   useMantineColorScheme,
-  UnstyledButton,
   Divider,
-  Center,
   Avatar,
   Stack,
   Title,
@@ -17,12 +15,12 @@ import {
   Box,
 } from "@mantine/core";
 // Others
-import { HiOutlineDotsVertical } from "@/icons";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import classes from "@/styles/card-process.module.css";
 import heightClasses from "@/styles/height-view.module.css";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { CardProcessProps } from "@/interface/interface";
+import BtnCardAction from "./buttons/BtnCardAction";
 
 export function Items({
   clientName,
@@ -33,6 +31,15 @@ export function Items({
   id,
 }: CardProcessProps) {
   const { colorScheme } = useMantineColorScheme();
+
+  /* Doesn't delete this
+  const [colorDivider, setColorDivider] = useState<string>("red");
+
+  useEffect(() => {
+    setColorDivider(card.columnId);
+  }, [card.columnId]);
+  */
+
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: id,
@@ -124,20 +131,39 @@ export function Items({
           </Stack>
         </Flex>
         <Stack justify="space-between" align="end">
-          <UnstyledButton className={classes.verticalDots}>
-            <Center
-              styles={(theme) => ({
-                root: {
-                  color:
-                    colorScheme === "light"
-                      ? `${theme.colors.lightTheme[3]}`
-                      : `${theme.colors.darkTheme[2]}`,
-                },
-              })}
-            >
-              <HiOutlineDotsVertical />
-            </Center>
-          </UnstyledButton>
+          {/* <Menu
+            closeOnClickOutside
+            withArrow
+            shadow="md"
+            closeOnItemClick
+            zIndex={0}
+          >
+            <Menu.Target>
+              <Center
+                className={classes.verticalDots}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[3]}`
+                        : `${theme.colors.darkTheme[2]}`,
+                  },
+                })}
+              >
+                <HiOutlineDotsVertical />
+              </Center>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item color="#F06418">
+                <BtnEditCard editRef={editRef} key={crypto.randomUUID()} />
+              </Menu.Item>
+              <Menu.Item color="#F0185C">
+                <BtnDeleteCard />
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu> */}
+          <BtnCardAction />
+          {/* <UnstyledButton className={classes.verticalDots}></UnstyledButton> */}
           <Text
             size={"xs"}
             styles={(theme) => ({

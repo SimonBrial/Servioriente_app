@@ -5,21 +5,26 @@ import {
   Center,
   Drawer,
   Stack,
+  Flex,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { HiOutlinePencil, HiOutlineSave } from "@/icons";
+import { HiOutlinePencil, HiOutlineSave, IoClose } from "@/icons";
 import btnClass from "@/styles/btn-styles.module.css";
 import { EditButtonStyles } from "@/types/types";
 import TooltipLayout from "../TooltipLayout";
-import BtnActions from "./BtnActions";
+import { notifications } from "@mantine/notifications";
+import { BtnEditProps } from "@/interface/interface";
 
 export default function BtnEdit({
-  children,
   buttonStyles,
-}: {
-  children: React.ReactNode;
-  buttonStyles: EditButtonStyles;
-}): JSX.Element {
+  description,
+  children,
+  labelBtn,
+  color,
+  title,
+  icon,
+  id,
+}: BtnEditProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
 
@@ -98,7 +103,50 @@ export default function BtnEdit({
           }}
         >
           {children}
-          <BtnActions icon={<HiOutlineSave />} title="Guardar" close={close} />
+          <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
+            <Button
+              onClick={close}
+              fullWidth
+              variant="white"
+              leftSection={<IoClose />}
+              styles={(theme) => ({
+                root: {
+                  border: `2px solid ${theme.colors.lightTheme[6]}`,
+                  color: `${theme.colors.lightTheme[6]}`,
+                },
+                section: { fontSize: "1.2rem" },
+              })}
+            >
+              Cancelar
+            </Button>
+            <Button
+              fullWidth
+              variant="filled"
+              leftSection={<HiOutlineSave />}
+              classNames={{
+                root:
+                  colorScheme === "light"
+                    ? btnClass.btnAdd
+                    : btnClass.btnAdd_dark,
+              }}
+              styles={(theme) => ({
+                section: { fontSize: "1.2rem" },
+              })}
+              onClick={() => {
+                notifications.show({
+                  id: id,
+                  color: color,
+                  title: title,
+                  message: description,
+                  autoClose: 1000,
+                  withCloseButton: true,
+                });
+                close();
+              }}
+            >
+              {labelBtn}
+            </Button>
+          </Flex>
         </Stack>
       </Drawer>
       {buttonType(buttonStyles)}

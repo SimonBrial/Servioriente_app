@@ -12,6 +12,7 @@ import {
   Stack,
   Flex,
   Text,
+  Box,
 } from "@mantine/core";
 import React, { useState } from "react";
 import { GoalsLayout } from "./GoalsLayout";
@@ -88,18 +89,20 @@ export const MetricsFilterInput = ({
             </Badge>
           </Flex>
           {btnDisable ? (
-            <BtnAdd
-              iconTag="add-event"
-              label="Nueva Meta"
-              key={crypto.randomUUID()}
-              color=""
-              description=""
-              id={crypto.randomUUID()}
-              labelBtn=""
-              title=""
-            >
-              <GoalsLayout />
-            </BtnAdd>
+            <Box>
+              <BtnAdd
+                iconTag="add-event"
+                label="Nueva Meta"
+                key={crypto.randomUUID()}
+                color=""
+                description=""
+                id={crypto.randomUUID()}
+                labelBtn=""
+                title=""
+              >
+                <GoalsLayout />
+              </BtnAdd>
+            </Box>
           ) : (
             <></>
           )}

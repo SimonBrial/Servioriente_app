@@ -1,4 +1,4 @@
-import { Flex } from "@mantine/core";
+import { Box, Flex } from "@mantine/core";
 import ListDataBase from "@/app/login/data-base/ListDataBase";
 import ListLayout from "./layout";
 import { FilterContainer } from "@/components/container/FilterContainer";
@@ -29,20 +29,21 @@ function page(): JSX.Element {
         <BtnFilter>
           <GeneralFilterLayout />
         </BtnFilter>
-        <BtnReportGenerate>prueba</BtnReportGenerate>
-
-        <BtnAdd
-          iconTag="add-user"
-          label="Nuevo Usuario"
-          key={crypto.randomUUID()}
-          color=""
-          description=""
-          id={crypto.randomUUID()}
-          labelBtn=""
-          title=""
-        >
-          <ClientRegister />
-        </BtnAdd>
+        <BtnReportGenerate />
+        <Box>
+          <BtnAdd
+            iconTag="add-user"
+            label="Nuevo Usuario"
+            key={crypto.randomUUID()}
+            id={crypto.randomUUID()}
+            labelBtn="Crear Registro"
+            color="green"
+            title="El Registro en la Base de Datos 📄"
+            description="Se ha creado el registro en la Base de Datos satisfactoriamente 😎!"
+          >
+            <ClientRegister />
+          </BtnAdd>
+        </Box>
       </Flex>
       <FilterContainer />
       <ListDataBase />

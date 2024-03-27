@@ -1,43 +1,37 @@
-import { AdminTypeSelect } from "@/components/inputs/AdminTypeSelect";
-import { AgeInput } from "@/components/inputs/AgeInput";
-import { CalendarInput } from "@/components/inputs/CalendarInput";
-import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
-import { MunicipalitySelect } from "@/components/inputs/MunicipalitySelect";
-import { StateSelect } from "@/components/inputs/StateSelect";
+import { ContainerInside } from "@/components/container/ContainerInside";
 import { TitleLayout } from "@/components/layout/TitleLayout";
-import { HiOutlineMail, HiOutlineUser } from "@/icons";
+import RegisterInfo from "@/components/RegisterInfo";
 import { Stack } from "@mantine/core";
 import React from "react";
 
-export const AdminDescriptionLayout = ({ size }: { size: string }) => {
+export const AdminDescriptionLayout = () => {
   return (
-    <Stack gap={8}>
-      <TitleLayout color="" icon="" onText title="Datos del Usuario" />
-      <Stack gap={6}>
-        <HorizontalInputLayout
-          inputSize={size}
-          asterisk={false}
-          icon={<HiOutlineUser />}
-          title="Nombre"
-        />
-        <HorizontalInputLayout
-          inputSize={size}
-          asterisk={false}
-          icon={<HiOutlineUser />}
-          title="Apellido"
-        />
-        <HorizontalInputLayout
-          inputSize={size}
-          asterisk={false}
-          icon={<HiOutlineMail />}
-          title="Correo"
-        />
-        <CalendarInput title="Fecha de Cumpleaños" withTitle width={size} />
-        <AgeInput inputSize={size} />
-        <AdminTypeSelect inputSize={size} />
-        <StateSelect inputSize={size} />
-        <MunicipalitySelect estado="Amazonas" inputSize={size} />
+    <ContainerInside withBorder width="70%" allWhite>
+      <Stack gap={8} px={10}>
+        <TitleLayout color="" icon="" onText title="Datos del Usuario" />
+        <Stack px={20} py={10}>
+          <RegisterInfo keyInput={"Nombre: "} valueInput={"Simon"} />
+          <RegisterInfo keyInput={"Apellido: "} valueInput={"Briceño"} />
+          <RegisterInfo
+            keyInput={"Tipo de Admin: "}
+            valueInput={"Super Admin"}
+          />
+          <RegisterInfo keyInput={"Edad: "} valueInput={"27"} />
+          <RegisterInfo
+            keyInput={"Correo: "}
+            valueInput={"correo@correo.com"}
+          />
+          <RegisterInfo
+            keyInput={"Fecha de Cumpleaños: "}
+            valueInput={"16 Dic. 1996"}
+          />
+          <RegisterInfo
+            keyInput={"Ubicacion: "}
+            valueInput={"Carabobo, Valencia VE"}
+          />
+          <RegisterInfo keyInput={"Oficina: "} valueInput={"Valencia"} />
+        </Stack>
       </Stack>
-    </Stack>
+    </ContainerInside>
   );
 };

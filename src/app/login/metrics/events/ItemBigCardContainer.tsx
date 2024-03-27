@@ -122,7 +122,16 @@ export const ItemBigCardContainer = () => {
           <BtnSee>
             <EventDescriptionLayout />
           </BtnSee>
-          <BtnEdit buttonStyles="special">
+          <BtnEdit
+            key={crypto.randomUUID()}
+            id={crypto.randomUUID()}
+            buttonStyles="special"
+            description=""
+            labelBtn=""
+            color=""
+            title=""
+            icon
+          >
             <EventEditLayout />
           </BtnEdit>
           {element.status === "No Completada" ? (

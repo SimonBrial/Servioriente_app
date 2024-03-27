@@ -3,7 +3,7 @@
 import BtnDelete from "@/components/buttons/BtnDelete";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import BtnSee from "@/components/buttons/BtnSee";
-import { BiCrown } from "@/icons";
+import { BiCrown, HiOutlineSave, HiOutlineTrash } from "@/icons";
 import {
   useMantineColorScheme,
   Container,
@@ -16,6 +16,7 @@ import React from "react";
 import { SuperAdminUserLayout } from "./SuperAdminUserLayout";
 import { SuperAdminDescription } from "./SuperAdminDescription";
 import { SuperAdminDeleteLayout } from "./SuperAdminDeleteLayout";
+import { IconLayout } from "@/components/IconLayout";
 
 export const SuperAdminCard = ({ admin }: { admin: boolean }) => {
   const { colorScheme } = useMantineColorScheme();
@@ -72,13 +73,38 @@ export const SuperAdminCard = ({ admin }: { admin: boolean }) => {
           )}
         </Flex>
         <Flex gap={"xs"}>
-          <BtnDelete>
+          <BtnDelete
+            color="green"
+            icon={
+              <IconLayout>
+                <HiOutlineTrash />
+              </IconLayout>
+            }
+            id={crypto.randomUUID()}
+            labelBtn="Aceptar"
+            title="Registro Eliminado"
+            description="El registro ha sido eliminado satisfactoriamente 😎!"
+            key={crypto.randomUUID()}
+          >
             <SuperAdminDeleteLayout />
           </BtnDelete>
           <BtnSee>
             <SuperAdminDescription />
           </BtnSee>
-          <BtnEdit buttonStyles="special">
+          <BtnEdit
+            key={crypto.randomUUID()}
+            id={crypto.randomUUID()}
+            buttonStyles="special"
+            labelBtn="Guardar"
+            description="Los datos del usuario han sido edistados satisfactoriamente 😎!"
+            color="green"
+            title="Datos de Usuario Editados"
+            icon={
+              <IconLayout>
+                <HiOutlineSave />
+              </IconLayout>
+            }
+          >
             <SuperAdminUserLayout />
           </BtnEdit>
         </Flex>

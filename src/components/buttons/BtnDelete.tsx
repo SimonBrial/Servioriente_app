@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 "use client";
 
 import { useDisclosure } from "@mantine/hooks";
@@ -10,25 +11,34 @@ import {
   Modal,
   Stack,
   Title,
+  Button,
+  Flex,
 } from "@mantine/core";
-import { HiOutlineTrash, HiOutlineCheck } from "../../icons";
+import { HiOutlineTrash, HiOutlineCheck, IoClose } from "../../icons";
 import btnClass from "@/styles/btn-styles.module.css";
 import { TitleLayout } from "../layout/TitleLayout";
-import BtnActions from "./BtnActions";
 import React from "react";
 import TooltipLayout from "../TooltipLayout";
+import { notifications } from "@mantine/notifications";
+import { BtnDeleteProps } from "@/interface/interface";
 
 export default function BtnDelete({
+  description,
   children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element {
+  labelBtn,
+  loading,
+  title,
+  color,
+  icon,
+  id,
+}: BtnDeleteProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
 
   return (
     <>
       <Modal
+        centered
         opened={opened}
         onClose={close}
         withCloseButton={false}
@@ -74,7 +84,50 @@ export default function BtnDelete({
               {children}
             </ScrollArea>
           </Container>
-          <BtnActions title="Aceptar" icon={<HiOutlineCheck />} close={close} />
+          <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
+            <Button
+              onClick={close}
+              fullWidth
+              variant="white"
+              leftSection={<IoClose />}
+              styles={(theme) => ({
+                root: {
+                  border: `2px solid ${theme.colors.lightTheme[6]}`,
+                  color: `${theme.colors.lightTheme[6]}`,
+                },
+                section: { fontSize: "1.2rem" },
+              })}
+            >
+              Cancelar
+            </Button>
+            <Button
+              fullWidth
+              variant="filled"
+              leftSection={<HiOutlineCheck />}
+              classNames={{
+                root:
+                  colorScheme === "light"
+                    ? btnClass.btnAdd
+                    : btnClass.btnAdd_dark,
+              }}
+              styles={(theme) => ({
+                section: { fontSize: "1.2rem" },
+              })}
+              onClick={() => {
+                notifications.show({
+                  id: id,
+                  color: color,
+                  title: title,
+                  message: description,
+                  autoClose: 1000,
+                  withCloseButton: true,
+                });
+                close();
+              }}
+            >
+              {labelBtn}
+            </Button>
+          </Flex>
         </Stack>
       </Modal>
 

@@ -1,4 +1,5 @@
-import { HiOutlineDotsVertical } from "@/icons";
+"use client";
+
 import { degreeType } from "@/types/types";
 import degreeColor from "@/utils/degreeColor";
 import {
@@ -6,16 +7,13 @@ import {
   Collapse,
   Divider,
   Avatar,
-  Center,
   Stack,
   Title,
   Flex,
   Text,
   Box,
-  Popover,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
 import { BtnTaskAction } from "./BtnTaskAction";
 
 interface TaskDayCardProps {
@@ -35,7 +33,6 @@ export const TaskDayItem = ({
 }: TaskDayCardProps) => {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { toggle }] = useDisclosure(false);
-  const [openedPop, setOpened] = useState(false);
 
   return (
     <>
@@ -128,31 +125,7 @@ export const TaskDayItem = ({
               </Text>
             </Stack>
           </Flex>
-          <Popover
-            opened={openedPop}
-            onChange={setOpened}
-            shadow="md"
-            width={150}
-            position="left"
-            offset={5}
-            withArrow
-            trapFocus
-            arrowPosition="center"
-            closeOnClickOutside={false}
-          >
-            <Popover.Target>
-              <Center
-                onClick={() => setOpened((o) => !o)}
-                style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
-              >
-                <HiOutlineDotsVertical />
-              </Center>
-            </Popover.Target>
-            <Popover.Dropdown>
-              <BtnTaskAction type="complete"/>
-              <BtnTaskAction type="delete"/>
-            </Popover.Dropdown>
-          </Popover>
+          <BtnTaskAction />
         </Flex>
         <Collapse
           transitionTimingFunction="linear"

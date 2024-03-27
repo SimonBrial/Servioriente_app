@@ -9,19 +9,29 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 export const AsideAdminContainer = () => {
   const { colorScheme } = useMantineColorScheme();
+  const path = usePathname();
+  console.log(path);
   return (
     <ContainerInside withBorder width="30%" allWhite={false}>
       <Stack justify="space-between" style={{ height: "100%" }}>
         <Stack
-          style={{
-            height: "100%",
-          }}
           align="center"
           justify="center"
+          styles={(theme) => ({
+            root: {
+              height: "100%",
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}
         >
           <Avatar size={"7rem"} />
           <Stack gap={4} align="center">
@@ -46,15 +56,23 @@ export const AsideAdminContainer = () => {
             <Text>Ofi. Valencia</Text>
           </Stack>
         </Stack>
-        <Button
-          leftSection={<TbEdit />}
-          styles={(theme) => ({
-            section: { fontSize: "1.2rem" },
-            root: { backgroundColor: `${theme.colors.principalTheme[6]}` },
-          })}
-        >
-          Editar
-        </Button>
+        {path === "/login/settings/admin" ? (
+          <Link
+            href={"/login/settings/admin/editing"}
+            style={{ width: "100%" }}
+          >
+            <Button
+              fullWidth
+              leftSection={<TbEdit />}
+              styles={(theme) => ({
+                section: { fontSize: "1.2rem" },
+                root: { backgroundColor: `${theme.colors.principalTheme[6]}` },
+              })}
+            >
+              Editar
+            </Button>
+          </Link>
+        ) : null}
       </Stack>
     </ContainerInside>
   );

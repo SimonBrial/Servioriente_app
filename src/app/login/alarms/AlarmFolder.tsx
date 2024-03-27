@@ -100,7 +100,16 @@ export default function AlarmFolder(): JSX.Element {
             transitionProps={{ transition: "scale", duration: 300 }}
           >
           </Tooltip> */}
-          <BtnEdit buttonStyles="unstyled">
+          <BtnEdit
+            key={crypto.randomUUID()}
+            id={crypto.randomUUID()}
+            buttonStyles="unstyled"
+            description=""
+            labelBtn=""
+            color=""
+            title=""
+            icon
+          >
             <CreateFolderLayout title="Editar Carpeta" />
           </BtnEdit>
         </Flex>

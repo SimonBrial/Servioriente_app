@@ -37,6 +37,25 @@ export function ProcessContainer() {
   const [containers, setContainers] = useState<DNDType[]>(dataFakeCard);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
+  /*
+  --> This code's block is for change the drag section od the card item container
+
+  function changeProperty(
+    id: string,
+    arr: CardProcessProps[],
+  ): CardProcessProps[] {
+    arr.forEach((arrCards) => {
+      if (arrCards.columnId !== id) {
+        arrCards.columnId = id;
+      }
+    });
+    return arr;
+  }
+  useEffect(() => {
+    setCardsArray(changeProperty(id, tasks));
+  }, [tasks.length]);
+  */
+
   // Find the value of the items
   function findValueOfItems(id: UniqueIdentifier | undefined, type: string) {
     if (type === "container") {
