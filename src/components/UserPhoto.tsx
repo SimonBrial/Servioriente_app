@@ -3,14 +3,15 @@
 import { useState } from "react";
 import { AiOutlinePaperClip } from "@/icons";
 import {
+  useMantineColorScheme,
+  UnstyledButton,
+  FileButton,
   Avatar,
   Center,
-  FileButton,
-  Flex,
   Stack,
-  Text,
   Title,
-  UnstyledButton,
+  Text,
+  Flex,
 } from "@mantine/core";
 
 export default function UserPhoto({
@@ -18,6 +19,7 @@ export default function UserPhoto({
 }: {
   userIconSize: string;
 }): JSX.Element {
+  const { colorScheme } = useMantineColorScheme();
   const [file, setFile] = useState<File | null>(null);
   return (
     <Flex align={"center"} justify={"center"} gap={10} w={"100%"}>
@@ -32,7 +34,15 @@ export default function UserPhoto({
         <FileButton onChange={setFile} accept="image/png,image/jpeg">
           {(props) => (
             <UnstyledButton {...props}>
-              <Title order={6}>CARGAR FOTO</Title>
+              <Title
+                order={6}
+                style={{
+                  color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+                  textAlign: "center",
+                }}
+              >
+                CARGAR FOTO
+              </Title>
             </UnstyledButton>
           )}
         </FileButton>

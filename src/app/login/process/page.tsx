@@ -6,7 +6,7 @@ import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
 import { Flex, Stack, Container, Box } from "@mantine/core";
 import { CountIndicator } from "../../../components/CountIndicator";
 import { HiOutlineUserCircle } from "@/icons";
-import CreateClientLayout from "./CreateClientLayout";
+import CreateClientLayout from "./layouts/CreateClientLayout";
 import { ProcessContainer } from "./ProcessContainer";
 
 function page(): JSX.Element {

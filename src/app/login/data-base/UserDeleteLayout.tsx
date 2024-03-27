@@ -1,6 +1,6 @@
 import RegisterInfo from "@/components/RegisterInfo";
 import { Stack } from "@mantine/core";
-import StatusBadge from "../../../components/badge/StatusBadge";
+import StatusBadge from "@/components/badge/StatusBadge";
 
 export const UserDeleteLayout = () => {
   const fakeArr = {
@@ -16,7 +16,7 @@ export const UserDeleteLayout = () => {
     birthdate: "16-12-1996",
   };
   return (
-    <Stack>
+    <Stack gap={6}>
       <RegisterInfo keyInput={"Nombre: "} valueInput={fakeArr.name} />
       <RegisterInfo keyInput={"Apellido: "} valueInput={fakeArr.lastName} />
       <RegisterInfo keyInput={"Vehiculo: "} valueInput={fakeArr.car} />

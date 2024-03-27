@@ -33,7 +33,7 @@ const sections: sidebarItems[] = [
   },
   {
     icon: <AiOutlineIdcard className={classes.icon} />,
-    label: "Cards",
+    label: "Procesos",
     direction: "/login/process",
   },
   {
@@ -68,7 +68,7 @@ const sections: sidebarItems[] = [
   },
   {
     icon: <HiOutlineCog className={classes.icon} />,
-    label: "Configuraciones",
+    label: "Configuracion",
     direction: "/login/settings",
   },
 ];

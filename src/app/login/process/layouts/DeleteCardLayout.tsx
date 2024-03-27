@@ -1,25 +1,19 @@
 import { GeneralDivider } from "@/components/GeneralDivider";
-import { TitleLayout } from "@/components/layout/TitleLayout";
+import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
 import {
   useMantineColorScheme,
+  Container,
   Stack,
   Flex,
   Text,
-  Container,
 } from "@mantine/core";
 import React from "react";
 
-export const EditCardLayout = () => {
+export default function DeleteCardLayout() {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Stack gap={8}>
-      <TitleLayout
-        color=""
-        icon=""
-        onText
-        title="Eliminar Tarjeta"
-        key={crypto.randomUUID()}
-      />
+      <TitleSimpleLayout title="Eliminar Registro" key={crypto.randomUUID()} />
       <Container
         styles={(theme) => ({
           root: {
@@ -178,4 +172,4 @@ export const EditCardLayout = () => {
       </Container>
     </Stack>
   );
-};
+}

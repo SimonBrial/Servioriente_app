@@ -283,8 +283,18 @@
 .btnDot_icon {
   padding: 0.1rem 0.05rem;
   border-radius: 6px;
+  color: #696969;
 }
 .btnDot_icon:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #9a90ef1a;
+}
+.btnDot_icon_dark {
+  padding: 0.1rem 0.05rem;
+  border-radius: 6px;
+  color: #eff3f5;
+}
+.btnDot_icon_dark:hover {
   transition: all 0.3s ease-in-out;
   background-color: #9a90ef1a;
 }

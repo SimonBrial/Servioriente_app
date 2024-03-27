@@ -1,13 +1,24 @@
 "use client";
 
-import { ScrollArea, Stack, Table, useMantineColorScheme } from "@mantine/core";
-import BtnFn from "@/components/buttons/BtnFn";
+import {
+  useMantineColorScheme,
+  ScrollArea,
+  Stack,
+  Table,
+  Flex,
+} from "@mantine/core";
 import { useState } from "react";
 import classes from "@/styles/list-styles.module.css";
 import heightClasses from "@/styles/height-view.module.css";
 import { listDB as elements } from "@/data/ListDB";
 import PaginationLayout from "./PaginationLayout";
 import HeaderRowItem from "./HeaderRowItem";
+import BtnDelete from "@/components/buttons/BtnDelete";
+import BtnSee from "@/components/buttons/BtnSee";
+import { UserDeleteLayout } from "./UserDeleteLayout";
+import { UserDescriptionLayout } from "./UserDescriptionLayout";
+import BtnEdit from "@/components/buttons/BtnEdit";
+import RegisterEditLayout from "./RegisterEditLayout";
 
 export default function ListDataBase(): JSX.Element {
   const [scrolled, setScrolled] = useState(false);
@@ -23,7 +34,34 @@ export default function ListDataBase(): JSX.Element {
       }}
     >
       <Table.Td style={{ paddingRight: "0", width: "2.5rem" }}>
-        <BtnFn />
+        <Flex gap={6} align={"center"}>
+          <BtnDelete
+            key={crypto.randomUUID()}
+            description="El registro del usuario ha sido eliminado  de la base de datos satisfactoriamente!"
+            labelBtn="Aceptar"
+            color="#2BDD66"
+            title="El registro ha sido eliminado"
+            id={crypto.randomUUID()}
+            icon
+          >
+            <UserDeleteLayout />
+          </BtnDelete>
+          <BtnSee>
+            <UserDescriptionLayout />
+          </BtnSee>
+          <BtnEdit
+            key={crypto.randomUUID()}
+            buttonStyles="special"
+            description="El registro ha sido editado y guardado satisfactoriamente 😎!"
+            labelBtn="Guardar"
+            color="#2BDD66"
+            title="Registro Editado"
+            id={crypto.randomUUID()}
+            icon
+          >
+            <RegisterEditLayout />
+          </BtnEdit>
+        </Flex>
       </Table.Td>
       <Table.Td>{element.name}</Table.Td>
       <Table.Td>{element.lastName}</Table.Td>

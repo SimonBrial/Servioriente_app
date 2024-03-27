@@ -6,11 +6,14 @@ import {
   HiOutlineCheck,
   HiOutlineTrash,
   IoClose,
+  HiOutlineSave,
 } from "@/icons";
 import {
   useMantineColorScheme,
+  Drawer,
   Center,
   Button,
+  Portal,
   Modal,
   Stack,
   Text,
@@ -20,13 +23,17 @@ import {
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
-import { EditCardLayout } from "../EditCardLayout";
+import DeleteCardLayout from "../layouts/DeleteCardLayout";
+import { useState } from "react";
+import EditCardLayout from "../layouts/EditCardLayout";
 
 export default function BtnCardAction() {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
+  const [showDrawer, setShowDrawer] = useState<boolean>(false);
   return (
     <>
+      {/* This modal is to delete the card */}
       <Modal
         centered
         opened={opened}
@@ -39,7 +46,7 @@ export default function BtnCardAction() {
         }}
       >
         <Stack>
-          <EditCardLayout />
+          <DeleteCardLayout />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
@@ -84,17 +91,93 @@ export default function BtnCardAction() {
           </Flex>
         </Stack>
       </Modal>
-
+      {/* This drawer is to edit the card */}
+      <Portal>
+        <Drawer
+          onClose={() => setShowDrawer(false)}
+          closeOnClickOutside={false}
+          withCloseButton={false}
+          opened={showDrawer}
+          position="right"
+          styles={{
+            content: {
+              backgroundColor: colorScheme === "light" ? "#F8F8F8" : "#262749",
+            },
+          }}
+        >
+          <Stack justify="space-between" style={{ height: "96vh" }}>
+            <EditCardLayout />
+            <Flex
+              align={"center"}
+              gap={"sm"}
+              style={{ height: "2.25rem", padding: "0 16px" }}
+            >
+              <Button
+                onClick={() => setShowDrawer(false)}
+                fullWidth
+                variant="white"
+                leftSection={<IoClose />}
+                styles={(theme) => ({
+                  root: {
+                    border: `2px solid ${theme.colors.lightTheme[6]}`,
+                    color: `${theme.colors.lightTheme[6]}`,
+                  },
+                  section: { fontSize: "1.2rem" },
+                })}
+              >
+                Cancelar
+              </Button>
+              <Button
+                fullWidth
+                variant="filled"
+                leftSection={<HiOutlineSave />}
+                classNames={{
+                  root:
+                    colorScheme === "light"
+                      ? classes.btnAdd
+                      : classes.btnAdd_dark,
+                }}
+                styles={(theme) => ({
+                  section: { fontSize: "1.2rem" },
+                })}
+                onClick={() => {
+                  setShowDrawer(false);
+                  notifications.show({
+                    id: crypto.randomUUID(),
+                    color: "#2BDD66",
+                    title: "Registro Editado",
+                    message:
+                      "El Registro ha sido editado satisfactoriamente 😎!",
+                    autoClose: 1000,
+                    withCloseButton: true,
+                  });
+                }}
+              >
+                Guardar
+              </Button>
+            </Flex>
+          </Stack>
+        </Drawer>
+      </Portal>
       <Menu
         position="bottom-end"
         closeOnClickOutside
         closeOnItemClick
         shadow="md"
         withArrow
+        styles={{
+          dropdown: {
+            backgroundColor: colorScheme === "light" ? "#F8F8F8" : "#262749",
+          },
+        }}
       >
         <Menu.Target>
           <Center
-            className={classes.btnDot_icon}
+            className={
+              colorScheme === "light"
+                ? classes.btnDot_icon
+                : classes.btnDot_icon_dark
+            }
             styles={{
               root: {
                 position: "absolute",
@@ -108,7 +191,10 @@ export default function BtnCardAction() {
           </Center>
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Item color="#F06418">
+          <Menu.Item
+            color="#F06418"
+            onClick={() => setShowDrawer((drawer) => !drawer)}
+          >
             <Flex gap={6}>
               <Center style={{ fontSize: "1.2rem" }}>
                 <HiOutlinePencil />

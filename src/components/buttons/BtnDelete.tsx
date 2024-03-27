@@ -79,7 +79,7 @@ export default function BtnDelete({
               borderRadius: "6px",
             }}
           >
-            <ScrollArea h={350} offsetScrollbars>
+            <ScrollArea h={350} offsetScrollbars scrollbarSize={2} pr={5}>
               {" "}
               {children}
             </ScrollArea>

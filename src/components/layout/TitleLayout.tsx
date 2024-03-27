@@ -44,7 +44,7 @@ export function TitleLayout({
                   ? color !== ""
                     ? color
                     : "#EFF3F5"
-                  : `${color}`,
+                  : color,
             textAlign: "center",
           }}
         >
