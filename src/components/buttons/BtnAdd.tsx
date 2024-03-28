@@ -153,8 +153,6 @@ function BtnAdd({
                   message: description,
                   autoClose: 1000,
                   withCloseButton: true,
-                  onClose: () => console.log("unmounted"),
-                  onOpen: () => console.log("mounted"),
                   className: classes,
                   // style: { backgroundColor: "red" },
                   loading: loading,

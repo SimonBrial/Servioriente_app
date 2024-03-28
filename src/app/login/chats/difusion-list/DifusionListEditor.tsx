@@ -4,12 +4,7 @@
 import { BtnPreview } from "@/components/buttons/BtnPreview";
 import BtnSend from "@/components/buttons/BtnSend";
 import InsideContainer from "@/components/container/InsideContainer";
-import {
-  useMantineColorScheme,
-  ScrollArea,
-  Stack,
-  Flex,
-} from "@mantine/core";
+import { useMantineColorScheme, ScrollArea, Stack, Flex } from "@mantine/core";
 import React from "react";
 import { RichTextEditor, Link } from "@mantine/tiptap";
 import { useEditor } from "@tiptap/react";
@@ -147,7 +142,11 @@ export const DifusionListEditor = (): JSX.Element => {
       </InsideContainer>
       <Flex gap={6} justify={"end"}>
         <BtnSend
-          label="Enviar Mensaje"
+          labelBtn="Enviar Mensaje"
+          description=""
+          iconTag
+          id={crypto.randomUUID()}
+          title=""
           close={() => console.log("FromBtnSend")}
           key={crypto.randomUUID()}
         />

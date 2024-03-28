@@ -15,10 +15,9 @@ import {
   Grid,
 } from "@mantine/core";
 import AlarmCard from "./AlarmCard";
-import BtnEdit from "@/components/buttons/BtnEdit";
-import CreateFolderLayout from "./CreateFolderLayout";
 import { PiFolderSimpleDashed } from "@/icons";
 import { alarmDataArray as arrayTest } from "@/data/AlarmData";
+import BtnFolderActions from "./buttons/BtnFolderActions";
 
 export default function AlarmFolder(): JSX.Element {
   const [opened, { toggle }] = useDisclosure(false);
@@ -100,18 +99,19 @@ export default function AlarmFolder(): JSX.Element {
             transitionProps={{ transition: "scale", duration: 300 }}
           >
           </Tooltip> */}
-          <BtnEdit
+          {/* <BtnEdit
             key={crypto.randomUUID()}
             id={crypto.randomUUID()}
             buttonStyles="unstyled"
-            description=""
-            labelBtn=""
-            color=""
-            title=""
+            description="Cambios en los datos de la carpeta fueron registrados satisfactoriamente 😎!"
+            title="Carpeta Editada"
+            labelBtn="Guardar"
+            color="#2BDD66"
             icon
           >
             <CreateFolderLayout title="Editar Carpeta" />
-          </BtnEdit>
+          </BtnEdit> */}
+          <BtnFolderActions />
         </Flex>
         <Text
           size="sm"

@@ -72,6 +72,14 @@
   background-color: #c8cdd0;
   transition: all 0.2s ease-in-out;
 }
+.btnEdit_folder {
+  padding: 0.5rem;
+  border-radius: 100%;
+}
+.btnEdit_folder:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #9a90ef1a;
+}
 
 .btnEdit_item {
   color: #696969;

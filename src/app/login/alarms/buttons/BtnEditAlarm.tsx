@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlinePencil } from "@/icons";
-import CreateFolderLayout from "../CreateFolderLayout";
+import CreateFolderLayout from "../layouts/CreateFolderLayout";
 
 export default function BtnEditAlarm({ editRef }: { editRef: any }) {
   const [opened, { open, close }] = useDisclosure(false);

@@ -8,8 +8,8 @@ import {
   Flex,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { HiOutlinePencil, HiOutlineSave, IoClose } from "@/icons";
-import btnClass from "@/styles/btn-styles.module.css";
+import { HiOutlineDotsVertical, HiOutlinePencil, HiOutlineSave, IoClose } from "@/icons";
+import classes from "@/styles/btn-styles.module.css";
 import { EditButtonStyles } from "@/types/types";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
@@ -57,8 +57,8 @@ export default function BtnEdit({
             aria-label="Editar"
             className={
               colorScheme === "light"
-                ? btnClass.btnEdit_item
-                : btnClass.btnEdit_item_dark
+                ? classes.btnEdit_item
+                : classes.btnEdit_item_dark
             }
             onClick={open}
           >
@@ -70,9 +70,9 @@ export default function BtnEdit({
       );
     } else if (type === "unstyled") {
       buttonSty = (
-        <UnstyledButton style={{ fontSize: "1.5rem" }} onClick={open}>
+        <UnstyledButton style={{ fontSize: "1.5rem" }} onClick={open} className={classes.btnEdit_folder}>
           <Center>
-            <HiOutlinePencil />
+            <HiOutlineDotsVertical />
           </Center>
         </UnstyledButton>
       );
@@ -126,8 +126,8 @@ export default function BtnEdit({
               classNames={{
                 root:
                   colorScheme === "light"
-                    ? btnClass.btnAdd
-                    : btnClass.btnAdd_dark,
+                    ? classes.btnAdd
+                    : classes.btnAdd_dark,
               }}
               styles={(theme) => ({
                 section: { fontSize: "1.2rem" },

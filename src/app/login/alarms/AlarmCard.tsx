@@ -1,22 +1,10 @@
 "use client";
 
-import {
-  Container,
-  Divider,
-  Center,
-  Stack,
-  Title,
-  Flex,
-  Text,
-  Menu,
-} from "@mantine/core";
+import { Container, Divider, Stack, Title, Flex, Text } from "@mantine/core";
 import AlarmCardDate from "./AlarmCardDate";
 import { AlarmCardProps } from "../../../interface/interface";
 import { useHover } from "@mantine/hooks";
-import classes from "@/styles/btn-styles.module.css";
-import { HiOutlineDotsVertical, HiOutlinePencil } from "@/icons";
-import { useRef } from "react";
-import BtnDeleteAlarm from "./buttons/BtnDeleteAlarm";
+import BtnAlarmAction from "./buttons/BtnAlarmAction";
 
 export default function AlarmCard({
   description,
@@ -28,8 +16,6 @@ export default function AlarmCard({
   id,
 }: AlarmCardProps): JSX.Element {
   const { hovered, ref } = useHover();
-  const editRef = useRef();
-  const deleteRef = useRef();
   return (
     <>
       <Container
@@ -70,44 +56,7 @@ export default function AlarmCard({
                 styles={(theme) => ({ root: { borderColor: `${"#FD0E78"}` } })}
               />
             </Stack>
-            <Menu
-              withArrow
-              shadow="md"
-              closeOnClickOutside
-              closeOnItemClick={false}
-              zIndex={
-                deleteRef.current !== undefined || editRef.current !== undefined
-                  ? 0
-                  : 300
-              }
-            >
-              <Menu.Target>
-                <Center
-                  className={classes.btnDot_icon}
-                  styles={{
-                    root: { color: "#FD0E78", fontSize: "1.2rem" },
-                  }}
-                >
-                  <HiOutlineDotsVertical />
-                </Center>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item color="#F06418">
-                  <Flex gap={6}>
-                    <Center style={{ fontSize: "1.2rem" }}>
-                      <HiOutlinePencil />
-                    </Center>
-                    <Text>Editar</Text>
-                  </Flex>
-                </Menu.Item>
-                <Menu.Item color="#F0185C">
-                  <BtnDeleteAlarm
-                    key={crypto.randomUUID()}
-                    deleteRef={deleteRef}
-                  />
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
+            <BtnAlarmAction />
           </Flex>
           <AlarmCardDate
             key={crypto.randomUUID()}

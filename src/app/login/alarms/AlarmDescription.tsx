@@ -17,7 +17,7 @@ import PrivateInput from "./PrivateInput";
 import AutomatedInput from "./AutomatedInput";
 import { IoClose, MdOutlinePlace } from "@/icons";
 import BtnEdit from "@/components/buttons/BtnEdit";
-import CreateAlarmLayout from "./CreateAlarmLayout";
+import CreateAlarmLayout from "./layouts/CreateAlarmLayout";
 import { ContainerInside } from "@/components/container/ContainerInside";
 
 export default function AlarmDescription({
@@ -140,7 +140,7 @@ export default function AlarmDescription({
               id={crypto.randomUUID()}
               buttonStyles="normal"
               description=""
-              labelBtn=""
+              labelBtn="Guardar"
               color=""
               title=""
               icon

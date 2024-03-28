@@ -30,8 +30,12 @@ export const FormatsContainer = () => {
         <BtnPreview />
         <BtnSend
           close={() => console.log("From FormatsContainer")}
-          label="Crear Plantilla"
+          labelBtn="Crear Plantilla"
           key={crypto.randomUUID()}
+          id={crypto.randomUUID()}
+          description=""
+          iconTag
+          title=""
         />
       </Flex>
     </Stack>

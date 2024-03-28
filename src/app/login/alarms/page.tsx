@@ -9,8 +9,8 @@ import BtnAdd from "@/components/buttons/BtnAdd";
 import AlarmDescription from "./AlarmDescription";
 import { AlarmObj } from "@/interface/interface";
 import FolderContainer from "./FolderContainer";
-import CreateAlarmLayout from "./CreateAlarmLayout";
-import CreateFolderLayout from "./CreateFolderLayout";
+import CreateAlarmLayout from "./layouts/CreateAlarmLayout";
+import CreateFolderLayout from "./layouts/CreateFolderLayout";
 
 const fakeAlarmDescription: AlarmObj = {
   id: crypto.randomUUID(),

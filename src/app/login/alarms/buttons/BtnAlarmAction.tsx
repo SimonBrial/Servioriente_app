@@ -5,8 +5,8 @@ import {
   HiOutlinePencil,
   HiOutlineCheck,
   HiOutlineTrash,
-  HiOutlineSave,
   IoClose,
+  HiOutlineSave,
 } from "@/icons";
 import {
   useMantineColorScheme,
@@ -23,17 +23,17 @@ import {
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
-import DeleteCardLayout from "../layouts/DeleteCardLayout";
 import { useState } from "react";
-import EditCardLayout from "../layouts/EditCardLayout";
+import DeleteAlarmLayout from "../layouts/DeleteAlarmLayout";
+import CreateAlarmLayout from "../layouts/CreateAlarmLayout";
 
-export default function BtnCardAction() {
+export default function BtnAlarmAction() {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
   return (
     <>
-      {/* This modal is to delete the card */}
+      {/* This modal is to delete the alarm */}
       <Modal
         centered
         opened={opened}
@@ -46,7 +46,7 @@ export default function BtnCardAction() {
         }}
       >
         <Stack>
-          <DeleteCardLayout />
+          <DeleteAlarmLayout />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
@@ -78,8 +78,8 @@ export default function BtnCardAction() {
                 notifications.show({
                   id: crypto.randomUUID(),
                   color: "#2BDD66",
-                  title: "Tarjeta Eliminada",
-                  message: "Tarjeta de proceso eliminada satisfactoriamente!",
+                  title: "Recordatorio Eliminado",
+                  message: "Recordatorio eliminado satisfactoriamente!",
                   autoClose: 1000,
                   withCloseButton: true,
                 });
@@ -91,7 +91,7 @@ export default function BtnCardAction() {
           </Flex>
         </Stack>
       </Modal>
-      {/* This drawer is to edit the card */}
+      {/* This drawer is to edit the alarm */}
       <Portal>
         <Drawer
           onClose={() => setShowDrawer(false)}
@@ -105,13 +105,18 @@ export default function BtnCardAction() {
             },
           }}
         >
-          <Stack justify="space-between" style={{ height: "96vh" }}>
-            <EditCardLayout />
-            <Flex
-              align={"center"}
-              gap={"sm"}
-              style={{ height: "2.25rem", padding: "0 16px" }}
-            >
+          <Stack
+            style={{
+              height: "95vh",
+              padding: "0 16px",
+              // border: "1px solid red",
+            }}
+          >
+            <CreateAlarmLayout
+              title="Editar Alarma"
+              key={crypto.randomUUID()}
+            />
+            <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
               <Button
                 onClick={() => setShowDrawer(false)}
                 fullWidth
@@ -179,12 +184,7 @@ export default function BtnCardAction() {
                 : classes.btnDot_icon_dark
             }
             styles={{
-              root: {
-                position: "absolute",
-                right: "0.4rem",
-                top: "0.5rem",
-                fontSize: "0.9rem",
-              },
+              root: { color: "#FD0E78", fontSize: "1.2rem" },
             }}
           >
             <HiOutlineDotsVertical />

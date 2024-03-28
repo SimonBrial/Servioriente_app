@@ -167,12 +167,12 @@
 /* -------------------------- Mail Section -------------------------- */
 @media (min-width: 1280px) {
   .sendMail_scroll_container {
-    height: 71vh;
+    height: 62vh;
   }
 }
 @media (min-width: 1281px) {
   .sendMail_scroll_container {
-    height: 64vh;
+    height: 54vh;
   }
 }
 /* -------------------------- Calendar Section -------------------------- */
@@ -230,7 +230,7 @@
 /* -------------------------- Alarm Section -------------------------- */
 @media (min-width: 1280px) {
   .createFolder_scroll_container {
-    height: 68vh;
+    height: 66vh;
   }
 }
 @media (min-width: 1281px) {
@@ -240,11 +240,11 @@
 }
 @media (min-width: 1280px) {
   .createAlarm_scroll_container {
-    height: 45vh;
+    height: 43.5vh;
   }
 }
 @media (min-width: 1281px) {
   .createAlarm_scroll_container {
-    height: 31vh;
+    height: 30vh;
   }
 }

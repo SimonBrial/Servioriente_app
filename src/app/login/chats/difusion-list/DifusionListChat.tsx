@@ -7,6 +7,7 @@ import { ContainerInside } from "@/components/container/ContainerInside";
 import heightClasses from "@/styles/height-view.module.css";
 import BtnSend from "@/components/buttons/BtnSend";
 import { BtnPreview } from "@/components/buttons/BtnPreview";
+import { IoIosSend } from "@/icons";
 
 export const DifusionListChat = (): JSX.Element => {
   // Se le debe suministrar un array con el nombre de los contactos a los que se les desee enviar el mensaje
@@ -41,7 +42,11 @@ export const DifusionListChat = (): JSX.Element => {
       <Flex gap={6} justify={"end"}>
         <BtnPreview />
         <BtnSend
-          label="Enviar Mensaje"
+          description="El mensaje enviado a la lista de Difusion ha sido satisfactoriamente!"
+          iconTag={<IoIosSend />}
+          id={crypto.randomUUID()}
+          title="Mensajes enviado a la lista de Difusion"
+          labelBtn="Enviar Mensaje"
           close={() => console.log("FromBtnSend")}
           key={crypto.randomUUID()}
         />

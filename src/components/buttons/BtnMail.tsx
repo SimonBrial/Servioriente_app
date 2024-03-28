@@ -11,6 +11,7 @@ import classes from "@/styles/btn-styles.module.css";
 import BtnSend from "./BtnSend";
 import { BtnCancel } from "./BtnCancel";
 import NewEmailLayout from "@/app/login/mails/NewEmailLayout";
+import { BiMailSend } from "@/icons";
 
 export default function BtnMail() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -31,13 +32,17 @@ export default function BtnMail() {
           },
         }}
       >
-        <Stack gap={4}>
+        <Stack gap={8}>
           <NewEmailLayout />
           <Flex gap={4}>
             <BtnCancel fnCancel={close} key={crypto.randomUUID()} />
             <BtnSend
-              label="Enviar Mensaje"
-              close={() => console.log("FromBtnSend")}
+              description="El correo ha sido enviado satisfactoriamente!"
+              iconTag={<BiMailSend />}
+              id={crypto.randomUUID()}
+              title="Correo Enviado"
+              labelBtn="Enviar Correo"
+              close={close}
               key={crypto.randomUUID()}
             />
           </Flex>

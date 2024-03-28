@@ -10,14 +10,11 @@ import {
   Text,
 } from "@mantine/core";
 import AsideSearch from "../AsideSearch";
-import { BtnBackSection } from "@/components/buttons/BtnBackSection";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { UserContactCard } from "../UserContactCard";
-import { BtnAcept } from "@/components/buttons/BtnAcept";
 import InsideContainer from "@/components/container/InsideContainer";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import classes from "@/styles/general-styles.module.css";
-// import { useListState } from "@mantine/hooks";
 
 export const DifusionListLayout = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
@@ -96,7 +93,7 @@ export const DifusionListLayout = (): JSX.Element => {
         <Stack gap={8}>
           <InsideContainer
             key={crypto.randomUUID()}
-            offset={340}
+            offset={295}
             withBackground={false}
             withBorder={false}
           >
@@ -128,10 +125,10 @@ export const DifusionListLayout = (): JSX.Element => {
               </Stack>
             </ScrollArea>
           </InsideContainer>
-          <Flex style={{ width: "100%" }} gap={4}>
+          {/* <Flex style={{ width: "100%" }} gap={4}>
             <BtnBackSection label="Volver" dir="/login/chats" withStyles />
             <BtnAcept />
-          </Flex>
+          </Flex> */}
         </Stack>
       </Stack>
     </Stack>

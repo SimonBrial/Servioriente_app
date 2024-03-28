@@ -18,10 +18,10 @@ import {
   CgCornerDoubleUpLeft,
   CgCornerUpRight,
   CgCornerUpLeft,
-  HiOutlineStar,
 } from "@/icons";
-import mailReadViewClasses from "@/styles/btn-styles.module.css";
+import classes from "@/styles/btn-styles.module.css";
 import TooltipLayout from "@/components/TooltipLayout";
+import { BtnFavorite } from "@/components/buttons/BtnFavorite";
 
 export default function MailReadView(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
@@ -29,11 +29,11 @@ export default function MailReadView(): JSX.Element {
   return (
     <>
       <Container
-        styles={(theme) => ({
+        styles={{
           root: { height: "12%", padding: "0.2rem 0.2rem 0.5rem 0.2rem" },
-        })}
+        }}
       >
-        <Flex style={{}} gap={"sm"} w={"100%"} align={"center"}>
+        <Flex gap={"sm"} w={"100%"} align={"center"}>
           <Avatar src={null} alt="no image here" color="indigo" size="lg" />
           <Stack justify={"space-between"} w={"100%"} gap={12}>
             <Flex
@@ -61,24 +61,7 @@ export default function MailReadView(): JSX.Element {
                 justify={"end"}
                 gap={2}
               >
-                <TooltipLayout
-                  label="Agregar a favoritos"
-                  position="bottom"
-                  key={crypto.randomUUID()}
-                >
-                  <UnstyledButton
-                    classNames={{
-                      root:
-                        colorScheme === "light"
-                          ? mailReadViewClasses.btnMail
-                          : mailReadViewClasses.btnMail_dark,
-                    }}
-                  >
-                    <Center style={{ fontSize: "1.5rem" }}>
-                      <HiOutlineStar />
-                    </Center>
-                  </UnstyledButton>
-                </TooltipLayout>
+                <BtnFavorite size="small" key={crypto.randomUUID()} />
                 <TooltipLayout
                   label="Responder"
                   position="bottom"
@@ -88,8 +71,8 @@ export default function MailReadView(): JSX.Element {
                     classNames={{
                       root:
                         colorScheme === "light"
-                          ? mailReadViewClasses.btnMail
-                          : mailReadViewClasses.btnMail_dark,
+                          ? classes.btnMail
+                          : classes.btnMail_dark,
                     }}
                   >
                     <Center style={{ fontSize: "1.5rem" }}>
@@ -106,8 +89,8 @@ export default function MailReadView(): JSX.Element {
                     classNames={{
                       root:
                         colorScheme === "light"
-                          ? mailReadViewClasses.btnMail
-                          : mailReadViewClasses.btnMail_dark,
+                          ? classes.btnMail
+                          : classes.btnMail_dark,
                     }}
                   >
                     <Center style={{ fontSize: "1.5rem" }}>
@@ -124,8 +107,8 @@ export default function MailReadView(): JSX.Element {
                     classNames={{
                       root:
                         colorScheme === "light"
-                          ? mailReadViewClasses.btnMail
-                          : mailReadViewClasses.btnMail_dark,
+                          ? classes.btnMail
+                          : classes.btnMail_dark,
                     }}
                   >
                     <Center style={{ fontSize: "1.5rem" }}>
@@ -142,8 +125,8 @@ export default function MailReadView(): JSX.Element {
                     classNames={{
                       root:
                         colorScheme === "light"
-                          ? mailReadViewClasses.btnMail
-                          : mailReadViewClasses.btnMail_dark,
+                          ? classes.btnMail
+                          : classes.btnMail_dark,
                     }}
                   >
                     <Center style={{ fontSize: "1.5rem" }}>

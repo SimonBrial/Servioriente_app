@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlineTrash, HiOutlineCheck, IoClose } from "@/icons";
-import DeleteAlarmLayout from "../DeleteAlarmLayout";
+import DeleteAlarmLayout from "../layouts/DeleteAlarmLayout";
 import classesBtn from "@/styles/btn-styles.module.css"
 import { notifications } from "@mantine/notifications";
 

@@ -40,10 +40,7 @@ export default function HorizontalInputLayout({
             color: `${theme.colors.lightTheme[3]}`,
           },
           section: {
-            color:
-              colorScheme === "light"
-                ? `${theme.colors.lightTheme[3]}`
-                : `${theme.colors.darkTheme[2]}`,
+            color: theme.colors.lightTheme[3],
           },
         })}
       />

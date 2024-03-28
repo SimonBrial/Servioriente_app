@@ -23,17 +23,17 @@ import {
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
-import DeleteCardLayout from "../layouts/DeleteCardLayout";
 import { useState } from "react";
-import EditCardLayout from "../layouts/EditCardLayout";
+import DeleteFolderLayout from "../layouts/DeleteFolderLayout";
+import CreateFolderLayout from "../layouts/CreateFolderLayout";
 
-export default function BtnCardAction() {
+export default function BtnFolderActions() {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
   return (
     <>
-      {/* This modal is to delete the card */}
+      {/* This modal is to delete the alarm */}
       <Modal
         centered
         opened={opened}
@@ -46,7 +46,7 @@ export default function BtnCardAction() {
         }}
       >
         <Stack>
-          <DeleteCardLayout />
+          <DeleteFolderLayout />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
@@ -78,8 +78,8 @@ export default function BtnCardAction() {
                 notifications.show({
                   id: crypto.randomUUID(),
                   color: "#2BDD66",
-                  title: "Tarjeta Eliminada",
-                  message: "Tarjeta de proceso eliminada satisfactoriamente!",
+                  title: "Carpeta Eliminada",
+                  message: "Carpeta eliminado satisfactoriamente 😎!",
                   autoClose: 1000,
                   withCloseButton: true,
                 });
@@ -91,7 +91,7 @@ export default function BtnCardAction() {
           </Flex>
         </Stack>
       </Modal>
-      {/* This drawer is to edit the card */}
+      {/* This drawer is to edit the alarm */}
       <Portal>
         <Drawer
           onClose={() => setShowDrawer(false)}
@@ -105,13 +105,15 @@ export default function BtnCardAction() {
             },
           }}
         >
-          <Stack justify="space-between" style={{ height: "96vh" }}>
-            <EditCardLayout />
-            <Flex
-              align={"center"}
-              gap={"sm"}
-              style={{ height: "2.25rem", padding: "0 16px" }}
-            >
+          <Stack
+            justify="space-between"
+            style={{ height: "95vh", padding: "0 16px" }}
+          >
+            <CreateFolderLayout
+              title="Editar Carpeta"
+              key={crypto.randomUUID()}
+            />
+            <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
               <Button
                 onClick={() => setShowDrawer(false)}
                 fullWidth
@@ -145,9 +147,9 @@ export default function BtnCardAction() {
                   notifications.show({
                     id: crypto.randomUUID(),
                     color: "#2BDD66",
-                    title: "Registro Editado",
+                    title: "Carpeta Editada",
                     message:
-                      "El Registro ha sido editado satisfactoriamente 😎!",
+                      "Los datos de la carpeta han sido editado satisfactoriamente 😎!",
                     autoClose: 1000,
                     withCloseButton: true,
                   });
@@ -173,18 +175,9 @@ export default function BtnCardAction() {
       >
         <Menu.Target>
           <Center
-            className={
-              colorScheme === "light"
-                ? classes.btnDot_icon
-                : classes.btnDot_icon_dark
-            }
+            className={classes.btnEdit_folder}
             styles={{
-              root: {
-                position: "absolute",
-                right: "0.4rem",
-                top: "0.5rem",
-                fontSize: "0.9rem",
-              },
+              root: { color: "#FD0E78", fontSize: "1.5rem" },
             }}
           >
             <HiOutlineDotsVertical />
