@@ -61,7 +61,7 @@ export default function MailReadView(): JSX.Element {
                 justify={"end"}
                 gap={2}
               >
-                <BtnFavorite size="small" key={crypto.randomUUID()} />
+                <BtnFavorite size="medium" key={crypto.randomUUID()} />
                 <TooltipLayout
                   label="Responder"
                   position="bottom"

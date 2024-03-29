@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "@/icons";
 import classes from "@/styles/general-styles.module.css";
+import { notifications } from "@mantine/notifications";
 
 export default function PrivateInput({
   userName,
@@ -88,6 +89,27 @@ export default function PrivateInput({
           checked={checked}
           onChange={(event) => {
             setChecked(event.currentTarget.checked);
+            if (!checked) {
+              notifications.show({
+                id: crypto.randomUUID(),
+                color: "#2BDD66",
+                title: "Recordatorio Privado",
+                message:
+                  "El recordatorio solo podra ser visto por usted!",
+                autoClose: 1000,
+                withCloseButton: true,
+              });
+            } else {
+              notifications.show({
+                id: crypto.randomUUID(),
+                color: "#115dfe",
+                title: "Recordatorio Publico",
+                message:
+                  "El recordatorio ahora se podra observar por cualquier usuario que acceda a la aplicacion!",
+                autoClose: 1000,
+                withCloseButton: true,
+              });
+            }
           }}
           classNames={{
             input:

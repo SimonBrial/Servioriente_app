@@ -11,7 +11,7 @@ import classes from "@/styles/btn-styles.module.css";
 import BtnSend from "./BtnSend";
 import { BtnCancel } from "./BtnCancel";
 import NewEmailLayout from "@/app/login/mails/NewEmailLayout";
-import { BiMailSend } from "@/icons";
+import { BiMailSend, HiOutlinePencil } from "@/icons";
 
 export default function BtnMail() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -49,12 +49,13 @@ export default function BtnMail() {
         </Stack>
       </Drawer>
       <Button
+        leftSection={<HiOutlinePencil />}
         onClick={open}
         classNames={{
           root: colorScheme === "light" ? classes.btnAdd : classes.btnAdd_dark,
         }}
       >
-        Enviar Nuevo Correo
+        Redactar Correo
       </Button>
     </>
   );

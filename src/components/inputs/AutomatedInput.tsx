@@ -2,14 +2,15 @@
 "use client";
 import { useState, useEffect } from "react";
 import {
-  Center,
-  Checkbox,
-  Flex,
-  Title,
   useMantineColorScheme,
+  Checkbox,
+  Center,
+  Title,
+  Flex,
 } from "@mantine/core";
 import { PiRobot } from "@/icons";
 import classes from "@/styles/general-styles.module.css";
+import { notifications } from "@mantine/notifications";
 
 export default function AutomatedInput({
   automatedStatus,
@@ -61,6 +62,27 @@ export default function AutomatedInput({
           checked={checked}
           onChange={(event) => {
             setChecked(event.currentTarget.checked);
+            if (!checked) {
+              notifications.show({
+                id: crypto.randomUUID(),
+                color: "#2BDD66",
+                title: "Recordatorio Automatizado",
+                message:
+                  "El recordatorio ha sido automatizado satisfactoriamente 🤖!",
+                autoClose: 1000,
+                withCloseButton: true,
+              });
+            } else {
+              notifications.show({
+                id: crypto.randomUUID(),
+                color: "#115dfe",
+                title: "Automatizacion Eliminada",
+                message:
+                  "La automatizacion del recordatorio ha sido eliminada satisfactoriamente 🤖!",
+                autoClose: 1000,
+                withCloseButton: true,
+              });
+            }
           }}
           style={{ marginTop: "-5px" }}
           classNames={{
@@ -73,20 +95,4 @@ export default function AutomatedInput({
       </Flex>
     </Flex>
   );
-}
-{
-  /* <span
-              style={{
-                color: "#696969",
-                marginBottom: "5px",
-              }}
-            >
-              <PiRobot
-                style={{
-                  fontSize: "1.3rem",
-                  marginTop: "0px",
-                  color: colorScheme === "light" ? " #cdcdcd" : "#EFF3F5",
-                }}
-              />
-            </span> */
 }

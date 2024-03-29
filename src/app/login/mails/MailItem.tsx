@@ -1,13 +1,7 @@
 "use client";
 
 import {
-  HiOutlineMailOpen,
-  HiOutlineStar,
-  HiOutlineSave,
-} from "@/icons";
-import {
   useMantineColorScheme,
-  UnstyledButton,
   Checkbox,
   Avatar,
   Center,
@@ -19,11 +13,145 @@ import {
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import BtnMailTrash from "./BtnMailTrash";
+import { useState } from "react";
+import { BtnFavorite } from "@/components/buttons/BtnFavorite";
+import BtnReadMail from "@/components/buttons/BtnReadMail";
+import BtnArchive from "@/components/buttons/BtnArchive";
 
 export default function MailItem(): JSX.Element {
-  const { hovered, ref } = useHover();
   const { colorScheme } = useMantineColorScheme();
+  const { hovered, ref } = useHover();
+  const [checked, setChecked] = useState<boolean>(false);
+  // const [toDelete, setToDelete] = useState<boolean>(false);
 
+  if (checked || hovered) {
+    return (
+      <Group
+        ref={ref}
+        mb={5}
+        styles={(theme) => ({
+          root: {
+            padding: "0.3rem 0.8rem",
+            border:
+              colorScheme === "light"
+                ? `1px solid ${theme.colors.lightTheme[2]}`
+                : `1px solid ${theme.colors.darkTheme[6]}`,
+            backgroundColor:
+              colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
+            borderRadius: "6px",
+            transition: "all 0.3s ease-in-out"
+            // boxShadow: "0px 10px 12px -10px rgba(27, 27, 27, 0.4)",
+          },
+        })}
+      >
+        <Flex
+          justify={"start"}
+          gap={"md"}
+          style={{
+            width: "100%",
+            cursor: "pointer",
+            padding: "0.2rem",
+          }}
+        >
+          <Center px={9}>
+            <Checkbox
+              onChange={(event) => setChecked(event.currentTarget.checked)}
+              checked={checked}
+              color="blue"
+            />
+          </Center>
+
+          <Stack gap={0} style={{ width: "100%" }}>
+            <Flex
+              justify={"space-between"}
+              style={{ margin: "-0.2rem", position: "relative" }}
+            >
+              <Title
+                order={5}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[3]}`
+                        : `${theme.colors.darkTheme[2]}`,
+                  },
+                })}
+              >
+                Titulo del mail
+              </Title>
+              <Flex
+                p={0}
+                gap={1}
+                align={"center"}
+                justify={"end"}
+                styles={(theme) => ({
+                  root: {
+                    position: "absolute",
+                    right: "0",
+                    top: "-3px",
+                    padding: "0",
+                    color:
+                      colorScheme === "light"
+                        ? theme.colors.lightTheme[3]
+                        : theme.colors.darkTheme[2],
+                  },
+                })}
+              >
+                <BtnReadMail />
+                <BtnFavorite size={"small"} />
+                <BtnArchive />
+              </Flex>
+            </Flex>
+            <Flex gap={12} style={{ margin: "-0.1rem" }} align={"center"}>
+              <Text
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[6]}`
+                        : `${theme.colors.darkTheme[1]}`,
+                  },
+                })}
+              >
+                Header del correo
+              </Text>
+              <Text
+                size="xs"
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[6]}`
+                        : `${theme.colors.darkTheme[1]}`,
+                  },
+                })}
+              >
+                12/10/2023
+              </Text>
+            </Flex>
+            <Text
+              styles={(theme) => ({
+                root: {
+                  margin: "-0.1rem",
+                  color:
+                    colorScheme === "light"
+                      ? theme.colors.lightTheme[3]
+                      : theme.colors.darkTheme[2],
+                },
+              })}
+            >
+              Descripcion del mai...............
+            </Text>
+          </Stack>
+          <BtnMailTrash
+            /* toDelete={toDelete}
+            toDeleteFn={() => setToDelete(toDelete => !toDelete)} */
+            // key={crypto.randomUUID()}
+          />
+        </Flex>
+      </Group>
+    );
+  }
   return (
     <Group
       ref={ref}
@@ -33,22 +161,12 @@ export default function MailItem(): JSX.Element {
           padding: "0.3rem 0.8rem",
           border:
             colorScheme === "light"
-              ? hovered
-                ? `1px solid ${theme.colors.lightTheme[3]}`
-                : `1px solid ${theme.colors.lightTheme[2]}`
-              : hovered
-                ? `1px solid ${theme.colors.lightTheme[3]}`
-                : `1px solid ${theme.colors.darkTheme[5]}`,
+              ? `1px solid ${theme.colors.lightTheme[2]}`
+              : `1px solid ${theme.colors.darkTheme[6]}`,
           backgroundColor:
-            colorScheme === "light"
-              ? hovered
-                ? "#efefef4c"
-                : "#FFFFFF"
-              : hovered
-                ? "#efefef4c"
-                : `${theme.colors.darkTheme[7]}`,
+            colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
           borderRadius: "6px",
-          transition: "0.3s all ease-in-out",
+          boxShadow: "0px 10px 12px -10px rgba(27, 27, 27, 0.4)",
         },
       })}
     >
@@ -61,19 +179,13 @@ export default function MailItem(): JSX.Element {
           padding: "0.2rem",
         }}
       >
-        {hovered ? (
-          <Center px={9}>
-            <Checkbox color="blue" />
-          </Center>
-        ) : (
-          <Avatar
-            src={null}
-            alt="no image here"
-            color="indigo"
-            size="md"
-            style={{ marginTop: "0.6rem" }}
-          />
-        )}
+        <Avatar
+          src={null}
+          alt="no image here"
+          color="indigo"
+          size="md"
+          style={{ marginTop: "0.6rem" }}
+        />
 
         <Stack gap={0} style={{ width: "100%" }}>
           <Flex justify={"space-between"} style={{ margin: "-0.2rem" }}>
@@ -83,67 +195,13 @@ export default function MailItem(): JSX.Element {
                 root: {
                   color:
                     colorScheme === "light"
-                      ? `${theme.colors.lightTheme[3]}`
-                      : `${theme.colors.darkTheme[2]}`,
+                      ? theme.colors.lightTheme[3]
+                      : theme.colors.darkTheme[2],
                 },
               })}
             >
               Titulo del mail
             </Title>
-            {hovered ? (
-              <Flex align={"center"} justify={"end"} style={{ gap: "0.3rem" }}>
-                <UnstyledButton
-                  style={{
-                    color:
-                      colorScheme === "light"
-                        ? hovered
-                          ? "#696969"
-                          : "#696969"
-                        : hovered
-                          ? "#F8F8F8"
-                          : "#696969",
-                  }}
-                >
-                  <Center>
-                    <HiOutlineMailOpen />
-                  </Center>
-                </UnstyledButton>
-                <UnstyledButton
-                  style={{
-                    color:
-                      colorScheme === "light"
-                        ? hovered
-                          ? "#696969"
-                          : "#696969"
-                        : hovered
-                          ? "#F8F8F8"
-                          : "#696969",
-                  }}
-                >
-                  <Center>
-                    <HiOutlineStar />
-                  </Center>
-                </UnstyledButton>
-                <UnstyledButton
-                  style={{
-                    color:
-                      colorScheme === "light"
-                        ? hovered
-                          ? "#696969"
-                          : "#696969"
-                        : hovered
-                          ? "#F8F8F8"
-                          : "#696969",
-                  }}
-                >
-                  <Center>
-                    <HiOutlineSave />
-                  </Center>
-                </UnstyledButton>
-              </Flex>
-            ) : (
-              <></>
-            )}
           </Flex>
           <Flex gap={12} style={{ margin: "-0.1rem" }} align={"center"}>
             <Text
@@ -172,11 +230,20 @@ export default function MailItem(): JSX.Element {
               12/10/2023
             </Text>
           </Flex>
-          <Text style={{ margin: "-0.1rem" }}>
+          <Text
+            styles={(theme) => ({
+              root: {
+                margin: "-0.1rem",
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[3]
+                    : theme.colors.darkTheme[2],
+              },
+            })}
+          >
             Descripcion del mai...............
           </Text>
         </Stack>
-        {hovered ? <BtnMailTrash /> : <></>}
       </Flex>
     </Group>
   );

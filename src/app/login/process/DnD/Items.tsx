@@ -20,7 +20,7 @@ import classes from "@/styles/card-process.module.css";
 import heightClasses from "@/styles/height-view.module.css";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { CardProcessProps } from "@/interface/interface";
-import BtnCardAction from "./buttons/BtnCardAction";
+import BtnCardAction from "../buttons/BtnCardAction";
 
 export function Items({
   clientName,

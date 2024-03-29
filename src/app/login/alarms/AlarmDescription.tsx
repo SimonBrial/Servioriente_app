@@ -13,8 +13,8 @@ import {
 import { useViewportSize } from "@mantine/hooks";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { AlarmProps } from "@/interface/interface";
-import PrivateInput from "./PrivateInput";
-import AutomatedInput from "./AutomatedInput";
+import PrivateInput from "../../../components/inputs/PrivateInput";
+import AutomatedInput from "../../../components/inputs/AutomatedInput";
 import { IoClose, MdOutlinePlace } from "@/icons";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import CreateAlarmLayout from "./layouts/CreateAlarmLayout";

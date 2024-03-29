@@ -25,11 +25,12 @@ import {
 import { useMantineColorScheme, Grid } from "@mantine/core";
 // Others
 import classes from "@/styles/card-process.module.css";
-import heightClasses from "@/styles/height-view.module.css";
+// import heightClasses from "@/styles/height-view.module.css";
 import { DNDType } from "@/interface/interface";
 import { dataFakeCard } from "@/data/initialCards";
 import { Items } from "./Items";
 import { ColumnContainer } from "./ColumnContainer";
+// import InsideContainer from "@/components/container/InsideContainer";
 
 export function ProcessContainer() {
   const DNDid = useId();
@@ -304,73 +305,76 @@ export function ProcessContainer() {
   }
 
   return (
-    <div
-      className={
-        colorScheme === "light"
-          ? heightClasses.column_process_container
-          : heightClasses.column_process_container
-      }
+    <DndContext
+      id={DNDid}
+      sensors={sensors}
+      collisionDetection={closestCorners}
+      onDragStart={handleDragStart}
+      onDragMove={handleDragMove}
+      onDragEnd={handleDragEnd}
     >
-      <DndContext
-        id={DNDid}
-        sensors={sensors}
-        collisionDetection={closestCorners}
-        onDragStart={handleDragStart}
-        onDragMove={handleDragMove}
-        onDragEnd={handleDragEnd}
+      <Grid
+        style={{
+          width: "100%",
+          maxWidth: "100%",
+        }}
+        className={
+          colorScheme === "light"
+            ? classes.containercolumns
+            : classes.containercolumns_dark
+        }
       >
-        <Grid
-          style={{
-            width: "100%",
-            maxWidth: "100%",
-          }}
-          className={
-            colorScheme === "light"
-              ? classes.containercolumns
-              : classes.containercolumns_dark
-          }
-        >
-          {containers.map((container) => (
-            <Grid.Col key={container.id} span={3}>
-              <ColumnContainer
-                lengthArray={container.items.length}
-                title={container.title}
-                id={container.id}
-              >
-                <SortableContext items={container.items.map((i) => i.id)}>
-                  <div>
-                    {container.items.map((i) => (
-                      <Items
-                        clientName={i.clientName}
-                        columnId={i.columnId}
-                        vehicle={i.vehicle}
-                        date={i.date}
-                        tag={i.tag}
-                        key={i.id}
-                        id={i.id}
-                      />
-                    ))}
-                  </div>
-                </SortableContext>
-              </ColumnContainer>
-            </Grid.Col>
-          ))}
-        </Grid>
-        <DragOverlay adjustScale={false}>
-          {/* Drag Overlay For item Item */}
-          {activeId && activeId.toString().includes("item") && (
-            <Items
-              clientName={findItemclientName(activeId)}
-              key={activeId}
-              id={activeId}
-              columnId=""
-              vehicle="Vehicle"
-              date="24/03/2024"
-              tag={0}
-            />
-          )}
-        </DragOverlay>
-      </DndContext>
-    </div>
+        {containers.map((container) => (
+          <Grid.Col key={container.id} span={3}>
+            <ColumnContainer
+              lengthArray={container.items.length}
+              title={container.title}
+              id={container.id}
+            >
+              <SortableContext items={container.items.map((i) => i.id)}>
+                <div>
+                  {container.items.map((i) => (
+                    <Items
+                      clientName={i.clientName}
+                      columnId={i.columnId}
+                      vehicle={i.vehicle}
+                      date={i.date}
+                      tag={i.tag}
+                      key={i.id}
+                      id={i.id}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            </ColumnContainer>
+          </Grid.Col>
+        ))}
+      </Grid>
+      <DragOverlay adjustScale={false}>
+        {/* Drag Overlay For item Item */}
+        {activeId && activeId.toString().includes("item") && (
+          <Items
+            clientName={findItemclientName(activeId)}
+            key={activeId}
+            id={activeId}
+            columnId=""
+            vehicle="Vehicle"
+            date="24/03/2024"
+            tag={0}
+          />
+        )}
+      </DragOverlay>
+    </DndContext>
   );
+}
+
+{
+  /* <div
+    className={
+      colorScheme === "light"
+        ? heightClasses.column_process_container
+        : heightClasses.column_process_container
+    }
+  >
+  </div> */
 }

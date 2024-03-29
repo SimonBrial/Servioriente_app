@@ -27,9 +27,9 @@ export default function SettingsPageContainer() {
         <BtnSave
           key={crypto.randomUUID()}
           id={crypto.randomUUID()}
-          description=""
-          color=""
-          title=""
+          description="Los cambios han sido guardados satisfactoramente!"
+          color="#2BDD66"
+          title="Cambios guardados"
         />
       </Flex>
     </>

@@ -19,6 +19,7 @@ export default function InsideContainer({
 
   return (
     <Container
+      className="aqui_hay_un_problema"
       px={0}
       m={0}
       h={height - offset}

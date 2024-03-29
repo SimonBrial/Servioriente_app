@@ -70,13 +70,13 @@
 }
 @media (min-width: 1280px) {
   .column_process_parent {
-    height: 82.5vh;
+    height: 83.8vh;
     width: 100%;
   }
 }
 @media (min-width: 1281px) {
   .column_process_parent {
-    height: 78.8vh;
+    height: 80vh;
     width: 100%;
   }
 }

@@ -1,8 +1,8 @@
 import { MdOutlineInsertEmoticon, MdTitle } from "@/icons";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { Flex, Stack, Title, Text, ScrollArea } from "@mantine/core";
-import PrivateInput from "../PrivateInput";
-import AutomatedInput from "../AutomatedInput";
+import PrivateInput from "../../../../components/inputs/PrivateInput";
+import AutomatedInput from "../../../../components/inputs/AutomatedInput";
 import WarningInfo from "@/components/WarningInfo";
 import TimeSelect from "../TimeSelect";
 import SelectInput from "@/components/inputs/SelectInput";

@@ -67,6 +67,8 @@ import {
 import {
   LuChevronsUpDown,
   LuCalendarPlus,
+  LuFolderOutput,
+  LuFolderInput,
   LuListTodo,
   LuGoal,
 } from "react-icons/lu";
@@ -172,6 +174,8 @@ export {
   HiOutlineCheck,
   CgCornerUpLeft,
   IoLogoFacebook,
+  LuFolderOutput,
+  LuFolderInput,
   MdOutlineSell,
   FaChartColumn,
   HiOutlineStar,

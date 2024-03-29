@@ -74,18 +74,20 @@ export function AdminEditLayout() {
               Cancelar
             </Button>
           </Link>
-          <BtnSave
-            key={crypto.randomUUID()}
-            id={crypto.randomUUID()}
-            color="green"
-            title="Los cambios han sido guardados"
-            description="Los cambios realizados en el registro del usuario, han sido guardados satisfatoriamente 😎!"
-            icon={
-              <IconLayout>
-                <HiOutlineSave />
-              </IconLayout>
-            }
-          />
+          <Link href={"/login/settings/admin"} style={{ width: "100%" }}>
+            <BtnSave
+              key={crypto.randomUUID()}
+              id={crypto.randomUUID()}
+              color="green"
+              title="Los cambios han sido guardados"
+              description="Los cambios realizados en el registro del usuario, han sido guardados satisfatoriamente 😎!"
+              icon={
+                <IconLayout>
+                  <HiOutlineSave />
+                </IconLayout>
+              }
+            />
+          </Link>
         </Flex>
       </Stack>
     </ContainerInside>
