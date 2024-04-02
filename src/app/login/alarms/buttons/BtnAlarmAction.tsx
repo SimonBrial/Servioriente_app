@@ -113,7 +113,7 @@ export default function BtnAlarmAction() {
             }}
           >
             <CreateAlarmLayout
-              title="Editar Alarma"
+              title="Editar Recordatorio"
               key={crypto.randomUUID()}
             />
             <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
@@ -150,9 +150,9 @@ export default function BtnAlarmAction() {
                   notifications.show({
                     id: crypto.randomUUID(),
                     color: "#2BDD66",
-                    title: "Registro Editado",
+                    title: "Recordatorio Editado",
                     message:
-                      "El Registro ha sido editado satisfactoriamente 😎!",
+                      "El Recordatorio ha sido editado satisfactoriamente 😎!",
                     autoClose: 1000,
                     withCloseButton: true,
                   });

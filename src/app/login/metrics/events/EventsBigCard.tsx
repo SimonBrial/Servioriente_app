@@ -14,7 +14,7 @@ import {
 import classes from "@/styles/metrics.module.css";
 import { HiOutlineDotsVertical } from "@/icons";
 import { useDisclosure } from "@mantine/hooks";
-import { ItemBigCardContainer } from "./ItemBigCardContainer";
+import ItemBigCardContainer from "./ItemBigCardContainer";
 
 export const EventsBigCard = () => {
   const { colorScheme } = useMantineColorScheme();

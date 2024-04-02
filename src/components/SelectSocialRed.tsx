@@ -23,7 +23,7 @@ export function SelectSocialRed(): JSX.Element {
         Red social
       </Title>
       <Select
-        w={200}
+        w={235}
         placeholder="Seleeciona una red"
         data={["Facebook", "Whatsapp", "Instagram"]}
         styles={(theme) => ({

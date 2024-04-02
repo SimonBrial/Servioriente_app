@@ -2,7 +2,6 @@
 
 import { BtnSave } from "@/components/buttons/BtnSave";
 import { ContainerInside } from "@/components/container/ContainerInside";
-import { IconLayout } from "@/components/IconLayout";
 import { AdminTypeSelect } from "@/components/inputs/AdminTypeSelect";
 import { AgeInput } from "@/components/inputs/AgeInput";
 import { CalendarInput } from "@/components/inputs/CalendarInput";
@@ -10,7 +9,7 @@ import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
 import { MunicipalitySelect } from "@/components/inputs/MunicipalitySelect";
 import { StateSelect } from "@/components/inputs/StateSelect";
 import { TitleLayout } from "@/components/layout/TitleLayout";
-import { HiOutlineMail, HiOutlineSave, HiOutlineUser, IoClose } from "@/icons";
+import { HiOutlineMail, HiOutlineUser, IoClose } from "@/icons";
 import { Button, Flex, Stack, useMantineColorScheme } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";
 import Link from "next/link";
@@ -81,11 +80,6 @@ export function AdminEditLayout() {
               color="green"
               title="Los cambios han sido guardados"
               description="Los cambios realizados en el registro del usuario, han sido guardados satisfatoriamente 😎!"
-              icon={
-                <IconLayout>
-                  <HiOutlineSave />
-                </IconLayout>
-              }
             />
           </Link>
         </Flex>

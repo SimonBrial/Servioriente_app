@@ -163,7 +163,7 @@ interface BtnDeleteProps extends NotificationsFnProps {
 interface BtnEditProps extends NotificationsFnProps {
   labelBtn: string;
   title: string;
-  icon: React.ReactNode;
+  // icon: React.ReactNode;
   children: React.ReactNode;
   buttonStyles: EditButtonStyles;
   // closeFn: () => void;

@@ -1,6 +1,6 @@
 import { CalendarInput } from "@/components/inputs/CalendarInput";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
-import { HiOutlineUser } from "@/icons";
+import { AiOutlineCar, HiOutlineMail, HiOutlineUser, MdNumbers, MdOutlinePlace } from "@/icons";
 import PhoneInputLayout from "@/components/inputs/PhoneInputLayout";
 import { SelectSocialRed } from "@/components/SelectSocialRed";
 import { TitleLayout } from "@/components/layout/TitleLayout";
@@ -15,43 +15,43 @@ export default function CreateClientLayout(): JSX.Element {
         <UserPhoto userIconSize="6rem" />
         <Stack gap={4} justify="space-between" w={"100%"}>
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Nombre"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Apellido"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
-            icon={<HiOutlineUser />}
+            icon={<AiOutlineCar />}
             title="Vehiculo"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
-            icon={<HiOutlineUser />}
+            icon={<MdNumbers />}
             title="Placa del vehiculo"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
-            icon={<HiOutlineUser />}
+            icon={<MdOutlinePlace />}
             title="Zona"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
-            icon={<HiOutlineUser />}
+            icon={<HiOutlineMail />}
             title="Email"
           />
           <SelectSocialRed />
-          <CalendarInput withTitle title="Cumpleaños" width={"200px"} />
+          <CalendarInput withTitle title="Cumpleaños" width={"235px"} />
           <PhoneInputLayout />
         </Stack>
       </Stack>

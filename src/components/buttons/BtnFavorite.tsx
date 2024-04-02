@@ -21,12 +21,14 @@ export const BtnFavorite = ({ size }: { size: sizeType }) => {
         onClick={() => {
           setColorState(!colorState);
           notifications.show({
-            color: colorState ? "red" : "green",
+            color: colorState ? "#115dfe" : "#2BDD66",
             message: !colorState
               ? "Eliminado de favoritos satisfactoriamente ♥️!"
               : "Agregado a favoritos satisfactoriamente!",
             id: crypto.randomUUID(),
-            title: colorState ? "Eliminado" : "Agregado",
+            title: colorState
+              ? "Eliminado de Favoritos"
+              : "Agregado a Favoritos",
           });
         }}
         styles={(theme) => ({

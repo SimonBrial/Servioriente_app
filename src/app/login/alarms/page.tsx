@@ -77,7 +77,7 @@ function page(): JSX.Element {
         <CountIndicator
           count={5}
           iconSection={<HiOutlineExclamationCircle />}
-          description="Total de Alarmas"
+          description="Total de Recordatorios"
         />
         <AutoCompleteInput />
         <BtnFilter>
@@ -100,15 +100,15 @@ function page(): JSX.Element {
         <Box>
           <BtnAdd
             iconTag="add"
-            label="Nueva Alarma"
+            label="Nuevo Recordatorio"
             key={crypto.randomUUID()}
             id={crypto.randomUUID()}
-            labelBtn="Crear Alarma"
+            labelBtn="Crear Recordatorio"
             color="green"
             title="Recordatorio Creado 🔔"
             description="el recordatorio ha sido creado satisfactoriamente 😎!"
           >
-            <CreateAlarmLayout title="Crear Nueva Alarma" />
+            <CreateAlarmLayout title="Crear Nueva Recordatorio" />
           </BtnAdd>
         </Box>
       </Flex>

@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import { IoSend, HiOutlineFaceSmile, HiPaperClip } from "@/icons";
 import classes from "@/styles/general-styles.module.css";
+import { notifications } from "@mantine/notifications";
 
 export default function ChatInputText(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
@@ -63,6 +64,16 @@ export default function ChatInputText(): JSX.Element {
           })}
         />
         <Center
+          onClick={() =>
+            notifications.show({
+              id: crypto.randomUUID(),
+              color: "#2BDD66",
+              title: "Mensaje Enviado",
+              message: "Mensaje ha sido enviado satisfactoriamente 😎!",
+              autoClose: 1000,
+              withCloseButton: true,
+            })
+          }
           styles={(theme) => ({
             root: {
               color:

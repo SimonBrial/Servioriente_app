@@ -11,9 +11,11 @@ import {
   Flex,
   Text,
   Box,
+  Center,
 } from "@mantine/core";
 import React from "react";
 import Link from "next/link";
+import { IoArrowBackOutline } from "@/icons";
 
 export default function ResetPasswordForm() {
   const { colorScheme } = useMantineColorScheme();
@@ -38,7 +40,7 @@ export default function ResetPasswordForm() {
         borderRadius: "6px",
         padding: "1.8rem 1.2rem",
         boxShadow: "0px 10px 12px -5px rgba(255,255,255,0.4)",
-        cursor: "default"
+        cursor: "default",
       }}
       mx="auto"
     >
@@ -89,6 +91,24 @@ export default function ResetPasswordForm() {
               <Button type="submit" mt="sm" fullWidth color="#115dfe">
                 Restaurar Contraseña
               </Button>
+            </Link>
+            <Link href={"/"}>
+              <Flex align={"center"} gap={6}>
+                <Center style={{ fontSize: "1rem", marginTop: "0.2rem" }}>
+                  <IoArrowBackOutline />
+                </Center>
+                <Text
+                  style={{
+                    fontSize: "0.8rem",
+                    cursor: "pointer",
+                    marginTop: "0.2rem",
+                    color: "#FFFFFF",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Volver
+                </Text>
+              </Flex>
             </Link>
           </Stack>
         </Stack>

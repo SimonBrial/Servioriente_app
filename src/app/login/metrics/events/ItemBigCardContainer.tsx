@@ -92,7 +92,7 @@ const elements: ItemBigCardProps[] = [
   },
 ];
 
-export const ItemBigCardContainer = () => {
+export default function ItemBigCardContainer() {
   const [valueSelected, setValueSelected] = useState<string | null>("");
   const selectValueArr = ["Completados", "No Completados"];
   const [scrolled, setScrolled] = useState(false);
@@ -126,11 +126,10 @@ export const ItemBigCardContainer = () => {
             key={crypto.randomUUID()}
             id={crypto.randomUUID()}
             buttonStyles="special"
-            description=""
-            labelBtn=""
-            color=""
-            title=""
-            icon
+            description="La Tarea ha sido editada satisfactoriamente 😎!"
+            labelBtn="Guardar"
+            color="#2BDD66"
+            title="Tarea Editada"
           >
             <EventEditLayout />
           </BtnEdit>
@@ -139,8 +138,7 @@ export const ItemBigCardContainer = () => {
               <Divider orientation="vertical" />
               <Center>
                 <HiOutlineCheck
-                  style={{ fontSize: "1.5rem", color: "#2BDD66" }}
-                />
+                  style={{ fontSize: "1.5rem", color: "#2BDD66" }} />
               </Center>
               <Center>
                 <IoClose style={{ fontSize: "1.5rem", color: "#F0185C" }} />
@@ -169,10 +167,9 @@ export const ItemBigCardContainer = () => {
           <Select
             styles={(theme) => ({
               section: {
-                color:
-                  valueSelected === selectValueArr[0]
-                    ? `${theme.colors.principalTheme[3]}`
-                    : `${theme.colors.principalTheme[9]}`,
+                color: valueSelected === selectValueArr[0]
+                  ? `${theme.colors.principalTheme[3]}`
+                  : `${theme.colors.principalTheme[9]}`,
                 fontSize: "1.2rem",
               },
               root: { width: "30%" },
@@ -185,18 +182,16 @@ export const ItemBigCardContainer = () => {
             value={valueSelected}
             onChange={setValueSelected}
             placeholder="Filtrar tareas..."
-            data={selectValueArr}
-          />
+            data={selectValueArr} />
           <GeneralDivider orientation="vertical" key={crypto.randomUUID()} />
           <WarningInfo description="Seleccionar Rango de fechas" />
           <DatePickerInput
             styles={(theme) => ({
               root: { width: "35%" },
               input: {
-                backgroundColor:
-                  colorScheme === "light"
-                    ? "#FFFFFF"
-                    : `${theme.colors.darkTheme[2]}`,
+                backgroundColor: colorScheme === "light"
+                  ? "#FFFFFF"
+                  : `${theme.colors.darkTheme[2]}`,
               },
             })}
             clearable
@@ -206,8 +201,7 @@ export const ItemBigCardContainer = () => {
             onChange={setValue}
             leftSection={<HiOutlineCalendar />}
             leftSectionPointerEvents="none"
-            placeholder="Seleccionar 2 de fechas"
-          />
+            placeholder="Seleccionar 2 de fechas" />
         </Flex>
         <ScrollArea
           h={220}
@@ -215,29 +209,23 @@ export const ItemBigCardContainer = () => {
           scrollbarSize={6}
           onScrollPositionChange={({ y }) => {
             setScrolled(y !== 0);
-          }}
+          } }
         >
           <Table
             highlightOnHover
             classNames={{
-              thead:
-                colorScheme === "light"
-                  ? classes.events_table_header
-                  : classes.events_table_header_dark,
-              tbody:
-                colorScheme === "light"
-                  ? classes.events_table_body
-                  : classes.events_table_body_dark,
+              thead: colorScheme === "light"
+                ? classes.events_table_header
+                : classes.events_table_header_dark,
+              tbody: colorScheme === "light"
+                ? classes.events_table_body
+                : classes.events_table_body_dark,
             }}
           >
             <Table.Thead
-              className={
-                colorScheme === "light"
-                  ? `${classesList.header} ${scrolled && classesList.scrolled}`
-                  : `${classesList.header_dark} ${
-                    scrolled && classesList.scrolled
-                  }`
-              }
+              className={colorScheme === "light"
+                ? `${classesList.header} ${scrolled && classesList.scrolled}`
+                : `${classesList.header_dark} ${scrolled && classesList.scrolled}`}
             >
               <Table.Tr>
                 <Table.Th>Titulo</Table.Th>
@@ -253,4 +241,4 @@ export const ItemBigCardContainer = () => {
       </Stack>
     </Container>
   );
-};
+}

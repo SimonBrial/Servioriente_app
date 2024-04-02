@@ -9,6 +9,7 @@ export const BtnReportGenerate = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Button
+      fullWidth
       classNames={{
         root:
           colorScheme === "light"
@@ -30,7 +31,7 @@ export const BtnReportGenerate = (): JSX.Element => {
       leftSection={<HiOutlineDocumentText />}
       // fullWidth
       styles={(theme) => ({
-        root: { width: "25%" },
+        // root: { width: "25%" },
         section: {
           fontSize: "1.4rem",
           color:

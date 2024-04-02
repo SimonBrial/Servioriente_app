@@ -22,7 +22,6 @@ export default function BtnEdit({
   labelBtn,
   color,
   title,
-  icon,
   id,
 }: BtnEditProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);

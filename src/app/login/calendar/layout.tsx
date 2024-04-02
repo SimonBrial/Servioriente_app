@@ -39,7 +39,11 @@ export default function layout({
           <BtnFilter>
             <CalendarFilterLayout />
           </BtnFilter>
-          <BtnReportGenerate />
+          <Box
+            style={{ height: "100%", width: "25%" }}
+          >
+            <BtnReportGenerate />
+          </Box>
           <Box>
             <BtnAdd
               title="Evento Creado"

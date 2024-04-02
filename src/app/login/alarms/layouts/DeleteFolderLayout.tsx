@@ -19,7 +19,7 @@ export default function DeleteFolderLayout() {
   const { colorScheme } = useMantineColorScheme();
   return (
     <>
-      <TitleSimpleLayout title="Eliminar Alarma" key={crypto.randomUUID()} />
+      <TitleSimpleLayout title="Eliminar Recordatorio" key={crypto.randomUUID()} />
       <Container
         styles={(theme) => ({
           root: {

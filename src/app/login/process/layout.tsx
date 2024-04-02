@@ -3,9 +3,8 @@ import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
 import { Flex, Stack, Container, Box } from "@mantine/core";
-
 import { HiOutlineUserCircle } from "@/icons";
-import { BtnCreateRegister } from "@/components/buttons/BtnCreateRegister";
+import BtnCreateRegister from "@/app/login/process/buttons/BtnCreateRegister";
 import { CountIndicator } from "@/components/CountIndicator";
 import InsideContainer from "@/components/container/InsideContainer";
 

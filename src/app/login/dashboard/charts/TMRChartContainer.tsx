@@ -2,22 +2,16 @@
 
 import { ContainerInside } from "@/components/container/ContainerInside";
 import {
-  FaChartColumn,
-  FaChartLine /* HiOutlineDotsVertical */,
-} from "@/icons";
-import {
   useMantineColorScheme,
-  Center,
   Select,
-  Switch,
   Stack,
   Title,
   Flex,
   Text,
 } from "@mantine/core";
-import { useState } from "react";
+// import { useState } from "react";
 import TMRLineChart from "@/components/charts/TMRLineChart";
-import TMRBarChart from "@/components/charts/TMRBarChart";
+// import TMRBarChart from "@/components/charts/TMRBarChart";
 
 interface DashboardChartContainerProps {
   dataArr: any[];
@@ -32,7 +26,7 @@ export default function TMRChartContainer({
 }: DashboardChartContainerProps) {
   const { colorScheme } = useMantineColorScheme();
   // const [chartType, setChartType] = useState<boolean>(false);
-  const [checked, setChecked] = useState<boolean>(false);
+  // const [checked, setChecked] = useState<boolean>(false);
 
   return (
     <ContainerInside allWhite width="100%" withBorder>
@@ -86,7 +80,7 @@ export default function TMRChartContainer({
             />
 
             <Flex gap={6} align={"center"}>
-              <Center
+              {/* <Center
                 styles={(theme) => ({
                   root: {
                     color: checked
@@ -140,15 +134,15 @@ export default function TMRChartContainer({
                 })}
               >
                 <FaChartColumn />
-              </Center>
+              </Center> */}
             </Flex>
           </Flex>
         </Flex>
-        {!checked ? (
-          <TMRLineChart key={crypto.randomUUID()} />
+        <TMRLineChart key={crypto.randomUUID()} />
+        {/* {!checked ? (
         ) : (
           <TMRBarChart key={crypto.randomUUID()} />
-        )}
+        )} */}
       </Stack>
     </ContainerInside>
   );

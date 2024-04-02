@@ -1,7 +1,7 @@
 import InsideContainer from "@/components/container/InsideContainer";
 import AsideUserSearch from "./AsideUserSearch";
 import { Flex } from "@mantine/core";
-import UserSelectedLayout from "./UserSelectedLayout";
+import UserSelectedContainer from "./UserSelectedContainer";
 
 function page(): JSX.Element {
   return (
@@ -23,7 +23,7 @@ function page(): JSX.Element {
         }}
       >
         <AsideUserSearch />
-        <UserSelectedLayout />
+        <UserSelectedContainer />
       </Flex>
     </InsideContainer>
   );

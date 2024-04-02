@@ -7,6 +7,7 @@ import BtnSend from "@/components/buttons/BtnSend";
 import { BtnPreview } from "@/components/buttons/BtnPreview";
 import heightClasses from "@/styles/height-view.module.css";
 import { ContainerInside } from "@/components/container/ContainerInside";
+import { HiOutlineDocumentAdd } from "@/icons";
 
 export const FormatsContainer = () => {
   return (
@@ -33,9 +34,9 @@ export const FormatsContainer = () => {
           labelBtn="Crear Plantilla"
           key={crypto.randomUUID()}
           id={crypto.randomUUID()}
-          description=""
-          iconTag
-          title=""
+          title="Plantilla Creada"
+          description="La plantilla ha sido creada satisfactoriamente 😎!"
+          iconTag={<HiOutlineDocumentAdd />}
         />
       </Flex>
     </Stack>

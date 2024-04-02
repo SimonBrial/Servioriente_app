@@ -5,15 +5,19 @@ import { ContainerInside } from "@/components/container/ContainerInside";
 import {
   useMantineColorScheme,
   UnstyledButton,
+  ScrollArea,
   TextInput,
   Center,
   Stack,
   Flex,
+  Text,
   Box,
 } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";
 import { HiOutlineSearch } from "@/icons";
 import { GeneralDivider } from "@/components/GeneralDivider";
+import InsideContainer from "@/components/container/InsideContainer";
+import UserDBCardLayout from "../layouts/UserDBCardLayout";
 
 export default function AsideUserSearch() {
   const { colorScheme } = useMantineColorScheme();
@@ -66,6 +70,53 @@ export default function AsideUserSearch() {
               },
             })}
           />
+        </Flex>
+        <InsideContainer
+          offset={310}
+          withBackground
+          withBorder
+          key={crypto.randomUUID()}
+        >
+          <ScrollArea
+            h={"100%"}
+            maw={"100%"}
+            p={5}
+            scrollbarSize={2}
+            offsetScrollbars
+          >
+            <Stack gap={4}>
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+              <UserDBCardLayout key={crypto.randomUUID()} />
+            </Stack>
+          </ScrollArea>
+        </InsideContainer>
+        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
+        <Flex
+          justify={"space-between"}
+          pb={5}
+          px={5}
+          styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}
+        >
+          <Text>Total de Registros</Text>
+          <Text>100</Text>
         </Flex>
       </Stack>
     </ContainerInside>

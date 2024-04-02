@@ -139,13 +139,12 @@ export default function AlarmDescription({
               key={crypto.randomUUID()}
               id={crypto.randomUUID()}
               buttonStyles="normal"
-              description=""
+              description="Los Datos de la Recordatorio han sido editados y guardados satisfactoriamente!"
               labelBtn="Guardar"
-              color=""
-              title=""
-              icon
+              color="#2BDD66"
+              title="Recordatorio Editado"
             >
-              <CreateAlarmLayout title="Editar Alarma" />
+              <CreateAlarmLayout title="Editar Recordatorio" />
             </BtnEdit>
           </Flex>
         </Stack>
@@ -155,12 +154,12 @@ export default function AlarmDescription({
           gap={5}
           justify="center"
           align="center"
-          styles={(theme) => ({
+          styles={{
             root: {
               color: "rgba(105, 105, 105, 0.3)",
               fontSize: "12rem",
             },
-          })}
+          }}
         >
           <MdOutlinePlace />
           <Text size="2.5rem" style={{ textAlign: "center" }}>

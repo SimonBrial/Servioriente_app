@@ -133,6 +133,18 @@
     height: 65.5vh;
   }
 }
+@media (min-width: 1280px) {
+  .listDifusion_scroll_container {
+    height: 85vh;
+    padding: 0.5rem;
+  }
+}
+@media (min-width: 1281px) {
+  .listDifusion_scroll_container {
+    height: 82vh;
+    padding: 0.5rem;
+  }
+}
 /* -------------------------- Metrics Section -------------------------- */
 @media (min-width: 1280px) {
   .metrics_container {

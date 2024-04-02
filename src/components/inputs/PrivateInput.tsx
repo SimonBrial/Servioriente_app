@@ -2,12 +2,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  Center,
+  useMantineColorScheme,
   Checkbox,
+  Center,
+  Title,
   Flex,
   Text,
-  Title,
-  useMantineColorScheme,
 } from "@mantine/core";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "@/icons";
 import classes from "@/styles/general-styles.module.css";

@@ -48,43 +48,43 @@ export default function EditCardLayout() {
         <UserPhoto userIconSize="6rem" />
         <Stack gap={4} justify="space-between" w={"100%"}>
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Nombre"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Apellido"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Vehiculo"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Placa del vehiculo"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Zona"
           />
           <HorizontalInputLayout
-            inputSize="200px"
+            inputSize="235px"
             asterisk
             icon={<HiOutlineUser />}
             title="Email"
           />
           <SelectSocialRed />
-          <CalendarInput withTitle title="Cumpleaños" width={"200px"} />
+          <CalendarInput withTitle title="Cumpleaños" width={"235px"} />
           <PhoneInputLayout />
         </Stack>
       </Stack>

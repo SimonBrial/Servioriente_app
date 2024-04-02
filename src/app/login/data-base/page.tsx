@@ -29,7 +29,9 @@ function page(): JSX.Element {
         <BtnFilter>
           <GeneralFilterLayout />
         </BtnFilter>
-        <BtnReportGenerate />
+        <Box style={{ height: "100%", width: "25%" }}>
+          <BtnReportGenerate />
+        </Box>
         <Box>
           <BtnAdd
             iconTag="add-user"

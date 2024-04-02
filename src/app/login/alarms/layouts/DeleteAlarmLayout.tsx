@@ -20,7 +20,7 @@ export default function DeleteAlarmLayout() {
         color=""
         icon=""
         onText
-        title="Eliminar Alarma"
+        title="Eliminar Recordatorio"
         key={crypto.randomUUID()}
       />
       <Container
