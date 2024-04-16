@@ -22,7 +22,7 @@ export const BtnFavorite = ({ size }: { size: sizeType }) => {
           setColorState(!colorState);
           notifications.show({
             color: colorState ? "#115dfe" : "#2BDD66",
-            message: !colorState
+            message: colorState
               ? "Eliminado de favoritos satisfactoriamente ♥️!"
               : "Agregado a favoritos satisfactoriamente!",
             id: crypto.randomUUID(),

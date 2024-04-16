@@ -1,7 +1,7 @@
 "use client";
 
 import { CustomDivider } from "@/components/CustomDivider";
-import { HiHeart } from "@/icons";
+import { TbStarFilled } from "@/icons";
 import { CardContainerHeader } from "@/types/types";
 import {
   useMantineColorScheme,
@@ -27,6 +27,7 @@ export const CardChatLayout = ({
     <Container
       styles={(theme) => ({
         root: {
+          cursor: "default",
           border:
             colorScheme === "light"
               ? `1px solid ${theme.colors.lightTheme[2]}`
@@ -35,14 +36,12 @@ export const CardChatLayout = ({
           padding: "0.5rem",
           width: "100%",
           backgroundColor:
-            colorScheme === "light"
-              ? "#fff"
-              : `${theme.colors.darkTheme[7]}`,
+            colorScheme === "light" ? "#fff" : `${theme.colors.darkTheme[7]}`,
         },
       })}
     >
       <Flex justify={"space-between"} align={"center"}>
-        <Flex gap={5} align={"center"}>
+        <Flex gap={5} align={"center"} style={{ cursor: "pointer" }}>
           <CustomDivider
             colorUser={colorUser}
             dividerHeight={"2.5rem"}
@@ -91,7 +90,7 @@ export const CardChatLayout = ({
                 },
               })}
             >
-              <HiHeart />
+              <TbStarFilled />
             </Center>
             <Text style={{ fontSize: "0.6rem" }}>10:30 AM</Text>
           </Flex>

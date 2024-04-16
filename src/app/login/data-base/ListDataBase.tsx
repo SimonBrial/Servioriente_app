@@ -15,7 +15,7 @@ import PaginationLayout from "./PaginationLayout";
 import HeaderRowItem from "./HeaderRowItem";
 import BtnDelete from "@/components/buttons/BtnDelete";
 import BtnSee from "@/components/buttons/BtnSee";
-import { UserDeleteLayout } from "./UserDeleteLayout";
+import UserDeleteLayout from "./UserDeleteLayout";
 import { UserDescriptionLayout } from "./UserDescriptionLayout";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import RegisterEditLayout from "./RegisterEditLayout";
@@ -39,7 +39,7 @@ export default function ListDataBase(): JSX.Element {
             key={crypto.randomUUID()}
             description="El registro del usuario ha sido eliminado  de la base de datos satisfactoriamente!"
             labelBtn="Aceptar"
-            color="#2BDD66"
+            color="#115dfe"
             title="El registro ha sido eliminado"
             id={crypto.randomUUID()}
             icon
@@ -81,7 +81,7 @@ export default function ListDataBase(): JSX.Element {
         // h={620}
         className={heightClasses.DB_container}
         offsetScrollbars
-        scrollbarSize={6}
+        scrollbarSize={2}
         onScrollPositionChange={({ y }) => {
           setScrolled(y !== 0);
         }}

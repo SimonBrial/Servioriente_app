@@ -29,7 +29,7 @@ export const UserDescriptionLayout = () => {
         color=""
         onText={false}
       />
-      <ScrollArea h={"90vh"} offsetScrollbars scrollbarSize={4}>
+      <ScrollArea h={"90vh"} offsetScrollbars scrollbarSize={2}>
         <Stack>
           <RegisterInfo keyInput={"Nombre: "} valueInput={fakeArr.name} />
           <RegisterInfo keyInput={"Apellido: "} valueInput={fakeArr.lastName} />

@@ -1,6 +1,6 @@
 "use Client";
 
-import { useMantineColorScheme, UnstyledButton } from "@mantine/core";
+import { useMantineColorScheme, UnstyledButton, Center } from "@mantine/core";
 import Link from "next/link";
 import sidebarClass from "@/styles/general-styles.module.css";
 import { NavIconProps } from "@/interface/interface";
@@ -34,7 +34,7 @@ function NavIcon({
           }
           data-active={active || undefined}
         >
-          <span
+          <Center
             className={
               colorScheme === "light"
                 ? sidebarClass.icon
@@ -43,7 +43,7 @@ function NavIcon({
             data-active={active || undefined}
           >
             {icon}
-          </span>
+          </Center>
         </UnstyledButton>
       </Link>
     </TooltipLayout>

@@ -42,7 +42,7 @@ export default function BtnCreateRegister() {
             },
           }}
         >
-          <Stack justify="space-between" style={{ height: "96vh" }}>
+          <Stack justify="space-between" style={{ height: "95vh" }}>
             <CreateClientLayout />
             <Flex
               align={"center"}

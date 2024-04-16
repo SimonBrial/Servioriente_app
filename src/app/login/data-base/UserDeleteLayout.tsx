@@ -2,7 +2,7 @@ import RegisterInfo from "@/components/RegisterInfo";
 import { Stack } from "@mantine/core";
 import StatusBadge from "@/components/badge/StatusBadge";
 
-export const UserDeleteLayout = () => {
+export default function UserDeleteLayout() {
   const fakeArr = {
     id: 1,
     name: "Mario",
@@ -30,4 +30,4 @@ export const UserDeleteLayout = () => {
       <RegisterInfo keyInput={"Instagram: "} valueInput={"Instagram"} />
     </Stack>
   );
-};
+}

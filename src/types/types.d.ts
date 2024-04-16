@@ -28,12 +28,25 @@ type cardSize = "small" | "medium" | "big";
 
 type labelType = "Super Admin" | "Admin";
 
+type SectionTypes =
+  | "Configuracion"
+  | "Recordatorios"
+  | "Base de Datos"
+  | "Dashboard"
+  | "Calendario"
+  | "Procesos"
+  | "Metricas"
+  | "Correos"
+  | "Chats"
+  | "User";
+
 export type {
   NotificationsTypes,
   CardContainerHeader,
   NotificationType,
   EditButtonStyles,
   processTitle,
+  SectionTypes,
   degreeType,
   labelType,
   cardSize,

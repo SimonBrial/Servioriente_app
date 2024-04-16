@@ -8,6 +8,7 @@ import {
   NotificationType,
   EditButtonStyles,
   processTitle,
+  SectionTypes,
   degreeType,
   cardSize,
 } from "../types/types";
@@ -22,7 +23,7 @@ interface NavIconProps {
 
 interface sidebarItems {
   icon: ReactNode;
-  label: string;
+  label: SectionTypes;
   direction: string;
 }
 

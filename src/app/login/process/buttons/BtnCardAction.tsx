@@ -77,7 +77,7 @@ export default function BtnCardAction() {
               onClick={() => {
                 notifications.show({
                   id: crypto.randomUUID(),
-                  color: "#2BDD66",
+                  color: "#115dfe",
                   title: "Tarjeta Eliminada",
                   message: "Tarjeta de proceso eliminada satisfactoriamente!",
                   autoClose: 1000,

@@ -29,6 +29,7 @@ export const BtnTaskAction = () => {
       <Modal
         opened={opened}
         onClose={close}
+        centered
         withCloseButton={false}
         styles={{
           content: {
@@ -70,7 +71,7 @@ export const BtnTaskAction = () => {
               onClick={() => {
                 notifications.show({
                   id: crypto.randomUUID(),
-                  color: "#2BDD66",
+                  color: "#115dfe",
                   title: "Tarea Eliminada",
                   message: "Tarea eliminada satisfactoriamente!",
                   autoClose: 1000,

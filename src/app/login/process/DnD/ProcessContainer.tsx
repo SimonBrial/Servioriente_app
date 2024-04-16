@@ -69,7 +69,7 @@ export function ProcessContainer() {
     }
   }
 
-  function findItemclientName(id: UniqueIdentifier | undefined) {
+  function findItemClientName(id: UniqueIdentifier | undefined) {
     const container = findValueOfItems(id, "item");
     if (!container) return "";
     const item = container.items.find((item) => item.id === id);
@@ -354,7 +354,7 @@ export function ProcessContainer() {
         {/* Drag Overlay For item Item */}
         {activeId && activeId.toString().includes("item") && (
           <Items
-            clientName={findItemclientName(activeId)}
+            clientName={findItemClientName(activeId)}
             key={activeId}
             id={activeId}
             columnId=""

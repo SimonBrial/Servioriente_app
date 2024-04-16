@@ -6,7 +6,7 @@ import { ScrollArea, Stack } from "@mantine/core";
 export default function page() {
   return (
     <SuperAdminLayout>
-      <ScrollArea scrollbarSize={4} offsetScrollbars style={{ width: "100%" }}>
+      <ScrollArea scrollbarSize={2} offsetScrollbars style={{ width: "100%" }}>
         <Stack gap={4} style={{ width: "100%" }}>
           <UserContainer label="Super Admin" />
           <UserContainer label="Admin" />

@@ -1,4 +1,6 @@
-import { ScrollArea, Stack } from "@mantine/core";
+"use client";
+
+import { Grid, ScrollArea, Stack } from "@mantine/core";
 // import { SalesCardContainer } from "./SalesCardContainer";
 import { MetricsFilterInput } from "../MetricsFilterInput";
 import heightClasses from "@/styles/height-view.module.css";
@@ -13,27 +15,44 @@ export const SalesContainer = () => {
         style={{ borderRadius: "6px", margin: "0" }}
         offsetScrollbars
         scrollbarSize={2}
+        scrollbars={"y"}
+        p={4}
       >
-        <Stack
-          gap={4}
-          style={{
-            maxWidth: "100%",
-            width: "100%",
-          }}
-        >
-          {/* <ChartContainer key={crypto.randomUUID()} /> */}
-
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-          <SalesCardContainer key={crypto.randomUUID()} />
-        </Stack>
+        <Grid gutter={"sm"}>
+          <Grid.Col span={6}>
+            <Stack
+              gap={4}
+              style={{
+                maxWidth: "100%",
+                width: "100%",
+              }}
+            >
+              <SalesCardContainer key={crypto.randomUUID()} />
+              <SalesCardContainer key={crypto.randomUUID()} />
+              <SalesCardContainer key={crypto.randomUUID()} />
+              <SalesCardContainer key={crypto.randomUUID()} />
+            </Stack>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Stack
+              gap={4}
+              style={{
+                maxWidth: "100%",
+                width: "100%",
+              }}
+            >
+              <SalesCardContainer key={crypto.randomUUID()} />
+              <SalesCardContainer key={crypto.randomUUID()} />
+              <SalesCardContainer key={crypto.randomUUID()} />
+              <SalesCardContainer key={crypto.randomUUID()} />
+            </Stack>
+          </Grid.Col>
+        </Grid>
       </ScrollArea>
     </Stack>
   );
 };
+
+{
+  /* <ChartContainer key={crypto.randomUUID()} /> */
+}

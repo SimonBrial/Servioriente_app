@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, useMantineColorScheme } from "@mantine/core";
 import {
   HiOutlineChatBubbleLeftRight,
@@ -19,11 +19,12 @@ import classes from "@/styles/general-styles.module.css";
 import NavIcon from "./NavIcon";
 import { sidebarItems } from "@/interface/interface";
 import NotificationIcon from "./NotificationIcon";
+import { usePathname } from "next/navigation";
 
 const sections: sidebarItems[] = [
   {
     icon: <HiOutlineUser className={classes.icon} />,
-    label: "UserName",
+    label: "User",
     direction: "",
   },
   {
@@ -74,8 +75,13 @@ const sections: sidebarItems[] = [
 ];
 
 export function Sidebar(): JSX.Element {
+  const path = usePathname();
   const [active, setActive] = useState<number>(1);
   const { colorScheme } = useMantineColorScheme();
+
+  useEffect(() => {
+    setActive(sections.findIndex((section) => path === section.direction));
+  }, [path]);
 
   const links = sections.map((section: sidebarItems, index) => {
     return (
@@ -95,22 +101,17 @@ export function Sidebar(): JSX.Element {
   return (
     <nav
       className={
-        colorScheme === "light"
-          ? classes.sidebar
-          : classes.sidebar_dark
+        colorScheme === "light" ? classes.sidebar : classes.sidebar_dark
       }
     >
-      <Stack
-        style={{ height: "100%" }}
-        justify="space-between"
-        align="center"
-      >
+      <Stack style={{ height: "100%" }} justify="space-between" align="center">
         <Stack justify="center" gap={12} align="center">
           {links}
         </Stack>
-        <Stack justify="center" gap={12}>
+        <Stack justify="center" gap={12} align="center">
           <NotificationIcon active key={crypto.randomUUID()} />
           <NavIcon
+            key={crypto.randomUUID()}
             dir={"/"}
             icon={<HiOutlineLogout className={classes.icon} />}
             label={"Logout"}

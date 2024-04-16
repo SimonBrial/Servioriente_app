@@ -77,7 +77,7 @@ export const ColumnContainerEvent = ({
       )}
       {/* <ScrollArea
         classNames={{ root: classes.carousel_container }}
-        scrollbarSize={6}
+        scrollbarSize={2}
         offsetScrollbars
         scrollHideDelay={0}
         p={0}

@@ -6,7 +6,7 @@ export default function CardsContainer (): JSX.Element {
   return (
     <ScrollArea
       className={heightClasses.chatCard_container}
-      scrollbarSize={6}
+      scrollbarSize={2}
       offsetScrollbars
       scrollHideDelay={100}
     >

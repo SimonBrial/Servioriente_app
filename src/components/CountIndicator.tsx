@@ -18,7 +18,7 @@ export function CountIndicator({
     >
       <Button
         leftSection={iconSection}
-        // fullWidth
+        fullWidth
         styles={(theme) => ({
           section: {
             fontSize: "1.6rem",

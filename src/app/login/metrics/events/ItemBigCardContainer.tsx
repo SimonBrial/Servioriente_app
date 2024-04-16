@@ -206,7 +206,7 @@ export default function ItemBigCardContainer() {
         <ScrollArea
           h={220}
           offsetScrollbars
-          scrollbarSize={6}
+          scrollbarSize={2}
           onScrollPositionChange={({ y }) => {
             setScrolled(y !== 0);
           } }

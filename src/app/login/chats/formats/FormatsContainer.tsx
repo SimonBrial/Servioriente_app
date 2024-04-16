@@ -19,7 +19,7 @@ export const FormatsContainer = () => {
         key={crypto.randomUUID()}
       >
         <ScrollArea
-          scrollbarSize={0}
+          scrollbarSize={2}
           p={0}
           className={heightClasses.formats_scroll_container}
         >

@@ -32,7 +32,7 @@ export const DifusionListChat = (): JSX.Element => {
         key={crypto.randomUUID()}
       >
         <ScrollArea
-          scrollbarSize={0}
+          scrollbarSize={2}
           p={0}
           className={heightClasses.difusionList_scroll_container}
         >

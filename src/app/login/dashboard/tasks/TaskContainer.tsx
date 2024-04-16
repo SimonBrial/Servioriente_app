@@ -1,7 +1,6 @@
 "use client";
 
 import BtnBack from "@/components/buttons/BtnBack";
-import { TitleLayout } from "@/components/layout/TitleLayout";
 import { HiMenu } from "@/icons";
 import {
   useMantineColorScheme,
@@ -14,6 +13,7 @@ import { useDisclosure } from "@mantine/hooks";
 import classes from "@/styles/dashboard.module.css";
 import heightViewClass from "@/styles/height-view.module.css";
 import { TaskListLayout } from "./TaskListLayout";
+import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
 
 export const TaskContainer = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -38,12 +38,7 @@ export const TaskContainer = () => {
       >
         <Container style={{ width: "100%", height: "100%" }}>
           <Stack gap={8} style={{ height: "100%" }}>
-            <TitleLayout
-              color=""
-              icon=""
-              onText
-              title="Actividades Semanales"
-            />
+            <TitleSimpleLayout title="Actividades Semanales" />
             <TaskListLayout />
             <BtnBack label="Volver" close={close} />
           </Stack>

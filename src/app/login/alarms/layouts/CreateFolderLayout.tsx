@@ -40,7 +40,7 @@ export default function CreateFolderLayout({
         key={crypto.randomUUID()}
       >
         <ScrollArea
-          scrollbarSize={0}
+          scrollbarSize={2}
           p={0}
           className={heightClasses.createFolder_scroll_container}
         >

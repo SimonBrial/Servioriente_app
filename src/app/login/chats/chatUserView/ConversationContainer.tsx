@@ -46,7 +46,7 @@ export default function ConversationContainer(): JSX.Element {
         <ScrollArea
           // h={matches ? "74vh" : "68vh"}
           className={heightClasses.chat_container}
-          scrollbarSize={0}
+          scrollbarSize={2}
           offsetScrollbars
           scrollHideDelay={100}
           style={{ padding: "0.6rem" }}

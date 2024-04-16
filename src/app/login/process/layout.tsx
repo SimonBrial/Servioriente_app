@@ -30,7 +30,9 @@ export default function ProcessLayout({
           <BtnFilter>
             <GeneralFilterLayout />
           </BtnFilter>
-          <BtnReportGenerate />
+          <Box style={{ height: "100%", width: "25%" }}>
+            <BtnReportGenerate />
+          </Box>
           <Box>
             <BtnCreateRegister />
           </Box>

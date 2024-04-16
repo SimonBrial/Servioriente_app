@@ -60,7 +60,7 @@ export default function CreateAlarmLayout({
         key={crypto.randomUUID()}
       >
         <ScrollArea
-          scrollbarSize={0}
+          scrollbarSize={2}
           p={0}
           className={heightClasses.createAlarm_scroll_container}
         >
