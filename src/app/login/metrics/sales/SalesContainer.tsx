@@ -1,7 +1,6 @@
 "use client";
 
 import { Grid, ScrollArea, Stack } from "@mantine/core";
-// import { SalesCardContainer } from "./SalesCardContainer";
 import { MetricsFilterInput } from "../MetricsFilterInput";
 import heightClasses from "@/styles/height-view.module.css";
 import { SalesCardContainer } from "./SalesCardContainer";

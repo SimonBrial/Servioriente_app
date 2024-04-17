@@ -10,7 +10,6 @@ import {
 import { useState } from "react";
 import classes from "@/styles/list-styles.module.css";
 import heightClasses from "@/styles/height-view.module.css";
-import { listDB as elements } from "@/data/ListDB";
 import PaginationLayout from "./PaginationLayout";
 import HeaderRowItem from "./HeaderRowItem";
 import BtnDelete from "@/components/buttons/BtnDelete";
@@ -19,15 +18,19 @@ import UserDeleteLayout from "./UserDeleteLayout";
 import { UserDescriptionLayout } from "./UserDescriptionLayout";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import RegisterEditLayout from "./RegisterEditLayout";
+import { dataBaseStore } from "@/store/dataBaseStore";
 
 export default function ListDataBase(): JSX.Element {
   const [scrolled, setScrolled] = useState(false);
   const [sorted, setSorted] = useState(false);
   const { colorScheme } = useMantineColorScheme();
 
-  const rows = elements.map((element) => (
+  // Reading the context from zustand store folder
+  const DBStore = dataBaseStore((state) => state.data);
+
+  const rows = DBStore.map((element, index) => (
     <Table.Tr
-      key={element.id}
+      key={index}
       style={{ color: colorScheme === "light" ? "#000" : "white" }}
       classNames={{
         tr: colorScheme === "light" ? classes.row : classes.row_dark,
@@ -41,7 +44,7 @@ export default function ListDataBase(): JSX.Element {
             labelBtn="Aceptar"
             color="#115dfe"
             title="El registro ha sido eliminado"
-            id={crypto.randomUUID()}
+            id={element.id}
             icon
           >
             <UserDeleteLayout />
@@ -69,7 +72,7 @@ export default function ListDataBase(): JSX.Element {
       <Table.Td>{element.carID}</Table.Td>
       <Table.Td>{element.site}</Table.Td>
       <Table.Td>{element.phone}</Table.Td>
-      <Table.Td>{element.email}</Table.Td>
+      <Table.Td>{element.mail}</Table.Td>
       <Table.Td>{element.status}</Table.Td>
       <Table.Td>{element.birthdate}</Table.Td>
     </Table.Tr>

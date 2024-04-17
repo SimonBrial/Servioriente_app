@@ -21,6 +21,7 @@ import React from "react";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
 import { BtnDeleteProps } from "@/interface/interface";
+import { dataBaseStore } from "@/store/dataBaseStore";
 
 export default function BtnDelete({
   description,
@@ -34,6 +35,23 @@ export default function BtnDelete({
 }: BtnDeleteProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
+
+  // Zustand Storage
+  const deleteUser = dataBaseStore((state) => state.deleteUser);
+  // Zustand Storage
+
+  const handleDelete = () => {
+    deleteUser(id);
+    close();
+    notifications.show({
+      id: id,
+      color: color,
+      title: title,
+      message: description,
+      autoClose: 1000,
+      withCloseButton: true,
+    });
+  }
 
   return (
     <>
@@ -113,17 +131,7 @@ export default function BtnDelete({
               styles={(theme) => ({
                 section: { fontSize: "1.2rem" },
               })}
-              onClick={() => {
-                notifications.show({
-                  id: id,
-                  color: color,
-                  title: title,
-                  message: description,
-                  autoClose: 1000,
-                  withCloseButton: true,
-                });
-                close();
-              }}
+              onClick={handleDelete}
             >
               {labelBtn}
             </Button>

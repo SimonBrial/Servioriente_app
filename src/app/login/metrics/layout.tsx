@@ -1,11 +1,11 @@
 import TabsNavigation from "@/components/TabsNavigation";
-import MetricsContainer from "./MetricsContainer";
 import {
   AiOutlineFundProjectionScreen,
   MdOutlineEmojiEvents,
   MdOutlineSell,
   MdHistory,
 } from "@/icons";
+import { Container } from "@mantine/core";
 
 export default function RootLayout({
   children,
@@ -35,9 +35,9 @@ export default function RootLayout({
     },
   ];
   return (
-    <MetricsContainer>
+    <Container p={0} style={{ maxWidth: "100%", width: "100%" }}>
       <TabsNavigation sectionsArray={metricsSections} orientation />
       {children}
-    </MetricsContainer>
+    </Container>
   );
 }

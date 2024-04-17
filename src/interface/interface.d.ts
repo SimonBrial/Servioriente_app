@@ -159,7 +159,6 @@ interface BtnDeleteProps extends NotificationsFnProps {
   title: string;
   icon: React.ReactNode;
   children: React.ReactNode;
-  // closeFn: () => void;
 }
 interface BtnEditProps extends NotificationsFnProps {
   labelBtn: string;
@@ -283,6 +282,19 @@ interface NotificationsFnProps {
   id: string;
 }
 
+interface ListDBProps {
+  id: string;
+  name: string;
+  lastName: string;
+  car: string;
+  carID: string;
+  site: string;
+  phone: string;
+  mail: string;
+  birthdate: string;
+  status: React.JSX.Element;
+}
+
 export type {
   ProcessedConversationItemProps,
   DashboardProcessListItems,
@@ -315,6 +327,7 @@ export type {
   NavIconProps,
   sidebarItems,
   BtnEditProps,
+  ListDBProps,
   SocialMedia,
   EventsArray,
   BtnAddProps,
