@@ -1,9 +1,12 @@
+"use client";
+
 import { ScrollArea, Stack } from "@mantine/core";
 import AlarmFolder from "./AlarmFolder";
 import { ContainerInside } from "@/components/container/ContainerInside";
+import { useAlarmStore } from "@/store/alarm-store";
 
 export default function FolderContainer(): JSX.Element {
-  // const { colorScheme } = useMantineColorScheme();
+  const { alarmFolderArray } = useAlarmStore();
   return (
     <ContainerInside width="70%" allWhite={false} withBorder>
       <ScrollArea
@@ -13,10 +16,27 @@ export default function FolderContainer(): JSX.Element {
         offsetScrollbars
       >
         <Stack gap={12}>
-          <AlarmFolder key={crypto.randomUUID()} />
-          <AlarmFolder key={crypto.randomUUID()} />
-          <AlarmFolder key={crypto.randomUUID()} />
-          <AlarmFolder key={crypto.randomUUID()} />
+          {alarmFolderArray.map((folder) => {
+            const {
+              alarmsArray,
+              description,
+              themeColor,
+              idFolder,
+              title,
+              icon,
+            } = folder;
+            return (
+              <AlarmFolder
+                description={description}
+                key={crypto.randomUUID()}
+                alarmsArray={alarmsArray}
+                themeColor={themeColor}
+                idFolder={idFolder}
+                title={title}
+                icon={icon}
+              />
+            );
+          })}
         </Stack>
       </ScrollArea>
     </ContainerInside>

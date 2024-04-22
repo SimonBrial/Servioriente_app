@@ -18,20 +18,22 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import heightClasses from "@/styles/height-view.module.css";
 import classes from "@/styles/card-process.module.css";
 import { underScoreColor } from "@/utils/underScoreColor";
+import { CardProcessProps } from "@/interface/interface";
 
 interface ContainerProps {
   id: UniqueIdentifier;
   children: React.ReactNode;
   title: string;
-  lengthArray: number;
+  cardArray: CardProcessProps[];
 }
 
 export function ColumnContainer({
+  cardArray,
   children,
   title,
   id,
-  lengthArray,
 }: ContainerProps) {
+  // const [cardsArray, setCardsArray] = useState<CardProcessProps[]>(cardArray);
   const { colorScheme } = useMantineColorScheme();
   const { setNodeRef } = useSortable({
     id: id,
@@ -72,6 +74,21 @@ export function ColumnContainer({
     return colorSelected;
   }
 
+  /* function changeProperty(
+    columnTitle: string,
+    arr: CardProcessProps[],
+  ): CardProcessProps[] {
+    arr.forEach((arrCards) => {
+      if (arrCards.columnId !== title) {
+        arrCards.columnId = title;
+      }
+    });
+    return arr;
+  }
+  useEffect(() => {
+    setCardsArray(changeProperty(title, cardsArray));
+  }, [cardsArray.length]); */
+
   return (
     <div
       ref={setNodeRef}
@@ -97,7 +114,7 @@ export function ColumnContainer({
             {capitalizeFirstLetter(title)}
           </Title>
           <Badge radius="sm" styles={{ label: { fontSize: "0.9rem" } }}>
-            {lengthArray}
+            {cardArray.length}
           </Badge>
         </Flex>
         <Divider

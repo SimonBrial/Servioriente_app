@@ -1,15 +1,17 @@
 import { Divider, Flex, Stack, Text } from "@mantine/core";
 
 export default function AlarmCardDate({
+  themeColor,
   label,
+  hover,
   date,
   hour,
-  hover,
 }: {
+  themeColor: string;
+  hover: boolean;
   label: string;
   date: string;
   hour: string;
-  hover: boolean;
 }): JSX.Element {
   return (
     <Stack gap={1} w={"100%"}>
@@ -35,7 +37,7 @@ export default function AlarmCardDate({
       <Divider
         size="xs"
         styles={(theme) => ({
-          root: { borderColor: `${hover ? "#FD0E78" : "#696969"}` },
+          root: { borderColor: `${hover ? themeColor : "#696969"}` },
         })}
       />
     </Stack>

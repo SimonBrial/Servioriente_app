@@ -27,7 +27,13 @@ import { useState } from "react";
 import DeleteAlarmLayout from "../layouts/DeleteAlarmLayout";
 import CreateAlarmLayout from "../layouts/CreateAlarmLayout";
 
-export default function BtnAlarmAction() {
+export default function BtnAlarmAction({
+  id,
+  themeColor,
+}: {
+  id: string;
+  themeColor: string;
+}) {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
@@ -184,7 +190,7 @@ export default function BtnAlarmAction() {
                 : classes.btnDot_icon_dark
             }
             styles={{
-              root: { color: "#FD0E78", fontSize: "1.2rem" },
+              root: { color: themeColor, fontSize: "1.2rem" },
             }}
           >
             <HiOutlineDotsVertical />
@@ -202,7 +208,7 @@ export default function BtnAlarmAction() {
               <Text>Editar</Text>
             </Flex>
           </Menu.Item>
-          <Menu.Item color="#F0185C" onClick={open}>
+          <Menu.Item color={themeColor} onClick={open}>
             <Flex gap={6}>
               <Center style={{ fontSize: "1.2rem" }}>
                 <HiOutlineTrash />

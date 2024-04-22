@@ -26,11 +26,37 @@ import { useDisclosure } from "@mantine/hooks";
 import DeleteCardLayout from "../layouts/DeleteCardLayout";
 import { useState } from "react";
 import EditCardLayout from "../layouts/EditCardLayout";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { useProcessStore } from "@/store/process-store";
 
-export default function BtnCardAction() {
+export default function BtnCardAction({
+  idCard,
+  columnId,
+}: {
+  idCard: UniqueIdentifier;
+  columnId: string;
+}) {
+  // Global State Management
+  const { deleteCard } = useProcessStore();
+
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
+
+  // Functions for manipulate each card (delete or edit)
+  function handleDeleteCard() {
+    deleteCard(idCard, columnId);
+    notifications.show({
+      id: crypto.randomUUID(),
+      color: "#115dfe",
+      title: "Tarjeta Eliminada",
+      message: "Tarjeta de proceso eliminada satisfactoriamente!",
+      autoClose: 1000,
+      withCloseButton: true,
+    });
+    close();
+  }
+
   return (
     <>
       {/* This modal is to delete the card */}
@@ -74,17 +100,7 @@ export default function BtnCardAction() {
                     : classes.btnAdd_dark,
               }}
               styles={{ section: { fontSize: "1.2rem" } }}
-              onClick={() => {
-                notifications.show({
-                  id: crypto.randomUUID(),
-                  color: "#115dfe",
-                  title: "Tarjeta Eliminada",
-                  message: "Tarjeta de proceso eliminada satisfactoriamente!",
-                  autoClose: 1000,
-                  withCloseButton: true,
-                });
-                close();
-              }}
+              onClick={handleDeleteCard}
             >
               Aceptar
             </Button>

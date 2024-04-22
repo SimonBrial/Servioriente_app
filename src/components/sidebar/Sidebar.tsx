@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Stack, useMantineColorScheme } from "@mantine/core";
 import {
   HiOutlineChatBubbleLeftRight,
-  HiOutlineExclamationCircle,
+  MdOutlineAccessAlarms,
   HiOutlineDatabase,
   HiOutlineTemplate,
   HiOutlineCalendar,
@@ -63,7 +63,7 @@ const sections: sidebarItems[] = [
     direction: "/login/mails",
   },
   {
-    icon: <HiOutlineExclamationCircle className={classes.icon} />,
+    icon: <MdOutlineAccessAlarms className={classes.icon} />,
     label: "Recordatorios",
     direction: "/login/alarms",
   },

@@ -35,6 +35,7 @@ export default function AlarmDescription({
     color,
     title,
     icon,
+    // id
   } = objAlarm;
 
   return (

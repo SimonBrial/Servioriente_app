@@ -24,12 +24,12 @@ interface DataBaseStoreProps {
   deleteUser: (id: string) => void;
 }
 
-export const dataBaseStore = create<DataBaseStoreProps>()((set, get) => {
+export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
   return {
     // Data
     data: listDB,
 
-    // Funtion to manipulate the data
+    // Funtions to manipulate the data
     deleteUser: (id) => {
       const { data } = get();
       const newData = data.filter((d) => d.id !== id);

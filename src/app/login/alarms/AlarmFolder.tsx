@@ -1,7 +1,7 @@
 "use client";
 
 import { useDisclosure } from "@mantine/hooks";
-import { AlarmCardProps } from "@/interface/interface";
+import { AlarmCardArray, AlarmFolderArray } from "@/interface/interface";
 import {
   Container,
   Collapse,
@@ -16,30 +16,42 @@ import {
 } from "@mantine/core";
 import AlarmCard from "./AlarmCard";
 import { PiFolderSimpleDashed } from "@/icons";
-import { alarmDataArray as arrayTest } from "@/data/AlarmData";
 import BtnFolderActions from "./buttons/BtnFolderActions";
 
-export default function AlarmFolder(): JSX.Element {
+export default function AlarmFolder({
+  alarmsArray,
+  description,
+  themeColor,
+  idFolder,
+  title,
+  icon,
+}: AlarmFolderArray): JSX.Element {
   const [opened, { toggle }] = useDisclosure(false);
-
-  const description =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting";
 
   let items: JSX.Element[];
 
   function cardItems(): JSX.Element[] {
-    items = arrayTest.map((item: AlarmCardProps) => {
+    items = alarmsArray.map((item: AlarmCardArray) => {
+      const {
+        description,
+        createHour,
+        createdAt,
+        forDate,
+        forHour,
+        title,
+        id,
+      } = item;
       return (
         <Grid.Col key={item.id} span={4}>
           <AlarmCard
-            // key={item.id}
-            id={item.id}
-            createHour={item.createHour}
-            createdAt={item.createdAt}
-            description={item.description}
-            forDate={item.forDate}
-            forHour={item.forHour}
-            title={item.title}
+            description={description}
+            themeColor={themeColor}
+            createHour={createHour}
+            createdAt={createdAt}
+            forDate={forDate}
+            forHour={forHour}
+            title={title}
+            id={id}
           />
         </Grid.Col>
       );
@@ -47,22 +59,21 @@ export default function AlarmFolder(): JSX.Element {
 
     return items;
   }
-  // #FD0E78
   return (
     <Container
       p={12}
       w={"100%"}
       style={{
-        border: "2px solid #FD0E78",
+        border: `2px solid ${themeColor}`,
         borderRadius: "6px",
-        backgroundColor: "#fd0e7933",
+        backgroundColor: `${themeColor}33`,
       }}
     >
       <Stack pb={5}>
         <Flex
           align={"center"}
           justify={"space-between"}
-          styles={(theme) => ({ root: { color: `${"#FD0E78"}` } })}
+          styles={{ root: { color: themeColor } }}
         >
           <Stack gap={1} w={"60%"} onClick={toggle}>
             <Flex
@@ -72,20 +83,20 @@ export default function AlarmFolder(): JSX.Element {
                 cursor: `${cardItems().length > 3 ? "pointer" : "default"}`,
               }}
             >
-              <Text size="1.6rem">🎂</Text>
-              <Title order={3}>Cumpleaños</Title>
+              <Text size="1.6rem">{icon}</Text>
+              <Title order={3}>{title}</Title>
               <Badge
                 radius="sm"
                 style={{ marginLeft: "0.5rem" }}
                 styles={{
-                  root: { backgroundColor: `${"#FD0E78"}` },
+                  root: { backgroundColor: `${themeColor}` },
                   label: { fontSize: "0.9rem", color: "#FFF" },
                 }}
               >
-                {arrayTest.length}
+                {alarmsArray.length}
               </Badge>
             </Flex>
-            <Divider size="md" color="#FD0E78" />
+            <Divider size="md" color={themeColor} />
           </Stack>
           {/* <Tooltip
             label="Editar"
@@ -111,14 +122,14 @@ export default function AlarmFolder(): JSX.Element {
           >
             <CreateFolderLayout title="Editar Carpeta" />
           </BtnEdit> */}
-          <BtnFolderActions />
+          <BtnFolderActions idFolder={idFolder} theme={themeColor} />
         </Flex>
         <Text
           size="sm"
           mah={10}
           styles={(theme) => ({
             root: {
-              color: `${"#FD0E78"}`,
+              color: `${themeColor}`,
               marginTop: "-0.8rem",
               cursor: "default",
             },
@@ -133,7 +144,7 @@ export default function AlarmFolder(): JSX.Element {
             <Flex
               gap={8}
               align={"center"}
-              styles={(theme) => ({ root: { color: `${"#FD0E78"}` } })}
+              styles={{ root: { color: `${themeColor}` } }}
             >
               <Center>
                 <PiFolderSimpleDashed style={{ fontSize: "2.5rem" }} />

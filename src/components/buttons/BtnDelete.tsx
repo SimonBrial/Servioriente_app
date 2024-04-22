@@ -21,7 +21,7 @@ import React from "react";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
 import { BtnDeleteProps } from "@/interface/interface";
-import { dataBaseStore } from "@/store/dataBaseStore";
+import { useDataBaseStore } from "@/store/db-store";
 
 export default function BtnDelete({
   description,
@@ -37,7 +37,7 @@ export default function BtnDelete({
   const { colorScheme } = useMantineColorScheme();
 
   // Zustand Storage
-  const deleteUser = dataBaseStore((state) => state.deleteUser);
+  const deleteUser = useDataBaseStore((state) => state.deleteUser);
   // Zustand Storage
 
   const handleDelete = () => {

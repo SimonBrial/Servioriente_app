@@ -27,7 +27,13 @@ import { useState } from "react";
 import DeleteFolderLayout from "../layouts/DeleteFolderLayout";
 import CreateFolderLayout from "../layouts/CreateFolderLayout";
 
-export default function BtnFolderActions() {
+export default function BtnFolderActions({
+  theme,
+  idFolder,
+}: {
+  theme: string;
+  idFolder: string;
+}) {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
@@ -177,7 +183,7 @@ export default function BtnFolderActions() {
           <Center
             className={classes.btnEdit_folder}
             styles={{
-              root: { color: "#FD0E78", fontSize: "1.5rem" },
+              root: { color: theme, fontSize: "1.5rem", cursor: "pointer" },
             }}
           >
             <HiOutlineDotsVertical />

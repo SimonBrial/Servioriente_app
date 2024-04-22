@@ -21,6 +21,7 @@ import heightClasses from "@/styles/height-view.module.css";
 import { underScoreColor } from "@/utils/underScoreColor";
 import { CardProcessProps } from "@/interface/interface";
 import BtnCardAction from "../buttons/BtnCardAction";
+import { useEffect, useState } from "react";
 
 export function Items({
   clientName,
@@ -32,13 +33,12 @@ export function Items({
 }: CardProcessProps) {
   const { colorScheme } = useMantineColorScheme();
 
-  /* Doesn't delete this
+  // Doesn't delete this
   const [colorDivider, setColorDivider] = useState<string>("red");
 
   useEffect(() => {
-    setColorDivider(card.columnId);
-  }, [card.columnId]);
-  */
+    setColorDivider(columnId);
+  }, [columnId]);
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
@@ -70,7 +70,7 @@ export function Items({
           {...listeners}
           orientation="vertical"
           size="8px"
-          color={underScoreColor(capitalizeFirstLetter("red"))}
+          color={underScoreColor(capitalizeFirstLetter(colorDivider))}
           style={{ height: "78%" }}
           className={classes.card_divider}
         />
@@ -162,7 +162,7 @@ export function Items({
               </Menu.Item>
             </Menu.Dropdown>
           </Menu> */}
-          <BtnCardAction />
+          <BtnCardAction idCard={id} columnId={columnId} />
           {/* <UnstyledButton className={classes.verticalDots}></UnstyledButton> */}
           <Text
             size={"xs"}

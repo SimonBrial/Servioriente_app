@@ -18,7 +18,7 @@ import UserDeleteLayout from "./UserDeleteLayout";
 import { UserDescriptionLayout } from "./UserDescriptionLayout";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import RegisterEditLayout from "./RegisterEditLayout";
-import { dataBaseStore } from "@/store/dataBaseStore";
+import { useDataBaseStore } from "@/store/db-store";
 
 export default function ListDataBase(): JSX.Element {
   const [scrolled, setScrolled] = useState(false);
@@ -26,7 +26,7 @@ export default function ListDataBase(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
 
   // Reading the context from zustand store folder
-  const DBStore = dataBaseStore((state) => state.data);
+  const DBStore = useDataBaseStore((state) => state.data);
 
   const rows = DBStore.map((element, index) => (
     <Table.Tr

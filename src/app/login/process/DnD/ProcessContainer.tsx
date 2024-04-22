@@ -27,21 +27,23 @@ import { useMantineColorScheme, Grid } from "@mantine/core";
 import classes from "@/styles/card-process.module.css";
 // import heightClasses from "@/styles/height-view.module.css";
 import { DNDType } from "@/interface/interface";
-import { dataFakeCard } from "@/data/initialCards";
 import { Items } from "./Items";
 import { ColumnContainer } from "./ColumnContainer";
-// import InsideContainer from "@/components/container/InsideContainer";
+import { useProcessStore } from "@/store/process-store";
 
 export function ProcessContainer() {
+  // Global State Management
+  const ProcessData = useProcessStore((state) => state.data);
+
   const DNDid = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [containers, setContainers] = useState<DNDType[]>(dataFakeCard);
+  const [containers, setContainers] = useState<DNDType[]>(ProcessData);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
-  /*
-  --> This code's block is for change the drag section od the card item container
+  /* const [cardsArray, setCardsArray] = useState<CardProcessProps[]>(ProcessData.map(c => c.items)); */
 
-  function changeProperty(
+  // --> This code's block is for change the drag section od the card item container
+  /* function changeProperty(
     id: string,
     arr: CardProcessProps[],
   ): CardProcessProps[] {
@@ -51,11 +53,10 @@ export function ProcessContainer() {
       }
     });
     return arr;
-  }
-  useEffect(() => {
-    setCardsArray(changeProperty(id, tasks));
-  }, [tasks.length]);
-  */
+  } */
+  /* useEffect(() => {
+    setCardsArray(changeProperty(id, cardArray));
+  }, [cardArray.length]); */
 
   // Find the value of the items
   function findValueOfItems(id: UniqueIdentifier | undefined, type: string) {
@@ -294,6 +295,7 @@ export function ProcessContainer() {
       );
 
       let newItems = [...containers];
+      console.log("newItems: ", newItems);
       const [removeditem] = newItems[activeContainerIndex].items.splice(
         activeitemIndex,
         1,
@@ -327,7 +329,7 @@ export function ProcessContainer() {
         {containers.map((container) => (
           <Grid.Col key={container.id} span={3}>
             <ColumnContainer
-              lengthArray={container.items.length}
+              cardArray={container.items}
               title={container.title}
               id={container.id}
             >

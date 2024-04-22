@@ -64,7 +64,7 @@ interface AlarmObj {
   automated: boolean;
 }
 
-interface AlarmCardProps {
+interface AlarmCardArray {
   id: string;
   title: string;
   createdAt: string;
@@ -295,6 +295,15 @@ interface ListDBProps {
   status: React.JSX.Element;
 }
 
+interface AlarmFolderArray {
+  idFolder: string;
+  title: string;
+  icon: string;
+  alarmsArray: AlarmCardProps[];
+  themeColor: string;
+  description: string;
+}
+
 export type {
   ProcessedConversationItemProps,
   DashboardProcessListItems,
@@ -311,6 +320,7 @@ export type {
   RegisterInfoProps,
   BoardSectionProps,
   SortableItemProps,
+  AlarmFolderArray,
   AutoCompleteData,
   TitleLayoutProps,
   CardProcessProps,
@@ -318,7 +328,7 @@ export type {
   BtnDeleteProps,
   EventCardProps,
   BtnActionProps,
-  AlarmCardProps,
+  AlarmCardArray,
   EventCardData,
   SectionsArray,
   ColumnSection,

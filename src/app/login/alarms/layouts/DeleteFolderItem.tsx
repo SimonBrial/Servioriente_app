@@ -1,14 +1,14 @@
 import { GeneralDivider } from "@/components/GeneralDivider";
-import { AlarmCardProps } from "@/interface/interface";
+import { AlarmCardArray } from "@/interface/interface";
 import {
-  Box,
+  useMantineColorScheme,
   Collapse,
   Divider,
-  Flex,
-  Stack,
-  Text,
   Title,
-  useMantineColorScheme,
+  Stack,
+  Flex,
+  Text,
+  Box,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
@@ -19,7 +19,7 @@ export default function DeleteFolderItem({
   forDate,
   title,
   id,
-}: AlarmCardProps) {
+}: AlarmCardArray) {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { toggle }] = useDisclosure(false);
   return (

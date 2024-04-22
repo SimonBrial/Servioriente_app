@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import DeleteFolderItem from "./DeleteFolderItem";
 import { alarmDataArray } from "@/data/AlarmData";
-import { AlarmCardProps } from "@/interface/interface";
+import { AlarmCardArray } from "@/interface/interface";
 
 export default function DeleteFolderLayout() {
   const { colorScheme } = useMantineColorScheme();
@@ -126,7 +126,7 @@ export default function DeleteFolderLayout() {
                   padding: "0.2rem",
                 }}
               >
-                {alarmDataArray.map((item: AlarmCardProps, index: number) => {
+                {alarmDataArray.map((item: AlarmCardArray, index: number) => {
                   const {
                     description,
                     createHour,
