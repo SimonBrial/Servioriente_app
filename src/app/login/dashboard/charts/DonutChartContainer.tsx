@@ -5,6 +5,7 @@ import { Box, Stack, Table, Title, useMantineColorScheme } from "@mantine/core";
 import classes from "@/styles/dashboard.module.css";
 
 import DonutChart from "@/components/charts/DonutChart";
+import { useDashboardStore } from "@/store/dashboard-store";
 
 /*
 Para determinar el valor total de la grafica a mostrar, se deben conocer el valor de referencia y el valor a mostrar
@@ -15,23 +16,6 @@ Para determinar el valor total de la grafica a mostrar, se deben conocer el valo
 
 // Se deben evaluar mejor las estadisticas, ya que faltan datos por escalar y procesar, para indicar los vlores reales
 
-const totalData = [
-  {
-    name: "Generacion de RCV",
-    currentValue: 80,
-    goal: 100,
-  },
-  {
-    name: "Clientes captados",
-    currentValue: 30,
-    goal: 50,
-  },
-  {
-    name: "Total",
-    currentValue: 120,
-    goal: 150,
-  },
-];
 // console.log(totalData);
 
 /* const colors01 = ["rgb(177, 130, 202)", "transparent"]; // Data01
@@ -40,6 +24,7 @@ const colors03 = ["rgb(130, 202, 157)", "transparent"]; // Data03 */
 
 export const DonutChartContainer = () => {
   const { colorScheme } = useMantineColorScheme();
+  const { DonutData } = useDashboardStore();
   return (
     <ContainerInside allWhite width="100%" withBorder>
       <Stack gap={6} align="center">
@@ -87,7 +72,7 @@ export const DonutChartContainer = () => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {totalData.map((element) => (
+          {DonutData.map((element) => (
             <Table.Tr key={crypto.randomUUID()}>
               <Table.Td>{element.name}</Table.Td>
               <Table.Td>{element.currentValue}</Table.Td>

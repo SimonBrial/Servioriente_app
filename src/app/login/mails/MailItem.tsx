@@ -17,8 +17,18 @@ import { useState } from "react";
 import { BtnFavorite } from "@/components/buttons/BtnFavorite";
 import BtnReadMail from "@/components/buttons/BtnReadMail";
 import BtnArchive from "@/components/buttons/BtnArchive";
+import { MailDataProps } from "@/interface/interface";
 
-export default function MailItem(): JSX.Element {
+export default function MailItem({
+  description,
+  mailStatus,
+  userName,
+  idMail,
+  title,
+  photo,
+  mail,
+  date,
+}: MailDataProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const { hovered, ref } = useHover();
   const [checked, setChecked] = useState<boolean>(false);
@@ -31,7 +41,7 @@ export default function MailItem(): JSX.Element {
         mb={5}
         styles={(theme) => ({
           root: {
-            padding: "0.3rem 0.8rem",
+            padding: "0.4rem 0.8rem",
             border:
               colorScheme === "light"
                 ? `1px solid ${theme.colors.lightTheme[2]}`
@@ -39,7 +49,7 @@ export default function MailItem(): JSX.Element {
             backgroundColor:
               colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
             borderRadius: "6px",
-            transition: "all 0.3s ease-in-out"
+            transition: "all 0.3s ease-in-out",
             // boxShadow: "0px 10px 12px -10px rgba(27, 27, 27, 0.4)",
           },
         })}
@@ -77,7 +87,7 @@ export default function MailItem(): JSX.Element {
                   },
                 })}
               >
-                Titulo del mail
+                {title}
               </Title>
               <Flex
                 p={0}
@@ -102,8 +112,13 @@ export default function MailItem(): JSX.Element {
                 <BtnArchive />
               </Flex>
             </Flex>
-            <Flex gap={12} style={{ margin: "-0.1rem" }} align={"center"}>
+            <Flex
+              justify={"space-between"}
+              style={{ margin: "-0.1rem" }}
+              align={"center"}
+            >
               <Text
+                size="sm"
                 styles={(theme) => ({
                   root: {
                     color:
@@ -113,7 +128,7 @@ export default function MailItem(): JSX.Element {
                   },
                 })}
               >
-                Header del correo
+                {mail}
               </Text>
               <Text
                 size="xs"
@@ -126,7 +141,7 @@ export default function MailItem(): JSX.Element {
                   },
                 })}
               >
-                12/10/2023
+                {date.format("DD")}/{date.format("MM")}/{date.format("YYYY")}
               </Text>
             </Flex>
             <Text
@@ -139,14 +154,15 @@ export default function MailItem(): JSX.Element {
                       : theme.colors.darkTheme[2],
                 },
               })}
+              size="sm"
             >
-              Descripcion del mai...............
+              {description.slice(0, 25)}...
             </Text>
           </Stack>
           <BtnMailTrash
-            /* toDelete={toDelete}
+          /* toDelete={toDelete}
             toDeleteFn={() => setToDelete(toDelete => !toDelete)} */
-            // key={crypto.randomUUID()}
+          // key={crypto.randomUUID()}
           />
         </Flex>
       </Group>
@@ -158,7 +174,7 @@ export default function MailItem(): JSX.Element {
       mb={5}
       styles={(theme) => ({
         root: {
-          padding: "0.3rem 0.8rem",
+          padding: "0.4rem 0.8rem",
           border:
             colorScheme === "light"
               ? `1px solid ${theme.colors.lightTheme[2]}`
@@ -200,11 +216,12 @@ export default function MailItem(): JSX.Element {
                 },
               })}
             >
-              Titulo del mail
+              {title}
             </Title>
           </Flex>
-          <Flex gap={12} style={{ margin: "-0.1rem" }} align={"center"}>
+          <Flex gap={53.5} style={{ margin: "-0.1rem" }} align={"center"}>
             <Text
+              size="sm"
               styles={(theme) => ({
                 root: {
                   color:
@@ -214,7 +231,7 @@ export default function MailItem(): JSX.Element {
                 },
               })}
             >
-              Header del correo
+              {mail}
             </Text>
             <Text
               size="xs"
@@ -227,7 +244,7 @@ export default function MailItem(): JSX.Element {
                 },
               })}
             >
-              12/10/2023
+              {date.format("DD")}/{date.format("MM")}/{date.format("YYYY")}
             </Text>
           </Flex>
           <Text
@@ -240,8 +257,9 @@ export default function MailItem(): JSX.Element {
                     : theme.colors.darkTheme[2],
               },
             })}
+            size="sm"
           >
-            Descripcion del mai...............
+            {description.slice(0, 25)}...
           </Text>
         </Stack>
       </Flex>

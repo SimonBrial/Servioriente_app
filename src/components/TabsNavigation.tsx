@@ -10,6 +10,20 @@ export default function TabsNavigation({
   orientation,
 }: SectionsArray): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
+  /* const [activeTab, setActiveTab] = useState<number>(0);
+  const path = usePathname();
+
+  useEffect(() => {
+    if (path === sectionsArray[0].dir) {
+      setActiveTab(0);
+    } else if (path.includes(sectionsArray[0].dir)) {
+      const idx = sectionsArray.findIndex((section) => path === section.dir);
+      setActiveTab(idx);
+    }
+    console.log("path: ", path);
+  }, [path]);
+
+   console.log("activeTab: ", activeTab); */
 
   const sections = (): JSX.Element => {
     return (

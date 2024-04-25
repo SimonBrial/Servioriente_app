@@ -80,7 +80,11 @@ export function Sidebar(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
 
   useEffect(() => {
-    setActive(sections.findIndex((section) => path === section.direction));
+    setActive(
+      sections.findIndex((section) =>
+        section.direction.includes(path.split("/")[2]),
+      ),
+    );
   }, [path]);
 
   const links = sections.map((section: sidebarItems, index) => {

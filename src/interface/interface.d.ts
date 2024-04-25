@@ -10,8 +10,10 @@ import {
   processTitle,
   SectionTypes,
   degreeType,
+  MailStatus,
   cardSize,
 } from "../types/types";
+import { Dayjs } from "dayjs";
 
 interface NavIconProps {
   icon: ReactNode;
@@ -239,7 +241,7 @@ interface SocialMedia {
   id: string;
 }
 
-interface socialMediaData {
+interface SocialMediaData {
   _id: string;
   date: string;
   Instagram: number | null;
@@ -247,11 +249,25 @@ interface socialMediaData {
   Whatsapp: number | null;
 }
 
+interface ChartSocialMedia {
+  id: string;
+  date: string;
+  Instagram: string | number;
+  Facebook: string | number;
+  Whatsapp: string | number;
+}
+
 interface ProcessedConversationItemProps {
   id: string;
-  socialMediaIcon: React.ReactNode;
+  // socialMediaIcon: React.ReactNode;
   iconName: CardContainerHeader;
   totalConversations: number;
+}
+
+interface DonutChartDataProps {
+  name: string;
+  currentValue: number;
+  goal: number;
 }
 
 interface EventsArray {
@@ -304,31 +320,86 @@ interface AlarmFolderArray {
   description: string;
 }
 
+interface MailDataProps {
+  userName: string;
+  mail: string | string[];
+  title: string;
+  description: string;
+  date: Dayjs;
+  photo?: string;
+  mailStatus: MailStatus;
+  idMail: string;
+}
+
+interface MailSelectedArray {
+  dataArr: MailDataProps[];
+  dir: string;
+}
+
+interface TaskDayCardProps {
+  idTask: string;
+  title: string;
+  description: string;
+  degree: degreeType;
+  userToassign: string;
+  admin: boolean;
+}
+
+interface TaskListPerDaysProps {
+  id: string;
+  dateTitle: string | Dayjs;
+  taskToday: TaskDayCardProps[];
+}
+
+interface DifusionListItemProps {
+  id: string | number;
+  photo?: string;
+  favorite: boolean;
+  userName: string;
+  contactDescription: string;
+}
+
+interface FormatCardProps {
+  id: string;
+  title: string;
+  userCreator: string;
+  date: Dayjs | string;
+  description: string;
+}
+
 export type {
   ProcessedConversationItemProps,
   DashboardProcessListItems,
   NotificationIconsProps,
   CardChatContainerProps,
+  DifusionListItemProps,
   HorizontalLayoutProps,
+  TaskListPerDaysProps,
   NotificationsFnProps,
   CardProcessItemProps,
   CountIndicatorProps,
   SmallEventCardProps,
+  DonutChartDataProps,
   TabsSectionesProps,
   colorBackgroundArr,
+  MailSelectedArray,
   NotitifacionProps,
   RegisterInfoProps,
   BoardSectionProps,
   SortableItemProps,
   AlarmFolderArray,
   AutoCompleteData,
+  TaskDayCardProps,
   TitleLayoutProps,
   CardProcessProps,
-  socialMediaData,
+  ChartSocialMedia,
+  FormatCardProps,
+  SocialMediaData,
   BtnDeleteProps,
   EventCardProps,
   BtnActionProps,
   AlarmCardArray,
+  MailDataProps,
   EventCardData,
   SectionsArray,
   ColumnSection,

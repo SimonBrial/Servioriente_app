@@ -6,12 +6,13 @@ import { DashboardChartContainer } from "../charts/DashboardChartContainer";
 import { Grid, ScrollArea, Stack } from "@mantine/core";
 import InsideContainer from "@/components/container/InsideContainer";
 import heightViewClass from "@/styles/height-view.module.css";
-import { data, tmrArray, tmrPerHour } from "@/data/socialMediaData";
 import { ProcessedConversationContainer } from "./ProcessedConversationContainer";
 import { DonutChartContainer } from "../charts/DonutChartContainer";
 import TMRChartContainer from "../charts/TMRChartContainer";
+import { useDashboardStore } from "@/store/dashboard-store";
 
 export default function DashboardContainer() {
+  const { TMRData, TMRPerHour, processData } = useDashboardStore();
   return (
     <InsideContainer
       withBackground
@@ -29,7 +30,7 @@ export default function DashboardContainer() {
             <Stack gap={"xs"} style={{ height: "100%" }}>
               <ProcessedConversationContainer />
               <DashboardChartContainer
-                dataArr={data}
+                dataArr={processData}
                 title="Puntuacion por Red Social"
               />
             </Stack>
@@ -37,15 +38,17 @@ export default function DashboardContainer() {
           <Grid.Col span={3.5}>
             <DashboardProcessListContainer key={crypto.randomUUID()} />
           </Grid.Col>
-          <Grid.Col span={3.5}><DonutChartContainer /></Grid.Col>
+          <Grid.Col span={3.5}>
+            <DonutChartContainer />
+          </Grid.Col>
           <Grid.Col span={8.5}>
             <DashboardChartContainer
-              dataArr={tmrArray}
+              dataArr={TMRData}
               title="Tiempo medio de Respuesta"
             />
           </Grid.Col>
           <Grid.Col span={12}>
-            <TMRChartContainer dataArr={tmrPerHour} title="TMR" />
+            <TMRChartContainer dataArr={TMRPerHour} title="TMR" />
           </Grid.Col>
         </Grid>
       </ScrollArea>

@@ -9,7 +9,6 @@ import {
 } from "@mantine/core";
 import { SocialMedia } from "@/interface/interface";
 import SocialMediaItem from "./SocialMediaItem";
-import { TitleLayout } from "@/components/layout/TitleLayout";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import {
   KeyboardSensor,
@@ -26,17 +25,15 @@ import {
 } from "@dnd-kit/sortable";
 import { useId, useState } from "react";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-
-const SocialMediaRed: SocialMedia[] = [
-  { title: "instagram", rating: 3, id: crypto.randomUUID() },
-  { title: "facebook", rating: 3, id: crypto.randomUUID() },
-  { title: "whatsapp", rating: 3, id: crypto.randomUUID() },
-];
+import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
+import { useDashboardStore } from "@/store/dashboard-store";
 
 export const SocialMediaContainer = () => {
+  const { SocialMediaRedConversations } = useDashboardStore();
+
   const idDnD = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [socialMedia, setSocialMedia] = useState<SocialMedia[]>(SocialMediaRed);
+  const [socialMedia, setSocialMedia] = useState<SocialMedia[]>(SocialMediaRedConversations);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -68,7 +65,7 @@ export const SocialMediaContainer = () => {
 
   return (
     <Stack gap={2} p={0}>
-      <TitleLayout color="" icon="" onText title="Redes Sociales" />
+      <TitleSimpleLayout title="Redes Sociales" />
       <Stack gap={1}>
         <Grid gutter="xs" style={{ width: "100%" }}>
           <Grid.Col span={4}></Grid.Col>

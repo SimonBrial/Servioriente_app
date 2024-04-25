@@ -21,7 +21,7 @@ import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
 import { TaskDeleteLayout } from "./TaskDeleteLayout";
 
-export const BtnTaskAction = () => {
+export const BtnTaskAction = ({ themeColor }: { themeColor: string }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -102,6 +102,7 @@ export const BtnTaskAction = () => {
                 right: "0.4rem",
                 top: "0.5rem",
                 fontSize: "1.2rem",
+                color: themeColor,
               },
             }}
           >

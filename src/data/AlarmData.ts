@@ -1,6 +1,6 @@
 import {
-  AlarmCardArray,
   AlarmFolderArray,
+  AlarmCardArray,
   AlarmObj,
 } from "@/interface/interface";
 

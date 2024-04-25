@@ -21,33 +21,31 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
 import { useId, useState } from "react";
+import { useDashboardStore } from "@/store/dashboard-store";
 
-const mediaSocialArray: ProcessedConversationItemProps[] = [
+const mediaSocialIconArray = [
   {
-    id: crypto.randomUUID(),
-    iconName: "instagram",
-    totalConversations: 8,
+    name: "instagram",
     socialMediaIcon: <IoLogoInstagram />,
   },
   {
-    id: crypto.randomUUID(),
-    iconName: "facebook",
-    totalConversations: 8,
+    name: "facebook",
     socialMediaIcon: <FaFacebookF />,
   },
   {
-    id: crypto.randomUUID(),
-    iconName: "whatsapp",
-    totalConversations: 8,
+    name: "whatsapp",
     socialMediaIcon: <IoLogoWhatsapp />,
   },
 ];
 
 export const ProcessedConversationContainer = () => {
+  const { ProcessedConversationItems } = useDashboardStore();
+
   const idDnD = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [socialMedia, setSocialMedia] =
-    useState<ProcessedConversationItemProps[]>(mediaSocialArray);
+  const [socialMedia, setSocialMedia] = useState<
+  ProcessedConversationItemProps[]
+  >(ProcessedConversationItems);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -56,6 +54,11 @@ export const ProcessedConversationContainer = () => {
     }),
   );
 
+  const selectIcon = (socialMediaRed: string) => {
+    return mediaSocialIconArray.find(
+      (iconSelected) => iconSelected.name === socialMediaRed,
+    )?.socialMediaIcon;
+  };
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!active.id !== over.id) {
@@ -68,11 +71,11 @@ export const ProcessedConversationContainer = () => {
   };
 
   const rows = socialMedia.map((itemMedia) => {
-    const { iconName, id, totalConversations, socialMediaIcon } = itemMedia;
+    const { iconName, id, totalConversations } = itemMedia;
     return (
       <ProcessedConversationItem
         totalConversations={totalConversations}
-        socialMediaIcon={socialMediaIcon}
+        socialMediaIcon={selectIcon(iconName)}
         iconName={iconName}
         key={id}
         id={id}

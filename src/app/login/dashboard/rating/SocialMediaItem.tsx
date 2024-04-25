@@ -56,7 +56,7 @@ export default function SocialMediaItem({ rating, title, id }: SocialMedia) {
         >
           {title}
         </Badge>
-        <Text style={{ textAlign: "center" }}>{rating}</Text>
+        <Text style={{ textAlign: "center", width: "20%" }}>{rating}</Text>
       </Flex>
     </Box>
   );

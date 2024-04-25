@@ -14,12 +14,15 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "@/styles/general-styles.module.css";
+import { DifusionListItemProps } from "@/interface/interface";
 
 export const UserContactCard = ({
+  contactDescription,
   favorite,
-}: {
-  favorite: boolean;
-}): JSX.Element => {
+  userName,
+  photo,
+  id,
+}: DifusionListItemProps): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Container
@@ -48,7 +51,7 @@ export const UserContactCard = ({
                   },
                 })}
               >
-                Mario Hurtado
+                {userName}
               </Title>
               {favorite ? (
                 <HiHeart
@@ -72,7 +75,7 @@ export const UserContactCard = ({
                 },
               })}
             >
-              Descripcion del contacto
+              {contactDescription}
             </Text>
           </Stack>
         </Flex>

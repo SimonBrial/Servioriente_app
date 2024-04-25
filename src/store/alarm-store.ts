@@ -8,7 +8,7 @@ import {
   fakeAlarmDescription,
   alarmFolderArray,
   alarmDataArray,
-} from "@/data/AlarmData";
+} from "@/data/alarmData";
 
 /* Functionalities of this section
  */

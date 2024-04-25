@@ -7,7 +7,12 @@ type tagIcon =
   | "goal"
   | "add";
 
-type processTitle = "Espera" | "Generacion" | "Pagado" | "Entregado" | "Rechazado";
+type processTitle =
+  | "Espera"
+  | "Generacion"
+  | "Pagado"
+  | "Entregado"
+  | "Rechazado";
 
 type NotificationType = "Aviso" | "Error" | "Completado" | "Informacion";
 
@@ -40,6 +45,8 @@ type SectionTypes =
   | "Chats"
   | "User";
 
+type MailStatus = "archived" | "favorites" | "read" | "notRead";
+
 export type {
   NotificationsTypes,
   CardContainerHeader,
@@ -48,6 +55,7 @@ export type {
   processTitle,
   SectionTypes,
   degreeType,
+  MailStatus,
   labelType,
   cardSize,
   tagIcon,

@@ -13,12 +13,16 @@ import classes from "@/styles/dashboard.module.css";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 
+interface ConversationItemProps extends ProcessedConversationItemProps {
+  socialMediaIcon: React.ReactNode;
+}
+
 export const ProcessedConversationItem = ({
   totalConversations,
   socialMediaIcon,
   iconName,
   id,
-}: ProcessedConversationItemProps) => {
+}: ConversationItemProps) => {
   const adminArr: string[] = ["Mario Hurtado", "Simon Briceño"];
   const { colorScheme } = useMantineColorScheme();
   const { attributes, listeners, setNodeRef, transform, transition } =

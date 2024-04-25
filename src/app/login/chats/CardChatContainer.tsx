@@ -51,6 +51,7 @@ export const CardChatContainer = ({
             },
           })}
           style={{
+            borderRadius: "6px",
             borderBottomRightRadius: opened ? "0" : "6px",
             borderBottomLeftRadius: opened ? "0" : "6px",
           }}

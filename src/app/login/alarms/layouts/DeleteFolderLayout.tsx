@@ -12,7 +12,7 @@ import {
   Text,
 } from "@mantine/core";
 import DeleteFolderItem from "./DeleteFolderItem";
-import { alarmDataArray } from "@/data/AlarmData";
+import { alarmDataArray } from "@/data/alarmData";
 import { AlarmCardArray } from "@/interface/interface";
 
 export default function DeleteFolderLayout() {

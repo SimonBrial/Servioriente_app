@@ -8,13 +8,19 @@ import {
   Stack,
   Badge,
   Title,
+  Text,
   Flex,
   Box,
 } from "@mantine/core";
 import classes from "@/styles/dashboard.module.css";
 import { TaskDayItem } from "./TaskDayItem";
+import { TaskDayCardProps } from "@/interface/interface";
 
-export const TaskDaycontainer = () => {
+export default function TaskDaycontainer({
+  taskToday,
+}: {
+  taskToday: TaskDayCardProps[];
+}) {
   const [opened, { toggle }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -50,43 +56,35 @@ export const TaskDaycontainer = () => {
         }
       >
         <Stack gap={3}>
-          <TaskDayItem
-            admin
-            degree="Muy Importante"
-            desription="Prueba"
-            title="Prueba 1 Prueba 1 Prueba 1 Prueba 1 Prueba 1"
-            userToassign="Mario Hurtado"
-          />
-          <TaskDayItem
-            admin
-            degree="Muy Importante"
-            desription="Prueba"
-            title="Prueba 1 Prueba 1 Prueba 1 Prueba 1 Prueba 1"
-            userToassign="Mario Hurtado"
-          />
-          <TaskDayItem
-            admin
-            degree="Muy Importante"
-            desription="Prueba"
-            title="Prueba 1 Prueba 1 Prueba 1 Prueba 1 Prueba 1"
-            userToassign="Mario Hurtado"
-          />
-          <TaskDayItem
-            admin
-            degree="Muy Importante"
-            desription="Prueba"
-            title="Prueba 1 Prueba 1 Prueba 1 Prueba 1 Prueba 1"
-            userToassign="Mario Hurtado"
-          />
-          <TaskDayItem
-            admin
-            degree="Muy Importante"
-            desription="Prueba"
-            title="Prueba 1 Prueba 1 Prueba 1 Prueba 1 Prueba 1"
-            userToassign="Mario Hurtado"
-          />
+          {taskToday.length > 0 ? (
+            <>
+              {taskToday.map((task) => {
+                const {
+                  admin,
+                  degree,
+                  description,
+                  idTask,
+                  title,
+                  userToassign,
+                } = task;
+                return (
+                  <TaskDayItem
+                    userToassign={userToassign}
+                    description={description}
+                    idTask={idTask}
+                    degree={degree}
+                    admin={admin}
+                    title={title}
+                    key={idTask}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <Text>Vacio</Text>
+          )}
         </Stack>
       </Collapse>
     </Box>
   );
-};
+}

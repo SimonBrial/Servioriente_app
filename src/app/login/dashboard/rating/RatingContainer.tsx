@@ -1,7 +1,16 @@
+import { useDashboardStore } from "@/store/dashboard-store";
 import { Rating, Title, Flex, useMantineColorScheme } from "@mantine/core";
+import { useEffect, useState } from "react";
 
-export const RatingContainer = ({ value }: { value: number }) => {
+export const RatingContainer = () => {
   const { colorScheme } = useMantineColorScheme();
+  const { rating, avarageSocialMedia } = useDashboardStore();
+  const [avarage, setAvarage] = useState<number>(rating)
+
+  useEffect(() => {
+    setAvarage(avarageSocialMedia())
+  }, [rating]);
+
   return (
     <Flex
       gap={8}
@@ -17,8 +26,8 @@ export const RatingContainer = ({ value }: { value: number }) => {
       })}
     >
       <Title order={4}>Rating</Title>
-      <Rating value={value} fractions={2} readOnly size="lg" />
-      <Title order={4}>{value}</Title>
+      <Rating value={avarage} fractions={2} readOnly size="lg" />
+      <Title order={4}>{avarage}</Title>
     </Flex>
   );
 };

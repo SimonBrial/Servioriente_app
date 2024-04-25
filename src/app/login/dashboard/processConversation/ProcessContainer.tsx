@@ -8,7 +8,6 @@ import {
   Grid,
 } from "@mantine/core";
 import { DashboardProcessListItems } from "@/interface/interface";
-import { dashboardProcessList } from "@/data/dashboardProcessList";
 import { DashboardProcessListItem } from "./DashboardProcessListItem";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import {
@@ -26,12 +25,16 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { useId, useState } from "react";
+import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
+import { useDashboardStore } from "@/store/dashboard-store";
 
 export default function ProcessContainer() {
+  const { processData } = useDashboardStore();
+
   const idDnD = useId();
   const { colorScheme } = useMantineColorScheme();
   const [process, setProcess] =
-    useState<DashboardProcessListItems[]>(dashboardProcessList);
+    useState<DashboardProcessListItems[]>(processData);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -70,6 +73,7 @@ export default function ProcessContainer() {
 
   return (
     <Stack gap={2} p={0}>
+      <TitleSimpleLayout title="Procesos" />
       <Stack gap={1}>
         <Grid gutter="xs" style={{ width: "100%", paddingRight: "0.4rem" }}>
           <Grid.Col span={2}></Grid.Col>

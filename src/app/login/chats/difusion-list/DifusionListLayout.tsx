@@ -10,18 +10,20 @@ import {
   Text,
 } from "@mantine/core";
 import AsideSearch from "../AsideSearch";
-import { TitleLayout } from "@/components/layout/TitleLayout";
 import { UserContactCard } from "../UserContactCard";
 import InsideContainer from "@/components/container/InsideContainer";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import classes from "@/styles/general-styles.module.css";
+import { useChatStore } from "@/store/chat-store";
+import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
 
 export const DifusionListLayout = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
+  const { difusionArray } = useChatStore();
 
   return (
     <Stack gap={3}>
-      <TitleLayout color="" icon="" onText title="Crear lista de Difusion" />
+      <TitleSimpleLayout title="Crear lista de Difusion" />
       <AsideSearch />
       <Stack gap={6}>
         <Stack gap={2}>
@@ -61,7 +63,7 @@ export const DifusionListLayout = (): JSX.Element => {
               })}
             />
           </Flex>
-          <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
+          <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
           <Flex
             justify={"space-between"}
             align={"center"}
@@ -104,24 +106,31 @@ export const DifusionListLayout = (): JSX.Element => {
               scrollbarSize={2}
             >
               <Stack gap={5} h={"50%"} p={6}>
-                <UserContactCard favorite />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite />
-                <UserContactCard favorite />
-                <UserContactCard favorite />
-                <UserContactCard favorite />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite />
-                <UserContactCard favorite={false} />
-                <UserContactCard favorite={false} />
+                {difusionArray.length > 0 ? (
+                  <>
+                    {difusionArray.map((contact, idx) => {
+                      const {
+                        contactDescription,
+                        favorite,
+                        userName,
+                        photo,
+                        id,
+                      } = contact;
+                      return (
+                        <UserContactCard
+                          contactDescription={contactDescription}
+                          favorite={favorite}
+                          userName={userName}
+                          photo={photo}
+                          key={idx}
+                          id={id}
+                        />
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>Vacio</>
+                )}
               </Stack>
             </ScrollArea>
           </InsideContainer>

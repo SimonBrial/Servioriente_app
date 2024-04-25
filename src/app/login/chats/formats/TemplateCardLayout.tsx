@@ -12,8 +12,15 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "@/styles/general-styles.module.css";
+import { FormatCardProps } from "@/interface/interface";
 
-export const TemplateCardLayout = (): JSX.Element => {
+export const TemplateCardLayout = ({
+  userCreator,
+  description,
+  title,
+  date,
+  id,
+}: FormatCardProps): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Container
@@ -47,7 +54,7 @@ export const TemplateCardLayout = (): JSX.Element => {
               }}
             />
           </Center>
-          <Stack gap={0}>
+          <Stack gap={0} style={{ cursor: "default" }}>
             <Title
               order={5}
               styles={(theme) => ({
@@ -59,7 +66,7 @@ export const TemplateCardLayout = (): JSX.Element => {
                 },
               })}
             >
-              Mario Hurtado
+              {userCreator}
             </Title>
             <Text
               styles={(theme) => ({
@@ -72,13 +79,26 @@ export const TemplateCardLayout = (): JSX.Element => {
                 },
               })}
             >
-              Plantilla para Cumpleaños
+              {title}
             </Text>
           </Stack>
         </Flex>
-        <Center>
+        <Center
+        /* styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+              fontSize: "1.5rem",
+            },
+          })} */
+        >
           <HiOutlineDotsVertical
-            style={{ fontSize: "1.5rem", color: "#696969", strokeWidth: "1.5" }}
+            // style={{ strokeWidth: "1.5" }}
+            className={
+              colorScheme === "light" ? classes.btn_dots : classes.btn_dots_dark
+            }
           />
         </Center>
       </Flex>

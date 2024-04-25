@@ -1,4 +1,68 @@
-import { SocialMediaData } from "@/interface/interface";
+import {
+  ChartSocialMedia,
+  DashboardProcessListItems,
+  DonutChartDataProps,
+  ProcessedConversationItemProps,
+  SocialMedia,
+  SocialMediaData,
+  TaskDayCardProps,
+  TaskListPerDaysProps,
+} from "@/interface/interface";
+import dayjs from "dayjs";
+
+export const dashboardProcessList: DashboardProcessListItems[] = [
+  {
+    process: "espera",
+    processTitle: "Esperando",
+    yesterday: 3,
+    today: 3,
+    id: crypto.randomUUID(),
+  },
+  {
+    process: "pagado",
+    processTitle: "Pagados",
+    yesterday: 3,
+    today: 3,
+    id: crypto.randomUUID(),
+  },
+  {
+    process: "entregado",
+    processTitle: "Entregados",
+    yesterday: 3,
+    today: 3,
+    id: crypto.randomUUID(),
+  },
+  {
+    process: "generacion",
+    processTitle: "Generados",
+    yesterday: 3,
+    today: 3,
+    id: crypto.randomUUID(),
+  },
+  {
+    process: "rechazado",
+    processTitle: "Rechazados",
+    yesterday: 3,
+    today: 3,
+    id: crypto.randomUUID(),
+  },
+  {
+    process: "Msg. Recibidos",
+    processTitle: "Msg. Recibidos",
+
+    yesterday: 3,
+    today: 3,
+    id: crypto.randomUUID(),
+  },
+  {
+    process: "Msg. Enviados",
+    processTitle: "Msg. Enviados",
+
+    yesterday: 3,
+    today: 3,
+    id: crypto.randomUUID(),
+  },
+];
 
 export const tmrArray: SocialMediaData[] = [
   /* {
@@ -101,7 +165,7 @@ export const tmrArray: SocialMediaData[] = [
   }, */
 ];
 
-export const chartData = [
+export const chartSocialMediaData: ChartSocialMedia[] = [
   {
     id: "1",
     date: "Enero",
@@ -287,4 +351,107 @@ export const tmrPerHour: SocialMediaData[] = [
     Facebook: null,
     Whatsapp: null,
   }, */
+];
+
+export const SocialMediaRed: SocialMedia[] = [
+  { title: "instagram", rating: 4.2, id: crypto.randomUUID() },
+  { title: "facebook", rating: 2.5, id: crypto.randomUUID() },
+  { title: "whatsapp", rating: 3.8, id: crypto.randomUUID() },
+];
+
+export const mediaSocialArray: ProcessedConversationItemProps[] = [
+  {
+    id: crypto.randomUUID(),
+    iconName: "instagram",
+    totalConversations: 5,
+  },
+  {
+    id: crypto.randomUUID(),
+    iconName: "facebook",
+    totalConversations: 8,
+  },
+  {
+    id: crypto.randomUUID(),
+    iconName: "whatsapp",
+    totalConversations: 3,
+  },
+];
+
+export const DonutChartData: DonutChartDataProps[] = [
+  {
+    name: "Generacion de RCV",
+    currentValue: 80,
+    goal: 100,
+  },
+  {
+    name: "Clientes captados",
+    currentValue: 30,
+    goal: 50,
+  },
+  {
+    name: "Total",
+    currentValue: 120,
+    goal: 150,
+  },
+];
+
+const taskTodayFake: TaskDayCardProps[] = [
+  {
+    idTask: crypto.randomUUID(),
+    admin: false,
+    degree: "Muy Importante",
+    description: "Prueba",
+    title: "Prueba Prueba Prueba Prueba Prueba",
+    userToassign: "Mario Hurtado",
+  },
+  {
+    idTask: crypto.randomUUID(),
+    admin: false,
+    degree: "Importante",
+    description: "Prueba",
+    title: "Prueba 1 Prueba 1 Prueba 1 Prueba 1 Prueba 1",
+    userToassign: "Mario Hurtado",
+  },
+  {
+    idTask: crypto.randomUUID(),
+    admin: true,
+    degree: "Normal",
+    description: "Prueba",
+    title: "Prueba 2 Prueba 2 Prueba 2 Prueba 2 Prueba 2",
+    userToassign: "Mario Hurtado",
+  },
+  {
+    idTask: crypto.randomUUID(),
+    admin: false,
+    degree: "Normal",
+    description: "Prueba",
+    title: "Prueba 3 Prueba 3 Prueba 3 Prueba 3 Prueba 3",
+    userToassign: "Mario Hurtado",
+  },
+  {
+    idTask: crypto.randomUUID(),
+    admin: true,
+    degree: "Poco Importante",
+    description: "Prueba",
+    title: "Prueba 4 Prueba 4 Prueba 4 Prueba 4 Prueba 4",
+    userToassign: "Mario Hurtado",
+  },
+];
+
+export const TaskListData: TaskListPerDaysProps[] = [
+  {
+    id: crypto.randomUUID(),
+    dateTitle: dayjs().format("DD MM YYYY"),
+    taskToday: taskTodayFake.slice(0, 2),
+  },
+  {
+    id: crypto.randomUUID(),
+    dateTitle: dayjs().format("DD MM YYYY"),
+    taskToday: taskTodayFake.slice(0, 3),
+  },
+  {
+    id: crypto.randomUUID(),
+    dateTitle: dayjs().format("DD MM YYYY"),
+    taskToday: taskTodayFake.slice(0, 5),
+  },
 ];
