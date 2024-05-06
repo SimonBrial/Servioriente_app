@@ -1,6 +1,6 @@
 "use client";
 
-import { HiOutlineDocumentText, HiOutlineDotsVertical } from "@/icons";
+import { HiOutlineDocumentText } from "@/icons";
 import {
   useMantineColorScheme,
   Container,
@@ -13,6 +13,7 @@ import {
 import React from "react";
 import classes from "@/styles/general-styles.module.css";
 import { FormatCardProps } from "@/interface/interface";
+import BtnTemplateAction from "../buttoms/BtnTemplateAction";
 
 export const TemplateCardLayout = ({
   userCreator,
@@ -32,7 +33,7 @@ export const TemplateCardLayout = ({
       }}
       style={{
         borderRadius: "6px",
-        padding: "0.3rem 0.5rem",
+        padding: "0.5rem",
       }}
     >
       <Flex justify={"space-between"}>
@@ -76,6 +77,7 @@ export const TemplateCardLayout = ({
                       ? `${theme.colors.lightTheme[6]}`
                       : `${theme.colors.darkTheme[1]}`,
                   fontSize: "0.8rem",
+                  marginTop: "-0.1rem",
                 },
               })}
             >
@@ -83,22 +85,13 @@ export const TemplateCardLayout = ({
             </Text>
           </Stack>
         </Flex>
-        <Center
-        /* styles={(theme) => ({
-            root: {
-              color:
-                colorScheme === "light"
-                  ? theme.colors.lightTheme[3]
-                  : theme.colors.darkTheme[2],
-              fontSize: "1.5rem",
-            },
-          })} */
-        >
-          <HiOutlineDotsVertical
-            // style={{ strokeWidth: "1.5" }}
-            className={
-              colorScheme === "light" ? classes.btn_dots : classes.btn_dots_dark
-            }
+        <Center>
+          <BtnTemplateAction
+            userCreator={userCreator}
+            description={description}
+            date={date}
+            title={title}
+            id={id}
           />
         </Center>
       </Flex>

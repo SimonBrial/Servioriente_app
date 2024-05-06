@@ -39,7 +39,7 @@ export default function DeleteFolderLayout() {
           <Stack gap={2} w={"100%"}>
             <Flex align={"center"} gap={5}>
               <Text
-                size="1.3rem"
+                size="1.1rem"
                 styles={(theme) => ({
                   root: {
                     color:
@@ -51,7 +51,7 @@ export default function DeleteFolderLayout() {
               >
                 Titulo:
               </Text>
-              <Text size="1.3rem">🎂</Text>
+              <Text size="1.1rem">🎂</Text>
               <Title
                 order={6}
                 styles={(theme) => ({
@@ -60,7 +60,7 @@ export default function DeleteFolderLayout() {
                       colorScheme === "light"
                         ? theme.colors.lightTheme[3]
                         : theme.colors.darkTheme[2],
-                    fontSize: "1.5rem",
+                    fontSize: "1.2rem",
                   },
                 })}
               >
@@ -72,9 +72,9 @@ export default function DeleteFolderLayout() {
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={2} w={"100%"}>
+          <Stack gap={4} w={"100%"}>
             <Text
-              size="1.3rem"
+              size="1.1rem"
               styles={(theme) => ({
                 root: {
                   color:
@@ -86,7 +86,7 @@ export default function DeleteFolderLayout() {
             >
               Descripcion:
             </Text>
-            <Text size="sm" style={{ lineHeight: "15px" }}>
+            <Text size="sm" style={{ lineHeight: "15px", marginBottom: "0.4rem" }} px={4}>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis
               ipsum qui molestiae dolorem, porro blanditiis, corrupti mollitia
               numquam molestias, odio debitis harum officia. Cupiditate, hic

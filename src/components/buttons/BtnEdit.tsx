@@ -8,12 +8,18 @@ import {
   Flex,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { HiOutlineDotsVertical, HiOutlinePencil, HiOutlineSave, IoClose } from "@/icons";
+import {
+  HiOutlineDotsVertical,
+  HiOutlinePencil,
+  HiOutlineSave,
+  IoClose,
+} from "@/icons";
 import classes from "@/styles/btn-styles.module.css";
 import { EditButtonStyles } from "@/types/types";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
 import { BtnEditProps } from "@/interface/interface";
+import { useDataBaseStore } from "@/store/db-store";
 
 export default function BtnEdit({
   buttonStyles,
@@ -26,6 +32,12 @@ export default function BtnEdit({
 }: BtnEditProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
+  const { fnUserToEdit } = useDataBaseStore();
+
+  const handleEdit = () => {
+    open();
+    fnUserToEdit(id);
+  };
 
   let buttonSty: JSX.Element;
 
@@ -59,7 +71,7 @@ export default function BtnEdit({
                 ? classes.btnEdit_item
                 : classes.btnEdit_item_dark
             }
-            onClick={open}
+            onClick={handleEdit}
           >
             <Center>
               <HiOutlinePencil />
@@ -69,7 +81,11 @@ export default function BtnEdit({
       );
     } else if (type === "unstyled") {
       buttonSty = (
-        <UnstyledButton style={{ fontSize: "1.5rem" }} onClick={open} className={classes.btnEdit_folder}>
+        <UnstyledButton
+          style={{ fontSize: "1.5rem" }}
+          onClick={open}
+          className={classes.btnEdit_folder}
+        >
           <Center>
             <HiOutlineDotsVertical />
           </Center>

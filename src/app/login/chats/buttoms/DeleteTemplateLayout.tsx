@@ -2,8 +2,10 @@
 
 import { GeneralDivider } from "@/components/GeneralDivider";
 import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
+import { FormatCardProps } from "@/interface/interface";
 import {
   useMantineColorScheme,
+  ScrollArea,
   Container,
   Stack,
   Flex,
@@ -11,11 +13,17 @@ import {
 } from "@mantine/core";
 import React from "react";
 
-export default function DeleteCardLayout() {
+export default function DeleteTemplateLayout({
+  userCreator,
+  description,
+  title,
+  date,
+  id,
+}: FormatCardProps) {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Stack gap={8}>
-      <TitleSimpleLayout title="Eliminar Registro" key={crypto.randomUUID()} />
+      <TitleSimpleLayout title="Eliminar Formato" key={crypto.randomUUID()} />
       <Container
         styles={(theme) => ({
           root: {
@@ -47,7 +55,7 @@ export default function DeleteCardLayout() {
                   },
                 })}
               >
-                Cliente:
+                Creado por:
               </Text>
               <Text
                 size="1.1rem"
@@ -60,7 +68,7 @@ export default function DeleteCardLayout() {
                   },
                 })}
               >
-                Mario Hurtado
+                {userCreator}
               </Text>
             </Flex>
             <GeneralDivider
@@ -81,7 +89,7 @@ export default function DeleteCardLayout() {
                   },
                 })}
               >
-                Vehiculo:
+                Titulo:
               </Text>
               <Text
                 size="1.1rem"
@@ -94,7 +102,7 @@ export default function DeleteCardLayout() {
                   },
                 })}
               >
-                Spark
+                {title}
               </Text>
             </Flex>
             <GeneralDivider
@@ -115,7 +123,7 @@ export default function DeleteCardLayout() {
                   },
                 })}
               >
-                Tarifa:
+                Fecha:
               </Text>
               <Text
                 size="1.1rem"
@@ -128,7 +136,7 @@ export default function DeleteCardLayout() {
                   },
                 })}
               >
-                8$
+                {date.format("DD-MM-YYYY")}
               </Text>
             </Flex>
             <GeneralDivider
@@ -136,8 +144,8 @@ export default function DeleteCardLayout() {
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={1} w={"100%"}>
-            <Flex align={"center"} gap={10}>
+          <Stack gap={4} w={"100%"}>
+            <Stack gap={4}>
               <Text
                 size="1.1rem"
                 styles={(theme) => ({
@@ -149,26 +157,45 @@ export default function DeleteCardLayout() {
                   },
                 })}
               >
-                Fecha de Creacion:
+                Descripcion:
               </Text>
-              <Text
-                size="1.1rem"
+              <GeneralDivider
+                orientation="horizontal"
+                key={crypto.randomUUID()}
+              />
+            </Stack>
+            <Container
+              styles={(theme) => ({
+                root: {
+                  overflow: "hidden",
+                  border:
+                    colorScheme === "light"
+                      ? `1px solid ${theme.colors.lightTheme[2]}`
+                      : `1px solid ${theme.colors.darkTheme[6]}`,
+                  borderRadius: "6px",
+                },
+              })}
+              p={0}
+            >
+              <ScrollArea
+                scrollbarSize={2}
+                h={250}
                 styles={(theme) => ({
                   root: {
+                    width: "100%",
+                    lineHeight: "16px",
+                    fontSize: "1rem",
                     color:
                       colorScheme === "light"
-                        ? theme.colors.principalTheme[6]
-                        : theme.colors.principalTheme[7],
+                        ? theme.colors.lightTheme[3]
+                        : theme.colors.darkTheme[2],
+                    padding: "0.5rem",
                   },
                 })}
               >
-                06/11/2023
-              </Text>
-            </Flex>
-            <GeneralDivider
-              orientation="horizontal"
-              key={crypto.randomUUID()}
-            />
+                {description}
+              </ScrollArea>
+            </Container>
           </Stack>
         </Stack>
       </Container>

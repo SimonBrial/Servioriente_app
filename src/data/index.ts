@@ -13,12 +13,14 @@ import { mailReceivedFake } from "./mailData";
 import { chartData, tmrArray, tmrPerHour } from "./socialMediaData";
 import { VenezuelaStates } from "./venezuela";
 import { difusionArray } from "./chatsDatafake";
+import { MetricsDataFake } from "./metricsData";
 
 export {
   fakeAlarmDescription,
   dashboardProcessList,
   alarmFolderArray,
   mailReceivedFake,
+  MetricsDataFake,
   VenezuelaStates,
   alarmDataArray,
   eventCardArray,

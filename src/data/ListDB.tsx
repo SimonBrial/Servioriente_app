@@ -13,6 +13,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -25,6 +27,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -37,6 +41,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -49,6 +55,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -61,6 +69,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -73,6 +83,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -85,6 +97,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -97,6 +111,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -109,6 +125,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -121,6 +139,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -133,6 +153,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -145,6 +167,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -157,6 +181,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -169,6 +195,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -181,6 +209,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -193,6 +223,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -205,6 +237,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -217,6 +251,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -229,6 +265,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -241,6 +279,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -253,6 +293,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -265,6 +307,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -277,6 +321,8 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
   {
     id: crypto.randomUUID(),
@@ -289,5 +335,7 @@ export const listDB: ListDBProps[] = [
     mail: "correo@gmail.com",
     status: <StatusBadge title="GENERACION" />,
     birthdate: "16-12-1996",
+    facebook: "facebook",
+    instagram: "instagram",
   },
 ];

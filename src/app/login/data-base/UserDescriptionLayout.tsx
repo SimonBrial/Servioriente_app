@@ -1,21 +1,12 @@
+"use client";
+
 import RegisterInfo from "@/components/RegisterInfo";
 import { TitleLayout } from "@/components/layout/TitleLayout";
+import { useDataBaseStore } from "@/store/db-store";
 import { ScrollArea, Stack } from "@mantine/core";
-import StatusBadge from "../../../components/badge/StatusBadge";
 
-export const UserDescriptionLayout = () => {
-  const fakeArr = {
-    id: 1,
-    name: "Mario",
-    lastName: "Hurtado",
-    car: "car",
-    carID: "da6s5d4",
-    site: "Estado",
-    phone: "32165487",
-    email: "correo@gmail.com",
-    status: <StatusBadge title="GENERACION" />,
-    birthdate: "16-12-1996",
-  };
+export default function UserDescriptionLayout() {
+  const { dataToShow } = useDataBaseStore();
   return (
     <Stack
       style={{
@@ -30,23 +21,37 @@ export const UserDescriptionLayout = () => {
         onText={false}
       />
       <ScrollArea h={"90vh"} offsetScrollbars scrollbarSize={2}>
-        <Stack>
-          <RegisterInfo keyInput={"Nombre: "} valueInput={fakeArr.name} />
-          <RegisterInfo keyInput={"Apellido: "} valueInput={fakeArr.lastName} />
-          <RegisterInfo keyInput={"Vehiculo: "} valueInput={fakeArr.car} />
-          <RegisterInfo
-            keyInput={"Numero de Placa: "}
-            valueInput={fakeArr.carID}
-          />
-          <RegisterInfo keyInput={"Estado: "} valueInput={fakeArr.site} />
-          <RegisterInfo keyInput={"Telefono: "} valueInput={fakeArr.phone} />
-          <RegisterInfo keyInput={"Correo: "} valueInput={fakeArr.email} />
-          <RegisterInfo keyInput={"Status: "} valueInput={fakeArr.status} />
-          <RegisterInfo keyInput={"Facebook: "} valueInput={"Facebook"} />
-          <RegisterInfo keyInput={"Whatsapp: "} valueInput={fakeArr.phone} />
-          <RegisterInfo keyInput={"Instagram: "} valueInput={"Instagram"} />
-        </Stack>
+        {dataToShow[0] !== undefined ? (
+          <Stack>
+            <RegisterInfo keyInput={"Nombre: "} valueInput={dataToShow[0].name} />
+            <RegisterInfo
+              keyInput={"Apellido: "}
+              valueInput={dataToShow[0].lastName}
+            />
+            <RegisterInfo keyInput={"Vehiculo: "} valueInput={dataToShow[0].car} />
+            <RegisterInfo
+              keyInput={"Numero de Placa: "}
+              valueInput={dataToShow[0].carID}
+            />
+            <RegisterInfo keyInput={"Estado: "} valueInput={dataToShow[0].site} />
+            <RegisterInfo
+              keyInput={"Telefono: "}
+              valueInput={dataToShow[0].phone}
+            />
+            <RegisterInfo keyInput={"Correo: "} valueInput={dataToShow[0].mail} />
+            <RegisterInfo
+              keyInput={"Status: "}
+              valueInput={dataToShow[0].status}
+            />
+            <RegisterInfo keyInput={"Facebook: "} valueInput={"Facebook"} />
+            <RegisterInfo
+              keyInput={"Whatsapp: "}
+              valueInput={dataToShow[0].phone}
+            />
+            <RegisterInfo keyInput={"Instagram: "} valueInput={"Instagram"} />
+          </Stack>
+        ) : null}
       </ScrollArea>
     </Stack>
   );
-};
+}

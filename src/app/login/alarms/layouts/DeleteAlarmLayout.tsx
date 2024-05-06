@@ -34,17 +34,15 @@ export default function DeleteAlarmLayout() {
             padding: "0.5rem",
             marginTop: "-0.2rem",
             backgroundColor:
-              colorScheme === "light"
-                ? "#fff"
-                : theme.colors.darkTheme[7],
+              colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
           },
         })}
       >
         <Stack gap={4}>
-          <Stack gap={2} w={"100%"}>
+          <Stack gap={4} w={"100%"}>
             <Flex align={"center"} gap={5}>
               <Text
-                size="1.3rem"
+                size="1.1rem"
                 styles={(theme) => ({
                   root: {
                     color:
@@ -56,7 +54,7 @@ export default function DeleteAlarmLayout() {
               >
                 Titulo:
               </Text>
-              <Text size="1.3rem">🎂</Text>
+              <Text size="1.1rem">🎂</Text>
               <Title
                 order={6}
                 styles={(theme) => ({
@@ -65,7 +63,7 @@ export default function DeleteAlarmLayout() {
                       colorScheme === "light"
                         ? theme.colors.lightTheme[3]
                         : theme.colors.darkTheme[2],
-                    fontSize: "1.5rem",
+                    fontSize: "1.2rem",
                   },
                 })}
               >
@@ -77,10 +75,10 @@ export default function DeleteAlarmLayout() {
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={2} w={"100%"}>
+          <Stack gap={4} w={"100%"}>
             <Flex align={"center"} gap={10}>
               <Text
-                size="1.3rem"
+                size="1.1rem"
                 styles={(theme) => ({
                   root: {
                     color:
@@ -111,10 +109,10 @@ export default function DeleteAlarmLayout() {
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={1} w={"100%"}>
+          <Stack gap={4} w={"100%"}>
             <Flex align={"center"} gap={10}>
               <Text
-                size="1.3rem"
+                size="1.1rem"
                 styles={(theme) => ({
                   root: {
                     color:
@@ -145,7 +143,19 @@ export default function DeleteAlarmLayout() {
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Container style={{ overflow: "hidden" }} p={0}>
+          <Container
+            styles={(theme) => ({
+              root: {
+                overflow: "hidden",
+                border:
+                  colorScheme === "light"
+                    ? `1px solid ${theme.colors.lightTheme[2]}`
+                    : `1px solid ${theme.colors.darkTheme[6]}`,
+                borderRadius: "6px",
+              },
+            })}
+            p={0}
+          >
             <ScrollArea
               scrollbarSize={2}
               h={250}

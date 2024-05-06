@@ -21,7 +21,7 @@ export const BtnFavorite = ({ size }: { size: sizeType }) => {
         onClick={() => {
           setColorState(!colorState);
           notifications.show({
-            color: colorState ? "#115dfe" : "#2BDD66",
+            color: colorState ? "#115dfe" : "#2bdd66",
             message: colorState
               ? "Eliminado de favoritos satisfactoriamente ♥️!"
               : "Agregado a favoritos satisfactoriamente!",

@@ -1,72 +1,72 @@
 "use client";
 
+import { VenezuelaStates } from "@/data";
 import { MdOutlinePlace } from "@/icons";
+import { StateSelectProps } from "@/interface/interface";
 import { Flex, Select, Title, useMantineColorScheme } from "@mantine/core";
-import React, { useState } from "react";
+import { Controller } from "react-hook-form";
 
-export const StateSelect = ({ inputSize }: { inputSize: string }) => {
-  const [value, setValue] = useState<string | null>("");
+export default function StateSelect({
+  errorDescription,
+  inputSize,
+  register,
+  asterisk,
+  required,
+  control,
+  label,
+  max,
+  min,
+}: StateSelectProps) {
   const { colorScheme } = useMantineColorScheme();
-  const estadosArray = [
-    "Amazonas",
-    "Anzoátegui",
-    "Apure",
-    "Aragua",
-    "Barinas",
-    "Bolívar",
-    "Carabobo",
-    "Cojedes",
-    "Delta Amacuro",
-    "Falcón",
-    "Guárico",
-    "Lara",
-    "Mérida",
-    "Miranda",
-    "Monagas",
-    "Nueva Esparta",
-    "Portuguesa",
-    "Sucre",
-    "Táchira",
-    "Trujillo",
-    "Vargas",
-    "Yaracuy",
-    "Zulia",
-    "Dependencias Federales",
-    "Distrito Capital",
-  ];
+  const stateArray = VenezuelaStates.map((state) => state.estado);
   return (
     <Flex align={"center"} justify={"space-between"}>
-      <Title
-        order={4}
-        styles={(theme) => ({
-          root: {
-            color:
-              colorScheme === "light"
-                ? theme.colors.lightTheme[3]
-                : theme.colors.darkTheme[2],
-          },
-        })}
-      >
-        Estado
-      </Title>
-      <Select
-        leftSection={<MdOutlinePlace />}
-        w={inputSize}
-        placeholder="Seleccione un Estado de Venezuela"
-        data={estadosArray}
-        onChange={setValue}
-        value={value}
-        styles={(theme) => ({
-          input: {
-            cursor: "pointer",
-            backgroundColor: colorScheme === "light" ? "#FFFFFF" : "#EFF3F5",
-            color: colorScheme === "light" ? "#696969" : "#696969",
-          },
-          section: {
-            color: colorScheme === "light" ? "#696969" : "#696969",
-          },
-        })}
+      <Flex>
+        <Title
+          order={4}
+          styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}
+        >
+          Estado
+        </Title>
+        {asterisk ? <span style={{ color: "red" }}>*</span> : <></>}
+      </Flex>
+      <Controller
+        name={label}
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Select
+            error={errorDescription}
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            leftSection={<MdOutlinePlace />}
+            defaultValue={stateArray[0]}
+            w={inputSize}
+            placeholder="Seleccione un Estado de Venezuela"
+            data={stateArray}
+            styles={(theme) => ({
+              input: {
+                cursor: "pointer",
+                backgroundColor:
+                  colorScheme === "light"
+                    ? "#FFFFFF"
+                    : theme.colors.darkTheme[2],
+                color: colorScheme === "light" ? "#696969" : "#696969",
+              },
+              section: {
+                color: colorScheme === "light" ? "#696969" : "#696969",
+              },
+            })}
+          />
+        )}
       />
     </Flex>
   );
-};
+}

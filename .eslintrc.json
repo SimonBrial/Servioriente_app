@@ -26,6 +26,7 @@
     "array-callback-return": "off",
     "prefer-const": "off",
     "object-shorthand": "off",
+    "react/display-name": "off",
 
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/quotes": "off",

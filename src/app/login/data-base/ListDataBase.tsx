@@ -15,7 +15,7 @@ import HeaderRowItem from "./HeaderRowItem";
 import BtnDelete from "@/components/buttons/BtnDelete";
 import BtnSee from "@/components/buttons/BtnSee";
 import UserDeleteLayout from "./UserDeleteLayout";
-import { UserDescriptionLayout } from "./UserDescriptionLayout";
+import UserDescriptionLayout from "./UserDescriptionLayout";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import RegisterEditLayout from "./RegisterEditLayout";
 import { useDataBaseStore } from "@/store/db-store";
@@ -47,9 +47,9 @@ export default function ListDataBase(): JSX.Element {
             id={element.id}
             icon
           >
-            <UserDeleteLayout />
+            <UserDeleteLayout idToDelete={element.id} />
           </BtnDelete>
-          <BtnSee>
+          <BtnSee idToShow={element.id}>
             <UserDescriptionLayout />
           </BtnSee>
           <BtnEdit
@@ -59,7 +59,7 @@ export default function ListDataBase(): JSX.Element {
             labelBtn="Guardar"
             color="#2BDD66"
             title="Registro Editado"
-            id={crypto.randomUUID()}
+            id={element.id}
             icon
           >
             <RegisterEditLayout />

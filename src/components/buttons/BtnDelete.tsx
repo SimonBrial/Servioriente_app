@@ -37,11 +37,11 @@ export default function BtnDelete({
   const { colorScheme } = useMantineColorScheme();
 
   // Zustand Storage
-  const deleteUser = useDataBaseStore((state) => state.deleteUser);
+  const { fnDeleteUser } = useDataBaseStore();
   // Zustand Storage
 
   const handleDelete = () => {
-    deleteUser(id);
+    fnDeleteUser(id);
     close();
     notifications.show({
       id: id,
@@ -51,7 +51,7 @@ export default function BtnDelete({
       autoClose: 1000,
       withCloseButton: true,
     });
-  }
+  };
 
   return (
     <>

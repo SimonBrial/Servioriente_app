@@ -14,6 +14,7 @@ import {
   cardSize,
 } from "../types/types";
 import { Dayjs } from "dayjs";
+import { Path, UseFormRegister } from "react-hook-form";
 
 interface NavIconProps {
   icon: ReactNode;
@@ -176,9 +177,28 @@ interface AutoCompleteData {
 
 interface HorizontalLayoutProps {
   asterisk: boolean;
+  errorDescription: string | undefined;
   title: string;
   inputSize: string;
   icon: React.ReactNode;
+  label: Path<any>;
+  required: boolean;
+  min: number;
+  max: number;
+  register: UseFormRegister<any>;
+  control: any;
+}
+
+interface StateSelectProps {
+  errorDescription: string | undefined;
+  asterisk: boolean;
+  inputSize: string;
+  label: Path<any>;
+  required: boolean;
+  min: number;
+  max: number;
+  register: UseFormRegister<any>;
+  control: any;
 }
 
 interface verticalInput {
@@ -309,6 +329,8 @@ interface ListDBProps {
   mail: string;
   birthdate: string;
   status: React.JSX.Element;
+  facebook: string;
+  instagram: string;
 }
 
 interface AlarmFolderArray {
@@ -363,9 +385,33 @@ interface FormatCardProps {
   id: string;
   title: string;
   userCreator: string;
-  date: Dayjs | string;
+  date: Dayjs;
   description: string;
 }
+
+// ---------------------------- Metrics Data Interface ------------------------------------
+interface DayItem {
+  value: number | string;
+  label: Dayjs;
+}
+
+interface MonthItems {
+  month: string;
+  avarageMonth: number;
+  day?: DayItem[];
+}
+
+interface DataArrayProps {
+  id: string;
+  item: MonthItems[];
+}
+
+interface DataProps {
+  title: string;
+  id: string;
+  dataArray: DataArrayProps[];
+}
+// ---------------------------- Metrics Data Interface ------------------------------------
 
 export type {
   ProcessedConversationItemProps,
@@ -388,6 +434,7 @@ export type {
   BoardSectionProps,
   SortableItemProps,
   AlarmFolderArray,
+  StateSelectProps,
   AutoCompleteData,
   TaskDayCardProps,
   TitleLayoutProps,
@@ -399,6 +446,7 @@ export type {
   EventCardProps,
   BtnActionProps,
   AlarmCardArray,
+  DataArrayProps,
   MailDataProps,
   EventCardData,
   SectionsArray,
@@ -412,10 +460,13 @@ export type {
   SocialMedia,
   EventsArray,
   BtnAddProps,
+  MonthItems,
   AlarmProps,
+  DataProps,
   CardProps,
   ReturnFn,
   AlarmObj,
   iconList,
+  DayItem,
   DNDType,
 };

@@ -30,11 +30,11 @@ interface DashobardStoreProps {
   TMRData: SocialMediaData[];
   SocialMediaRedConversations: SocialMedia[];
   ProcessedConversationItems: ProcessedConversationItemProps[];
-  DonutData: DonutChartDataProps[],
+  DonutData: DonutChartDataProps[];
   rating: number;
 
   // Task Data
-  TaskList: TaskListPerDaysProps[]
+  TaskList: TaskListPerDaysProps[];
 
   // Fake properties
 
@@ -54,17 +54,23 @@ export const useDashboardStore = create<DashobardStoreProps>()((set, get) => {
     ProcessedConversationItems: mediaSocialArray,
     DonutData: DonutChartData,
     TaskList: TaskListData,
-    rating: 0,
+    rating: 3.5,
 
     // Funtions to manipulate the data
     avarageSocialMedia: () => {
       const { SocialMediaRedConversations } = get();
-      const arrayToAvarage: number[] = SocialMediaRedConversations.map(
+      /* const arrayToAvarage: number[] = SocialMediaRedConversations.map(
         (socialMedia: SocialMedia) => socialMedia.rating,
-      );
-      const avarage =
-        arrayToAvarage.reduce((acc, current) => acc + current, 0) / 3;
-      return Math.round(avarage);
+      ); */
+      const avarage = (
+        SocialMediaRedConversations.map(
+          (socialMedia: SocialMedia) => socialMedia.rating,
+        ).reduce((acc, current) => acc + current, 0) / 3
+      ).toFixed(2);
+      /* set({
+        rating: parseInt(avarage, 10),
+      }); */
+      return parseInt(avarage, 10);
     },
 
     // Secondary functions

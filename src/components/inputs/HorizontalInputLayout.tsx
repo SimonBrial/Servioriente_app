@@ -2,13 +2,21 @@
 
 import { HorizontalLayoutProps } from "@/interface/interface";
 import { Flex, TextInput, Title, useMantineColorScheme } from "@mantine/core";
+import { Controller } from "react-hook-form";
 
-export default function HorizontalInputLayout({
+const HorizontalInputLayout = ({
+  errorDescription,
   inputSize,
   asterisk,
+  register,
+  required,
+  control,
   title,
+  label,
   icon,
-}: HorizontalLayoutProps): JSX.Element {
+  min,
+  max,
+}: HorizontalLayoutProps) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex align={"center"} justify={"space-between"} w={"100%"}>
@@ -28,22 +36,35 @@ export default function HorizontalInputLayout({
         </Title>{" "}
         {asterisk ? <span style={{ color: "red" }}>*</span> : <></>}
       </Flex>
-      <TextInput
-        leftSectionPointerEvents="none"
-        leftSection={icon}
-        placeholder={title}
-        w={inputSize}
-        size="sm"
-        styles={(theme) => ({
-          input: {
-            backgroundColor: colorScheme === "light" ? "#FFFFFF" : "#EFF3F5",
-            color: `${theme.colors.lightTheme[3]}`,
-          },
-          section: {
-            color: theme.colors.lightTheme[3],
-          },
-        })}
+      <Controller
+        name={label}
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            error={errorDescription !== undefined ? errorDescription : null}
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            leftSectionPointerEvents="none"
+            leftSection={icon}
+            placeholder={title}
+            w={inputSize}
+            size="sm"
+            styles={(theme) => ({
+              input: {
+                backgroundColor:
+                  colorScheme === "light" ? "#FFFFFF" : "#EFF3F5",
+                color: `${theme.colors.lightTheme[3]}`,
+              },
+              section: {
+                color: theme.colors.lightTheme[3],
+              },
+            })}
+          />
+        )}
       />
     </Flex>
   );
-}
+};
+
+export default HorizontalInputLayout;

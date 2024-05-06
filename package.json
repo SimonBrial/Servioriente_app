@@ -14,6 +14,7 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@formkit/drag-and-drop": "0.0.36",
+    "@hookform/resolvers": "^3.3.4",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",
     "@mantine/dates": "^7.5.1",
@@ -40,7 +41,9 @@
     "react": "^18.2.0",
     "react-chartjs-2": "5.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.3",
     "react-icons": "^5.0.1",
+    "zod": "3.23.6",
     "zustand": "4.5.2"
   },
   "devDependencies": {

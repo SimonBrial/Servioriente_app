@@ -1,6 +1,5 @@
 "use client";
 
-import { TitleLayout } from "@/components/layout/TitleLayout";
 import AsideSearch from "../AsideSearch";
 import { BtnBackSection } from "@/components/buttons/BtnBackSection";
 import InsideContainer from "@/components/container/InsideContainer";
@@ -9,12 +8,13 @@ import { TemplateCardLayout } from "./TemplateCardLayout";
 import { BtnCreateTemplate } from "@/components/buttons/BtnCreateTemplate";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import { useChatStore } from "@/store/chat-store";
+import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
 
 export const FormatsLayout = (): JSX.Element => {
   const { templateArray } = useChatStore();
   return (
     <Stack gap={0}>
-      <TitleLayout color="" icon="" onText title="Buscar Plantilla" />
+      <TitleSimpleLayout title="Buscar Plantilla" />
       <AsideSearch />
       <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       <Stack gap={8} mt={8}>

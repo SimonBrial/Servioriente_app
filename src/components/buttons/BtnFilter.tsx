@@ -3,9 +3,9 @@
 import React from "react";
 import { Modal, Button, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { BsFilter } from "../../icons";
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
+import { BsFilter } from "@/icons";
 
 export function BtnFilter({
   children,

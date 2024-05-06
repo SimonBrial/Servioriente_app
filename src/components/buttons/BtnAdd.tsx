@@ -23,8 +23,13 @@ import {
 import classesBtn from "@/styles/btn-styles.module.css";
 import { BtnAddProps, iconList } from "@/interface/interface";
 import { notifications } from "@mantine/notifications";
+import { useForm, FormProvider } from "react-hook-form";
 
-function BtnAdd({
+/* interface TestProps extends BtnAddProps {
+  methods:
+}
+ */
+export default function BtnAdd({
   description,
   children,
   labelBtn,
@@ -40,6 +45,7 @@ function BtnAdd({
 }: BtnAddProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
+  const methods = useForm();
 
   const iconList: iconList[] = [
     {
@@ -114,8 +120,55 @@ function BtnAdd({
             height: "95vh",
           }}
         >
-          {children}
-          <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
+          <FormProvider {...methods}>
+            {children}
+            <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
+              <Button
+                onClick={close}
+                fullWidth
+                variant="white"
+                leftSection={<IoClose />}
+                styles={(theme) => ({
+                  root: {
+                    border: `2px solid ${theme.colors.lightTheme[6]}`,
+                    color: `${theme.colors.lightTheme[6]}`,
+                  },
+                  section: { fontSize: "1.2rem" },
+                })}
+              >
+                Cancelar
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="filled"
+                leftSection={<HiOutlineUserAdd />}
+                classNames={{
+                  root:
+                    colorScheme === "light"
+                      ? classesBtn.btnAdd
+                      : classesBtn.btnAdd_dark,
+                }}
+                styles={{
+                  section: { fontSize: "1.2rem" },
+                }}
+                onClick={() => {
+                  close();
+                  notifications.show({
+                    id: id,
+                    color: "#2BDD66",
+                    title: title,
+                    message: description,
+                    autoClose: 1000,
+                    withCloseButton: true,
+                  });
+                }}
+              >
+                {labelBtn}
+              </Button>
+            </Flex>
+          </FormProvider>
+          {/* <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
               fullWidth
@@ -161,7 +214,7 @@ function BtnAdd({
             >
               {labelBtn}
             </Button>
-          </Flex>
+          </Flex> */}
         </Stack>
       </Drawer>
       <Button
@@ -189,5 +242,3 @@ function BtnAdd({
     </>
   );
 }
-
-export default BtnAdd;

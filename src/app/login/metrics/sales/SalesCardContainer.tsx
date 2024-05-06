@@ -13,9 +13,11 @@ import {
 import classes from "@/styles/metrics.module.css";
 import { HiOutlineDotsVertical } from "@/icons";
 import { useDisclosure } from "@mantine/hooks";
-import ChartContainer from "@/components/charts/LineChart";
+import LineChart from "@/components/charts/LineChart";
+import { useMetricStore } from "@/store/metric-store";
 
 export const SalesCardContainer = () => {
+  const { goalsArray } = useMetricStore();
   const { colorScheme } = useMantineColorScheme();
   const [opened, { toggle }] = useDisclosure(false);
   return (
@@ -75,7 +77,7 @@ export const SalesCardContainer = () => {
         </Flex>
       </Flex>
       <Collapse in={opened} style={{ marginBottom: "0.5rem" }}>
-        <ChartContainer />
+        <LineChart dataToShow={goalsArray} />
       </Collapse>
     </Container>
   );

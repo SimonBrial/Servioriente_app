@@ -1,24 +1,26 @@
 "use client";
 
-import { HiLink } from "@/icons";
-import {
-  Center,
-  Flex,
-  TextInput,
-  Title,
-  UnstyledButton,
-  useMantineColorScheme,
-} from "@mantine/core";
-import React from "react";
-import classes from "@/styles/btn-styles.module.css";
+import { useMantineColorScheme, TextInput, Title, Flex } from "@mantine/core";
+import { Controller } from "react-hook-form";
+import { StateSelectProps } from "@/interface/interface";
+import BtnCopy from "../buttons/BtnCopy";
 
-export const SocialMediaInput = ({
-  socialMediaName,
-  socialMediaIcon,
-}: {
+interface SocialMediaProps extends StateSelectProps {
   socialMediaName: string;
   socialMediaIcon: React.ReactNode;
-}) => {
+}
+
+export default function SocialMediaInput({
+  socialMediaName,
+  socialMediaIcon,
+  inputSize,
+  register,
+  required,
+  control,
+  label,
+  max,
+  min,
+}: SocialMediaProps) {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Flex justify={"space-between"} align={"center"}>
@@ -35,29 +37,35 @@ export const SocialMediaInput = ({
       >
         {socialMediaName}
       </Title>
-      <Flex gap={4}>
-        <TextInput
-          placeholder={socialMediaName}
-          leftSection={socialMediaIcon}
-          styles={(theme) => ({
-            input: {
-              backgroundColor: colorScheme === "light" ? "#FFFFFF" : "#EFF3F5",
-              color: `${theme.colors.lightTheme[3]}`,
-            },
-          })}
-        />
-        <UnstyledButton
-          classNames={{
-            root:
-              colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
-          }}
-          style={{ marginTop: "0.2rem" }}
-        >
-          <Center style={{ fontSize: "1.2rem" }}>
-            <HiLink />
-          </Center>
-        </UnstyledButton>
-      </Flex>
+      <Controller
+        name={label}
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Flex gap={4} align={"center"}>
+            <TextInput
+              placeholder={socialMediaName}
+              leftSection={socialMediaIcon}
+              onChange={onChange}
+              onBlur={onBlur}
+              value={value}
+              styles={(theme) => ({
+                input: {
+                  backgroundColor:
+                    colorScheme === "light" ? "#FFFFFF" : "#EFF3F5",
+                  color: `${theme.colors.lightTheme[3]}`,
+                },
+              })}
+            />
+            <BtnCopy
+              value={
+                socialMediaName === "Instagram"
+                  ? `https://www.instagram.com/${value}/`
+                  : `https://www.facebook.com/${value}/`
+              }
+            />
+          </Flex>
+        )}
+      />
     </Flex>
   );
-};
+}

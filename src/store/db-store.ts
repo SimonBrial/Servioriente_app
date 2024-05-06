@@ -21,19 +21,41 @@ import { ListDBProps } from "@/interface/interface";
 
 interface DataBaseStoreProps {
   data: ListDBProps[];
-  deleteUser: (id: string) => void;
+  dataToShow: ListDBProps[];
+  dataToDelete: ListDBProps[];
+  dataToEdit: ListDBProps[];
+  fnDeleteUser: (id: string) => void;
+  fnShowUser: (id: string) => void;
+  fnUserToEdit: (id: string) => void;
 }
 
 export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
   return {
     // Data
     data: listDB,
+    dataToShow: [],
+    dataToDelete: [],
+    dataToEdit: [],
 
     // Funtions to manipulate the data
-    deleteUser: (id) => {
+    fnDeleteUser: (id) => {
       const { data } = get();
       const newData = data.filter((d) => d.id !== id);
-      set({ data: newData });
+      const showUserToDelete = data.find((d) => d.id === id);
+      set({
+        data: newData,
+        dataToDelete: showUserToDelete ? [showUserToDelete] : [],
+      });
+    },
+    fnShowUser: (id: string) => {
+      const { data } = get();
+      const newData = data.find((user) => user.id === id);
+      set({ dataToShow: newData ? [newData] : [] });
+    },
+    fnUserToEdit: (id: string) => {
+      const { data } = get();
+      const foundUser = data.find((user) => user.id === id);
+      set({ dataToEdit: foundUser ? [foundUser] : [] });
     },
   };
 });

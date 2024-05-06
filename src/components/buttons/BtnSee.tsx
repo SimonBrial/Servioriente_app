@@ -10,14 +10,18 @@ import { HiOutlineEye } from "../../icons";
 import btnClass from "@/styles/btn-styles.module.css";
 import BtnBack from "./BtnBack";
 import TooltipLayout from "../TooltipLayout";
+import { useDataBaseStore } from "@/store/db-store";
 
 export default function BtnSee({
   children,
+  idToShow,
 }: {
   children: React.ReactNode;
+  idToShow: string;
 }): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
+  const { fnShowUser } = useDataBaseStore();
 
   return (
     <>
@@ -54,7 +58,10 @@ export default function BtnSee({
               ? btnClass.btnView_item
               : btnClass.btnView_item_dark
           }
-          onClick={open}
+          onClick={() => {
+            open();
+            fnShowUser(idToShow);
+          }}
         >
           <Center>
             <HiOutlineEye />

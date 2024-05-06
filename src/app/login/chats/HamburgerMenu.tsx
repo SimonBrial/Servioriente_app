@@ -2,7 +2,7 @@
 
 import {
   MdOutlineMarkChatUnread,
-  HiOutlineDocumentAdd,
+  HiOutlineDocumentText,
   HiOutlineUserGroup,
   HiHeart,
   HiMenu,
@@ -27,7 +27,7 @@ export default function HamburgerMenu(): JSX.Element {
     },
     {
       value: "Plantillas",
-      icon: <HiOutlineDocumentAdd />,
+      icon: <HiOutlineDocumentText />,
       dir: "/login/chats/formats",
     },
     { value: "Favoritos", icon: <HiHeart />, dir: "/login/chats/favorities" },

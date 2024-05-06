@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 
 export const RatingContainer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { rating, avarageSocialMedia } = useDashboardStore();
-  const [avarage, setAvarage] = useState<number>(rating)
+  const { avarageSocialMedia } = useDashboardStore();
+  const [avarage, setAvarage] = useState<number>();
 
   useEffect(() => {
-    setAvarage(avarageSocialMedia())
-  }, [rating]);
+    setAvarage(avarageSocialMedia());
+  }, []);
 
   return (
     <Flex
