@@ -21,7 +21,7 @@ export default function BtnSee({
 }): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
-  const { fnShowUser } = useDataBaseStore();
+  const { fnGetUser } = useDataBaseStore();
 
   return (
     <>
@@ -60,7 +60,7 @@ export default function BtnSee({
           }
           onClick={() => {
             open();
-            fnShowUser(idToShow);
+            fnGetUser(idToShow);
           }}
         >
           <Center>

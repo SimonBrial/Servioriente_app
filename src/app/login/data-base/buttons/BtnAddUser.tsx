@@ -18,22 +18,27 @@ import {
   HiOutlineUser,
   AiOutlineCar,
   IoClose,
+  MdOutlineAlternateEmail,
 } from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
-import HorizontalInputLayout from "../inputs/HorizontalInputLayout";
-import TitleSimpleLayout from "../layout/TitleSimpleLayout";
-import StatusSelect from "../inputs/StatusSelect";
-import PhoneInputLayout from "../inputs/PhoneInputLayout";
-import StateSelect from "../inputs/StateSelect";
-import SocialMediaInput from "../inputs/SocialMediaInput";
-import { processTitle } from "@/types/types";
+import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
+import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
+import StatusSelect from "@/components/inputs/StatusSelect";
+import PhoneInputLayout from "@/components/inputs/PhoneInputLayout";
+import StateSelect from "@/components/inputs/StateSelect";
+import SocialMediaInput from "@/components/inputs/SocialMediaInput";
 import { useForm } from "react-hook-form";
-import RememberWarning from "../RememberWarning";
+import RememberWarning from "@/components/RememberWarning";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/schema/UserSchema";
+import { ListDBProps } from "@/interface/interface";
 
-interface ClientFormProps {
+import dayjs from "dayjs";
+import { useDataBaseStore } from "@/store/db-store";
+// import { CalendarInput } from "@/components/inputs/CalendarInput";
+
+/* interface ClientFormProps {
   firstName: string;
   lastName: string;
   vehicle: string;
@@ -43,7 +48,7 @@ interface ClientFormProps {
   phonePost: string | number;
   facebook?: string;
   instagram?: string;
-}
+} */
 
 /*
 {
@@ -61,6 +66,22 @@ interface ClientFormProps {
   id,
 }: BtnAddProps
 */
+
+const initialValues: ListDBProps = {
+  firstName: "",
+  lastName: "",
+  vehicle: "",
+  state: "",
+  typeStatus: "Espera",
+  phonePre: "",
+  phonePost: "",
+  facebook: "",
+  instagram: "",
+  birthday: dayjs(new Date()),
+  carID: "",
+  id: crypto.randomUUID(),
+  mail: "",
+};
 export default function BtnAddUser(): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
@@ -70,23 +91,16 @@ export default function BtnAddUser(): JSX.Element {
     register,
     control,
     watch,
-  } = useForm<ClientFormProps>({
+  } = useForm<ListDBProps>({
     resolver: zodResolver(userSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      vehicle: "",
-      state: "",
-      typeStatus: "",
-      phonePre: "",
-      phonePost: "",
-      facebook: "",
-      instagram: "",
-    },
+    defaultValues: initialValues,
   });
-  console.log(errors);
-  const onSubmit = (data: ClientFormProps) => {
-    console.log(data);
+
+  const { fnCreateUser } = useDataBaseStore();
+  // console.log(errors);
+  const onSubmit = (data: ListDBProps) => {
+    // console.log(data);
+    fnCreateUser(data);
   };
   const phonePost = watch("phonePost");
   const phonePre = watch("phonePre");
@@ -162,6 +176,19 @@ export default function BtnAddUser(): JSX.Element {
                     title="Vehiculo"
                     control={control}
                   />
+                  <HorizontalInputLayout
+                    errorDescription={errors.carID?.message}
+                    asterisk
+                    icon={<AiOutlineCar />}
+                    inputSize="200px"
+                    label="carID"
+                    max={20}
+                    min={2}
+                    register={register}
+                    required
+                    title="Placa"
+                    control={control}
+                  />
                   <StateSelect
                     errorDescription={errors.state?.message}
                     asterisk
@@ -185,11 +212,39 @@ export default function BtnAddUser(): JSX.Element {
                     required
                     control={control}
                   />
+                  <HorizontalInputLayout
+                    errorDescription={errors.mail?.message}
+                    asterisk
+                    icon={<MdOutlineAlternateEmail />}
+                    inputSize="200px"
+                    label="mail"
+                    max={20}
+                    min={2}
+                    register={register}
+                    required
+                    title="Correo"
+                    control={control}
+                  />
+                  {/* <CalendarInput
+                    width="200px"
+                    withTitle
+                    errorDescription={errors.birthday?.message}
+                    asterisk={false}
+                    icon={<MdOutlineAlternateEmail />}
+                    inputSize="100px"
+                    label="birthday"
+                    max={20}
+                    min={2}
+                    register={register}
+                    required
+                    title="Cumpleaños"
+                    control={control}
+                  /> */}
                   <PhoneInputLayout
-                    erroCodePhone={errors.phonePre?.message}
+                    errorCodePhone={errors.phonePre?.message}
                     errorDescription={errors.phonePost?.message}
                     asterisk
-                    inputSize=""
+                    inputSize="200px"
                     label=""
                     max={20}
                     min={2}
@@ -238,15 +293,19 @@ export default function BtnAddUser(): JSX.Element {
                         },
                       })}
                     >
-                      <Flex
-                        gap={4}
-                        align={"center"}
-                        justify={"end"}
-                        style={{ marginRight: "2rem" }}
-                      >
-                        <Title order={5}>{phonePre}</Title> -{" "}
-                        <Title order={5}>{phonePost}</Title>
-                      </Flex>
+                      {phonePre || phonePost ? (
+                        <Flex
+                          gap={4}
+                          align={"center"}
+                          justify={"end"}
+                          style={{ marginRight: "2rem" }}
+                        >
+                          <Title order={5}>{phonePre}</Title> -{" "}
+                          <Title order={5}>{phonePost}</Title>
+                        </Flex>
+                      ) : (
+                        <Title order={5}>Indicar Telefono</Title>
+                      )}
                     </Title>
                   </Flex>
                   <SocialMediaInput
@@ -262,9 +321,6 @@ export default function BtnAddUser(): JSX.Element {
                     required
                     min={2}
                   />
-                  {errors.instagram?.message && (
-                    <p>{errors.instagram?.message}</p>
-                  )}
                 </Stack>
                 <Stack>
                   {/* <Box

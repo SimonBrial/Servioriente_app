@@ -1,12 +1,11 @@
-"use client";
+import { processTitle } from "@/types/types";
+import { underScoreColor } from "@/utils/underScoreColor";
+import { Badge } from "@mantine/core";
 
-import { Badge, useMantineColorScheme } from "@mantine/core";
-
-export default function StatusBadge({ title }: { title: string }): JSX.Element {
-  const { colorScheme } = useMantineColorScheme();
+export default function StatusBadge({ title }: { title: processTitle }): JSX.Element {
   return (
     <Badge
-      color={colorScheme === "light" ? "#004EE5" : "#52A5E0"}
+      color={underScoreColor(title)}
       size="md"
       radius="sm"
     >

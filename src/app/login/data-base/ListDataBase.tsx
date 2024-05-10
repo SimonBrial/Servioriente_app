@@ -6,6 +6,7 @@ import {
   Stack,
   Table,
   Flex,
+  Text,
 } from "@mantine/core";
 import { useState } from "react";
 import classes from "@/styles/list-styles.module.css";
@@ -16,9 +17,10 @@ import BtnDelete from "@/components/buttons/BtnDelete";
 import BtnSee from "@/components/buttons/BtnSee";
 import UserDeleteLayout from "./UserDeleteLayout";
 import UserDescriptionLayout from "./UserDescriptionLayout";
-import BtnEdit from "@/components/buttons/BtnEdit";
-import RegisterEditLayout from "./RegisterEditLayout";
 import { useDataBaseStore } from "@/store/db-store";
+import BtnEditUser from "./buttons/BtnEditUser";
+import StatusBadge from "@/components/badge/StatusBadge";
+import dayjs from "dayjs";
 
 export default function ListDataBase(): JSX.Element {
   const [scrolled, setScrolled] = useState(false);
@@ -26,9 +28,9 @@ export default function ListDataBase(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
 
   // Reading the context from zustand store folder
-  const DBStore = useDataBaseStore((state) => state.data);
+  const { data } = useDataBaseStore();
 
-  const rows = DBStore.map((element, index) => (
+  const rows = data.map((element, index) => (
     <Table.Tr
       key={index}
       style={{ color: colorScheme === "light" ? "#000" : "white" }}
@@ -52,7 +54,8 @@ export default function ListDataBase(): JSX.Element {
           <BtnSee idToShow={element.id}>
             <UserDescriptionLayout />
           </BtnSee>
-          <BtnEdit
+          <BtnEditUser idToEdit={element.id} />
+          {/* <BtnEdit
             key={crypto.randomUUID()}
             buttonStyles="special"
             description="El registro ha sido editado y guardado satisfactoriamente 😎!"
@@ -63,18 +66,28 @@ export default function ListDataBase(): JSX.Element {
             icon
           >
             <RegisterEditLayout />
-          </BtnEdit>
+          </BtnEdit> */}
         </Flex>
       </Table.Td>
-      <Table.Td>{element.name}</Table.Td>
+      <Table.Td>{element.firstName}</Table.Td>
       <Table.Td>{element.lastName}</Table.Td>
-      <Table.Td>{element.car}</Table.Td>
+      <Table.Td>{element.vehicle}</Table.Td>
       <Table.Td>{element.carID}</Table.Td>
-      <Table.Td>{element.site}</Table.Td>
-      <Table.Td>{element.phone}</Table.Td>
+      <Table.Td>{element.state}</Table.Td>
+      <Table.Td>
+        {element.phonePre} - {element.phonePost}
+      </Table.Td>
       <Table.Td>{element.mail}</Table.Td>
-      <Table.Td>{element.status}</Table.Td>
-      <Table.Td>{element.birthdate}</Table.Td>
+      <Table.Td>
+        <StatusBadge title={element.typeStatus} />
+      </Table.Td>
+      <Table.Td>
+        {element.birthday !== undefined && element.birthday instanceof dayjs ? (
+          dayjs(element.birthday).format("DD MMMM YYYY")
+        ) : (
+          <Text size="xs">No asignada</Text>
+        )}
+      </Table.Td>
     </Table.Tr>
   ));
 

@@ -11,12 +11,12 @@ import {
 import { Controller } from "react-hook-form";
 
 interface PhoneInputLayoutProps extends StateSelectProps {
-  erroCodePhone: string | undefined;
+  errorCodePhone: string | undefined;
 }
 
 export default function PhoneInputLayout({
   errorDescription,
-  erroCodePhone,
+  errorCodePhone,
   inputSize,
   register,
   required,
@@ -45,15 +45,25 @@ export default function PhoneInputLayout({
         </Title>
         {asterisk ? <span style={{ color: "red" }}>*</span> : <></>}
       </Flex>
-      <Flex gap={4}>
+      <Flex
+        gap={4}
+        styles={{
+          root: {
+            width: inputSize,
+          },
+        }}
+        align={"center"}
+        justify={"end"}
+      >
         <Controller
           name={"phonePre"}
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <Select
-              error={erroCodePhone}
+              error={errorCodePhone}
               allowDeselect={false}
-              w={80}
+              // w={65}
+              size="sm"
               placeholder="****"
               data={["0424", "0412", "0426", "0414"]}
               defaultValue={"0424"}
@@ -65,6 +75,11 @@ export default function PhoneInputLayout({
                   backgroundColor:
                     colorScheme === "light" ? "#FFFFFF" : "#EFF3F5",
                   color: `${theme.colors.lightTheme[3]}`,
+                  padding: "0.2rem 0.5rem",
+                },
+                root: {
+                  width: "45%",
+                  position: "relative",
                 },
               })}
             />
@@ -79,13 +94,18 @@ export default function PhoneInputLayout({
               onChange={onChange}
               onBlur={onBlur}
               value={value}
-              w={150}
+              // w={150}
               placeholder="*** ** **"
               styles={(theme) => ({
                 input: {
                   backgroundColor:
                     colorScheme === "light" ? "#FFFFFF" : "#EFF3F5",
                   color: `${theme.colors.lightTheme[3]}`,
+                  padding: "0.8rem 0.5rem",
+                },
+                root: {
+                  width: "60%",
+                  position: "relative",
                 },
               })}
             />

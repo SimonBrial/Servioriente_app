@@ -37,7 +37,7 @@ interface ClientFormProps {
 export default function ClientRegister(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const {
-    formState: { errors },
+    // formState: { errors },
     handleSubmit,
     register,
     control,
@@ -55,7 +55,7 @@ export default function ClientRegister(): JSX.Element {
       instagram: "",
     },
   });
-  console.log(errors);
+  // console.log(errors);
   const onSubmit = (data: ClientFormProps) => {
     console.log(data);
   };

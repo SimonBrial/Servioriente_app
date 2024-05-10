@@ -30,9 +30,14 @@ export const userSchema = z.object({
       message: "Por favor seleccion un estado.",
     }),
   }),
-  /* .string()
-    .min(1, { message: "Vehiculo del usuario requerido" })
-    .max(20), */
+  mail: z.string().email({
+    message: "El correo introducido no es valido, por favor corregirlo",
+  }),
+  carID: z.string().regex(/^(?=.*[a-zA-Z])(?=.*\d).*$/, {
+    message:
+      "La placa no coincide con el codigo de una placa tradicional de Venezuela, corregirlo por favor",
+  }),
+  // birthday: z.string().nullable(),
   phonePre: z
     .string()
     .length(4, { message: "El codigo de telefono es requerido" }),

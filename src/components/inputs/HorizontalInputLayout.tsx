@@ -6,6 +6,7 @@ import { Controller } from "react-hook-form";
 
 const HorizontalInputLayout = ({
   errorDescription,
+  valueToEdit,
   inputSize,
   asterisk,
   register,

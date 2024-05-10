@@ -88,6 +88,7 @@ import {
 } from "react-icons/tb";
 import {
   MdOutlineInsertEmoticon,
+  MdOutlineAlternateEmail,
   MdOutlineMarkChatUnread,
   MdOutlineDragIndicator,
   MdOutlineAccessAlarms,
@@ -124,6 +125,7 @@ export {
   IoChevronForwardOutline,
   MdOutlineMarkChatUnread,
   MdOutlineInsertEmoticon,
+  MdOutlineAlternateEmail,
   MdOutlineDragIndicator,
   HiOutlineDotsVertical,
   HiOutlineDocumentText,

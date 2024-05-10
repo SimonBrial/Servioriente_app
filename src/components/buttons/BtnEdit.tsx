@@ -32,11 +32,11 @@ export default function BtnEdit({
 }: BtnEditProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
-  const { fnUserToEdit } = useDataBaseStore();
+  const { fnGetUser } = useDataBaseStore();
 
   const handleEdit = () => {
     open();
-    fnUserToEdit(id);
+    fnGetUser(id);
   };
 
   let buttonSty: JSX.Element;

@@ -2,7 +2,7 @@
 
 import { processTitle } from "@/types/types";
 
-export function underScoreColor(colorEnum: processTitle | string): string {
+export function underScoreColor(colorEnum: processTitle): string {
   if (colorEnum === "Espera") {
     return "#fad901";
   } else if (colorEnum === "Generacion") {

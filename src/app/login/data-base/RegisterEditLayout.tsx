@@ -16,10 +16,11 @@ import {
   HiLink,
 } from "@/icons";
 import { TitleLayout } from "@/components/layout/TitleLayout";
-// import { useDataBaseStore } from "@/store/db-store";
+import { useDataBaseStore } from "@/store/db-store";
 
 export default function RegisterEditLayout(): JSX.Element {
-  // const { dataToEdit } = useDataBaseStore();
+  const { dataToEdit } = useDataBaseStore();
+  console.log(dataToEdit);
   return (
     <Stack gap={"xs"}>
       <TitleLayout title="Editar Registro" icon="" color="" onText={false} />

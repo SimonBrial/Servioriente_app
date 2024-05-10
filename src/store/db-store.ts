@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/await-thenable */
 import { create } from "zustand";
 import { listDB } from "@/data/ListDB";
 import { ListDBProps } from "@/interface/interface";
 
 /* Functionalities of this section
   --> User Register Fn
-    - Create an user
+    ✅ Create an user
     ✅ Delete an user
-    - Update an user
-    - Read an user
+    ✅ Update an user
+    ✅ Read an user
   --> General Functions
     - Apply filter by name, last name, whatever...
     - Delete filter that was apply it
@@ -20,13 +21,16 @@ import { ListDBProps } from "@/interface/interface";
 */
 
 interface DataBaseStoreProps {
-  data: ListDBProps[];
-  dataToShow: ListDBProps[];
-  dataToDelete: ListDBProps[];
-  dataToEdit: ListDBProps[];
-  fnDeleteUser: (id: string) => void;
-  fnShowUser: (id: string) => void;
-  fnUserToEdit: (id: string) => void;
+  data: ListDBProps[]; // Global data Array
+  dataToShow: ListDBProps[]; // Element to show
+  dataToDelete: ListDBProps[]; // Element to delete
+  dataToEdit: ListDBProps[]; // Element to edit
+  // -------------------- Functions --------------------
+  fnDeleteUser: (id: string) => void; // Delete an user by ID
+  fnGetUser: (id: string) => void; // Get an user by ID
+  // fnUserToEdit: (id: string) => void; // Edit an user by ID
+  fnUpdateData: (id: string, newData: ListDBProps[]) => void; // Edit an user by ID
+  fnCreateUser: (newUser: ListDBProps) => void; // Create an user register in the DB
 }
 
 export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
@@ -38,6 +42,7 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
     dataToEdit: [],
 
     // Funtions to manipulate the data
+
     fnDeleteUser: (id) => {
       const { data } = get();
       const newData = data.filter((d) => d.id !== id);
@@ -47,15 +52,43 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
         dataToDelete: showUserToDelete ? [showUserToDelete] : [],
       });
     },
-    fnShowUser: (id: string) => {
+    fnGetUser: (id: string) => {
       const { data } = get();
-      const newData = data.find((user) => user.id === id);
-      set({ dataToShow: newData ? [newData] : [] });
+      const foundUser = data.find((user) => user.id === id);
+      set({ dataToShow: foundUser ? [foundUser] : [] });
+      return foundUser;
     },
-    fnUserToEdit: (id: string) => {
+    /* fnUserToEdit: (id: string) => {
       const { data } = get();
       const foundUser = data.find((user) => user.id === id);
       set({ dataToEdit: foundUser ? [foundUser] : [] });
+      return foundUser;
+    }, */
+    fnUpdateData: (id: string, newData: ListDBProps[]) => {
+      const { data } = get();
+
+      // Find the index of the user that going to be updated
+      const userIndex = data.findIndex((user) => user.id === id);
+
+      // Find user in the data array
+      if (userIndex !== -1) {
+        // Creating a copy of the currently data and updating the specified data
+        const updatedData = [...data];
+        updatedData[userIndex] = {
+          ...updatedData[userIndex],
+          ...newData[0],
+        };
+
+        // Updating the data arrat with the new data
+        set({ data: updatedData });
+      } else {
+        set({ data: data });
+      }
+    },
+    fnCreateUser: (newUser: ListDBProps) => {
+      const { data } = get();
+      const userData = [...data, newUser];
+      set({ data: userData });
     },
   };
 });

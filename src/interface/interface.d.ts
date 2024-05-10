@@ -187,6 +187,7 @@ interface HorizontalLayoutProps {
   max: number;
   register: UseFormRegister<any>;
   control: any;
+  valueToEdit?: string;
 }
 
 interface StateSelectProps {
@@ -319,18 +320,19 @@ interface NotificationsFnProps {
 }
 
 interface ListDBProps {
-  id: string;
-  name: string;
-  lastName: string;
-  car: string;
-  carID: string;
-  site: string;
-  phone: string;
-  mail: string;
-  birthdate: string;
-  status: React.JSX.Element;
-  facebook: string;
-  instagram: string;
+  id: string; // Auto generated ✅
+  firstName: string; // required ✅
+  lastName: string; // required ✅
+  vehicle: string; // required ✅
+  carID: string; // required ✅
+  state: string; // required ✅
+  phonePre: string; // required ✅
+  phonePost: string | number; // required ✅
+  typeStatus: processTitle; // required ✅
+  mail?: string; // ✅
+  birthday?: string | Date | Dayjs;
+  facebook?: string; // ✅
+  instagram?: string; // ✅
 }
 
 interface AlarmFolderArray {

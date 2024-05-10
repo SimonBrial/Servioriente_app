@@ -8,7 +8,7 @@ import { AutoCompleteInput } from "@/components/inputs/AutoCompleteInput";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
 import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
-import BtnAddUser from "@/components/buttons/BtnAddUser";
+import BtnAddUser from "@/app/login/data-base/buttons/BtnAddUser";
 
 export default function DBContainer() {
   return (
