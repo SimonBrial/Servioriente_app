@@ -25,12 +25,16 @@ interface DataBaseStoreProps {
   dataToShow: ListDBProps[]; // Element to show
   dataToDelete: ListDBProps[]; // Element to delete
   dataToEdit: ListDBProps[]; // Element to edit
+  showRegisterLayout: boolean; // It's just a boolean value
+  showEditLayout: boolean; // It's just a boolean value
   // -------------------- Functions --------------------
   fnDeleteUser: (id: string) => void; // Delete an user by ID
   fnGetUser: (id: string) => void; // Get an user by ID
   // fnUserToEdit: (id: string) => void; // Edit an user by ID
-  fnUpdateData: (id: string, newData: ListDBProps[]) => void; // Edit an user by ID
-  fnCreateUser: (newUser: ListDBProps) => void; // Create an user register in the DB
+  fnUpdateData: (id: string, newData: ListDBProps[]) => Promise<void>; // Edit an user by ID
+  fnCreateUser: (newUser: ListDBProps) => Promise<void>; // Create an user register in the DB
+  fnSetShow: (stateValue: boolean) => void;
+  fnSetShowEdit: (stateValue: boolean) => void;
 }
 
 export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
@@ -40,9 +44,19 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
     dataToShow: [],
     dataToDelete: [],
     dataToEdit: [],
+    showRegisterLayout: false,
+    showEditLayout: false,
 
     // Funtions to manipulate the data
 
+    fnSetShow: (stateValue: boolean) =>
+      set({
+        showRegisterLayout: stateValue,
+      }),
+    fnSetShowEdit: (stateValue: boolean) =>
+      set({
+        showEditLayout: stateValue,
+      }),
     fnDeleteUser: (id) => {
       const { data } = get();
       const newData = data.filter((d) => d.id !== id);
@@ -64,7 +78,7 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
       set({ dataToEdit: foundUser ? [foundUser] : [] });
       return foundUser;
     }, */
-    fnUpdateData: (id: string, newData: ListDBProps[]) => {
+    fnUpdateData: async (id: string, newData: ListDBProps[]) => {
       const { data } = get();
 
       // Find the index of the user that going to be updated
@@ -80,15 +94,19 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
         };
 
         // Updating the data arrat with the new data
-        set({ data: updatedData });
+        await set({ data: updatedData });
       } else {
         set({ data: data });
       }
     },
-    fnCreateUser: (newUser: ListDBProps) => {
-      const { data } = get();
-      const userData = [...data, newUser];
-      set({ data: userData });
+    fnCreateUser: async (newUser: ListDBProps) => {
+      try {
+        const { data } = get();
+        const userData = [...data, newUser];
+        await set({ data: userData });
+      } catch (error) {
+        console.log(error);
+      }
     },
   };
 });

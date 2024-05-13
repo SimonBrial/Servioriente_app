@@ -8,25 +8,28 @@
 import { useDisclosure } from "@mantine/hooks";
 import {
   useMantineColorScheme,
+  UnstyledButton,
+  ScrollArea,
   Button,
   Drawer,
+  Center,
   Title,
   Stack,
   Flex,
-  Center,
-  UnstyledButton,
+  Text,
 } from "@mantine/core";
 import {
+  MdOutlineAlternateEmail,
   HiOutlineUserAdd,
   IoLogoInstagram,
+  HiOutlinePencil,
   IoLogoFacebook,
   HiOutlineUser,
   AiOutlineCar,
   IoClose,
-  HiOutlinePencil,
-  MdOutlineAlternateEmail,
 } from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
+import heightClass from "@/styles/height-view.module.css";
 // import { notifications } from "@mantine/notifications";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
 import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
@@ -42,41 +45,13 @@ import TooltipLayout from "@/components/TooltipLayout";
 import { useEffect, useState } from "react";
 import { useDataBaseStore } from "@/store/db-store";
 import { ListDBProps } from "@/interface/interface";
+import { notifications } from "@mantine/notifications";
 
-/* interface ClientFormProps {
-  firstName: string;
-  lastName: string;
-  vehicle: string;
-  state: string;
-  typeStatus: processTitle;
-  phonePre: string;
-  phonePost: string | number;
-  facebook?: string;
-  instagram?: string;
-} */
-
-/*
-{
-  description,
-  children,
-  labelBtn,
-  iconTag,
-  loading,
-  classes,
-  color,
-  title,
-  addFn,
-  label,
-  icon,
-  id,
-}: BtnAddProps
-*/
 export default function BtnEditUser({
   idToEdit,
 }: {
   idToEdit: string;
 }): JSX.Element {
-  // const datejs = dayjs()
   const initialValues: ListDBProps = {
     firstName: "initial values",
     lastName: "initial values",
@@ -112,6 +87,7 @@ export default function BtnEditUser({
     register,
     control,
   } = useForm<ListDBProps>({
+    mode: "onChange",
     resolver: zodResolver(userSchema),
     defaultValues: data[0] !== undefined ? data[0] : initialValues,
     values:
@@ -133,26 +109,42 @@ export default function BtnEditUser({
           }
         : initialValues,
   });
-  // console.log(errors);
-  const onSubmit = (dataUpdated: ListDBProps) => {
-    const newData: ListDBProps[] = [
-      {
-        birthday: dataUpdated.birthday,
-        carID: dataUpdated.carID,
-        firstName: dataUpdated.firstName,
-        id: idToEdit,
-        lastName: dataUpdated.lastName,
-        phonePost: dataUpdated.phonePost,
-        phonePre: dataUpdated.phonePre,
-        state: dataUpdated.state,
-        typeStatus: dataUpdated.typeStatus,
-        vehicle: dataUpdated.vehicle,
-        facebook: dataUpdated.facebook,
-        instagram: dataUpdated.instagram,
-        mail: dataUpdated.mail,
-      },
-    ];
-    fnUpdateData(idToEdit, newData);
+  console.log(errors);
+  const onSubmit = async (dataUpdated: ListDBProps) => {
+    try {
+      const newData: ListDBProps[] = [
+        {
+          birthday: dataUpdated.birthday,
+          carID: dataUpdated.carID,
+          firstName: dataUpdated.firstName,
+          id: idToEdit,
+          lastName: dataUpdated.lastName,
+          phonePost: dataUpdated.phonePost,
+          phonePre: dataUpdated.phonePre,
+          state: dataUpdated.state,
+          typeStatus: dataUpdated.typeStatus,
+          vehicle: dataUpdated.vehicle,
+          facebook: dataUpdated.facebook,
+          instagram: dataUpdated.instagram,
+          mail: dataUpdated.mail,
+        },
+      ];
+      if (Object.keys(errors).length === 0) {
+        await fnUpdateData(idToEdit, newData);
+        close();
+        notifications.show({
+          id: idToEdit,
+          color: "#2BDD66",
+          title: "Registro Editado",
+          message:
+            "El registro ha sido editado y guardado satisfactoriamente 😎!",
+          autoClose: 1000,
+          withCloseButton: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -173,112 +165,118 @@ export default function BtnEditUser({
         <Stack
           justify="space-between"
           style={{
-            padding: "0 1rem",
+            padding: "0 0.5rem",
             height: "95vh",
           }}
         >
           <Stack
             justify="space-between"
             style={{
-              padding: "0 1rem",
+              padding: "0 0.8rem",
               height: "95vh",
             }}
           >
-            {/* <p>{data[0] !== undefined ? data[0].firstname : "T.T"}</p> */}
             <form onSubmit={handleSubmit(onSubmit)} style={{ height: "100%" }}>
               <Stack justify="space-between" style={{ height: "100%" }}>
-                <Stack gap={"xs"}>
+                <Stack gap={8}>
                   <TitleSimpleLayout title="Editar Registro" />
-                  <HorizontalInputLayout
-                    errorDescription={errors.firstName?.message}
-                    asterisk
-                    icon={<HiOutlineUser />}
-                    inputSize="200px"
-                    label="firstName"
-                    max={20}
-                    min={3}
-                    register={register}
-                    required
-                    title="Nombre"
-                    control={control}
-                  />
-                  <HorizontalInputLayout
-                    errorDescription={errors.lastName?.message}
-                    asterisk
-                    icon={<HiOutlineUser />}
-                    inputSize="200px"
-                    label="lastName"
-                    max={20}
-                    min={3}
-                    register={register}
-                    required
-                    title="Apellido"
-                    control={control}
-                  />
-                  <HorizontalInputLayout
-                    errorDescription={errors.vehicle?.message}
-                    asterisk
-                    icon={<AiOutlineCar />}
-                    inputSize="200px"
-                    label="vehicle"
-                    max={20}
-                    min={2}
-                    register={register}
-                    required
-                    title="Vehiculo"
-                    control={control}
-                  />
-                  <HorizontalInputLayout
-                    errorDescription={errors.carID?.message}
-                    asterisk
-                    icon={<AiOutlineCar />}
-                    inputSize="200px"
-                    label="carID"
-                    max={20}
-                    min={2}
-                    register={register}
-                    required
-                    title="Placa"
-                    control={control}
-                  />
-                  <StateSelect
-                    errorDescription={errors.state?.message}
-                    asterisk
-                    inputSize="200px"
-                    label="state"
-                    max={20}
-                    min={2}
-                    register={register}
-                    required
-                    control={control}
-                  />
-                  <StatusSelect
-                    errorDescription={errors.typeStatus?.message}
-                    typeArray="process"
-                    asterisk
-                    inputSize="200px"
-                    label="typeStatus"
-                    max={20}
-                    min={2}
-                    register={register}
-                    required
-                    control={control}
-                  />
-                  <HorizontalInputLayout
-                    errorDescription={errors.mail?.message}
-                    asterisk
-                    icon={<MdOutlineAlternateEmail />}
-                    inputSize="200px"
-                    label="mail"
-                    max={20}
-                    min={2}
-                    register={register}
-                    required
-                    title="Correo"
-                    control={control}
-                  />
-                  {/* <p>Here must be the Calendar Component</p> */}
-                  {/* <CalendarInput
+                  <ScrollArea
+                    maw={"100%"}
+                    scrollbarSize={2}
+                    offsetScrollbars
+                    className={heightClass.registerLayout}
+                  >
+                    <Stack gap={"xs"}>
+                      <HorizontalInputLayout
+                        errorDescription={errors.firstName?.message}
+                        asterisk
+                        icon={<HiOutlineUser />}
+                        inputSize="200px"
+                        label="firstName"
+                        max={20}
+                        min={3}
+                        register={register}
+                        required
+                        title="Nombre"
+                        control={control}
+                      />
+                      <HorizontalInputLayout
+                        errorDescription={errors.lastName?.message}
+                        asterisk
+                        icon={<HiOutlineUser />}
+                        inputSize="200px"
+                        label="lastName"
+                        max={20}
+                        min={3}
+                        register={register}
+                        required
+                        title="Apellido"
+                        control={control}
+                      />
+                      <HorizontalInputLayout
+                        errorDescription={errors.vehicle?.message}
+                        asterisk
+                        icon={<AiOutlineCar />}
+                        inputSize="200px"
+                        label="vehicle"
+                        max={20}
+                        min={2}
+                        register={register}
+                        required
+                        title="Vehiculo"
+                        control={control}
+                      />
+                      <HorizontalInputLayout
+                        errorDescription={errors.carID?.message}
+                        asterisk
+                        icon={<AiOutlineCar />}
+                        inputSize="200px"
+                        label="carID"
+                        max={20}
+                        min={2}
+                        register={register}
+                        required
+                        title="Placa"
+                        control={control}
+                      />
+                      <StateSelect
+                        errorDescription={errors.state?.message}
+                        asterisk
+                        inputSize="200px"
+                        label="state"
+                        max={20}
+                        min={2}
+                        register={register}
+                        required
+                        control={control}
+                      />
+                      <StatusSelect
+                        errorDescription={errors.typeStatus?.message}
+                        typeArray="process"
+                        asterisk
+                        inputSize="200px"
+                        label="typeStatus"
+                        max={20}
+                        min={2}
+                        register={register}
+                        required
+                        control={control}
+                      />
+                      <HorizontalInputLayout
+                        errorDescription={errors.mail?.message}
+                        asterisk
+                        icon={<MdOutlineAlternateEmail />}
+                        inputSize="200px"
+                        label="mail"
+                        max={20}
+                        min={2}
+                        register={register}
+                        required
+                        title="Correo"
+                        control={control}
+                      />
+                      <p>Here must be the Calendar Component</p>
+                      {/* <CalendarInput
                     width="200px"
                     withTitle
                     errorDescription={errors.mail?.message}
@@ -293,112 +291,92 @@ export default function BtnEditUser({
                     title="Cumpleaños"
                     control={control}
                   /> */}
-                  <PhoneInputLayout
-                    errorCodePhone={errors.phonePre?.message}
-                    errorDescription={errors.phonePost?.message}
-                    asterisk
-                    inputSize="200px"
-                    label=""
-                    max={20}
-                    min={2}
-                    register={register}
-                    required
-                    control={control}
-                  />
-                  <TitleSimpleLayout title="Redes Sociales" />
-                  <SocialMediaInput
-                    errorDescription={errors.facebook?.message}
-                    asterisk={false}
-                    socialMediaIcon={<IoLogoFacebook />}
-                    socialMediaName="Facebook"
-                    register={register}
-                    inputSize="200px"
-                    control={control}
-                    label="facebook"
-                    max={20}
-                    required
-                    min={2}
-                  />
-                  <Flex justify={"space-between"} align={"center"}>
-                    <Title
-                      order={5}
-                      styles={(theme) => ({
-                        root: {
-                          color:
-                            colorScheme === "light"
-                              ? `${theme.colors.lightTheme[3]}`
-                              : `${theme.colors.darkTheme[2]}`,
-                        },
-                      })}
-                    >
-                      Whatsapp
-                    </Title>
-                    <Title
-                      order={5}
-                      styles={(theme) => ({
-                        root: {
-                          color:
-                            colorScheme === "light"
-                              ? `${theme.colors.lightTheme[3]}`
-                              : `${theme.colors.darkTheme[2]}`,
-                          width: "55%",
-                          textAlign: "center",
-                        },
-                      })}
-                    >
-                      {/* <Flex
-                        gap={4}
-                        align={"center"}
-                        justify={"end"}
-                        style={{ marginRight: "2rem" }}
-                      >
-                        <Title order={5}>{data[0].phonePre}</Title> -{" "}
-                        <Title order={5}>{data[0].phonePost}</Title>
-                      </Flex> */}
-                    </Title>
-                  </Flex>
-                  <SocialMediaInput
-                    errorDescription={errors.instagram?.message}
-                    asterisk={false}
-                    socialMediaIcon={<IoLogoInstagram />}
-                    socialMediaName="Instagram"
-                    register={register}
-                    inputSize="200px"
-                    control={control}
-                    label="instagram"
-                    max={20}
-                    required
-                    min={2}
-                  />
-                  {errors.instagram?.message && (
-                    <p>{errors.instagram?.message}</p>
-                  )}
+                      <PhoneInputLayout
+                        errorCodePhone={errors.phonePre?.message}
+                        errorDescription={errors.phonePost?.message}
+                        asterisk
+                        inputSize="200px"
+                        label=""
+                        max={20}
+                        min={2}
+                        register={register}
+                        required
+                        control={control}
+                      />
+                      <TitleSimpleLayout title="Redes Sociales" />
+                      <SocialMediaInput
+                        errorDescription={errors.facebook?.message}
+                        asterisk={false}
+                        socialMediaIcon={<IoLogoFacebook />}
+                        socialMediaName="Facebook"
+                        register={register}
+                        inputSize="200px"
+                        control={control}
+                        label="facebook"
+                        max={20}
+                        required
+                        min={2}
+                      />
+                      <Flex justify={"space-between"} align={"center"}>
+                        <Title
+                          order={5}
+                          styles={(theme) => ({
+                            root: {
+                              color:
+                                colorScheme === "light"
+                                  ? `${theme.colors.lightTheme[3]}`
+                                  : `${theme.colors.darkTheme[2]}`,
+                            },
+                          })}
+                        >
+                          Whatsapp
+                        </Title>
+                        <Title
+                          order={5}
+                          styles={(theme) => ({
+                            root: {
+                              color:
+                                colorScheme === "light"
+                                  ? `${theme.colors.lightTheme[3]}`
+                                  : `${theme.colors.darkTheme[2]}`,
+                              width: "55%",
+                              textAlign: "center",
+                            },
+                          })}
+                        >
+                          {data[0] !== undefined ? (
+                            <Flex
+                              gap={4}
+                              align={"center"}
+                              justify={"end"}
+                              style={{ marginRight: "2rem" }}
+                            >
+                              <Title order={5}>{data[0].phonePre}</Title> -{" "}
+                              <Title order={5}>{data[0].phonePost}</Title>
+                            </Flex>
+                          ) : (
+                            <Text size="xs">No asignada</Text>
+                          )}
+                        </Title>
+                      </Flex>
+                      <SocialMediaInput
+                        errorDescription={errors.instagram?.message}
+                        asterisk={false}
+                        socialMediaIcon={<IoLogoInstagram />}
+                        socialMediaName="Instagram"
+                        register={register}
+                        inputSize="200px"
+                        control={control}
+                        label="instagram"
+                        max={20}
+                        required
+                        min={2}
+                      />
+                    </Stack>
+                  </ScrollArea>
                 </Stack>
                 <Stack>
-                  {/* <Box
-                    style={{
-                      border: "1px solid #F0185C",
-                      borderRadius: "6px",
-                      padding: "0.5rem 0.8rem ",
-                    }}
-                  >
-                    <Stack gap={0}>
-                      <Text size="sm">Prueba</Text>
-                      <Text size="sm">Prueba</Text>
-                    </Stack>
-                  </Box> */}
                   <RememberWarning />
-                  {/* <Stack gap={1}>
-            <p>{firstName}</p>
-            <p>{lastName}</p>
-            <p>{vehicle}</p>
-            <p>{state}</p>
-            <p>{typeStatus}</p>
-            <p>{phonePre}</p>
-            <p>{phonePost}</p>
-            <p>{facebook}</p>
-            <p>{instagram}</p>
-          </Stack> */}
                   <Flex
                     align={"center"}
                     gap={"sm"}
@@ -420,7 +398,6 @@ export default function BtnEditUser({
                       Cancelar
                     </Button>
                     <Button
-                      // disabled={errors !== null ? true : false}
                       type="submit"
                       fullWidth
                       variant="filled"
@@ -435,17 +412,17 @@ export default function BtnEditUser({
                         section: { fontSize: "1.2rem" },
                       }}
                       onClick={() => {
-                        fnUpdateData(idToEdit, data);
-                        /* close();
-                        notifications.show({
-                          id: crypto.randomUUID(),
-                          color: "#2BDD66",
-                          title: "Registro Editado",
-                          message:
-                            "El registro ha sido editado y guardado satisfactoriamente 😎!",
-                          autoClose: 1000,
-                          withCloseButton: true,
-                        }); */
+                        if (Object.keys(errors).length > 0) {
+                          notifications.show({
+                            id: idToEdit,
+                            color: "#F0185C",
+                            title: "Errores en el formulario",
+                            message:
+                              "Existen algunos errores en el formulario, debe solucionarlos para poder registrar los cambios",
+                            autoClose: 1000,
+                            withCloseButton: true,
+                          });
+                        }
                       }}
                     >
                       Editar Registro

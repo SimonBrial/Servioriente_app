@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Checkbox,
   Divider,
@@ -6,7 +8,7 @@ import {
   Title,
   useMantineColorScheme,
 } from "@mantine/core";
-import classes from "@/styles/general-styles.module.css"
+import classes from "@/styles/general-styles.module.css";
 
 export const ItemFilterLayout = ({ label }: { label: string }) => {
   const { colorScheme } = useMantineColorScheme();

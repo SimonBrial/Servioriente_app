@@ -1,8 +1,8 @@
-"use client";
+// "use client";
 
 import { Stack } from "@mantine/core";
 import { TitleLayout } from "./TitleLayout";
-import { CalendarInput } from "../inputs/CalendarInput";
+// import { CalendarInput } from "../inputs/CalendarInput";
 import { ItemFilterLayout } from "./ItemFilterLayout";
 
 export function GeneralFilterLayout(): JSX.Element {
@@ -21,7 +21,7 @@ export function GeneralFilterLayout(): JSX.Element {
       <ItemFilterLayout label="Telefono" />
       <ItemFilterLayout label="Red Social" />
       <ItemFilterLayout label="Estatus" />
-      <CalendarInput title="Desde" width="200px" withTitle />
+      {/* <CalendarInput title="Desde" width="200px" withTitle /> */}
     </Stack>
   );
 }

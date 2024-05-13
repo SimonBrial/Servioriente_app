@@ -1,14 +1,7 @@
 /* eslint-disable object-shorthand */
 "use client";
 
-import { useDisclosure } from "@mantine/hooks";
-import {
-  useMantineColorScheme,
-  Button,
-  Drawer,
-  Stack,
-  Flex,
-} from "@mantine/core";
+import { useMantineColorScheme, Button, Drawer, Stack } from "@mantine/core";
 import {
   HiOutlineFolderAdd,
   HiOutlineUserAdd,
@@ -16,14 +9,12 @@ import {
   TbTemplate,
   TbMailPlus,
   BiBellPlus,
-  IoClose,
   LuGoal,
   // BiTask,
 } from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
 import { BtnAddProps, iconList } from "@/interface/interface";
-import { notifications } from "@mantine/notifications";
-import { useForm, FormProvider } from "react-hook-form";
+import { useDataBaseStore } from "@/store/db-store";
 
 /* interface TestProps extends BtnAddProps {
   methods:
@@ -43,9 +34,8 @@ export default function BtnAdd({
   icon,
   id,
 }: BtnAddProps): JSX.Element {
-  const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
-  const methods = useForm();
+  const { fnSetShow, showRegisterLayout } = useDataBaseStore();
 
   const iconList: iconList[] = [
     {
@@ -100,8 +90,8 @@ export default function BtnAdd({
   return (
     <>
       <Drawer
-        opened={opened}
-        onClose={close}
+        opened={showRegisterLayout}
+        onClose={() => fnSetShow(false)}
         closeOnClickOutside={false}
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
@@ -120,8 +110,8 @@ export default function BtnAdd({
             height: "95vh",
           }}
         >
-          <FormProvider {...methods}>
-            {children}
+          {children}
+          {/* <FormProvider {...methods}>
             <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
               <Button
                 onClick={close}
@@ -167,7 +157,7 @@ export default function BtnAdd({
                 {labelBtn}
               </Button>
             </Flex>
-          </FormProvider>
+          </FormProvider> */}
           {/* <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
@@ -219,16 +209,16 @@ export default function BtnAdd({
       </Drawer>
       <Button
         leftSection={selectIcon(iconTag)}
-        styles={(theme) => ({
+        styles={{
           section: { fontSize: "1.2rem" },
           root: {
             padding: "0.6rem 1.5rem",
             height: "100%",
             width: "100%",
           },
-        })}
+        }}
         // fullWidth
-        onClick={open}
+        onClick={() => fnSetShow(true)}
         classNames={{
           root:
             colorScheme === "light"

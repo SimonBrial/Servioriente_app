@@ -32,7 +32,7 @@ export default function BtnEdit({
 }: BtnEditProps): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
-  const { fnGetUser } = useDataBaseStore();
+  const { fnGetUser, fnSetShowEdit, showEditLayout } = useDataBaseStore();
 
   const handleEdit = () => {
     open();
@@ -98,8 +98,8 @@ export default function BtnEdit({
   return (
     <>
       <Drawer
-        opened={opened}
-        onClose={close}
+        opened={showEditLayout}
+        onClose={() => fnSetShowEdit(false)}
         closeOnClickOutside={false}
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}

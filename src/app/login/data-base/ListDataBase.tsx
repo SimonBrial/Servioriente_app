@@ -55,18 +55,6 @@ export default function ListDataBase(): JSX.Element {
             <UserDescriptionLayout />
           </BtnSee>
           <BtnEditUser idToEdit={element.id} />
-          {/* <BtnEdit
-            key={crypto.randomUUID()}
-            buttonStyles="special"
-            description="El registro ha sido editado y guardado satisfactoriamente 😎!"
-            labelBtn="Guardar"
-            color="#2BDD66"
-            title="Registro Editado"
-            id={element.id}
-            icon
-          >
-            <RegisterEditLayout />
-          </BtnEdit> */}
         </Flex>
       </Table.Td>
       <Table.Td>{element.firstName}</Table.Td>
@@ -88,13 +76,27 @@ export default function ListDataBase(): JSX.Element {
           <Text size="xs">No asignada</Text>
         )}
       </Table.Td>
+      <Table.Td>
+        {element.facebook !== undefined ? (
+          element.facebook
+        ) : (
+          <Text size="xs">No asignada</Text>
+        )}
+      </Table.Td>
+      <Table.Td>
+        {element.instagram !== undefined ? (
+          element.instagram
+        ) : (
+          <Text size="xs">No asignada</Text>
+        )}
+      </Table.Td>
     </Table.Tr>
   ));
 
   return (
     <Stack gap={10}>
       <ScrollArea
-        // h={620}
+        w={"90vw"}
         className={heightClasses.DB_container}
         offsetScrollbars
         scrollbarSize={2}
@@ -105,6 +107,7 @@ export default function ListDataBase(): JSX.Element {
         <Table
           highlightOnHover
           styles={(theme) => ({
+            table: { width: "100vw" },
             td: {
               borderTop:
                 colorScheme === "light"
@@ -167,6 +170,8 @@ export default function ListDataBase(): JSX.Element {
                 <HeaderRowItem label="Status" sorted={sorted} />
               </Table.Th>
               <Table.Th>Cumpleaños</Table.Th>
+              <Table.Th>Facebook</Table.Th>
+              <Table.Th>Instagram</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>

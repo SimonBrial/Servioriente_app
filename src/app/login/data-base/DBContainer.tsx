@@ -8,7 +8,8 @@ import { AutoCompleteInput } from "@/components/inputs/AutoCompleteInput";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
 import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
-import BtnAddUser from "@/app/login/data-base/buttons/BtnAddUser";
+import CreateRegisterLayout from "./layout/CreateRegisterLayout";
+import BtnAdd from "@/components/buttons/BtnAdd";
 
 export default function DBContainer() {
   return (
@@ -32,7 +33,17 @@ export default function DBContainer() {
           <BtnReportGenerate />
         </Box>
         <Box>
-          <BtnAddUser />
+          <BtnAdd
+            color=""
+            description=""
+            title=""
+            labelBtn=""
+            label="Crear Usuario"
+            id={crypto.randomUUID()}
+            iconTag="add-user"
+          >
+            <CreateRegisterLayout />
+          </BtnAdd>
         </Box>
       </Flex>
       <FilterContainer />

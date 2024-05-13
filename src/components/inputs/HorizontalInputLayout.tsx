@@ -40,7 +40,7 @@ const HorizontalInputLayout = ({
       <Controller
         name={label}
         control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
+        render={({ field: { onChange, onBlur, value, ref } }) => (
           <TextInput
             error={errorDescription !== undefined ? errorDescription : null}
             onChange={onChange}

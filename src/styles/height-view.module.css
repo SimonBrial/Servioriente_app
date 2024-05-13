@@ -239,6 +239,18 @@
     height: 72vh;
   }
 }
+@media (min-width: 1280px) {
+  .registerLayout {
+    height: 76vh;
+    padding: 0.1rem;
+  }
+}
+@media (min-width: 1281px) {
+  .registerLayout {
+    height: 70vh;
+    padding: 0.1rem;
+  }
+}
 /* -------------------------- Alarm Section -------------------------- */
 @media (min-width: 1280px) {
   .createFolder_scroll_container {

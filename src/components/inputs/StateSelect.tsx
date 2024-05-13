@@ -42,6 +42,7 @@ export default function StateSelect({
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
           <Select
+            searchable
             error={errorDescription}
             onChange={onChange}
             onBlur={onBlur}
