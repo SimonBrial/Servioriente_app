@@ -333,6 +333,12 @@ interface ListDBProps {
   birthday?: string | Date | Dayjs;
   facebook?: string; // ✅
   instagram?: string; // ✅
+  [key: string]: any;
+}
+
+interface DefaultFiltersValueProps {
+  id: string;
+  label: any;
 }
 
 interface AlarmFolderArray {
@@ -418,6 +424,7 @@ interface DataProps {
 export type {
   ProcessedConversationItemProps,
   DashboardProcessListItems,
+  DefaultFiltersValueProps,
   NotificationIconsProps,
   CardChatContainerProps,
   DifusionListItemProps,

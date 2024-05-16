@@ -46,6 +46,7 @@ import { useEffect, useState } from "react";
 import { useDataBaseStore } from "@/store/db-store";
 import { ListDBProps } from "@/interface/interface";
 import { notifications } from "@mantine/notifications";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 
 export default function BtnEditUser({
   idToEdit,
@@ -93,8 +94,8 @@ export default function BtnEditUser({
     values:
       data[0] !== undefined
         ? {
-            firstName: data[0].firstName,
-            lastName: data[0].lastName,
+            firstName: capitalizeFirstLetter(data[0].firstName),
+            lastName: capitalizeFirstLetter(data[0].lastName),
             vehicle: data[0].vehicle,
             state: data[0].state,
             typeStatus: data[0].typeStatus,
@@ -109,7 +110,7 @@ export default function BtnEditUser({
           }
         : initialValues,
   });
-  console.log(errors);
+  // console.log(errors);
   const onSubmit = async (dataUpdated: ListDBProps) => {
     try {
       const newData: ListDBProps[] = [

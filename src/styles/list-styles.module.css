@@ -3,6 +3,7 @@
   top: 0;
   background-color: #fff;
   transition: box-shadow 150ms ease;
+  backdrop-filter: blur(1rem);
 }
 
 .header_dark {
@@ -10,6 +11,7 @@
   top: 0;
   background-color: #484566;
   transition: box-shadow 150ms ease;
+  backdrop-filter: blur(1rem);
 }
 
 /* .header_dark:hover {

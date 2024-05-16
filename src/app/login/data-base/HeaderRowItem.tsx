@@ -4,15 +4,15 @@ import { IoChevronDownOutline, LuChevronsUpDown } from "@/icons";
 
 export default function HeaderRowItem({
   label,
-  sorted,
+  // sorted,
 }: {
   label: string;
-  sorted: boolean;
+  // sorted: boolean;
 }) {
   return (
     <Flex align={"center"} justify={"center"} gap={6} >
       {label}
-      <Stack>{sorted ? <IoChevronDownOutline /> : <LuChevronsUpDown />}</Stack>
+      {/* <Stack>{sorted ? <IoChevronDownOutline /> : <LuChevronsUpDown />}</Stack> */}
     </Flex>
   );
 }

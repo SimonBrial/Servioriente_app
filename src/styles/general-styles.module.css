@@ -38,12 +38,14 @@
   background-color: #004ce54c;
   font-weight: bold;
   border-radius: 6px;
+  margin: 0 0.1rem;
 }
 .pill_dark {
   color: #0ec7e0;
   background-color: #52a5e03f;
   font-weight: bold;
   border-radius: 6px;
+  margin: 0 0.1rem;
 }
 /* ---------------- container.module.css ---------- */
 .conversationContainer {

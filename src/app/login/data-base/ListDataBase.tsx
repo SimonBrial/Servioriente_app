@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 "use client";
 
 import {
@@ -8,11 +9,11 @@ import {
   Flex,
   Text,
 } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "@/styles/list-styles.module.css";
 import heightClasses from "@/styles/height-view.module.css";
 import PaginationLayout from "./PaginationLayout";
-import HeaderRowItem from "./HeaderRowItem";
+// import HeaderRowItem from "./HeaderRowItem";
 import BtnDelete from "@/components/buttons/BtnDelete";
 import BtnSee from "@/components/buttons/BtnSee";
 import UserDeleteLayout from "./UserDeleteLayout";
@@ -21,16 +22,65 @@ import { useDataBaseStore } from "@/store/db-store";
 import BtnEditUser from "./buttons/BtnEditUser";
 import StatusBadge from "@/components/badge/StatusBadge";
 import dayjs from "dayjs";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { ListDBProps } from "@/interface/interface";
+import { filterDataByFields } from "@/utils/filterDataByFields";
 
 export default function ListDataBase(): JSX.Element {
-  const [scrolled, setScrolled] = useState(false);
-  const [sorted, setSorted] = useState(false);
-  const { colorScheme } = useMantineColorScheme();
-
   // Reading the context from zustand store folder
-  const { data } = useDataBaseStore();
+  const { data, searchTerm, results, filterFields, defaultFiltersValue } =
+    useDataBaseStore();
 
-  const rows = data.map((element, index) => (
+  const [scrolled, setScrolled] = useState(false);
+  // const [sorted, setSorted] = useState(false);
+  const { colorScheme } = useMantineColorScheme();
+  const [showData, setShowData] = useState<ListDBProps[]>(data);
+  const [filters, setFilters] = useState<string[]>(defaultFiltersValue);
+
+  function generateTableField(jsxElement: JSX.Element, value: string) {
+    if (filters.includes(value)) {
+      return jsxElement;
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    const test = filterDataByFields(data, defaultFiltersValue);
+    console.log(test);
+    console.log("filterFields: ", filterFields);
+    if (filterFields.length > 0) {
+      filterFields.map((field) => {
+        console.log(field);
+      });
+    }
+    console.log(filterFields);
+  }, [filterFields.length]);
+  /* useEffect(() => {
+    setShowData(data);
+    if (searchTerm !== "") {
+      setShowData(results);
+    }
+  }, [searchTerm, data, results]);
+
+  useEffect(() => {
+    if (
+      filterFields.length >= 1 ||
+      filterFields.length < filterFields.length - 1
+    ) {
+      setFilters(filterFields);
+    } else {
+      setFilters(defaultFiltersValue);
+    }
+  }, [filterFields.length]); */
+
+  useEffect(() => {
+    // Establece los datos mostrados basado en si searchTerm está vacío o no
+    setShowData(searchTerm !== "" ? results : data);
+    // Establece los filtros basado en la longitud de filterFields
+    setFilters(filterFields.length ? filterFields : defaultFiltersValue);
+  }, [searchTerm, data, results, filterFields, defaultFiltersValue]);
+
+  const rows = showData.map((element, index) => (
     <Table.Tr
       key={index}
       style={{ color: colorScheme === "light" ? "#000" : "white" }}
@@ -57,39 +107,55 @@ export default function ListDataBase(): JSX.Element {
           <BtnEditUser idToEdit={element.id} />
         </Flex>
       </Table.Td>
-      <Table.Td>{element.firstName}</Table.Td>
-      <Table.Td>{element.lastName}</Table.Td>
-      <Table.Td>{element.vehicle}</Table.Td>
-      <Table.Td>{element.carID}</Table.Td>
-      <Table.Td>{element.state}</Table.Td>
-      <Table.Td>
-        {element.phonePre} - {element.phonePost}
-      </Table.Td>
-      <Table.Td>{element.mail}</Table.Td>
-      <Table.Td>
-        <StatusBadge title={element.typeStatus} />
-      </Table.Td>
-      <Table.Td>
-        {element.birthday !== undefined && element.birthday instanceof dayjs ? (
-          dayjs(element.birthday).format("DD MMMM YYYY")
-        ) : (
-          <Text size="xs">No asignada</Text>
-        )}
-      </Table.Td>
-      <Table.Td>
-        {element.facebook !== undefined ? (
-          element.facebook
-        ) : (
-          <Text size="xs">No asignada</Text>
-        )}
-      </Table.Td>
-      <Table.Td>
-        {element.instagram !== undefined ? (
-          element.instagram
-        ) : (
-          <Text size="xs">No asignada</Text>
-        )}
-      </Table.Td>
+      {generateTableField(<Table.Td>{element.firstName}</Table.Td>, "nombre")}
+      {generateTableField(<Table.Td>{element.lastName}</Table.Td>, "apellido")}
+      {generateTableField(<Table.Td>{element.vehicle}</Table.Td>, "vehiculo")}
+      {generateTableField(<Table.Td>{element.carID}</Table.Td>, "placa")}
+      {generateTableField(<Table.Td>{element.state}</Table.Td>, "estado")}
+      {generateTableField(
+        <Table.Td>
+          {element.phonePre}-{element.phonePost}
+        </Table.Td>,
+        "telefono",
+      )}
+      {generateTableField(<Table.Td>{element.mail}</Table.Td>, "correo")}
+      {generateTableField(
+        <Table.Td>
+          <StatusBadge title={element.typeStatus} />
+        </Table.Td>,
+        "status",
+      )}
+      {generateTableField(
+        <Table.Td>
+          {element.birthday !== undefined &&
+          element.birthday instanceof dayjs ? (
+            dayjs(element.birthday).format("DD MMMM YYYY")
+          ) : (
+            <Text size="xs">No asignado</Text>
+          )}
+        </Table.Td>,
+        "cumpleaños",
+      )}
+      {generateTableField(
+        <Table.Td>
+          {element.facebook !== undefined ? (
+            element.facebook
+          ) : (
+            <Text size="xs">No asignado</Text>
+          )}
+        </Table.Td>,
+        "facebook",
+      )}
+      {generateTableField(
+        <Table.Td>
+          {element.instagram !== undefined ? (
+            element.instagram
+          ) : (
+            <Text size="xs">No asignado</Text>
+          )}
+        </Table.Td>,
+        "instagram",
+      )}
     </Table.Tr>
   ));
 
@@ -107,13 +173,14 @@ export default function ListDataBase(): JSX.Element {
         <Table
           highlightOnHover
           styles={(theme) => ({
-            table: { width: "100vw" },
+            table: { width: "100%" },
             td: {
               borderTop:
                 colorScheme === "light"
                   ? `1px solid ${theme.colors.lightTheme[2]}`
                   : `1px solid ${theme.colors.darkTheme[8]}`,
               textAlign: "center",
+              fontSize: "0.8rem",
             },
             thead: {
               color: "#000",
@@ -145,33 +212,11 @@ export default function ListDataBase(): JSX.Element {
                   zIndex: "100",
                 }}
               ></Table.Th>
-              <Table.Th
-                style={{ textAlign: "center" }}
-                onClick={() => setSorted((s) => !s)}
-              >
-                <HeaderRowItem label="Nombre" sorted={sorted} />
-              </Table.Th>
-              <Table.Th onClick={() => setSorted((s) => !s)}>
-                <HeaderRowItem label="Apellido" sorted={sorted} />
-              </Table.Th>
-              <Table.Th onClick={() => setSorted((s) => !s)}>
-                {" "}
-                <HeaderRowItem label="Vehiculo" sorted={sorted} />
-              </Table.Th>
-              <Table.Th>ID Vehiculo</Table.Th>
-              <Table.Th onClick={() => setSorted((s) => !s)}>
-                {" "}
-                <HeaderRowItem label="Lugar" sorted={sorted} />
-              </Table.Th>
-              <Table.Th>Telefono</Table.Th>
-              <Table.Th>Correo</Table.Th>
-              <Table.Th onClick={() => setSorted((s) => !s)}>
-                {" "}
-                <HeaderRowItem label="Status" sorted={sorted} />
-              </Table.Th>
-              <Table.Th>Cumpleaños</Table.Th>
-              <Table.Th>Facebook</Table.Th>
-              <Table.Th>Instagram</Table.Th>
+              {filters.map((item, index) => {
+                return (
+                  <Table.Th key={index}>{capitalizeFirstLetter(item)}</Table.Th>
+                );
+              })}
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
@@ -183,3 +228,34 @@ export default function ListDataBase(): JSX.Element {
 }
 
 // https://ui.mantine.dev/category/tables/ -> When i need to create an sorted table
+
+{
+  /* <Table.Th
+                style={{ textAlign: "center" }}
+                onClick={() => setSorted((s) => !s)}
+              >
+                <HeaderRowItem label="Nombre" sorted={sorted} />
+              </Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+                <HeaderRowItem label="Apellido" sorted={sorted} />
+              </Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+
+                <HeaderRowItem label="Vehiculo" sorted={sorted} />
+              </Table.Th>
+              <Table.Th>ID Vehiculo</Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+
+                <HeaderRowItem label="Estado" sorted={sorted} />
+              </Table.Th>
+              <Table.Th>Telefono</Table.Th>
+              <Table.Th>Correo</Table.Th>
+              <Table.Th onClick={() => setSorted((s) => !s)}>
+
+                {<HeaderRowItem label="Status" sorted={sorted} />}
+                Status
+              </Table.Th>
+              <Table.Th>Cumpleaños</Table.Th>
+              <Table.Th>Facebook</Table.Th>
+              <Table.Th>Instagram</Table.Th> */
+}

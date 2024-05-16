@@ -27,6 +27,8 @@ interface DataBaseStoreProps {
   dataToEdit: ListDBProps[]; // Element to edit
   showRegisterLayout: boolean; // It's just a boolean value
   showEditLayout: boolean; // It's just a boolean value
+  filterFields: string[]; //
+  defaultFiltersValue: string[]; //
   // -------------------- Functions --------------------
   fnDeleteUser: (id: string) => void; // Delete an user by ID
   fnGetUser: (id: string) => void; // Get an user by ID
@@ -35,6 +37,14 @@ interface DataBaseStoreProps {
   fnCreateUser: (newUser: ListDBProps) => Promise<void>; // Create an user register in the DB
   fnSetShow: (stateValue: boolean) => void;
   fnSetShowEdit: (stateValue: boolean) => void;
+  // ----------------------------------------------------------------
+  searchTerm: string;
+  results: any[];
+  setSearchTerm: (term: string) => void;
+  setResults: (results: any[]) => void;
+  fnSetField: (fields: string[]) => void;
+  fnDeletePillFilter: (id: string) => void;
+  fnDeleteAllPillFilter: () => void;
 }
 
 export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
@@ -46,9 +56,23 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
     dataToEdit: [],
     showRegisterLayout: false,
     showEditLayout: false,
-
+    searchTerm: "",
+    results: [],
+    filterFields: [],
+    defaultFiltersValue: [
+      "nombre",
+      "apellido",
+      "vehiculo",
+      "placa",
+      "estado",
+      "telefono",
+      "correo",
+      "status",
+      "cumpleaños",
+      "facebook",
+      "instagram",
+    ],
     // Funtions to manipulate the data
-
     fnSetShow: (stateValue: boolean) =>
       set({
         showRegisterLayout: stateValue,
@@ -72,12 +96,6 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
       set({ dataToShow: foundUser ? [foundUser] : [] });
       return foundUser;
     },
-    /* fnUserToEdit: (id: string) => {
-      const { data } = get();
-      const foundUser = data.find((user) => user.id === id);
-      set({ dataToEdit: foundUser ? [foundUser] : [] });
-      return foundUser;
-    }, */
     fnUpdateData: async (id: string, newData: ListDBProps[]) => {
       const { data } = get();
 
@@ -108,5 +126,64 @@ export const useDataBaseStore = create<DataBaseStoreProps>()((set, get) => {
         console.log(error);
       }
     },
+    setSearchTerm: (term: string) => set({ searchTerm: term }),
+    setResults: (results: any[]) => set({ results }),
+    fnSetField: (fields: string[]) => set({ filterFields: fields }),
+    fnDeletePillFilter: (id: string) => {
+      const { filterFields } = get();
+      const activeFields: string[] = filterFields.filter(
+        (field) => field !== id.toLowerCase(),
+      );
+
+      set({ filterFields: activeFields });
+    },
+    fnDeleteAllPillFilter: () => set({ filterFields: [] }),
   };
 });
+
+/* [
+      {
+        id: "nombre",
+        label: "firstName",
+      },
+      {
+        id: "apellido",
+        label: "lastName",
+      },
+      {
+        id: "vehiculo",
+        label: "vehicle",
+      },
+      {
+        id: "placa",
+        label: "carID",
+      },
+      {
+        id: "estado",
+        label: "state",
+      },
+      {
+        id: "telefono",
+        label: "phone",
+      },
+      {
+        id: "correo",
+        label: "mail",
+      },
+      {
+        id: "status",
+        label: "typeStatus",
+      },
+      {
+        id: "cumpleaños",
+        label: "birthday",
+      },
+      {
+        id: "facebook",
+        label: "facebook",
+      },
+      {
+        id: "instagram",
+        label: "instagram",
+      },
+    ] */

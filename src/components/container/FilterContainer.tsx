@@ -6,13 +6,17 @@ import {
   Stack,
   Title,
   Flex,
+  Badge,
 } from "@mantine/core";
-import { BadgeClose } from "../badge/BadgeClose";
 import { PillFilter } from "../PillFilter";
 import { GeneralDivider } from "../GeneralDivider";
+import { useDataBaseStore } from "@/store/db-store";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { HiOutlineTrash } from "@/icons";
 
 export function FilterContainer(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
+  const { filterFields, fnDeleteAllPillFilter } = useDataBaseStore();
   return (
     <Container
       style={{
@@ -37,12 +41,43 @@ export function FilterContainer(): JSX.Element {
             >
               Filter:{" "}
             </Title>
-            <PillFilter tag="Nombre" />
-            <PillFilter tag="Apellido" />
+            {filterFields.length > 0 ? (
+              <Flex gap={0} style={{ width: "74vw" }}>
+                {filterFields.map((field, index) => {
+                  console.log(field, field);
+                  return (
+                    <PillFilter
+                      tag={capitalizeFirstLetter(field)}
+                      key={index}
+                    />
+                  );
+                })}
+              </Flex>
+            ) : null}
           </Flex>
-          <BadgeClose status={true} />
+          <Badge
+            onClick={() => fnDeleteAllPillFilter()}
+            variant="light"
+            color="blue"
+            radius="sm"
+            style={{
+              color: "#FF0000",
+              backgroundColor: "rgba(255, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            rightSection={
+              <HiOutlineTrash
+                style={{
+                  width: "16px",
+                  height: "16px",
+                }}
+              />
+            }
+          >
+            Borrar Filtros
+          </Badge>
         </Flex>
-        <GeneralDivider orientation="horizontal"/>
+        <GeneralDivider orientation="horizontal" />
       </Stack>
     </Container>
   );

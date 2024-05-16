@@ -1,34 +1,39 @@
 "use client";
 
-import {
-  Autocomplete,
-  Center,
-  Flex,
-  useMantineColorScheme,
-} from "@mantine/core";
-import { HiOutlineSearch } from "../../icons";
+import { useMantineColorScheme, TextInput, Center, Flex } from "@mantine/core";
+import { HiOutlineSearch } from "@/icons";
 import classes from "@/styles/general-styles.module.css";
+import { useDataBaseStore } from "@/store/db-store";
+import { filterData } from "@/utils/filterData";
 
 export function AutoCompleteInput(): JSX.Element {
+  const { searchTerm, setSearchTerm, setResults, data } = useDataBaseStore();
   const { colorScheme } = useMantineColorScheme();
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    // Suponiendo que `data` es la colección de datos donde quieres buscar
+    const filteredResults = filterData(data, term);
+    setResults(filteredResults);
+  };
+
   return (
     <Flex
       className={
-        colorScheme === "light"
-          ? classes.container
-          : classes.container_dark
+        colorScheme === "light" ? classes.container : classes.container_dark
       }
       align={"center"}
     >
       <Center className={classes.icon}>
         <HiOutlineSearch />
       </Center>
-      <Autocomplete
+      <TextInput
         size="xs"
+        value={searchTerm}
+        onChange={handleSearch}
         style={{ width: "100%" }}
-        maxDropdownHeight={100}
         placeholder="Buscar Informacion del usuario"
-        data={["Mario Hurtado", "Simon Briceño", "Manuel"]}
         styles={(theme) => ({
           input: {
             backgroundColor:
