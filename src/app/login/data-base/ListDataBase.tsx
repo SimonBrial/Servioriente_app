@@ -47,13 +47,13 @@ export default function ListDataBase(): JSX.Element {
   useEffect(() => {
     const test = filterDataByFields(data, defaultFiltersValue);
     console.log(test);
-    console.log("filterFields: ", filterFields);
+    // console.log("filterFields: ", filterFields);
     if (filterFields.length > 0) {
       filterFields.map((field) => {
         console.log(field);
       });
     }
-    console.log(filterFields);
+    // console.log(filterFields);
   }, [filterFields.length]);
   /* useEffect(() => {
     setShowData(data);
@@ -107,9 +107,18 @@ export default function ListDataBase(): JSX.Element {
           <BtnEditUser idToEdit={element.id} />
         </Flex>
       </Table.Td>
-      {generateTableField(<Table.Td>{element.firstName}</Table.Td>, "nombre")}
-      {generateTableField(<Table.Td>{element.lastName}</Table.Td>, "apellido")}
-      {generateTableField(<Table.Td>{element.vehicle}</Table.Td>, "vehiculo")}
+      {generateTableField(
+        <Table.Td>{capitalizeFirstLetter(element.firstName)}</Table.Td>,
+        "nombre",
+      )}
+      {generateTableField(
+        <Table.Td>{capitalizeFirstLetter(element.lastName)}</Table.Td>,
+        "apellido",
+      )}
+      {generateTableField(
+        <Table.Td>{capitalizeFirstLetter(element.vehicle)}</Table.Td>,
+        "vehiculo",
+      )}
       {generateTableField(<Table.Td>{element.carID}</Table.Td>, "placa")}
       {generateTableField(<Table.Td>{element.state}</Table.Td>, "estado")}
       {generateTableField(

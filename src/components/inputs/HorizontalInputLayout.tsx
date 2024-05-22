@@ -6,17 +6,12 @@ import { Controller } from "react-hook-form";
 
 const HorizontalInputLayout = ({
   errorDescription,
-  valueToEdit,
   inputSize,
   asterisk,
-  register,
-  required,
   control,
   title,
   label,
   icon,
-  min,
-  max,
 }: HorizontalLayoutProps) => {
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -40,7 +35,7 @@ const HorizontalInputLayout = ({
       <Controller
         name={label}
         control={control}
-        render={({ field: { onChange, onBlur, value, ref } }) => (
+        render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             error={errorDescription !== undefined ? errorDescription : null}
             onChange={onChange}

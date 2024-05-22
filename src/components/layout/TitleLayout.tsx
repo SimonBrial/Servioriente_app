@@ -23,7 +23,7 @@ export function TitleLayout({
     { id: "Pagado", color: "#12E500" },
     { id: "Entregado", color: "#004EE5" },
   */
-  const colorSelected: string = underScoreColor(capitalizeFirstLetter(title));
+  const colorSelected: string = underScoreColor(title);
   const { colorScheme } = useMantineColorScheme();
 
   return (

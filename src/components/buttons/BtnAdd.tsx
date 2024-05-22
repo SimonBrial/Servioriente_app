@@ -1,4 +1,3 @@
-/* eslint-disable object-shorthand */
 "use client";
 
 import { useMantineColorScheme, Button, Drawer, Stack } from "@mantine/core";
@@ -10,32 +9,27 @@ import {
   TbMailPlus,
   BiBellPlus,
   LuGoal,
-  // BiTask,
 } from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
-import { BtnAddProps, iconList } from "@/interface/interface";
-import { useDataBaseStore } from "@/store/db-store";
+import { tagIcon } from "@/types/types";
+import { iconList } from "@/interface/interface";
 
-/* interface TestProps extends BtnAddProps {
-  methods:
+interface BtnAddProps {
+  iconTag: tagIcon;
+  label: string;
+  fnShow: (state: boolean) => void;
+  children: React.ReactNode;
+  showDrawer: boolean;
 }
- */
+
 export default function BtnAdd({
-  description,
+  showDrawer,
   children,
-  labelBtn,
   iconTag,
-  loading,
-  classes,
-  color,
-  title,
-  addFn,
+  fnShow,
   label,
-  icon,
-  id,
 }: BtnAddProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
-  const { fnSetShow, showRegisterLayout } = useDataBaseStore();
 
   const iconList: iconList[] = [
     {
@@ -90,9 +84,9 @@ export default function BtnAdd({
   return (
     <>
       <Drawer
-        opened={showRegisterLayout}
-        onClose={() => fnSetShow(false)}
-        closeOnClickOutside={false}
+        opened={showDrawer}
+        onClose={() => fnShow(false)}
+        closeOnClickOutside={true}
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         withCloseButton={false}
@@ -101,7 +95,6 @@ export default function BtnAdd({
             backgroundColor: colorScheme === "light" ? "#F8F8F8" : "#262749",
           },
         }}
-        // key={crypto.randomUUID()}
       >
         <Stack
           justify="space-between"
@@ -111,100 +104,6 @@ export default function BtnAdd({
           }}
         >
           {children}
-          {/* <FormProvider {...methods}>
-            <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
-              <Button
-                onClick={close}
-                fullWidth
-                variant="white"
-                leftSection={<IoClose />}
-                styles={(theme) => ({
-                  root: {
-                    border: `2px solid ${theme.colors.lightTheme[6]}`,
-                    color: `${theme.colors.lightTheme[6]}`,
-                  },
-                  section: { fontSize: "1.2rem" },
-                })}
-              >
-                Cancelar
-              </Button>
-              <Button
-                type="submit"
-                fullWidth
-                variant="filled"
-                leftSection={<HiOutlineUserAdd />}
-                classNames={{
-                  root:
-                    colorScheme === "light"
-                      ? classesBtn.btnAdd
-                      : classesBtn.btnAdd_dark,
-                }}
-                styles={{
-                  section: { fontSize: "1.2rem" },
-                }}
-                onClick={() => {
-                  close();
-                  notifications.show({
-                    id: id,
-                    color: "#2BDD66",
-                    title: title,
-                    message: description,
-                    autoClose: 1000,
-                    withCloseButton: true,
-                  });
-                }}
-              >
-                {labelBtn}
-              </Button>
-            </Flex>
-          </FormProvider> */}
-          {/* <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
-            <Button
-              onClick={close}
-              fullWidth
-              variant="white"
-              leftSection={<IoClose />}
-              styles={(theme) => ({
-                root: {
-                  border: `2px solid ${theme.colors.lightTheme[6]}`,
-                  color: `${theme.colors.lightTheme[6]}`,
-                },
-                section: { fontSize: "1.2rem" },
-              })}
-            >
-              Cancelar
-            </Button>
-            <Button
-              fullWidth
-              variant="filled"
-              leftSection={selectIcon(iconTag)}
-              classNames={{
-                root:
-                  colorScheme === "light"
-                    ? classesBtn.btnAdd
-                    : classesBtn.btnAdd_dark,
-              }}
-              styles={(theme) => ({
-                section: { fontSize: "1.2rem" },
-              })}
-              onClick={() => {
-                close();
-                notifications.show({
-                  id: id,
-                  color: color,
-                  title: title,
-                  message: description,
-                  autoClose: 1000,
-                  withCloseButton: true,
-                  className: classes,
-                  // style: { backgroundColor: "red" },
-                  loading: loading,
-                });
-              }}
-            >
-              {labelBtn}
-            </Button>
-          </Flex> */}
         </Stack>
       </Drawer>
       <Button
@@ -218,7 +117,7 @@ export default function BtnAdd({
           },
         }}
         // fullWidth
-        onClick={() => fnSetShow(true)}
+        onClick={() => fnShow(true)}
         classNames={{
           root:
             colorScheme === "light"

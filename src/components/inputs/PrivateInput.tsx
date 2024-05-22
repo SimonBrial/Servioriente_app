@@ -12,14 +12,24 @@ import {
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "@/icons";
 import classes from "@/styles/general-styles.module.css";
 import { notifications } from "@mantine/notifications";
+import WarningInfo from "../WarningInfo";
+import { Controller, Path } from "react-hook-form";
 
-export default function PrivateInput({
-  userName,
-  privateStatus,
-}: {
+interface PrivateInputProps {
   userName: string;
   privateStatus: boolean;
-}): JSX.Element {
+  errorDescription: string | undefined;
+  label: Path<any>;
+  control: any;
+}
+
+export default function PrivateInput({
+  errorDescription,
+  privateStatus,
+  userName,
+  control,
+  label,
+}: PrivateInputProps): JSX.Element {
   const [checked, setChecked] = useState<boolean>(false);
   const { colorScheme } = useMantineColorScheme();
   useEffect(() => {
@@ -84,40 +94,50 @@ export default function PrivateInput({
             <HiOutlineLockOpen />
           </Center>
         )}
-        <Checkbox
-          color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
-          checked={checked}
-          onChange={(event) => {
-            setChecked(event.currentTarget.checked);
-            if (!checked) {
-              notifications.show({
-                id: crypto.randomUUID(),
-                color: "#2BDD66",
-                title: "Recordatorio Privado",
-                message:
-                  "El recordatorio solo podra ser visto por usted!",
-                autoClose: 1000,
-                withCloseButton: true,
-              });
-            } else {
-              notifications.show({
-                id: crypto.randomUUID(),
-                color: "#115dfe",
-                title: "Recordatorio Publico",
-                message:
-                  "El recordatorio ahora se podra observar por cualquier usuario que acceda a la aplicacion!",
-                autoClose: 1000,
-                withCloseButton: true,
-              });
-            }
-          }}
-          classNames={{
-            input:
-              colorScheme === "light"
-                ? classes.checkbox
-                : classes.checkbox_dark,
-          }}
+        <Controller
+          name={label}
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              error={errorDescription}
+              {...field}
+              color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
+              checked={checked}
+              onChange={(event) => {
+                field.onChange();
+                setChecked(event.currentTarget.checked);
+                if (!checked) {
+                  notifications.show({
+                    id: crypto.randomUUID(),
+                    color: "#2BDD66",
+                    title: "Recordatorio Privado",
+                    message: "El recordatorio solo podra ser visto por usted!",
+                    autoClose: 1000,
+                    withCloseButton: true,
+                  });
+                } else {
+                  notifications.show({
+                    id: crypto.randomUUID(),
+                    color: "#115dfe",
+                    title: "Recordatorio Publico",
+                    message:
+                      "El recordatorio ahora se podra observar por cualquier usuario que acceda a la aplicacion!",
+                    autoClose: 1000,
+                    withCloseButton: true,
+                  });
+                }
+              }}
+              classNames={{
+                input:
+                  colorScheme === "light"
+                    ? classes.checkbox
+                    : classes.checkbox_dark,
+              }}
+            />
+          )}
         />
+
+        <WarningInfo description="Si no se selecciona, se mantendra su valor por defecto 'Publico'" />
       </Flex>
     </Flex>
   );

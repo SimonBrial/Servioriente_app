@@ -65,6 +65,7 @@ export default function CreateRegisterLayout() {
     resolver: zodResolver(userSchema),
     defaultValues: initialValues,
   });
+  console.log("Control: ", control)
 
   const { fnCreateUser, fnSetShow } = useDataBaseStore();
   console.log(errors);

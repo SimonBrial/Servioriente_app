@@ -254,12 +254,12 @@
 /* -------------------------- Alarm Section -------------------------- */
 @media (min-width: 1280px) {
   .createFolder_scroll_container {
-    height: 66vh;
+    height: 60vh; /*66vh*/
   }
 }
 @media (min-width: 1281px) {
   .createFolder_scroll_container {
-    height: 60vh;
+    height: 52vh; /*60vh*/
   }
 }
 @media (min-width: 1280px) {

@@ -39,8 +39,9 @@ interface BtnAddProps extends NotificationsFnProps {
   iconTag: tagIcon;
   label: string;
   labelBtn: string;
-  addFn?: () => void;
+  fnShow: (state: boolean) => void;
   children: ReactNode;
+  showDrawer: boolean;
 }
 
 interface TitleLayoutProps {

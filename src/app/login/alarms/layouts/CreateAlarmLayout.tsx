@@ -37,7 +37,7 @@ export default function CreateAlarmLayout({
         asterisk={false}
         inputSize="200px"
       />
-      <CalendarInput title="Title" withTitle width="200px" />
+      {/* <CalendarInput title="Title" withTitle width="200px" /> */}
       <Flex justify={"space-between"} align={"center"}>
         <Title order={4}>Fecha de Creacion</Title>
         <Flex gap={4}>

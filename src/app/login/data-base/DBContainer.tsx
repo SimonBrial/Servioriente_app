@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Flex } from "@mantine/core";
 import ListDataBase from "@/app/login/data-base/ListDataBase";
 import ListLayout from "./layout";
@@ -10,8 +12,10 @@ import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
 import { BtnReportGenerate } from "@/components/buttons/BtnReportGenerate";
 import CreateRegisterLayout from "./layout/CreateRegisterLayout";
 import BtnAdd from "@/components/buttons/BtnAdd";
+import { useDataBaseStore } from "@/store/db-store";
 
 export default function DBContainer() {
+  const { fnSetShow, showRegisterLayout } = useDataBaseStore();
   return (
     <ListLayout>
       <Flex
@@ -34,12 +38,9 @@ export default function DBContainer() {
         </Box>
         <Box>
           <BtnAdd
-            color=""
-            description=""
-            title=""
-            labelBtn=""
+            showDrawer={showRegisterLayout}
+            fnShow={fnSetShow}
             label="Crear Usuario"
-            id={crypto.randomUUID()}
             iconTag="add-user"
           >
             <CreateRegisterLayout />
