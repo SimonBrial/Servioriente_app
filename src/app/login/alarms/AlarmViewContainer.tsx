@@ -1,16 +1,19 @@
 "use client";
 
 import { Box, Flex, Stack } from "@mantine/core";
-import { CountIndicator } from "@/components/CountIndicator";
 import { HiOutlineExclamationCircle } from "@/icons";
+import { CountIndicator } from "@/components/CountIndicator";
 import { AutoCompleteInput } from "@/components/inputs/AutoCompleteInput";
 import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
-import { AlarmContainer } from "./AlarmContainer";
-import BtnCreateFolder from "./buttons/BtnCreateFolder";
-import BtnCreateAlarm from "./buttons/BtnCreateAlarm";
+import AlarmContainer from "./AlarmContainer";
+import CreateFolderLayout from "./buttons/CreateFolderLayout";
+import CreateAlarmLayout from "./buttons/CreateAlarmLayout";
+import { useAlarmStore } from "@/store/alarm-store";
+import BtnAdd from "@/components/buttons/BtnAdd";
 
 export default function AlarmViewContainer() {
+  const { fnSetFolderShow, fnSetAlarmShow, showFolderLayout, showAlarmLayout } = useAlarmStore();
   return (
     <Stack gap={12}>
       <Flex
@@ -28,10 +31,24 @@ export default function AlarmViewContainer() {
           <GeneralFilterLayout />
         </BtnFilter>
         <Box>
-          <BtnCreateFolder />
+          <BtnAdd
+            fnShow={fnSetFolderShow}
+            showDrawer={showFolderLayout}
+            iconTag="folder"
+            label="Nuevo Carpeta"
+          >
+            <CreateFolderLayout />
+          </BtnAdd>
         </Box>
         <Box>
-          <BtnCreateAlarm />
+          <BtnAdd
+            fnShow={fnSetAlarmShow}
+            showDrawer={showAlarmLayout}
+            iconTag="add"
+            label="Nuevo Alarma"
+          >
+            <CreateAlarmLayout />
+          </BtnAdd>
         </Box>
       </Flex>
       <AlarmContainer />

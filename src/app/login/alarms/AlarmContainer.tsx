@@ -1,13 +1,11 @@
-"use client";
-
 import InsideContainer from "@/components/container/InsideContainer";
 import { Flex } from "@mantine/core";
 import FolderContainer from "./FolderContainer";
 import AlarmDescription from "./AlarmDescription";
-import { useAlarmStore } from "@/store/alarm-store";
+// import { useAlarmStore } from "@/store/alarm-store";
 
-export const AlarmContainer = () => {
-  const { alarmDescription } = useAlarmStore();
+export default function AlarmContainer() {
+  // const { alarmDescription } = useAlarmStore();
   return (
     <InsideContainer
       offset={120}
@@ -17,8 +15,8 @@ export const AlarmContainer = () => {
     >
       <Flex gap={"sm"} style={{ height: "100%" }}>
         <FolderContainer />
-        <AlarmDescription objAlarm={alarmDescription} />
+        <AlarmDescription />
       </Flex>
     </InsideContainer>
   );
-};
+}

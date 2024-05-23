@@ -29,7 +29,7 @@ export function TitleLayout({
   return (
     <Stack gap={2} style={{ width: "100%" }}>
       <Flex gap={5} justify={"center"} align={"center"}>
-        <Text size="1.5rem">{icon}</Text>
+        {icon !== undefined ? <Text size="1.5rem">{icon}</Text> : null}
         <Title
           order={2}
           style={{
@@ -41,10 +41,10 @@ export function TitleLayout({
                     : "#696969"
                   : `${color}`
                 : onText
-                  ? color !== ""
-                    ? color
-                    : "#EFF3F5"
-                  : color,
+                ? color !== ""
+                  ? color
+                  : "#EFF3F5"
+                : color,
             textAlign: "center",
           }}
         >
@@ -60,8 +60,8 @@ export function TitleLayout({
                 ? color !== ""
                   ? color
                   : colorScheme === "light"
-                    ? `${theme.colors.lightTheme[6]}`
-                    : `${theme.colors.darkTheme[1]}`
+                  ? `${theme.colors.lightTheme[6]}`
+                  : `${theme.colors.darkTheme[1]}`
                 : colorSelected,
             marginTop: "-0.3rem",
           },

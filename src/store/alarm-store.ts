@@ -19,9 +19,11 @@ interface AlarmStoreProps {
   alarmArray: AlarmCardArray[];
   alarmFolderArray: AlarmFolderArray[];
   showFolderLayout: boolean;
+  showAlarmLayout: boolean;
   // Fake properties
   // Functionalities
   fnSetFolderShow: (stateValue: boolean) => void;
+  fnSetAlarmShow: (stateValue: boolean) => void;
 }
 
 export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
@@ -31,11 +33,16 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
     alarmArray: alarmDataArray,
     alarmFolderArray: alarmFolderArray,
     showFolderLayout: false,
+    showAlarmLayout: false,
 
     // Funtions to manipulate the data
     fnSetFolderShow: (stateValue: boolean) =>
       set({
         showFolderLayout: stateValue,
+      }),
+      fnSetAlarmShow: (stateValue: boolean) =>
+      set({
+        showAlarmLayout: stateValue,
       }),
   };
 });

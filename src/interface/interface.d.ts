@@ -46,7 +46,7 @@ interface BtnAddProps extends NotificationsFnProps {
 
 interface TitleLayoutProps {
   title: string;
-  icon: string;
+  icon?: string;
   color: string;
   onText: boolean;
 }

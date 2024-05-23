@@ -9,20 +9,25 @@ import {
   Text,
   Flex,
   Box,
+  Center,
 } from "@mantine/core";
 import { useViewportSize } from "@mantine/hooks";
 import { TitleLayout } from "@/components/layout/TitleLayout";
-import { AlarmProps } from "@/interface/interface";
-import PrivateInput from "../../../components/inputs/PrivateInput";
-import AutomatedInput from "../../../components/inputs/AutomatedInput";
-import { IoClose, MdOutlinePlace } from "@/icons";
+import {
+  HiOutlineLockClosed,
+  HiOutlineLockOpen,
+  IoClose,
+  MdOutlinePlace,
+  PiRobot,
+} from "@/icons";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import CreateAlarmLayout from "./layouts/CreateAlarmLayout";
 import { ContainerInside } from "@/components/container/ContainerInside";
+import { useAlarmStore } from "@/store/alarm-store";
 
-export default function AlarmDescription({
-  objAlarm,
-}: AlarmProps): JSX.Element {
+export default function AlarmDescription(): JSX.Element {
+  const { alarmDescription } = useAlarmStore();
+
   const { colorScheme } = useMantineColorScheme();
   const { height } = useViewportSize();
   const {
@@ -35,12 +40,12 @@ export default function AlarmDescription({
     color,
     title,
     icon,
-    // id
-  } = objAlarm;
+    id,
+  } = alarmDescription;
 
   return (
     <ContainerInside allWhite={false} width="30%" withBorder>
-      {objAlarm ? (
+      {alarmDescription ? (
         <Stack
           h={"100%"}
           justify={"space-between"}
@@ -104,8 +109,100 @@ export default function AlarmDescription({
               <Title order={4}>Cliente:</Title>
               <Text>Cliente</Text>
             </Flex>
-            <PrivateInput userName={privateUser} privateStatus={privateAlarm} />
-            <AutomatedInput automatedStatus={automated} />
+            <Flex align={"center"} gap={5} justify={"space-between"}>
+              <Title
+                order={4}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[3]}`
+                        : `${theme.colors.darkTheme[2]}`,
+                  },
+                })}
+              >
+                Privado:
+              </Title>
+              <Flex align={"center"} gap={5}>
+                <Text
+                  size="1.05rem"
+                  styles={(theme) => ({
+                    root: {
+                      color:
+                        colorScheme === "light"
+                          ? `${theme.colors.lightTheme[3]}`
+                          : `${theme.colors.darkTheme[2]}`,
+                    },
+                  })}
+                >
+                  {privateAlarm ? <>{privateUser}</> : <></>}
+                </Text>
+                {privateAlarm ? (
+                  <Center
+                    styles={(theme) => ({
+                      root: {
+                        fontSize: "1.3rem",
+                        color:
+                          colorScheme === "light"
+                            ? `${theme.colors.lightTheme[3]}`
+                            : `${theme.colors.darkTheme[2]}`,
+                      },
+                    })}
+                  >
+                    <HiOutlineLockClosed />
+                  </Center>
+                ) : (
+                  <Center
+                    styles={(theme) => ({
+                      root: {
+                        fontSize: "1.3rem",
+                        color:
+                          colorScheme === "light"
+                            ? `${theme.colors.lightTheme[3]}`
+                            : `${theme.colors.darkTheme[2]}`,
+                      },
+                    })}
+                  >
+                    <HiOutlineLockOpen />
+                  </Center>
+                )}
+              </Flex>
+            </Flex>
+            <Flex align={"center"} gap={5} justify={"space-between"}>
+              <Title
+                order={4}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[3]}`
+                        : `${theme.colors.darkTheme[2]}`,
+                  },
+                })}
+              >
+                Automatizado:
+              </Title>
+              {automated ? (
+                <Flex align={"center"} gap={5}>
+                  <Text size="sm">Automatizado</Text>
+                  <Center
+                    styles={(theme) => ({
+                      root: {
+                        fontSize: "1.3rem",
+                        color:
+                          colorScheme === "light"
+                            ? `${theme.colors.lightTheme[3]}`
+                            : `${theme.colors.darkTheme[2]}`,
+                      },
+                    })}
+                  >
+                    <PiRobot />
+                  </Center>
+                </Flex>
+              ) : (
+                <Text size="sm">No Automatizado</Text>
+              )}
+            </Flex>
             <Stack gap={1} h={height <= 720 ? "54%" : "65%"}>
               <Title order={4}>Descripción:</Title>
               <ScrollArea
