@@ -47,7 +47,7 @@ interface BtnAddProps extends NotificationsFnProps {
 interface TitleLayoutProps {
   title: string;
   icon?: string;
-  color: string;
+  color?: string;
   onText: boolean;
 }
 
@@ -57,15 +57,18 @@ interface AlarmProps {
 
 interface AlarmObj {
   id: string;
-  title: string;
+  alarmTitle: string;
   icon?: string;
-  color: string;
+  folderIcon?: string;
+  color?: string;
   createAt: string;
   createdTo: string;
+  toDate: string;
   privateAlarm: boolean;
   privateUser: string;
   description: string;
   automated: boolean;
+  folderAssigned: string;
 }
 
 interface AlarmCardArray {
@@ -76,6 +79,9 @@ interface AlarmCardArray {
   forDate: string;
   forHour: string;
   description: string;
+  automated: boolean;
+  privated: boolean;
+  folderAssigned: string;
 }
 
 interface CardProcessItemProps {
@@ -346,7 +352,7 @@ interface AlarmFolderArray {
   idFolder: string;
   title: string;
   icon: string;
-  alarmsArray: AlarmCardProps[];
+  alarmsArray: AlarmObj[];
   themeColor: string;
   description: string;
 }

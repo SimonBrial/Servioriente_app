@@ -1,7 +1,11 @@
 "use client";
 
 import { useDisclosure } from "@mantine/hooks";
-import { AlarmCardArray, AlarmFolderArray } from "@/interface/interface";
+import {
+  AlarmCardArray,
+  AlarmFolderArray,
+  AlarmObj,
+} from "@/interface/interface";
 import {
   Container,
   Collapse,
@@ -31,33 +35,47 @@ export default function AlarmFolder({
   let items: JSX.Element[];
 
   function cardItems(): JSX.Element[] {
-    items = alarmsArray.map((item: AlarmCardArray) => {
-      const {
-        description,
-        createHour,
-        createdAt,
-        forDate,
-        forHour,
-        title,
-        id,
-      } = item;
-      return (
-        <Grid.Col key={item.id} span={4}>
-          <AlarmCard
-            description={description}
-            themeColor={themeColor}
-            createHour={createHour}
-            createdAt={createdAt}
-            forDate={forDate}
-            forHour={forHour}
-            title={title}
-            id={id}
-          />
-        </Grid.Col>
-      );
-    });
+    if (alarmsArray.length > 0) {
+      return alarmsArray.map((item: AlarmObj) => {
+        const {
+          folderAssigned,
+          alarmTitle,
+          automated,
+          createAt,
+          createdTo,
+          description,
+          id,
+          privateAlarm,
+          privateUser,
+          toDate,
+          color,
+          folderIcon,
+          icon,
+        } = item;
+        return (
+          <Grid.Col key={item.id} span={4}>
+            <AlarmCard
+              folderAssigned={folderAssigned}
+              privateAlarm={privateAlarm}
+              privateUser={privateUser}
+              description={description}
+              themeColor={themeColor}
+              alarmTitle={alarmTitle}
+              folderIcon={folderIcon}
+              automated={automated}
+              createdTo={createdTo}
+              createAt={createAt}
+              toDate={toDate}
+              color={color}
+              icon={icon}
+              id={id}
+            />
+          </Grid.Col>
+        );
+      });
+    }
 
-    return items;
+    return [];
   }
   return (
     <Container

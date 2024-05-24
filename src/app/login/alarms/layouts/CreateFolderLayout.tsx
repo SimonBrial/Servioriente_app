@@ -1,119 +1,146 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 "use client";
 
-import ColorSelectInput from "@/components/inputs/ColorSelectInput";
 import {
-  HiOutlineUserAdd,
-  IoClose,
+  useMantineColorScheme,
+  Button,
+  Stack,
+  Flex,
+} from "@mantine/core";
+import {
   MdOutlineInsertEmoticon,
+  HiOutlineFolderAdd,
+  IoClose,
   MdTitle,
 } from "@/icons";
-import TextEditor from "@/components/TextEditor";
+import classesBtn from "@/styles/btn-styles.module.css";
 import { TitleLayout } from "@/components/layout/TitleLayout";
-import {
-  Button,
-  Flex,
-  ScrollArea,
-  Stack,
-  useMantineColorScheme,
-} from "@mantine/core";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
-import { ContainerInside } from "@/components/container/ContainerInside";
-import heightClasses from "@/styles/height-view.module.css";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { folderSchema } from "@/schema/FolderSchema";
+import ColorSelectInput from "@/components/inputs/ColorSelectInput";
 import { notifications } from "@mantine/notifications";
 import RememberWarning from "@/components/RememberWarning";
-import classesBtn from "@/styles/btn-styles.module.css";
-import { folderSchema } from "@/schema/FolderSchema";
+import TextAreaInput from "@/components/inputs/TextAreaInput";
+import { useAlarmStore } from "@/store/alarm-store";
 
-interface IFolderProps {
-  value1: string;
-  value2: string;
-  value3: string;
+interface ICreateFolderProps {
+  title: string;
+  icon: string;
+  color: string;
+  description: string;
 }
 
-const initialValues: IFolderProps = {
-  value1: "one",
-  value2: "two",
-  value3: "three",
+const initialValues = {
+  title: "",
+  icon: "",
+  color: "",
+  description: "",
 };
 
-export default function CreateFolderLayout(): JSX.Element {
+export default function CreateFolderLayout() {
   const { colorScheme } = useMantineColorScheme();
+  const { fnSetFolderShow } = useAlarmStore();
   const {
     formState: { errors },
     handleSubmit,
     register,
     control,
     reset,
-  } = useForm<IFolderProps>({
+  } = useForm<ICreateFolderProps>({
     mode: "onChange",
     resolver: zodResolver(folderSchema),
     defaultValues: initialValues,
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: ICreateFolderProps) => {
+    try {
+      if (Object.keys(errors).length === 0) {
+        console.log(data);
+        fnSetFolderShow(false);
+        notifications.show({
+          id: crypto.randomUUID(),
+          color: "#2BDD66",
+          title: "El Registro en la Base de Datos 📄",
+          message:
+            "Se ha creado el registro en la Base de Datos satisfactoriamente 😎!",
+          autoClose: 1000,
+          withCloseButton: true,
+        });
+        reset(initialValues);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  console.log(errors);
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ height: "100%" }}>
       <Stack
-        gap={"0.4rem"}
-        styles={{
-          root: { padding: "0 0.2rem" },
+        justify="space-between"
+        style={{
+          padding: "0 0.5rem",
+          height: "95vh",
         }}
+        gap={6}
       >
-        <TitleLayout
-          title="Crear Nueva Carpeta"
-          color=""
-          icon=""
-          onText={false}
-        />
-        <HorizontalInputLayout
-          errorDescription={errors.value1?.message}
-          label="value1"
-          max={100}
-          min={1}
-          register={register}
-          required
-          control={control}
-          title="Titulo"
-          icon={<MdTitle />}
-          inputSize="200px"
-          asterisk
-        />
-        <HorizontalInputLayout
-          errorDescription={errors.value2?.message}
-          label="value2"
-          max={100}
-          min={1}
-          register={register}
-          required
-          control={control}
-          title="Icono"
-          icon={<MdOutlineInsertEmoticon />}
-          inputSize="200px"
-          asterisk
-        />
-        <ColorSelectInput />
-        <ContainerInside
-          allWhite
-          width="100%"
-          withBorder
-          key={crypto.randomUUID()}
-        >
-          <ScrollArea
-            scrollbarSize={2}
-            p={0}
-            className={heightClasses.createFolder_scroll_container}
-          >
-            <TextEditor />
-          </ScrollArea>
+        <Stack gap={6} p={0}>
+          <TitleLayout title="Crear Carpeta" color="" icon="" onText={false} />
+          <HorizontalInputLayout
+            errorDescription={errors.title?.message}
+            register={register}
+            icon={<MdTitle />}
+            control={control}
+            inputSize="200px"
+            label="title"
+            title="Titulo"
+            asterisk
+            max={20}
+            required
+            min={3}
+          />
+          <HorizontalInputLayout
+            errorDescription={errors.icon?.message}
+            icon={<MdOutlineInsertEmoticon />}
+            register={register}
+            inputSize="200px"
+            control={control}
+            label="icon"
+            asterisk={false}
+            title="Icono"
+            max={20}
+            required
+            min={3}
+          />
+          <ColorSelectInput
+            errorDescription={errors.color?.message}
+            register={register}
+            control={control}
+            inputSize="200px"
+            label="color"
+            asterisk={true}
+            required
+          />
+          <TextAreaInput
+            errorDescription={errors.description?.message}
+            label="description"
+            title="Descripción"
+            control={control}
+            inputSize="200px"
+            maxRows={8}
+            minRows={4}
+            asterisk
+            required
+            icon
+          />
+        </Stack>
+        <Stack>
           <RememberWarning />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={() => {
+                fnSetFolderShow(false);
                 reset(initialValues);
               }}
               fullWidth
@@ -133,7 +160,7 @@ export default function CreateFolderLayout(): JSX.Element {
               type="submit"
               fullWidth
               variant="filled"
-              leftSection={<HiOutlineUserAdd />}
+              leftSection={<HiOutlineFolderAdd />}
               classNames={{
                 root:
                   colorScheme === "light"
@@ -144,27 +171,7 @@ export default function CreateFolderLayout(): JSX.Element {
                 section: { fontSize: "1.2rem" },
               }}
               onClick={() => {
-                notifications.show({
-                  id: crypto.randomUUID(),
-                  color: "#2BDD66",
-                  title: "Carpeta Creada 📂!",
-                  message:
-                    "La carpeta ha sido creada satisfactoriamente, añadele recordatorios 😎!",
-                  autoClose: 1000,
-                  withCloseButton: true,
-                });
-              }}
-            >
-              Crear Registro
-            </Button>
-          </Flex>
-        </ContainerInside>
-      </Stack>
-    </form>
-  );
-}
-
-/* if (Object.keys(errors).length > 0) {
+                if (Object.keys(errors).length > 0) {
                   notifications.show({
                     id: crypto.randomUUID(),
                     color: "#F0185C",
@@ -174,4 +181,14 @@ export default function CreateFolderLayout(): JSX.Element {
                     autoClose: 1000,
                     withCloseButton: true,
                   });
-                } */
+                }
+              }}
+            >
+              Crear Carpeta
+            </Button>
+          </Flex>
+        </Stack>
+      </Stack>
+    </form>
+  );
+}

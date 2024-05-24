@@ -7,13 +7,14 @@ import { AutoCompleteInput } from "@/components/inputs/AutoCompleteInput";
 import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
 import { BtnFilter } from "@/components/buttons/BtnFilter";
 import AlarmContainer from "./AlarmContainer";
-import CreateFolderLayout from "./buttons/CreateFolderLayout";
-import CreateAlarmLayout from "./buttons/CreateAlarmLayout";
+import CreateFolderLayout from "./layouts/CreateFolderLayout";
+import CreateAlarmLayout from "./layouts/CreateAlarmLayout";
 import { useAlarmStore } from "@/store/alarm-store";
 import BtnAdd from "@/components/buttons/BtnAdd";
 
 export default function AlarmViewContainer() {
-  const { fnSetFolderShow, fnSetAlarmShow, showFolderLayout, showAlarmLayout } = useAlarmStore();
+  const { fnSetFolderShow, fnSetAlarmShow, showFolderLayout, showAlarmLayout } =
+    useAlarmStore();
   return (
     <Stack gap={12}>
       <Flex
@@ -54,15 +55,4 @@ export default function AlarmViewContainer() {
       <AlarmContainer />
     </Stack>
   );
-}
-
-{
-  /* <BtnAdd
-  fnShow={fnSetFolderShow}
-  showDrawer={showFolderLayout}
-  iconTag="add"
-  label="Nuevo Recordatorio"
->
-  <CreateAlarmLayout title="Crear Nueva Recordatorio" />
-</BtnAdd> */
 }

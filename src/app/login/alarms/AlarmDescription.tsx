@@ -31,17 +31,21 @@ export default function AlarmDescription(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const { height } = useViewportSize();
   const {
+    folderIcon,
+    folderAssigned,
     privateAlarm,
     privateUser,
     description,
+    alarmTitle,
     automated,
     createdTo,
     createAt,
     color,
-    title,
     icon,
     id,
   } = alarmDescription;
+
+  console.log(alarmDescription);
 
   return (
     <ContainerInside allWhite={false} width="30%" withBorder>
@@ -60,14 +64,14 @@ export default function AlarmDescription(): JSX.Element {
         >
           <Stack gap={height <= 720 ? 1 : 2} mah={"90%"}>
             <TitleLayout
-              title={title}
+              title={folderAssigned}
               color={color}
-              icon={icon}
+              icon={folderIcon}
               onText={false}
             />
             <Flex justify={"space-between"}>
               <Title order={4}>Titulo:</Title>
-              <Text style={{ color: `${color}` }}>{title}</Text>
+              <Text style={{ color: `${color}` }}>{alarmTitle}</Text>
             </Flex>
             <Flex justify={"space-between"}>
               <Title order={4}>Icono:</Title>
@@ -135,7 +139,7 @@ export default function AlarmDescription(): JSX.Element {
                     },
                   })}
                 >
-                  {privateAlarm ? <>{privateUser}</> : <></>}
+                  {privateAlarm ? <>{privateUser}</> : null}
                 </Text>
                 {privateAlarm ? (
                   <Center
@@ -152,19 +156,34 @@ export default function AlarmDescription(): JSX.Element {
                     <HiOutlineLockClosed />
                   </Center>
                 ) : (
-                  <Center
-                    styles={(theme) => ({
-                      root: {
-                        fontSize: "1.3rem",
-                        color:
-                          colorScheme === "light"
-                            ? `${theme.colors.lightTheme[3]}`
-                            : `${theme.colors.darkTheme[2]}`,
-                      },
-                    })}
-                  >
-                    <HiOutlineLockOpen />
-                  </Center>
+                  <>
+                    <Text
+                      size="1rem"
+                      styles={(theme) => ({
+                        root: {
+                          color:
+                            colorScheme === "light"
+                              ? `${theme.colors.lightTheme[3]}`
+                              : `${theme.colors.darkTheme[2]}`,
+                        },
+                      })}
+                    >
+                      Publico
+                    </Text>
+                    <Center
+                      styles={(theme) => ({
+                        root: {
+                          fontSize: "1.3rem",
+                          color:
+                            colorScheme === "light"
+                              ? `${theme.colors.lightTheme[3]}`
+                              : `${theme.colors.darkTheme[2]}`,
+                        },
+                      })}
+                    >
+                      <HiOutlineLockOpen />
+                    </Center>
+                  </>
                 )}
               </Flex>
             </Flex>
@@ -242,7 +261,8 @@ export default function AlarmDescription(): JSX.Element {
               color="#2BDD66"
               title="Recordatorio Editado"
             >
-              <CreateAlarmLayout title="Editar Recordatorio" />
+              {/* <CreateAlarmLayout title="Editar Recordatorio" /> */}
+              prueba
             </BtnEdit>
           </Flex>
         </Stack>

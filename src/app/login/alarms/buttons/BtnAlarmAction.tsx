@@ -118,10 +118,11 @@ export default function BtnAlarmAction({
               // border: "1px solid red",
             }}
           >
-            <CreateAlarmLayout
+            {/* <CreateAlarmLayout
               title="Editar Recordatorio"
               key={crypto.randomUUID()}
-            />
+            /> */}
+            prueba
             <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
               <Button
                 onClick={() => setShowDrawer(false)}
@@ -208,7 +209,7 @@ export default function BtnAlarmAction({
               <Text>Editar</Text>
             </Flex>
           </Menu.Item>
-          <Menu.Item color={themeColor} onClick={open}>
+          <Menu.Item color={"#F0185C"} onClick={open}>
             <Flex gap={6}>
               <Center style={{ fontSize: "1.2rem" }}>
                 <HiOutlineTrash />

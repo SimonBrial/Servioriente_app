@@ -1,29 +1,48 @@
 "use client";
 
-import { Container, Divider, Stack, Title, Flex, Text } from "@mantine/core";
+import {
+  useMantineColorScheme,
+  Container,
+  Divider,
+  Center,
+  Stack,
+  Title,
+  Flex,
+  Text,
+} from "@mantine/core";
 import AlarmCardDate from "./AlarmCardDate";
-import { useHover } from "@mantine/hooks";
 import BtnAlarmAction from "./buttons/BtnAlarmAction";
-import { AlarmCardArray } from "@/interface/interface";
+import { AlarmCardArray, AlarmObj } from "@/interface/interface";
+import { HiOutlineLockClosed, HiOutlineLockOpen, PiRobot } from "@/icons";
+import TooltipLayout from "@/components/TooltipLayout";
+import { useAlarmStore } from "@/store/alarm-store";
 
-interface AlarmCardProps extends AlarmCardArray {
+interface AlarmCardProps extends AlarmObj {
   themeColor: string;
 }
 
 export default function AlarmCard({
+  folderAssigned,
+  privateAlarm,
+  privateUser,
   description,
   themeColor,
-  createHour,
-  createdAt,
-  forDate,
-  forHour,
-  title,
+  alarmTitle,
+  folderIcon,
+  automated,
+  createdTo,
+  createAt,
+  toDate,
+  color,
+  icon,
   id,
 }: AlarmCardProps): JSX.Element {
-  const { hovered, ref } = useHover();
+  console.log(folderAssigned);
+  const { colorScheme } = useMantineColorScheme();
+  const { fnGetAlarm } = useAlarmStore();
   return (
     <Container
-      ref={ref}
+      onClick={() => fnGetAlarm(id, folderAssigned)}
       p={10}
       style={{
         border: `1px solid ${themeColor}`,
@@ -40,42 +59,86 @@ export default function AlarmCard({
           styles={{ root: { color: `${"#696969"}` } }}
         >
           <Stack gap={1} w={"95%"}>
-            <Flex align={"center"} gap={5}>
-              <Text size="1.2rem">🎂</Text>
-              <Title
-                order={6}
-                styles={(theme) => ({
-                  root: {
-                    color: `${hovered ? themeColor : "#696969"}`,
-                    transition: "color 0.3s ease-in-out",
-                  },
-                })}
-              >
-                {title}
-              </Title>
+            <Flex align={"center"} justify={"space-between"} gap={5}>
+              <Flex>
+                <Text size="1.2rem">🎂</Text>
+                <Title
+                  order={6}
+                  styles={{
+                    root: { color: themeColor },
+                  }}
+                >
+                  {alarmTitle}
+                </Title>
+              </Flex>
+              <Flex mr={5} gap={4}>
+                {privateAlarm ? (
+                  <TooltipLayout label="Privado" position="top">
+                    <Center
+                      styles={(theme) => ({
+                        root: {
+                          fontSize: "1rem",
+                          color:
+                            colorScheme === "light"
+                              ? `${theme.colors.lightTheme[3]}`
+                              : `${theme.colors.darkTheme[2]}`,
+                        },
+                      })}
+                    >
+                      <HiOutlineLockClosed />
+                    </Center>
+                  </TooltipLayout>
+                ) : (
+                  <TooltipLayout label="Publico" position="top">
+                    <Center
+                      styles={(theme) => ({
+                        root: {
+                          fontSize: "1rem",
+                          color:
+                            colorScheme === "light"
+                              ? `${theme.colors.lightTheme[3]}`
+                              : `${theme.colors.darkTheme[2]}`,
+                        },
+                      })}
+                    >
+                      <HiOutlineLockOpen />
+                    </Center>
+                  </TooltipLayout>
+                )}
+                {automated ? (
+                  <TooltipLayout label="Automatizado" position="top">
+                    <Center
+                      styles={(theme) => ({
+                        root: {
+                          fontSize: "1rem",
+                          color:
+                            colorScheme === "light"
+                              ? `${theme.colors.lightTheme[3]}`
+                              : `${theme.colors.darkTheme[2]}`,
+                        },
+                      })}
+                    >
+                      <PiRobot />
+                    </Center>
+                  </TooltipLayout>
+                ) : null}
+              </Flex>
             </Flex>
-            <Divider
-              size="md"
-              styles={(theme) => ({ root: { borderColor: themeColor } })}
-            />
+            <Divider size="md" styles={{ root: { borderColor: themeColor } }} />
           </Stack>
           <BtnAlarmAction id={id} themeColor={themeColor} />
         </Flex>
         <AlarmCardDate
           themeColor={themeColor}
           key={crypto.randomUUID()}
-          date={createdAt}
-          hour={createHour}
+          date={createAt}
           label="Creado"
-          hover={hovered}
         />
         <AlarmCardDate
           themeColor={themeColor}
           key={crypto.randomUUID()}
-          date={forDate}
-          hour={forHour}
+          date={toDate}
           label="Para"
-          hover={hovered}
         />
         <Container h={"2rem"} style={{ overflow: "hidden" }} p={0}>
           <Text

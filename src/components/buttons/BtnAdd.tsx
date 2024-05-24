@@ -86,7 +86,7 @@ export default function BtnAdd({
       <Drawer
         opened={showDrawer}
         onClose={() => fnShow(false)}
-        closeOnClickOutside={true}
+        closeOnClickOutside={false}
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         withCloseButton={false}
