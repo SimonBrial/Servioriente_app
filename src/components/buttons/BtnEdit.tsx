@@ -17,20 +17,16 @@ import {
 import classes from "@/styles/btn-styles.module.css";
 import { EditButtonStyles } from "@/types/types";
 import TooltipLayout from "../TooltipLayout";
-import { notifications } from "@mantine/notifications";
 import { BtnEditProps } from "@/interface/interface";
 import { useDataBaseStore } from "@/store/db-store";
 
 export default function BtnEdit({
+  fnShowEditLayout,
   buttonStyles,
-  description,
+  editLayout,
   children,
-  labelBtn,
-  color,
-  title,
   id,
 }: BtnEditProps): JSX.Element {
-  const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   const { fnGetUser, fnSetShowEdit, showEditLayout } = useDataBaseStore();
 
@@ -54,7 +50,7 @@ export default function BtnEdit({
             },
             section: { fontSize: "1.2rem" },
           })}
-          onClick={open}
+          onClick={() => fnShowEditLayout(true)}
         >
           Editar
         </Button>
@@ -83,7 +79,7 @@ export default function BtnEdit({
       buttonSty = (
         <UnstyledButton
           style={{ fontSize: "1.5rem" }}
-          onClick={open}
+          onClick={() => fnShowEditLayout(true)}
           className={classes.btnEdit_folder}
         >
           <Center>
@@ -98,9 +94,9 @@ export default function BtnEdit({
   return (
     <>
       <Drawer
-        opened={showEditLayout}
+        opened={editLayout}
         onClose={() => fnSetShowEdit(false)}
-        closeOnClickOutside={false}
+        closeOnClickOutside
         position="right"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         withCloseButton={false}
@@ -118,53 +114,57 @@ export default function BtnEdit({
           }}
         >
           {children}
-          <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
-            <Button
-              onClick={close}
-              fullWidth
-              variant="white"
-              leftSection={<IoClose />}
-              styles={(theme) => ({
-                root: {
-                  border: `2px solid ${theme.colors.lightTheme[6]}`,
-                  color: `${theme.colors.lightTheme[6]}`,
-                },
-                section: { fontSize: "1.2rem" },
-              })}
-            >
-              Cancelar
-            </Button>
-            <Button
-              fullWidth
-              variant="filled"
-              leftSection={<HiOutlineSave />}
-              classNames={{
-                root:
-                  colorScheme === "light"
-                    ? classes.btnAdd
-                    : classes.btnAdd_dark,
-              }}
-              styles={(theme) => ({
-                section: { fontSize: "1.2rem" },
-              })}
-              onClick={() => {
-                notifications.show({
-                  id: id,
-                  color: color,
-                  title: title,
-                  message: description,
-                  autoClose: 1000,
-                  withCloseButton: true,
-                });
-                close();
-              }}
-            >
-              {labelBtn}
-            </Button>
-          </Flex>
         </Stack>
       </Drawer>
       {buttonType(buttonStyles)}
     </>
   );
+}
+{
+  /* 
+  <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
+  <Button
+    onClick={close}
+    fullWidth
+    variant="white"
+    leftSection={<IoClose />}
+    styles={(theme) => ({
+      root: {
+        border: `2px solid ${theme.colors.lightTheme[6]}`,
+        color: `${theme.colors.lightTheme[6]}`,
+      },
+      section: { fontSize: "1.2rem" },
+    })}
+  >
+    Cancelar
+  </Button>
+  <Button
+    fullWidth
+    variant="filled"
+    leftSection={<HiOutlineSave />}
+    classNames={{
+      root:
+        colorScheme === "light"
+          ? classes.btnAdd
+          : classes.btnAdd_dark,
+    }}
+    styles={(theme) => ({
+      section: { fontSize: "1.2rem" },
+    })}
+    onClick={() => {
+      notifications.show({
+        id: id,
+        color: color,
+        title: title,
+        message: description,
+        autoClose: 1000,
+        withCloseButton: true,
+      });
+      close();
+    }}
+  >
+    {labelBtn}
+  </Button>
+</Flex> 
+*/
 }

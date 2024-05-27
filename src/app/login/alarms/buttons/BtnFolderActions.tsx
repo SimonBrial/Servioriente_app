@@ -19,6 +19,7 @@ import {
   Text,
   Flex,
   Menu,
+  Popover,
 } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
@@ -26,6 +27,15 @@ import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import DeleteFolderLayout from "../layouts/DeleteFolderLayout";
 import CreateFolderLayout from "../layouts/CreateFolderLayout";
+import { useAlarmStore } from "@/store/alarm-store";
+
+function CorrectItem(props: React.ComponentPropsWithoutRef<"button">) {
+  return (
+    <button type="button" {...props}>
+      My custom Menu item
+    </button>
+  );
+}
 
 export default function BtnFolderActions({
   theme,
@@ -37,6 +47,10 @@ export default function BtnFolderActions({
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
+  const { fnDeleteFolder } = useAlarmStore();
+  // console.log("idFolder: ", idFolder);
+
+
   return (
     <>
       {/* This modal is to delete the alarm */}
@@ -52,7 +66,7 @@ export default function BtnFolderActions({
         }}
       >
         <Stack>
-          <DeleteFolderLayout />
+          <DeleteFolderLayout idFolder={idFolder} />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}
@@ -81,6 +95,7 @@ export default function BtnFolderActions({
               }}
               styles={{ section: { fontSize: "1.2rem" } }}
               onClick={() => {
+                fnDeleteFolder(idFolder);
                 notifications.show({
                   id: crypto.randomUUID(),
                   color: "#2BDD66",
@@ -115,10 +130,11 @@ export default function BtnFolderActions({
             justify="space-between"
             style={{ height: "95vh", padding: "0 16px" }}
           >
-            <CreateFolderLayout
+            {/* <CreateFolderLayout
               title="Editar Carpeta"
               key={crypto.randomUUID()}
-            />
+            /> */}
+            editar
             <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
               <Button
                 onClick={() => setShowDrawer(false)}
@@ -145,9 +161,9 @@ export default function BtnFolderActions({
                       ? classes.btnAdd
                       : classes.btnAdd_dark,
                 }}
-                styles={(theme) => ({
+                styles={{
                   section: { fontSize: "1.2rem" },
-                })}
+                }}
                 onClick={() => {
                   setShowDrawer(false);
                   notifications.show({
@@ -168,9 +184,9 @@ export default function BtnFolderActions({
         </Drawer>
       </Portal>
       <Menu
+        zIndex={10}
         position="bottom-end"
         closeOnClickOutside
-        closeOnItemClick
         shadow="md"
         withArrow
         styles={{
@@ -201,7 +217,7 @@ export default function BtnFolderActions({
               <Text>Editar</Text>
             </Flex>
           </Menu.Item>
-          <Menu.Item color="#F0185C" onClick={open}>
+          <Menu.Item color="#F0185C" type="button" onClick={open}>
             <Flex gap={6}>
               <Center style={{ fontSize: "1.2rem" }}>
                 <HiOutlineTrash />
@@ -214,3 +230,4 @@ export default function BtnFolderActions({
     </>
   );
 }
+

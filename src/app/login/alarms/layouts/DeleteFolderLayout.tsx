@@ -10,16 +10,130 @@ import {
   Title,
   Flex,
   Text,
+  Center,
 } from "@mantine/core";
 import DeleteFolderItem from "./DeleteFolderItem";
-import { alarmDataArray } from "@/data/alarmData";
-import { AlarmCardArray } from "@/interface/interface";
+import { AlarmFolderArray, AlarmObj } from "@/interface/interface";
+import { useAlarmStore } from "@/store/alarm-store";
+import { useEffect, useState } from "react";
+import { PiFolderSimpleDashed } from "@/icons";
 
-export default function DeleteFolderLayout() {
+export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
   const { colorScheme } = useMantineColorScheme();
+  const { fnGetFolder } = useAlarmStore();
+  const [folder, setFolder] = useState<AlarmFolderArray>();
+
+  useEffect(() => {
+    const folderFound = fnGetFolder(idFolder);
+    if (folderFound !== undefined) {
+      setFolder(folderFound);
+    }
+  }, []);
+
+  function folderItem() {
+    if (folder !== undefined) {
+      if (folder.alarmsArray.length > 0) {
+        return (
+          <Container
+            style={{ overflow: "hidden", maxWidth: "100%", width: "100%" }}
+            p={0}
+          >
+            <ScrollArea
+              scrollbarSize={2}
+              h={250}
+              styles={(theme) => ({
+                root: {
+                  maxWidth: "100%",
+                  width: "100%",
+                  lineHeight: "16px",
+                  fontSize: "1rem",
+                  color:
+                    colorScheme === "light"
+                      ? theme.colors.lightTheme[3]
+                      : theme.colors.darkTheme[2],
+                  padding: "0.5rem",
+                },
+              })}
+            >
+              <Stack
+                gap={8}
+                style={{
+                  width: "100%",
+                  maxWidth: "100%",
+                  padding: "0.2rem",
+                }}
+              >
+                {folder.alarmsArray.map((item: AlarmObj, index: number) => {
+                  const {
+                    folderAssigned,
+                    privateAlarm,
+                    privateUser,
+                    description,
+                    alarmTitle,
+                    folderIcon,
+                    automated,
+                    createdTo,
+                    createAt,
+                    toDate,
+                    color,
+                    icon,
+                    id,
+                  } = item;
+                  return (
+                    <DeleteFolderItem
+                      folderAssigned={folderAssigned}
+                      description={description}
+                      privateAlarm={privateAlarm}
+                      privateUser={privateUser}
+                      alarmTitle={alarmTitle}
+                      automated={automated}
+                      folderIcon={folderIcon}
+                      createdTo={createdTo}
+                      createAt={createAt}
+                      toDate={toDate}
+                      color={color}
+                      icon={icon}
+                      key={index}
+                      id={id}
+                    />
+                  );
+                })}
+              </Stack>
+            </ScrollArea>
+          </Container>
+        );
+      }
+      return (
+        <Container
+          styles={(theme) => ({
+            root: {
+              border:
+                colorScheme === "light"
+                  ? `1px solid ${theme.colors.lightTheme[2]}`
+                  : `1px solid ${theme.colors.darkTheme[6]}`,
+              width: "100%",
+              padding: "0.5rem",
+              borderRadius: "6px",
+            },
+          })}
+        >
+          <Flex gap={8} align={"center"} justify={"center"}>
+            <Center>
+              <PiFolderSimpleDashed style={{ fontSize: "1.5rem" }} />
+            </Center>
+            <Text size="1rem">Carpeta vacía</Text>
+          </Flex>
+        </Container>
+      );
+    }
+  }
+
   return (
     <>
-      <TitleSimpleLayout title="Eliminar Recordatorio" key={crypto.randomUUID()} />
+      <TitleSimpleLayout
+        title="Eliminar Recordatorio"
+        key={crypto.randomUUID()}
+      />
       <Container
         styles={(theme) => ({
           root: {
@@ -64,7 +178,7 @@ export default function DeleteFolderLayout() {
                   },
                 })}
               >
-                Titulo 1
+                {folder?.title}
               </Title>
             </Flex>
             <GeneralDivider
@@ -86,11 +200,12 @@ export default function DeleteFolderLayout() {
             >
               Descripcion:
             </Text>
-            <Text size="sm" style={{ lineHeight: "15px", marginBottom: "0.4rem" }} px={4}>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis
-              ipsum qui molestiae dolorem, porro blanditiis, corrupti mollitia
-              numquam molestias, odio debitis harum officia. Cupiditate, hic
-              nihil explicabo earum aperiam perferendis.
+            <Text
+              size="sm"
+              style={{ lineHeight: "15px", marginBottom: "0.4rem" }}
+              px={4}
+            >
+              {folder?.description}
             </Text>
             <GeneralDivider
               orientation="horizontal"
@@ -101,56 +216,7 @@ export default function DeleteFolderLayout() {
             style={{ overflow: "hidden", maxWidth: "100%", width: "100%" }}
             p={0}
           >
-            <ScrollArea
-              scrollbarSize={2}
-              h={250}
-              styles={(theme) => ({
-                root: {
-                  maxWidth: "100%",
-                  width: "100%",
-                  lineHeight: "16px",
-                  fontSize: "1rem",
-                  color:
-                    colorScheme === "light"
-                      ? theme.colors.lightTheme[3]
-                      : theme.colors.darkTheme[2],
-                  padding: "0.5rem",
-                },
-              })}
-            >
-              <Stack
-                gap={8}
-                style={{
-                  width: "100%",
-                  maxWidth: "100%",
-                  padding: "0.2rem",
-                }}
-              >
-                {alarmDataArray.map((item: AlarmCardArray, index: number) => {
-                  const {
-                    description,
-                    createHour,
-                    createdAt,
-                    forDate,
-                    forHour,
-                    title,
-                    id,
-                  } = item;
-                  return (
-                    <DeleteFolderItem
-                      description={description}
-                      createHour={createHour}
-                      createdAt={createdAt}
-                      forDate={forDate}
-                      forHour={forHour}
-                      title={title}
-                      key={index}
-                      id={id}
-                    />
-                  );
-                })}
-              </Stack>
-            </ScrollArea>
+            {folderItem()}
           </Container>
         </Stack>
       </Container>

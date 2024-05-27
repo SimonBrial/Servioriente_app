@@ -48,7 +48,7 @@ export function TitleLayout({
             textAlign: "center",
           }}
         >
-          {capitalizeFirstLetter(title)}
+          {title !== "" ? capitalizeFirstLetter(title) : null}
         </Title>
       </Flex>
       <Divider

@@ -1,5 +1,7 @@
 import { GeneralDivider } from "@/components/GeneralDivider";
-import { AlarmCardArray } from "@/interface/interface";
+import TooltipLayout from "@/components/TooltipLayout";
+import { HiOutlineLockClosed, HiOutlineLockOpen, PiRobot } from "@/icons";
+import { AlarmCardArray, AlarmObj } from "@/interface/interface";
 import {
   useMantineColorScheme,
   Collapse,
@@ -9,17 +11,26 @@ import {
   Flex,
   Text,
   Box,
+  Center,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 
 export default function DeleteFolderItem({
+  folderAssigned,
+  privateAlarm,
+  privateUser,
   description,
-  createdAt,
-  forDate,
-  title,
+  alarmTitle,
+  folderIcon,
+  automated,
+  createdTo,
+  createAt,
+  toDate,
+  color,
+  icon,
   id,
-}: AlarmCardArray) {
+}: AlarmObj) {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { toggle }] = useDisclosure(false);
   return (
@@ -37,20 +48,78 @@ export default function DeleteFolderItem({
       <Stack gap={2} onClick={toggle} style={{ cursor: "pointer" }}>
         <Flex
           gap={5}
-          justify={"start"}
+          justify={"space-between"}
           align={"center"}
-          style={{ paddingLeft: "0.5rem" }}
         >
-          <Text>😎</Text>
-          <Title
-            order={4}
-            style={{
-              color: colorScheme === "light" ? "#696969" : "#EFF3F5",
-              textAlign: "center",
-            }}
+          <Flex
+            gap={5}
+            justify={"start"}
+            align={"center"}
+            style={{ paddingLeft: "0.5rem" }}
           >
-            {title}
-          </Title>
+            <Text>😎</Text>
+            <Title
+              order={4}
+              style={{
+                color: colorScheme === "light" ? "#696969" : "#EFF3F5",
+                textAlign: "center",
+              }}
+            >
+              {alarmTitle}
+            </Title>
+          </Flex>
+          <Flex mr={5} gap={4}>
+            {privateAlarm ? (
+              <TooltipLayout label="Privado" position="top">
+                <Center
+                  styles={(theme) => ({
+                    root: {
+                      fontSize: "1rem",
+                      color:
+                        colorScheme === "light"
+                          ? `${theme.colors.lightTheme[3]}`
+                          : `${theme.colors.darkTheme[2]}`,
+                    },
+                  })}
+                >
+                  <HiOutlineLockClosed />
+                </Center>
+              </TooltipLayout>
+            ) : (
+              <TooltipLayout label="Publico" position="top">
+                <Center
+                  styles={(theme) => ({
+                    root: {
+                      fontSize: "1rem",
+                      color:
+                        colorScheme === "light"
+                          ? `${theme.colors.lightTheme[3]}`
+                          : `${theme.colors.darkTheme[2]}`,
+                    },
+                  })}
+                >
+                  <HiOutlineLockOpen />
+                </Center>
+              </TooltipLayout>
+            )}
+            {automated ? (
+              <TooltipLayout label="Automatizado" position="top">
+                <Center
+                  styles={(theme) => ({
+                    root: {
+                      fontSize: "1rem",
+                      color:
+                        colorScheme === "light"
+                          ? `${theme.colors.lightTheme[3]}`
+                          : `${theme.colors.darkTheme[2]}`,
+                    },
+                  })}
+                >
+                  <PiRobot />
+                </Center>
+              </TooltipLayout>
+            ) : null}
+          </Flex>
         </Flex>
         <Divider
           size="md"
@@ -65,7 +134,11 @@ export default function DeleteFolderItem({
           })}
         />
       </Stack>
-      <Stack gap={2} w={"100%"} style={{ cursor: "default", margin: "0.2rem 0" }}>
+      <Stack
+        gap={2}
+        w={"100%"}
+        style={{ cursor: "default", margin: "0.2rem 0" }}
+      >
         <Flex justify={"space-between"} align={"center"}>
           <Flex gap={4} align={"center"}>
             <Text
@@ -93,7 +166,7 @@ export default function DeleteFolderItem({
                 },
               })}
             >
-              {createdAt}
+              {createAt}
             </Text>
           </Flex>
           <Flex gap={4} align={"center"}>
@@ -122,7 +195,7 @@ export default function DeleteFolderItem({
                 },
               })}
             >
-              {forDate}
+              {createdTo}
             </Text>
           </Flex>
         </Flex>

@@ -170,13 +170,12 @@ interface BtnDeleteProps extends NotificationsFnProps {
   icon: React.ReactNode;
   children: React.ReactNode;
 }
-interface BtnEditProps extends NotificationsFnProps {
-  labelBtn: string;
-  title: string;
-  // icon: React.ReactNode;
+interface BtnEditProps {
+  id: string;
   children: React.ReactNode;
   buttonStyles: EditButtonStyles;
-  // closeFn: () => void;
+  fnShowEditLayout: (valueState: boolean) => void;
+  editLayout: boolean;
 }
 interface AutoCompleteData {
   label: string | string[];

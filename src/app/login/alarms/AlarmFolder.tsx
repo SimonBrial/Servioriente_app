@@ -39,18 +39,18 @@ export default function AlarmFolder({
       return alarmsArray.map((item: AlarmObj) => {
         const {
           folderAssigned,
+          privateAlarm,
+          description,
+          privateUser,
           alarmTitle,
+          folderIcon,
+          createdTo,
           automated,
           createAt,
-          createdTo,
-          description,
-          id,
-          privateAlarm,
-          privateUser,
           toDate,
           color,
-          folderIcon,
           icon,
+          id,
         } = item;
         return (
           <Grid.Col key={item.id} span={4}>

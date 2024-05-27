@@ -3,19 +3,21 @@
 import {
   useMantineColorScheme,
   Center,
+  Button,
   Modal,
+  Stack,
   Flex,
   Text,
-  Stack,
-  Button,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlineTrash, HiOutlineCheck, IoClose } from "@/icons";
 import DeleteAlarmLayout from "../layouts/DeleteAlarmLayout";
-import classesBtn from "@/styles/btn-styles.module.css"
+import classesBtn from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
+import { AlarmObj } from "@/interface/interface";
 
-export default function BtnDeleteAlarm({ deleteRef }: { deleteRef: any }) {
+export default function BtnDeleteAlarm(/* { obj }: { obj: AlarmObj } */) {
+  // console.log(obj)
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -59,16 +61,17 @@ export default function BtnDeleteAlarm({ deleteRef }: { deleteRef: any }) {
                     ? classesBtn.btnAdd
                     : classesBtn.btnAdd_dark,
               }}
-              styles={(theme) => ({
+              styles={{
                 section: { fontSize: "1.2rem" },
-              })}
+              }}
               onClick={() => {
                 close();
                 notifications.show({
                   id: crypto.randomUUID(),
                   color: "#2BDD66",
                   title: "Recordatorio Eliminado",
-                  message: "El recordatorio ha sido eliminado satisfactoriamente!",
+                  message:
+                    "El recordatorio ha sido eliminado satisfactoriamente!",
                   autoClose: 1000,
                   withCloseButton: true,
                 });
@@ -79,12 +82,20 @@ export default function BtnDeleteAlarm({ deleteRef }: { deleteRef: any }) {
           </Flex>
         </Stack>
       </Modal>
-      <Flex gap={6} onClick={open} ref={deleteRef}>
-        <Center style={{ fontSize: "1.2rem" }}>
-          <HiOutlineTrash />
-        </Center>
-        <Text>Elimnar</Text>
-      </Flex>
+      <Button
+        onClick={open}
+        fullWidth
+        leftSection={<HiOutlineTrash />}
+        styles={(theme) => ({
+          root: {
+            color: "white",
+            backgroundColor: `${theme.colors.principalTheme[9]}`,
+          },
+          section: { fontSize: "1.2rem" },
+        })}
+      >
+        Borrar
+      </Button>
     </>
   );
 }

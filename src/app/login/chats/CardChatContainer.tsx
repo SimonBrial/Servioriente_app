@@ -34,10 +34,10 @@ export const CardChatContainer = ({
           gradient={
             header !== "instagram"
               ? {
-                from: socialRedColor(header),
-                to: socialRedColor(header),
-                deg: 90,
-              }
+                  from: socialRedColor(header),
+                  to: socialRedColor(header),
+                  deg: 90,
+                }
               : { from: "pink", to: "violet", deg: 90 }
           }
           styles={(theme) => ({
@@ -71,8 +71,8 @@ export const CardChatContainer = ({
                 ? `1px solid ${theme.colors.lightTheme[2]}`
                 : ""
               : opened
-                ? `1px solid ${theme.colors.darkTheme[6]}`
-                : "",
+              ? `1px solid ${theme.colors.darkTheme[6]}`
+              : "",
           borderRadius: "6px",
           backgroundColor:
             colorScheme === "light"
