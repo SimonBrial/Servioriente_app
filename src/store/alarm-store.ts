@@ -25,9 +25,7 @@ import {
     
 */
 
-type descriptionObj = {
-  
-} | {}
+type descriptionObj = {} | {};
 
 interface AlarmStoreProps {
   // Fake properties
@@ -96,23 +94,25 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
         if (alarmFound) {
           set({
             alarmDescription: {
-              toDate: alarmFound.toDate,
-              createAt: alarmFound.createAt,
-              id: alarmFound.id,
-              automated: alarmFound.automated,
-              description: alarmFound.description,
-              createdTo: alarmFound.createdTo,
               folderAssigned: alarmFound.folderAssigned,
               privateAlarm: alarmFound.privateAlarm,
+              description: alarmFound.description,
               privateUser: alarmFound.privateUser,
               alarmTitle: alarmFound.alarmTitle,
-              icon: alarmFound.icon,
-              folderIcon: folderFound.icon,
+              automated: alarmFound.automated,
+              createdTo: alarmFound.createdTo,
+              createAt: alarmFound.createAt,
               color: folderFound.themeColor,
+              folderIcon: folderFound.icon,
+              toDate: alarmFound.toDate,
+              icon: alarmFound.icon,
+              id: alarmFound.id,
             },
           });
         }
+        return;
       }
+      return null;
     },
     // Delete alarm
     fnDeleteAlarm: (alarmId: string, folderName: string) => {
@@ -146,7 +146,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
       const folderFound = alarmFolderArray.filter(
         (folder) => id !== folder.idFolder,
       );
-      set({alarmFolderArray: folderFound})
+      set({ alarmFolderArray: folderFound });
     },
   };
 });

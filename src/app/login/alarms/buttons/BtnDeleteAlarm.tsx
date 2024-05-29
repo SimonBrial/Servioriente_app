@@ -16,8 +16,8 @@ import classesBtn from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import { AlarmObj } from "@/interface/interface";
 
-export default function BtnDeleteAlarm(/* { obj }: { obj: AlarmObj } */) {
-  // console.log(obj)
+export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
+  console.log(obj);
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -34,7 +34,7 @@ export default function BtnDeleteAlarm(/* { obj }: { obj: AlarmObj } */) {
         }}
       >
         <Stack>
-          <DeleteAlarmLayout />
+          <DeleteAlarmLayout alarmId={obj.id} folderName={obj.folderAssigned} />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}

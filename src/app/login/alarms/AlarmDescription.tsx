@@ -18,6 +18,7 @@ import {
   HiOutlineLockOpen,
   BiAlarmOff,
   PiRobot,
+  TbClick,
 } from "@/icons";
 import BtnEdit from "@/components/buttons/BtnEdit";
 import { ContainerInside } from "@/components/container/ContainerInside";
@@ -258,7 +259,7 @@ export default function AlarmDescription(): JSX.Element {
               </Stack>
             </Stack>
             <Flex gap={"sm"} align={"center"}>
-              <BtnDeleteAlarm />
+              <BtnDeleteAlarm obj={alarmDescription as AlarmObj} />
               <BtnEdit
                 editLayout={showEditAlarmLayout}
                 fnShowEditLayout={fnSetEditAlarmShow}
@@ -285,7 +286,7 @@ export default function AlarmDescription(): JSX.Element {
             },
           }}
         >
-          <BiAlarmOff />
+          <TbClick />
           <Text size="2.5rem" style={{ textAlign: "center" }}>
             Selecciona un recordatorio
           </Text>
