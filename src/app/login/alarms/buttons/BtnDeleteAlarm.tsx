@@ -2,12 +2,10 @@
 
 import {
   useMantineColorScheme,
-  Center,
   Button,
   Modal,
   Stack,
   Flex,
-  Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HiOutlineTrash, HiOutlineCheck, IoClose } from "@/icons";
@@ -15,11 +13,32 @@ import DeleteAlarmLayout from "../layouts/DeleteAlarmLayout";
 import classesBtn from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import { AlarmObj } from "@/interface/interface";
+import { useAlarmStore } from "@/store/alarm-store";
 
 export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
   console.log(obj);
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
+  const { fnDeleteAlarm } = useAlarmStore();
+
+  const handleDeleteAlarm = async () => {
+    try {
+      await fnDeleteAlarm(obj.id, obj.folderAssigned);
+      console.log("prueba");
+      await close();
+      await notifications.show({
+        id: crypto.randomUUID(),
+        color: "#2BDD66",
+        title: "Recordatorio Eliminado",
+        message: "El recordatorio ha sido eliminado satisfactoriamente!",
+        autoClose: 1000,
+        withCloseButton: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -64,7 +83,9 @@ export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
               styles={{
                 section: { fontSize: "1.2rem" },
               }}
-              onClick={() => {
+              onClick={
+                handleDeleteAlarm /* () => {
+                console.log("prueba");
                 close();
                 notifications.show({
                   id: crypto.randomUUID(),
@@ -75,7 +96,8 @@ export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
                   autoClose: 1000,
                   withCloseButton: true,
                 });
-              }}
+              } */
+              }
             >
               Aceptar
             </Button>

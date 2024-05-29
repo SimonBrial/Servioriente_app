@@ -26,8 +26,8 @@ export default function DeleteAlarmLayout({
   alarmId: string;
 }) {
   const { colorScheme } = useMantineColorScheme();
-  const { fnGetAlarm, alarmDescription } = useAlarmStore();
-  const [alarmToDelete, setAlarmToDelete] = useState<AlarmObj | {}>({});
+  const { alarmDescription } = useAlarmStore();
+  // const [alarmToDelete, setAlarmToDelete] = useState<AlarmObj | {}>({});
 
   /* useEffect(() => {
     if (!isObjectVoid(alarmDescription)) {
@@ -38,7 +38,7 @@ export default function DeleteAlarmLayout({
     }
   }, []); */
   console.log("alarmDescription: ", alarmDescription);
-  console.log("alarmToDelete: ", alarmToDelete);
+  // console.log("fnDeleteAlarm: ", );
 
   function showLayout() {
     if (isObjectVoid(alarmDescription) !== undefined) {

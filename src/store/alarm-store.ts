@@ -4,11 +4,7 @@ import {
   AlarmCardArray,
   AlarmObj,
 } from "@/interface/interface";
-import {
-  fakeAlarmDescription,
-  alarmFolderArray,
-  alarmDataArray,
-} from "@/data/alarmData";
+import { alarmFolderArray, alarmDataArray } from "@/data/alarmData";
 
 /* Functionalities of this section
   --> Folder Fn
@@ -45,6 +41,7 @@ interface AlarmStoreProps {
   fnSetEditAlarmShow: (stateValue: boolean) => void;
   fnGetAlarm: (alarmId: string, folderName: string) => void;
   fnDeleteAlarm: (alarmId: string, folderName: string) => void;
+  fnDeleteAllAlarms: (folderName: string) => void;
   fnDeleteFolder: (folderId: string) => void;
   fnGetFolder: (folderId: string) => void;
   // ----------------------------------------------------------------
@@ -114,18 +111,50 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
       }
       return null;
     },
-    // Delete alarm
+    // Delete alarm by Id
     fnDeleteAlarm: (alarmId: string, folderName: string) => {
       const { alarmFolderArray } = get();
-      const folderFound = alarmFolderArray.find(
+      const folderIndex = alarmFolderArray.findIndex(
         (folder) => folder.title === folderName,
       );
-      if (folderFound) {
-        const alarmFound = folderFound.alarmsArray.filter(
+      if (folderIndex !== -1) {
+        const alarmFound = alarmFolderArray[folderIndex].alarmsArray.filter(
           (alarm) => alarm.id !== alarmId,
         );
-        console.log(alarmFound);
+        const updatedFolder = {
+          ...alarmFolderArray[folderIndex],
+          alarmsArray: alarmFound,
+        };
+        set({
+          alarmFolderArray: [
+            ...alarmFolderArray.slice(0, folderIndex),
+            updatedFolder,
+            ...alarmFolderArray.slice(folderIndex + 1),
+          ],
+        });
       }
+      console.log("Elemento no encontrado")
+    },
+    // Delete all alarms
+    fnDeleteAllAlarms: (folderName: string) => {
+      const { alarmFolderArray } = get();
+      const folderIndex = alarmFolderArray.findIndex(
+        (folder) => folder.title === folderName,
+      );
+      if (folderIndex !== -1) { 
+        const updatedFolder = {
+          ...alarmFolderArray[folderIndex],
+          alarmsArray: [],
+        };
+        set({
+          alarmFolderArray: [
+            ...alarmFolderArray.slice(0, folderIndex),
+            updatedFolder,
+            ...alarmFolderArray.slice(folderIndex + 1),
+          ],
+        });
+      }
+      console.log("Hubo un problema")
     },
     // Folder Functions
     // Read Folder
