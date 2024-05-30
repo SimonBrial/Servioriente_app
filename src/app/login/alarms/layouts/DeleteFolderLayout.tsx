@@ -6,17 +6,18 @@ import {
   useMantineColorScheme,
   ScrollArea,
   Container,
+  Center,
   Stack,
   Title,
   Flex,
   Text,
-  Center,
 } from "@mantine/core";
 import DeleteFolderItem from "./DeleteFolderItem";
 import { AlarmFolderArray, AlarmObj } from "@/interface/interface";
 import { useAlarmStore } from "@/store/alarm-store";
 import { useEffect, useState } from "react";
 import { PiFolderSimpleDashed } from "@/icons";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 
 export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
   const { colorScheme } = useMantineColorScheme();
@@ -112,6 +113,7 @@ export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
                   ? `1px solid ${theme.colors.lightTheme[2]}`
                   : `1px solid ${theme.colors.darkTheme[6]}`,
               width: "100%",
+              maxWidth: "100%",
               padding: "0.5rem",
               borderRadius: "6px",
             },
@@ -131,12 +133,14 @@ export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
   return (
     <>
       <TitleSimpleLayout
-        title="Eliminar Recordatorio"
+        title="Eliminar Carpeta"
         key={crypto.randomUUID()}
       />
       <Container
         styles={(theme) => ({
           root: {
+            width: "100%",
+            maxWidth: "100%",
             border:
               colorScheme === "light"
                 ? `2px solid ${theme.colors.lightTheme[2]}`
@@ -165,7 +169,7 @@ export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
               >
                 Titulo:
               </Text>
-              <Text size="1.1rem">🎂</Text>
+              <Text size="1.1rem">{folder?.icon}</Text>
               <Title
                 order={6}
                 styles={(theme) => ({
@@ -178,7 +182,7 @@ export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
                   },
                 })}
               >
-                {folder?.title}
+                {folder?.title ? capitalizeFirstLetter(folder?.title) : null}
               </Title>
             </Flex>
             <GeneralDivider

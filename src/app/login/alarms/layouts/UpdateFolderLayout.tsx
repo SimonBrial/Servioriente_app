@@ -1,15 +1,9 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 "use client";
 
-import {
-  useMantineColorScheme,
-  Button,
-  Stack,
-  Flex,
-} from "@mantine/core";
+import { useMantineColorScheme, Button, Stack, Flex } from "@mantine/core";
 import {
   MdOutlineInsertEmoticon,
-  HiOutlineFolderAdd,
+  HiOutlineSave,
   IoClose,
   MdTitle,
 } from "@/icons";
@@ -24,13 +18,16 @@ import { notifications } from "@mantine/notifications";
 import RememberWarning from "@/components/RememberWarning";
 import TextAreaInput from "@/components/inputs/TextAreaInput";
 import { useAlarmStore } from "@/store/alarm-store";
-import { AlarmFolderArray } from "@/interface/interface";
+import { AlarmFolderArray, AlarmObj } from "@/interface/interface";
+import { useEffect, useState } from "react";
 
-interface ICreateFolderProps {
+interface IEditFolderProps {
   title: string;
   icon: string;
   color: string;
   description: string;
+  alarmsArray: AlarmObj[];
+  idFolder: string;
 }
 
 const initialValues = {
@@ -38,42 +35,82 @@ const initialValues = {
   icon: "",
   color: "",
   description: "",
+  alarmsArray: [],
+  idFolder: "",
 };
 
-export default function CreateFolderLayout() {
+export default function UpdateFolderLayout({
+  fnSetShowDrawner,
+  folderId,
+}: {
+  folderId: string;
+  fnSetShowDrawner: (state: boolean) => void;
+}) {
   const { colorScheme } = useMantineColorScheme();
-  const { fnSetFolderShow, fnCreateFolder } = useAlarmStore();
+  const { fnGetFolder, fnUpdateFolder } = useAlarmStore();
+  const [data, setData] = useState<IEditFolderProps>(initialValues);
+
+  useEffect(() => {
+    const folderFound = fnGetFolder(folderId);
+    if (folderFound !== undefined) {
+      const { description, icon, idFolder, themeColor, title, alarmsArray } =
+        folderFound as AlarmFolderArray;
+      
+      console.log(alarmsArray)
+
+      setData({
+        color: themeColor,
+        description: description,
+        icon: icon,
+        title: title,
+        alarmsArray: alarmsArray,
+        idFolder: idFolder,
+      });
+    }
+  }, []);
+
   const {
     formState: { errors },
     handleSubmit,
     register,
     control,
     reset,
-  } = useForm<ICreateFolderProps>({
+  } = useForm<IEditFolderProps>({
     mode: "onChange",
     resolver: zodResolver(folderSchema),
-    defaultValues: initialValues,
+    defaultValues: data !== undefined ? data : initialValues,
+    values:
+      data !== undefined
+        ? {
+            color: data.color,
+            description: data.description,
+            icon: data.icon,
+            title: data.title,
+            alarmsArray: data.alarmsArray,
+            idFolder: data.idFolder,
+          }
+        : initialValues,
   });
 
-  const onSubmit = async (data: ICreateFolderProps) => {
+  const onSubmit = async (dataUpdated: IEditFolderProps) => {
     try {
       if (Object.keys(errors).length === 0) {
         const folderData: AlarmFolderArray = {
-          alarmsArray: [],
-          description: data.description,
-          icon: data.icon,
-          idFolder: crypto.randomUUID(),
-          themeColor: data.color,
-          title: data.title
-        }
-        await fnCreateFolder(folderData);
-        fnSetFolderShow(false);
+          idFolder: folderId,
+          description: dataUpdated.description,
+          themeColor: dataUpdated.color,
+          title: dataUpdated.title,
+          alarmsArray: data.alarmsArray,
+          icon: dataUpdated.icon,
+        };
+        await fnUpdateFolder(folderId, folderData);
+        fnSetShowDrawner(false);
         notifications.show({
           id: crypto.randomUUID(),
           color: "#2BDD66",
-          title: "El Registro en la Base de Datos 📄",
+          title: "El Registro Editado 📄",
           message:
-            "Se ha creado el registro en la Base de Datos satisfactoriamente 😎!",
+            "Se ha editado y guardado el registro en la Base de Datos satisfactoriamente 😎!",
           autoClose: 1000,
           withCloseButton: true,
         });
@@ -83,7 +120,6 @@ export default function CreateFolderLayout() {
       console.log(err);
     }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ height: "100%" }}>
       <Stack
@@ -149,7 +185,7 @@ export default function CreateFolderLayout() {
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={() => {
-                fnSetFolderShow(false);
+                fnSetShowDrawner(false);
                 reset(initialValues);
               }}
               fullWidth
@@ -169,7 +205,7 @@ export default function CreateFolderLayout() {
               type="submit"
               fullWidth
               variant="filled"
-              leftSection={<HiOutlineFolderAdd />}
+              leftSection={<HiOutlineSave />}
               classNames={{
                 root:
                   colorScheme === "light"
@@ -193,7 +229,7 @@ export default function CreateFolderLayout() {
                 }
               }}
             >
-              Crear Carpeta
+              Guardar Cambios
             </Button>
           </Flex>
         </Stack>

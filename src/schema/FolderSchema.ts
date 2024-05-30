@@ -8,7 +8,7 @@ export const folderSchema = z.object({
   icon: z.string().nullable(),
   color: z
     .string()
-    .regex(/^#[0-6a-fA-F]{6}$/, {
+    .regex(/^#[0-9a-fA-F]{6}$/, {
       message: "Seleccione el color que tendra la carpeta.",
     }),
   description: z

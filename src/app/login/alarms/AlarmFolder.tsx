@@ -21,6 +21,7 @@ import {
 import AlarmCard from "./AlarmCard";
 import { PiFolderSimpleDashed } from "@/icons";
 import BtnFolderActions from "./buttons/BtnFolderActions";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 
 export default function AlarmFolder({
   alarmsArray,
@@ -31,8 +32,6 @@ export default function AlarmFolder({
   icon,
 }: AlarmFolderArray): JSX.Element {
   const [opened, { toggle }] = useDisclosure(false);
-
-  let items: JSX.Element[];
 
   function cardItems(): JSX.Element[] {
     if (alarmsArray.length > 0) {
@@ -102,7 +101,7 @@ export default function AlarmFolder({
               }}
             >
               <Text size="1.6rem">{icon}</Text>
-              <Title order={3}>{title}</Title>
+              <Title order={3}>{capitalizeFirstLetter(title)}</Title>
               <Badge
                 radius="sm"
                 style={{ marginLeft: "0.5rem" }}

@@ -24,7 +24,6 @@ export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
   const handleDeleteAlarm = async () => {
     try {
       await fnDeleteAlarm(obj.id, obj.folderAssigned);
-      console.log("prueba");
       await close();
       await notifications.show({
         id: crypto.randomUUID(),
@@ -52,7 +51,7 @@ export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
           },
         }}
       >
-        <Stack>
+        <Stack style={{ width: "100%" }}>
           <DeleteAlarmLayout alarmId={obj.id} folderName={obj.folderAssigned} />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
@@ -83,21 +82,7 @@ export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
               styles={{
                 section: { fontSize: "1.2rem" },
               }}
-              onClick={
-                handleDeleteAlarm /* () => {
-                console.log("prueba");
-                close();
-                notifications.show({
-                  id: crypto.randomUUID(),
-                  color: "#2BDD66",
-                  title: "Recordatorio Eliminado",
-                  message:
-                    "El recordatorio ha sido eliminado satisfactoriamente!",
-                  autoClose: 1000,
-                  withCloseButton: true,
-                });
-              } */
-              }
+              onClick={handleDeleteAlarm}
             >
               Aceptar
             </Button>

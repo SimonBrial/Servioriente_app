@@ -29,9 +29,9 @@ import isObjectVoid from "@/utils/isVoidObject";
 
 export default function AlarmDescription(): JSX.Element {
   const {
-    alarmDescription,
     showEditAlarmLayout,
     fnSetEditAlarmShow,
+    alarmDescription,
     alarmFolderArray,
   } = useAlarmStore();
 

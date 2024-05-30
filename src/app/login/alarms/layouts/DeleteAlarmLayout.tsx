@@ -16,7 +16,6 @@ import {
   Text,
   Center,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
 
 export default function DeleteAlarmLayout({
   folderName,
@@ -27,18 +26,6 @@ export default function DeleteAlarmLayout({
 }) {
   const { colorScheme } = useMantineColorScheme();
   const { alarmDescription } = useAlarmStore();
-  // const [alarmToDelete, setAlarmToDelete] = useState<AlarmObj | {}>({});
-
-  /* useEffect(() => {
-    if (!isObjectVoid(alarmDescription)) {
-      const alarmFound = fnGetAlarm(alarmId, folderName);
-      if (alarmFound === undefined) {
-        setAlarmToDelete(alarmDescription);
-      }
-    }
-  }, []); */
-  console.log("alarmDescription: ", alarmDescription);
-  // console.log("fnDeleteAlarm: ", );
 
   function showLayout() {
     if (isObjectVoid(alarmDescription) !== undefined) {
@@ -59,7 +46,7 @@ export default function DeleteAlarmLayout({
       } = alarmDescription as AlarmObj;
       return (
         <Stack gap={4}>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Flex align={"center"} px={4} justify={"space-between"}>
               <Text
                 size="1.1rem"
@@ -97,7 +84,7 @@ export default function DeleteAlarmLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Flex align={"center"} px={4} justify={"space-between"}>
               <Text
                 size="1rem"
@@ -135,7 +122,7 @@ export default function DeleteAlarmLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Flex align={"center"} px={4} justify={"space-between"}>
               <Text
                 size="1rem"
@@ -169,7 +156,7 @@ export default function DeleteAlarmLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Flex align={"center"} px={4} justify={"space-between"}>
               <Text
                 size="1rem"
@@ -203,7 +190,7 @@ export default function DeleteAlarmLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Flex align={"center"} px={4} justify={"space-between"}>
               <Text
                 size="1rem"
@@ -237,7 +224,7 @@ export default function DeleteAlarmLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Flex align={"center"} gap={5} px={4} justify={"space-between"}>
               <Text
                 styles={(theme) => ({
@@ -316,7 +303,7 @@ export default function DeleteAlarmLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Flex align={"center"} gap={5} px={4} justify={"space-between"}>
               <Text
                 size="1.1rem"
@@ -332,7 +319,7 @@ export default function DeleteAlarmLayout({
                 Automatizado:
               </Text>
               {automated ? (
-                <Flex align={"center"} gap={5} style={{fontSize: "1rem"}}>
+                <Flex align={"center"} gap={5} style={{ fontSize: "1rem" }}>
                   <Text>Automatizado</Text>
                   <Center
                     styles={(theme) => ({
@@ -357,7 +344,7 @@ export default function DeleteAlarmLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
+          <Stack gap={4}>
             <Text
               px={4}
               size="1.1rem"

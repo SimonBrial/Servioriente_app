@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Flex, Stack } from "@mantine/core";
-import { HiOutlineExclamationCircle } from "@/icons";
+import { LuFolder, MdOutlineAccessAlarms } from "@/icons";
 import { CountIndicator } from "@/components/CountIndicator";
 import { AutoCompleteInput } from "@/components/inputs/AutoCompleteInput";
 import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
@@ -13,8 +13,18 @@ import { useAlarmStore } from "@/store/alarm-store";
 import BtnAdd from "@/components/buttons/BtnAdd";
 
 export default function AlarmViewContainer() {
-  const { fnSetFolderShow, fnSetAlarmShow, showFolderLayout, showAlarmLayout } =
-    useAlarmStore();
+  const {
+    showFolderLayout,
+    alarmFolderArray,
+    fnSetFolderShow,
+    showAlarmLayout,
+    fnSetAlarmShow,
+  } = useAlarmStore();
+  // To show the total of alarms
+  const getTotalAlarm = () => {
+    const alarmArray = alarmFolderArray.map(folder => folder.alarmsArray.length);
+    return alarmArray.reduce((acc, current) => current + acc, 0)
+  };
   return (
     <Stack gap={12}>
       <Flex
@@ -23,9 +33,14 @@ export default function AlarmViewContainer() {
         style={{ height: "2.5rem", width: "100%" }}
       >
         <CountIndicator
-          count={5}
-          iconSection={<HiOutlineExclamationCircle />}
-          description="Total de Recordatorios"
+          count={alarmFolderArray.length}
+          iconSection={<LuFolder />}
+          description="Total de Carpetas"
+        />
+        <CountIndicator
+          count={getTotalAlarm()}
+          iconSection={<MdOutlineAccessAlarms />}
+          description="Total de Alarmas"
         />
         <AutoCompleteInput />
         <BtnFilter>

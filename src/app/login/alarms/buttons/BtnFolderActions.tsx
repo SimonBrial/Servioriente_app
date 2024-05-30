@@ -26,16 +26,8 @@ import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import DeleteFolderLayout from "../layouts/DeleteFolderLayout";
-import CreateFolderLayout from "../layouts/CreateFolderLayout";
 import { useAlarmStore } from "@/store/alarm-store";
-
-function CorrectItem(props: React.ComponentPropsWithoutRef<"button">) {
-  return (
-    <button type="button" {...props}>
-      My custom Menu item
-    </button>
-  );
-}
+import UpdateFolderLayout from "../layouts/UpdateFolderLayout";
 
 export default function BtnFolderActions({
   theme,
@@ -48,8 +40,19 @@ export default function BtnFolderActions({
   const [opened, { open, close }] = useDisclosure(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
   const { fnDeleteFolder } = useAlarmStore();
-  // console.log("idFolder: ", idFolder);
 
+  const handleDelete = () => {
+    fnDeleteFolder(idFolder);
+    notifications.show({
+      id: crypto.randomUUID(),
+      color: "#2BDD66",
+      title: "Carpeta Eliminada",
+      message: "Carpeta eliminado satisfactoriamente 😎!",
+      autoClose: 1000,
+      withCloseButton: true,
+    });
+    close();
+  };
 
   return (
     <>
@@ -65,7 +68,7 @@ export default function BtnFolderActions({
           },
         }}
       >
-        <Stack>
+        <Stack style={{ width: "100%", maxWidth: "100%" }}>
           <DeleteFolderLayout idFolder={idFolder} />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
@@ -94,18 +97,7 @@ export default function BtnFolderActions({
                     : classes.btnAdd_dark,
               }}
               styles={{ section: { fontSize: "1.2rem" } }}
-              onClick={() => {
-                fnDeleteFolder(idFolder);
-                notifications.show({
-                  id: crypto.randomUUID(),
-                  color: "#2BDD66",
-                  title: "Carpeta Eliminada",
-                  message: "Carpeta eliminado satisfactoriamente 😎!",
-                  autoClose: 1000,
-                  withCloseButton: true,
-                });
-                close();
-              }}
+              onClick={handleDelete}
             >
               Aceptar
             </Button>
@@ -134,8 +126,11 @@ export default function BtnFolderActions({
               title="Editar Carpeta"
               key={crypto.randomUUID()}
             /> */}
-            editar
-            <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
+            <UpdateFolderLayout
+              fnSetShowDrawner={setShowDrawer}
+              folderId={idFolder}
+            />
+            {/* <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
               <Button
                 onClick={() => setShowDrawer(false)}
                 fullWidth
@@ -179,7 +174,7 @@ export default function BtnFolderActions({
               >
                 Guardar
               </Button>
-            </Flex>
+            </Flex> */}
           </Stack>
         </Drawer>
       </Portal>
@@ -230,4 +225,3 @@ export default function BtnFolderActions({
     </>
   );
 }
-

@@ -70,6 +70,7 @@ import {
   LuFolderOutput,
   LuFolderInput,
   LuListTodo,
+  LuFolder,
   LuGoal,
 } from "react-icons/lu";
 import {
@@ -215,6 +216,7 @@ export {
   MdNumbers,
   BsFilter,
   MdCircle,
+  LuFolder,
   PiRobot,
   MdTitle,
   IoClose,
