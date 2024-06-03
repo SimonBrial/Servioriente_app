@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import {
   useMantineColorScheme,
   Checkbox,
@@ -22,100 +22,103 @@ interface AutomatedInputProps {
   control: any;
 }
 
-export default function AutomatedInput({
+export const AutomatedInput = ({
   errorDescription,
   automatedStatus,
   userName,
   control,
   label,
-}: AutomatedInputProps): JSX.Element {
-  const [checked, setChecked] = useState<boolean>(false);
-  const { colorScheme } = useMantineColorScheme();
+}: AutomatedInputProps) => {
+  {
+    const [checked, setChecked] = useState<boolean>(false);
+    const { colorScheme } = useMantineColorScheme();
 
-  useEffect(() => {
-    setChecked(automatedStatus);
-  }, []);
+    useEffect(() => {
+      setChecked(automatedStatus);
+    }, []);
 
-  return (
-    <Flex align={"center"} gap={5} justify={"space-between"}>
-      <Title
-        order={4}
-        styles={(theme) => ({
-          root: {
-            color:
-              colorScheme === "light"
-                ? `${theme.colors.lightTheme[3]}`
-                : `${theme.colors.darkTheme[2]}`,
-          },
-        })}
-      >
-        Automatizado:
-      </Title>
-      <Flex align={"center"} gap={5}>
-        {checked ? (
-          <Center
-            styles={(theme) => ({
-              root: {
-                fontSize: "1.3rem",
-                color:
-                  colorScheme === "light"
-                    ? `${theme.colors.lightTheme[3]}`
-                    : `${theme.colors.darkTheme[2]}`,
-              },
-            })}
-          >
-            <PiRobot />
-          </Center>
-        ) : (
-          <></>
-        )}
-        <Controller
-          name={label}
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Checkbox
-              error={errorDescription}
-              onBlur={onBlur}
-              value={value}
-              color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
-              checked={checked}
-              onChange={(event) => {
-                onChange();
-                setChecked(event.currentTarget.checked);
-                if (!checked) {
-                  notifications.show({
-                    id: crypto.randomUUID(),
-                    color: "#2BDD66",
-                    title: "Recordatorio Automatizado",
-                    message:
-                      "El recordatorio ha sido automatizado satisfactoriamente 🤖!",
-                    autoClose: 1000,
-                    withCloseButton: true,
-                  });
-                } else {
-                  notifications.show({
-                    id: crypto.randomUUID(),
-                    color: "#115dfe",
-                    title: "Automatizacion Eliminada",
-                    message:
-                      "La automatizacion del recordatorio ha sido eliminada satisfactoriamente 🤖!",
-                    autoClose: 1000,
-                    withCloseButton: true,
-                  });
-                }
-              }}
-              style={{ marginTop: "-5px" }}
-              classNames={{
-                input:
-                  colorScheme === "light"
-                    ? classes.checkbox
-                    : classes.checkbox_dark,
-              }}
-            />
+    return (
+      <Flex align={"center"} gap={5} justify={"space-between"}>
+        <Title
+          order={4}
+          styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? `${theme.colors.lightTheme[3]}`
+                  : `${theme.colors.darkTheme[2]}`,
+            },
+          })}
+        >
+          Automatizado:
+        </Title>
+        <Flex align={"center"} gap={5}>
+          {checked ? (
+            <Center
+              styles={(theme) => ({
+                root: {
+                  fontSize: "1.3rem",
+                  color:
+                    colorScheme === "light"
+                      ? `${theme.colors.lightTheme[3]}`
+                      : `${theme.colors.darkTheme[2]}`,
+                },
+              })}
+            >
+              <PiRobot />
+            </Center>
+          ) : (
+            <></>
           )}
-        />
-        <WarningInfo description="Si no se selecciona, se mantendra su valor por defecto 'No Automatizado'" />
+          <Controller
+            name={label}
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => {
+              return (
+                <Checkbox
+                  error={errorDescription}
+                  onBlur={onBlur}
+                  value={value}
+                  onChange={onChange}
+                  color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
+                  onClick={(event: any) => {
+                    setChecked(event.target.checked);
+                    if (!checked) {
+                      notifications.show({
+                        id: crypto.randomUUID(),
+                        color: "#2BDD66",
+                        title: "Recordatorio Automatizado",
+                        message:
+                          "El recordatorio ha sido automatizado satisfactoriamente 🤖!",
+                        autoClose: 1000,
+                        withCloseButton: true,
+                      });
+                    } else {
+                      notifications.show({
+                        id: crypto.randomUUID(),
+                        color: "#115dfe",
+                        title: "Automatizacion Eliminada",
+                        message:
+                          "La automatizacion del recordatorio ha sido eliminada satisfactoriamente 🤖!",
+                        autoClose: 1000,
+                        withCloseButton: true,
+                      });
+                    }
+                  }}
+                  style={{ marginTop: "-5px" }}
+                  classNames={{
+                    input:
+                      colorScheme === "light"
+                        ? classes.checkbox
+                        : classes.checkbox_dark,
+                  }}
+                />
+              );
+            }}
+          />
+          <WarningInfo description="Si no se selecciona, se mantendra su valor por defecto 'No Automatizado'" />
+        </Flex>
       </Flex>
-    </Flex>
-  );
-}
+    );
+  }
+};

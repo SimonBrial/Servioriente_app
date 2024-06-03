@@ -26,6 +26,7 @@ import { useAlarmStore } from "@/store/alarm-store";
 import BtnDeleteAlarm from "./buttons/BtnDeleteAlarm";
 import { AlarmObj } from "@/interface/interface";
 import isObjectVoid from "@/utils/isVoidObject";
+import dayjs from "dayjs";
 
 export default function AlarmDescription(): JSX.Element {
   const {
@@ -96,7 +97,7 @@ export default function AlarmDescription(): JSX.Element {
                     },
                   })}
                 >
-                  {createAt}
+                  {dayjs(createAt).format("DD/MM/YYYY - hh: mm A")}
                 </Text>
               </Flex>
               <Flex justify={"space-between"}>
@@ -112,7 +113,7 @@ export default function AlarmDescription(): JSX.Element {
                     },
                   })}
                 >
-                  {toDate}
+                  {dayjs(toDate).format("DD/MM/YYYY - hh: mm A")}
                 </Text>
               </Flex>
               <Flex justify={"space-between"}>

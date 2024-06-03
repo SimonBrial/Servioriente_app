@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { ActionIcon, Flex, Title, useMantineColorScheme } from "@mantine/core";
-import { TimeInput } from "@mantine/dates";
+import { DateTimePicker } from "@mantine/dates";
 import { HiOutlineClock } from "@/icons";
 import { Path, Controller } from "react-hook-form";
 
@@ -14,25 +14,13 @@ interface TimeInputProps {
   control: any;
 }
 
-export default function TimeSelect({
+export default function DateTimePickerInput({
   errorDescription,
   asterisk,
   control,
   label,
-}: TimeInputProps): JSX.Element {
-  const ref = useRef<HTMLInputElement>(null);
+}: TimeInputProps) {
   const { colorScheme } = useMantineColorScheme();
-
-  const pickerControl = (
-    <ActionIcon
-      variant="subtle"
-      color="gray"
-      onClick={() => ref.current?.showPicker()}
-    >
-      <HiOutlineClock style={{ color: "#696969" }} />
-    </ActionIcon>
-  );
-
   return (
     <Flex justify={"space-between"} align={"center"}>
       <Flex>
@@ -55,17 +43,14 @@ export default function TimeSelect({
         name={label}
         control={control}
         render={({ field: { onChange, onBlur, value } }) => {
-          /* console.log(onChange)
-          console.log(onBlur)
-          console.log(value) */
+          // console.log("DateTimePickerInput: ",value)
           return (
-            <TimeInput
+            <DateTimePicker
               error={errorDescription}
               onChange={onChange}
               onBlur={onBlur}
               value={value}
-              ref={ref}
-              leftSection={pickerControl}
+              leftSection={<HiOutlineClock style={{ color: "#696969" }} />}
               styles={(theme) => ({
                 root: { width: "200px" },
                 input: {
@@ -75,7 +60,7 @@ export default function TimeSelect({
                 },
               })}
             />
-          )
+          );
         }}
       />
     </Flex>

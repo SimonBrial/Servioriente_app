@@ -29,19 +29,19 @@ interface AlarmStoreProps {
   showFolderLayout: boolean;
   showAlarmLayout: boolean;
   showEditAlarmLayout: boolean;
-  folderToDelete: AlarmFolderArray[] | [];
   showFolderToDelete: boolean;
-  folderToEdit: AlarmFolderArray | {};
   // Fake properties
   // -------------------- Functions --------------------
   // Alarm Functions
   fnSetAlarmShow: (stateValue: boolean) => void;
   fnSetEditAlarmShow: (stateValue: boolean) => void;
+  fnGetAlarm: (alarmId: string, folderName: string) => void;
   fnDeleteAlarm: (alarmId: string, folderName: string) => void;
   fnDeleteAllAlarms: (folderName: string) => void;
-  fnGetAlarm: (alarmId: string, folderName: string) => void;
+  fnCreateAlarm: (newAlarm: AlarmObj, folderName: string) => void;
   // Folder Functions
   fnGetFolder: (folderId: string) => void;
+  fnGetfolderByName: (folderName: string) => AlarmFolderArray | null;
   fnSetFolderShow: (stateValue: boolean) => void;
   fnSetFolderToDeleteShow: (stateValue: boolean) => void;
   fnDeleteFolder: (folderId: string) => void;
@@ -63,8 +63,6 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
     showFolderToDelete: false,
     showAlarmLayout: false,
     showEditAlarmLayout: false,
-    folderToDelete: [],
-    folderToEdit: {},
 
     // ------------ Funtions to manipulate the data ------------
     fnSetFolderShow: (stateValue: boolean) =>
@@ -143,6 +141,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
       console.log("Elemento no encontrado");
     },
     // Delete all alarms
+    // TODO: Must be implemented!!!
     fnDeleteAllAlarms: (folderName: string) => {
       const { alarmFolderArray } = get();
       const folderIndex = alarmFolderArray.findIndex(
@@ -163,6 +162,29 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
       }
       console.log("Hubo un problema");
     },
+    // Create Alarm
+    fnCreateAlarm: async (newAlarm: AlarmObj, folderName: string) => {
+      try {
+        console.log("From alarm-store: ", newAlarm);
+        const { alarmFolderArray } = get();
+        const folderIndex = alarmFolderArray.findIndex(
+          (folder) => folder.title === folderName,
+        );
+
+        if (folderIndex !== -1) {
+          console.log(folderIndex);
+          // console.log(newAlarm);
+          alarmFolderArray[folderIndex].alarmsArray.push(newAlarm);
+          
+          /* console.log(updateFolder.push(newAlarm));
+          console.log(alarmFolderArray); */
+          console.log(alarmFolderArray);
+          set({ alarmFolderArray });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
 
     // Folder Functions
     // Read Folder
@@ -177,6 +199,17 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
       }
       return [];
     },
+    // Get Folder by Name
+    fnGetfolderByName: (name: string): AlarmFolderArray | null => {
+      const { alarmFolderArray } = get();
+      const folderFound = alarmFolderArray.find(
+        (folder) => folder.title === name,
+      );
+      if (folderFound) {
+        return folderFound;
+      }
+      return null;
+    },
     // Delete Folder
     fnDeleteFolder: (id: string) => {
       const { alarmFolderArray } = get();
@@ -185,6 +218,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
       );
       set({ alarmFolderArray: folderFound });
     },
+    // Create Folder
     fnCreateFolder: async (folderData: AlarmFolderArray) => {
       try {
         const { alarmFolderArray } = get();
@@ -198,6 +232,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
         console.log(err);
       }
     },
+    // Update Folder
     fnUpdateFolder: async (folderId: string, folderData: AlarmFolderArray) => {
       try {
         const { alarmFolderArray } = get();

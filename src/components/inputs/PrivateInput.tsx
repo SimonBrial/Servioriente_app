@@ -97,44 +97,48 @@ export default function PrivateInput({
         <Controller
           name={label}
           control={control}
-          render={({ field }) => (
-            <Checkbox
-              error={errorDescription}
-              {...field}
-              color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
-              checked={checked}
-              onChange={(event) => {
-                field.onChange();
-                setChecked(event.currentTarget.checked);
-                if (!checked) {
-                  notifications.show({
-                    id: crypto.randomUUID(),
-                    color: "#2BDD66",
-                    title: "Recordatorio Privado",
-                    message: "El recordatorio solo podra ser visto por usted!",
-                    autoClose: 1000,
-                    withCloseButton: true,
-                  });
-                } else {
-                  notifications.show({
-                    id: crypto.randomUUID(),
-                    color: "#115dfe",
-                    title: "Recordatorio Publico",
-                    message:
-                      "El recordatorio ahora se podra observar por cualquier usuario que acceda a la aplicacion!",
-                    autoClose: 1000,
-                    withCloseButton: true,
-                  });
-                }
-              }}
-              classNames={{
-                input:
-                  colorScheme === "light"
-                    ? classes.checkbox
-                    : classes.checkbox_dark,
-              }}
-            />
-          )}
+          render={({ field: { onBlur, onChange, value, ref } }) => {
+            return (
+              <Checkbox
+                ref={ref}
+                error={errorDescription}
+                onBlur={onBlur}
+                value={value}
+                color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
+                onChange={(e: any) => {
+                  onChange(e.currentTarget.checked);
+                  setChecked(e.currentTarget.checked);
+                  if (!checked) {
+                    notifications.show({
+                      id: crypto.randomUUID(),
+                      color: "#2BDD66",
+                      title: "Recordatorio Privado",
+                      message:
+                        "El recordatorio solo podra ser visto por usted!",
+                      autoClose: 1000,
+                      withCloseButton: true,
+                    });
+                  } else {
+                    notifications.show({
+                      id: crypto.randomUUID(),
+                      color: "#115dfe",
+                      title: "Recordatorio Publico",
+                      message:
+                        "El recordatorio ahora se podra observar por cualquier usuario que acceda a la aplicacion!",
+                      autoClose: 1000,
+                      withCloseButton: true,
+                    });
+                  }
+                }}
+                classNames={{
+                  input:
+                    colorScheme === "light"
+                      ? classes.checkbox
+                      : classes.checkbox_dark,
+                }}
+              />
+            );
+          }}
         />
 
         <WarningInfo description="Si no se selecciona, se mantendra su valor por defecto 'Publico'" />

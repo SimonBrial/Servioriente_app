@@ -61,6 +61,7 @@ export function CalendarInput({
           // console.log("DateInput: ", value);
           return (
             <DateInput
+              error={errorDescription}
               locale="es"
               valueFormat="DD MMMM YYYY"
               /* dateParser={(value) => dayjs(value, 'DD MMMM YYYY', "es").toDate()} */

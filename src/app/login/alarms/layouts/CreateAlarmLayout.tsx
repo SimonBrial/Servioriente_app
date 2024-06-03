@@ -9,45 +9,64 @@ import {
   Title,
   Flex,
   Text,
+  ActionIcon,
 } from "@mantine/core";
-import { MdOutlineInsertEmoticon, BiBellPlus, IoClose, MdTitle } from "@/icons";
+import {
+  MdOutlineInsertEmoticon,
+  BiBellPlus,
+  IoClose,
+  MdTitle,
+  HiOutlineClock,
+} from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { notifications } from "@mantine/notifications";
 import RememberWarning from "@/components/RememberWarning";
 import TextAreaInput from "@/components/inputs/TextAreaInput";
 import SelectInput from "@/components/inputs/SelectInput";
 import PrivateInput from "@/components/inputs/PrivateInput";
-import AutomatedInput from "@/components/inputs/AutomatedInput";
+import { AutomatedInput } from "@/components/inputs/AutomatedInput";
 import TimeSelect from "../TimeSelect";
 import { useAlarmStore } from "@/store/alarm-store";
 import WarningInfo from "@/components/WarningInfo";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
 import { alarmSchema } from "@/schema/AlarmSchema";
+import { CalendarInput } from "@/components/inputs/CalendarInput";
+import { DateTimePicker } from "@mantine/dates";
+import { useState } from "react";
+
+import es from "dayjs/locale/es";
+import DateTimePickerInput from "@/components/inputs/DateTimePickerInput";
+import { AlarmFolderArray, AlarmObj } from "@/interface/interface";
 
 interface ICreateAlarmProps {
+  id: string;
   title: string;
   icon: string;
-  time: string;
+  // time: string | Dayjs;
+  toDate: Date;
   privateAlarm: boolean;
   automatedAlarm: boolean;
   folderSelected: string;
   description: string;
 }
-const initialValues = {
+const initialValues: ICreateAlarmProps = {
+  id: crypto.randomUUID(),
   title: "",
   icon: "",
-  time: dayjs(new Date()).format("DD/MM/YYYY - hh: mm A"),
+  // time: dayjs(new Date()),
+  toDate: new Date(),
   privateAlarm: false,
   automatedAlarm: false,
   folderSelected: "",
   description: "",
 };
 export default function CreateAlarmLayout() {
-  const { alarmFolderArray, fnSetAlarmShow } = useAlarmStore();
+  const { alarmFolderArray, fnSetAlarmShow, fnCreateAlarm, fnGetfolderByName } =
+    useAlarmStore();
   const { colorScheme } = useMantineColorScheme();
 
   const {
@@ -62,10 +81,11 @@ export default function CreateAlarmLayout() {
     defaultValues: initialValues,
   });
 
-  const onSubmit = async (data: ICreateAlarmProps) => {
+  /* const onSubmit = async (data: ICreateAlarmProps) => {
     try {
       if (Object.keys(errors).length === 0) {
-        console.log(data);
+        console.log("From CreateAlarmLayout: ", data.privateAlarm);
+        console.log("From CreateAlarmLayout: ", initialValues);
         fnSetAlarmShow(false);
         notifications.show({
           id: crypto.randomUUID(),
@@ -81,7 +101,48 @@ export default function CreateAlarmLayout() {
     } catch (err) {
       console.log(err);
     }
+  }; */
+  const onSubmit = async (data: ICreateAlarmProps) => {
+    try {
+      const folderFound: AlarmFolderArray | null = await fnGetfolderByName(
+        data.folderSelected,
+      );
+      if (folderFound !== null) {
+        const newAlarm: AlarmObj = {
+          alarmTitle: data.title,
+          automated: data.automatedAlarm,
+          createAt: new Date(),
+          createdTo: "Simon Briceño",
+          description: data.description,
+          folderAssigned: data.folderSelected,
+          id: crypto.randomUUID(),
+          privateAlarm: data.privateAlarm,
+          privateUser: "Simon Briceño",
+          toDate: data.toDate,
+          color: folderFound.themeColor,
+          folderIcon: folderFound.icon,
+          icon: data.icon,
+        };
+        /* console.log("newAlarm: ", newAlarm);
+        console.log("Data: ", data); */
+        await fnCreateAlarm(newAlarm, data.folderSelected);
+        // fnSetAlarmShow(false);
+        notifications.show({
+          id: crypto.randomUUID(),
+          color: "#2BDD66",
+          title: "El Registro en la Base de Datos 📄",
+          message:
+            "Se ha creado el registro en la Base de Datos satisfactoriamente 😎!",
+          autoClose: 1000,
+          withCloseButton: true,
+        });
+        // reset(initialValues);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ height: "100%" }}>
       <Stack
@@ -127,13 +188,36 @@ export default function CreateAlarmLayout() {
               <WarningInfo description="Este valor no se puede modificar" />
             </Flex>
           </Flex>
-          <TimeSelect
+          <DateTimePickerInput
+            errorDescription={errors.toDate?.message}
+            control={control}
+            label="toDate"
+            asterisk
+            required
+          />
+
+          {/* <CalendarInput
+            asterisk
+            control={control}
+            errorDescription={errors.toDate?.message}
+            icon
+            inputSize="200px"
+            label="toDate"
+            max={200}
+            min={100}
+            required
+            register={register}
+            title="Fecha de Asignacion"
+            width="200px"
+            withTitle
+          />*/}
+          {/* <TimeSelect
             errorDescription={errors.time?.message}
             control={control}
             label="time"
             asterisk
             required
-          />
+          /> */}
           <PrivateInput
             errorDescription={errors.privateAlarm?.message}
             privateStatus={false}

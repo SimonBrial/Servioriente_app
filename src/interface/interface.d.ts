@@ -61,9 +61,9 @@ interface AlarmObj {
   icon?: string;
   folderIcon?: string;
   color?: string;
-  createAt: string;
+  createAt: Date; // Date
   createdTo: string;
-  toDate: string;
+  toDate: Date; // Date
   privateAlarm: boolean;
   privateUser: string;
   description: string;

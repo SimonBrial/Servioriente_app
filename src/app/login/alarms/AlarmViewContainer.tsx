@@ -4,8 +4,6 @@ import { Box, Flex, Stack } from "@mantine/core";
 import { LuFolder, MdOutlineAccessAlarms } from "@/icons";
 import { CountIndicator } from "@/components/CountIndicator";
 import { AutoCompleteInput } from "@/components/inputs/AutoCompleteInput";
-import { GeneralFilterLayout } from "@/components/layout/GeneralFilterLayout";
-import { BtnFilter } from "@/components/buttons/BtnFilter";
 import AlarmContainer from "./AlarmContainer";
 import CreateFolderLayout from "./layouts/CreateFolderLayout";
 import CreateAlarmLayout from "./layouts/CreateAlarmLayout";
@@ -21,7 +19,7 @@ export default function AlarmViewContainer() {
     fnSetAlarmShow,
   } = useAlarmStore();
   // To show the total of alarms
-  const getTotalAlarm = () => {
+  const getTotalAlarm = (): number => {
     const alarmArray = alarmFolderArray.map(folder => folder.alarmsArray.length);
     return alarmArray.reduce((acc, current) => current + acc, 0)
   };
@@ -43,9 +41,9 @@ export default function AlarmViewContainer() {
           description="Total de Alarmas"
         />
         <AutoCompleteInput />
-        <BtnFilter>
+        {/* <BtnFilter>
           <GeneralFilterLayout />
-        </BtnFilter>
+        </BtnFilter> */}
         <Box>
           <BtnAdd
             fnShow={fnSetFolderShow}

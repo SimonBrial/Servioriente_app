@@ -1,4 +1,5 @@
 import { Divider, Flex, Stack, Text } from "@mantine/core";
+import dayjs from "dayjs";
 
 export default function AlarmCardDate({
   themeColor,
@@ -7,8 +8,9 @@ export default function AlarmCardDate({
 }: {
   themeColor: string;
   label: string;
-  date: string;
-}): JSX.Element {
+  date: Date | string;
+  }): JSX.Element {
+  console.log(date)
   return (
     <Stack gap={1} w={"100%"}>
       <Flex align={"center"} gap={10}>
@@ -27,7 +29,8 @@ export default function AlarmCardDate({
             transition: "color 0.3s ease-in-out",
           })}
         >
-          {date}
+          {dayjs(date).format("DD/MM/YYYY - hh: mm A")}
+          
         </Text>
       </Flex>
       <Divider

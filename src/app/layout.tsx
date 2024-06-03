@@ -23,6 +23,7 @@ import type { Metadata } from "next";
 // import { Inter } from "next/font/google";
 import { Notifications } from "@mantine/notifications";
 import { MainContainer } from "@/components/container/MainContainer";
+import { DatesProvider } from "@mantine/dates";
 // import LoginPage from "./login/page";
 /* const inter = Inter({
   weight: ["100", "900"],
@@ -46,17 +47,19 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider theme={theme} defaultColorScheme="light">
-          <Container fluid px={0}>
-            <Notifications />
-            {/* <Flex p={0}>
+          <DatesProvider settings={{ locale: "es" }}>
+            <Container fluid px={0}>
+              <Notifications />
+              {/* <Flex p={0}>
               <Sidebar />
               <GlobalContainer>{children}</GlobalContainer>
             </Flex> */}
-            {/* <LoginPage /> */}
-            <main /* className={inter.className} */>
-              <MainContainer>{children}</MainContainer>
-            </main>
-          </Container>
+              {/* <LoginPage /> */}
+              <main /* className={inter.className} */>
+                <MainContainer>{children}</MainContainer>
+              </main>
+            </Container>
+          </DatesProvider>
         </MantineProvider>
       </body>
     </html>
