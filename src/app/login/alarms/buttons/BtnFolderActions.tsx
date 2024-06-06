@@ -5,7 +5,6 @@ import {
   HiOutlinePencil,
   HiOutlineCheck,
   HiOutlineTrash,
-  HiOutlineSave,
   IoClose,
 } from "@/icons";
 import {
@@ -19,7 +18,6 @@ import {
   Text,
   Flex,
   Menu,
-  Popover,
 } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";

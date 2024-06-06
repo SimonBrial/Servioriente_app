@@ -110,7 +110,7 @@ export default function AlarmFolder({
                   label: { fontSize: "0.9rem", color: "#FFF" },
                 }}
               >
-                {alarmsArray.length}
+                {alarmsArray.length > 0 ? alarmsArray.length : 0}
               </Badge>
             </Flex>
             <Divider size="md" color={themeColor} />
@@ -126,8 +126,8 @@ export default function AlarmFolder({
             })}
             transitionProps={{ transition: "scale", duration: 300 }}
           >
-          </Tooltip> */}
-          {/* <BtnEdit
+          </Tooltip>
+          <BtnEdit
             key={crypto.randomUUID()}
             id={crypto.randomUUID()}
             buttonStyles="unstyled"

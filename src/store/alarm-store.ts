@@ -13,9 +13,9 @@ import { alarmFolderArray, alarmDataArray } from "@/data/alarmData";
     ✅ Update an Folder
     ✅ Read an Folder
   --> Alarm Fn
-    - Create an Alarm
+    ✅ Create an Alarm
     ✅ Delete an Alarm
-    - Update an Alarm
+    ✅ Update an Alarm
     ✅ Read an Alarm
   --> General Functions
     
@@ -39,6 +39,12 @@ interface AlarmStoreProps {
   fnDeleteAlarm: (alarmId: string, folderName: string) => void;
   fnDeleteAllAlarms: (folderName: string) => void;
   fnCreateAlarm: (newAlarm: AlarmObj, folderName: string) => void;
+  fnUpdateAlarm: (
+    alarmData: AlarmObj,
+    oldFolderName: string,
+    newFolderName: string,
+    alarmId: string,
+  ) => Promise<void>;
   // Folder Functions
   fnGetFolder: (folderId: string) => void;
   fnGetfolderByName: (folderName: string) => AlarmFolderArray | null;
@@ -142,10 +148,10 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
     },
     // Delete all alarms
     // TODO: Must be implemented!!!
-    fnDeleteAllAlarms: (folderName: string) => {
+    fnDeleteAllAlarms: (folderId: string) => {
       const { alarmFolderArray } = get();
       const folderIndex = alarmFolderArray.findIndex(
-        (folder) => folder.title === folderName,
+        (folder) => folder.idFolder === folderId,
       );
       if (folderIndex !== -1) {
         const updatedFolder = {
@@ -175,7 +181,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
           console.log(folderIndex);
           // console.log(newAlarm);
           alarmFolderArray[folderIndex].alarmsArray.push(newAlarm);
-          
+
           /* console.log(updateFolder.push(newAlarm));
           console.log(alarmFolderArray); */
           console.log(alarmFolderArray);
@@ -183,6 +189,50 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
         }
       } catch (err) {
         console.log(err);
+      }
+    },
+    // Update alarm
+    fnUpdateAlarm: async (
+      alarmData: AlarmObj,
+      oldFolderName: string,
+      newFolderName: string,
+      alarmId: string,
+    ) => {
+      const { alarmFolderArray, fnGetfolderByName } = get();
+      // Search the folder by name
+      const test = fnGetfolderByName(newFolderName);
+      console.log("oldFolderName: ", oldFolderName);
+      console.log("newFolderName: ", newFolderName);
+      // Encuentra el índice de la carpeta antigua y la nueva
+      const oldFolderIndex = alarmFolderArray.findIndex(
+        (folder) => folder.title === oldFolderName,
+      );
+      const newFolderIndex = alarmFolderArray.findIndex(
+        (folder) => folder.title === newFolderName,
+      );
+
+      if (oldFolderIndex !== -1 && newFolderIndex !== -1) {
+        // Encuentra el índice de la alarma en la carpeta antigua
+        const alarmIndex = alarmFolderArray[
+          oldFolderIndex
+        ].alarmsArray.findIndex((alarm) => alarm.id === alarmId);
+
+        if (alarmIndex !== -1) {
+          // Elimina la alarma de la carpeta antigua
+          const [removedAlarm] = alarmFolderArray[
+            oldFolderIndex
+          ].alarmsArray.splice(alarmIndex, 1);
+
+          // Actualiza la alarma si es necesario
+          const updatedAlarm = { ...removedAlarm, ...alarmData };
+
+          // Añade la alarma actualizada a la nueva carpeta
+          alarmFolderArray[newFolderIndex].alarmsArray.push(updatedAlarm);
+
+          // Actualiza el estado o la variable que contiene alarmFolderArray
+          console.log("alarmFolderArray: ", alarmFolderArray)
+          await set({ alarmFolderArray });
+        }
       }
     },
 

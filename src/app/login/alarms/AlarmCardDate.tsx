@@ -6,11 +6,11 @@ export default function AlarmCardDate({
   label,
   date,
 }: {
+  date: Date | string;
   themeColor: string;
   label: string;
-  date: Date | string;
   }): JSX.Element {
-  console.log(date)
+  // console.log(date)
   return (
     <Stack gap={1} w={"100%"}>
       <Flex align={"center"} gap={10}>

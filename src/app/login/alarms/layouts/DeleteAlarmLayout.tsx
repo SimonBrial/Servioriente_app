@@ -16,6 +16,7 @@ import {
   Text,
   Center,
 } from "@mantine/core";
+import dayjs from "dayjs";
 
 export default function DeleteAlarmLayout({
   folderName,
@@ -148,7 +149,7 @@ export default function DeleteAlarmLayout({
                   },
                 })}
               >
-                {createAt}
+                {dayjs(createAt).format("DD/MM/YYYY - hh: mm A")}
               </Text>
             </Flex>
             <GeneralDivider
@@ -182,7 +183,7 @@ export default function DeleteAlarmLayout({
                   },
                 })}
               >
-                {toDate}
+                {dayjs(toDate).format("DD/MM/YYYY - hh: mm A")}
               </Text>
             </Flex>
             <GeneralDivider
@@ -366,6 +367,7 @@ export default function DeleteAlarmLayout({
             <Container
               styles={(theme) => ({
                 root: {
+                  width: "100%",
                   overflow: "hidden",
                   border:
                     colorScheme === "light"
@@ -413,6 +415,7 @@ export default function DeleteAlarmLayout({
       <Container
         styles={(theme) => ({
           root: {
+            width: "100%",
             border:
               colorScheme === "light"
                 ? `2px solid ${theme.colors.lightTheme[2]}`

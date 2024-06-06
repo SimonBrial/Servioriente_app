@@ -61,14 +61,18 @@ export default function AlarmCard({
             <Stack gap={1} w={"95%"}>
               <Flex align={"center"} justify={"space-between"} gap={5}>
                 <Flex>
-                  <Text size="1.2rem">🎂</Text>
+                  <Text size="1.2rem">{icon}</Text>
                   <Title
                     order={6}
                     styles={{
                       root: { color: themeColor },
                     }}
                   >
-                    {alarmTitle}
+                    {alarmTitle.length > 16 ? (
+                      <>{alarmTitle.slice(0, 16)}...</>
+                    ) : (
+                      alarmTitle
+                    )}
                   </Title>
                 </Flex>
                 <Flex mr={5} gap={4}>
@@ -142,10 +146,15 @@ export default function AlarmCard({
             date={toDate}
             label="Para"
           />
-          <Container h={"2rem"} style={{ overflow: "hidden" }} p={0}>
+          <Container
+            h={"2rem"}
+            style={{ overflow: "hidden", width: "100%" }}
+            p={0}
+          >
             <Text
               styles={(theme) => ({
                 root: {
+                  textAlign: "start",
                   width: "100%",
                   lineHeight: "16px",
                   fontSize: "0.8rem",

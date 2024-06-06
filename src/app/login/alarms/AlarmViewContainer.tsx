@@ -41,9 +41,6 @@ export default function AlarmViewContainer() {
           description="Total de Alarmas"
         />
         <AutoCompleteInput />
-        {/* <BtnFilter>
-          <GeneralFilterLayout />
-        </BtnFilter> */}
         <Box>
           <BtnAdd
             fnShow={fnSetFolderShow}

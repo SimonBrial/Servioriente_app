@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import {
   MdOutlineInsertEmoticon,
-  BiBellPlus,
+  MdOutlineAlarmOn,
   IoClose,
   MdTitle,
 } from "@/icons";
@@ -28,15 +28,14 @@ import PrivateInput from "@/components/inputs/PrivateInput";
 import { AutomatedInput } from "@/components/inputs/AutomatedInput";
 import { useAlarmStore } from "@/store/alarm-store";
 import WarningInfo from "@/components/WarningInfo";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
 import { alarmSchema } from "@/schema/AlarmSchema";
-
-import es from "dayjs/locale/es";
+import { useEffect, useState } from "react";
 import DateTimePickerInput from "@/components/inputs/DateTimePickerInput";
 import { AlarmFolderArray, AlarmObj } from "@/interface/interface";
 
-interface ICreateAlarmProps {
+interface IEditAlarmProps {
   id: string;
   title: string;
   icon: string;
@@ -47,21 +46,57 @@ interface ICreateAlarmProps {
   folderSelected: string;
   description: string;
 }
-const initialValues: ICreateAlarmProps = {
+const initialValues: IEditAlarmProps = {
   id: crypto.randomUUID(),
   title: "",
   icon: "",
   // time: dayjs(new Date()),
   toDate: new Date(),
   privateAlarm: false,
-  automatedAlarm: false,
+  automatedAlarm: true,
   folderSelected: "",
   description: "",
 };
-export default function CreateAlarmLayout() {
-  const { alarmFolderArray, fnSetAlarmShow, fnCreateAlarm, fnGetfolderByName } =
-    useAlarmStore();
+
+export default function UpdateAlarmLayout({
+  folderName,
+  alarmId,
+}: {
+  folderName: string;
+  alarmId: string;
+}) {
   const { colorScheme } = useMantineColorScheme();
+  const [data, setData] = useState<IEditAlarmProps>(initialValues);
+  const [alarmObj, setAlarmObj] = useState<AlarmObj | null>(null);
+  const {
+    fnSetEditAlarmShow,
+    fnGetfolderByName,
+    alarmFolderArray,
+    fnUpdateAlarm,
+  } = useAlarmStore();
+
+  useEffect(() => {
+    const folderFound = fnGetfolderByName(folderName); // Old folder
+    // console.log("From useEffect: ", folderFound);
+    if (folderFound !== undefined) {
+      // Alarm array of the folder found
+      const { alarmsArray } = folderFound as AlarmFolderArray;
+      const alarmFound = alarmsArray.find((alarm) => alarm.id === alarmId);
+      if (alarmFound !== undefined) {
+        setAlarmObj(alarmFound);
+        setData({
+          privateAlarm: alarmFound.privateAlarm,
+          automatedAlarm: alarmFound.automated,
+          description: alarmFound.description,
+          folderSelected: alarmFound.folderAssigned,
+          icon: alarmFound.icon !== undefined ? alarmFound.icon : "",
+          id: alarmId,
+          title: alarmFound.alarmTitle,
+          toDate: alarmFound.toDate,
+        });
+      }
+    }
+  }, []);
 
   const {
     formState: { errors },
@@ -69,56 +104,50 @@ export default function CreateAlarmLayout() {
     register,
     control,
     reset,
-  } = useForm<ICreateAlarmProps>({
+  } = useForm<IEditAlarmProps>({
     mode: "onChange",
     resolver: zodResolver(alarmSchema),
-    defaultValues: initialValues,
+    defaultValues: data !== undefined ? data : initialValues,
+    values:
+      data !== undefined
+        ? {
+            automatedAlarm: data.automatedAlarm,
+            description: data.description,
+            folderSelected: data.folderSelected,
+            icon: data.icon,
+            id: alarmId,
+            privateAlarm: data.privateAlarm,
+            title: data.title,
+            toDate: data.toDate,
+          }
+        : initialValues,
   });
 
-  /* const onSubmit = async (data: ICreateAlarmProps) => {
+  const onSubmit = async (updateData: IEditAlarmProps) => {
     try {
-      if (Object.keys(errors).length === 0) {
-        console.log("From CreateAlarmLayout: ", data.privateAlarm);
-        console.log("From CreateAlarmLayout: ", initialValues);
-        fnSetAlarmShow(false);
-        notifications.show({
-          id: crypto.randomUUID(),
-          color: "#2BDD66",
-          title: "El Registro en la Base de Datos 📄",
-          message:
-            "Se ha creado el registro en la Base de Datos satisfactoriamente 😎!",
-          autoClose: 1000,
-          withCloseButton: true,
-        });
-        reset(initialValues);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }; */
-  const onSubmit = async (data: ICreateAlarmProps) => {
-    try {
-      const folderFound: AlarmFolderArray | null = await fnGetfolderByName(
-        data.folderSelected,
-      );
-      if (folderFound !== null) {
-        const newAlarm: AlarmObj = {
-          alarmTitle: data.title,
-          automated: data.automatedAlarm,
-          createAt: new Date(),
-          createdTo: "Simon Briceño",
-          description: data.description,
-          folderAssigned: data.folderSelected,
-          id: crypto.randomUUID(),
-          privateAlarm: data.privateAlarm,
+      if (Object.keys(errors).length === 0 && alarmObj !== null) {
+        const alarmData: AlarmObj = {
+          alarmTitle: updateData.title,
+          automated: updateData.automatedAlarm,
+          createAt: alarmObj?.createAt,
+          createdTo: alarmObj?.createdTo,
+          description: updateData.description,
+          folderAssigned: updateData.folderSelected, // New Folder
+          id: alarmId,
+          privateAlarm: updateData.privateAlarm,
           privateUser: "Simon Briceño",
-          toDate: data.toDate,
-          color: folderFound.themeColor,
-          folderIcon: folderFound.icon,
-          icon: data.icon,
+          toDate: updateData.toDate,
+          color: alarmObj?.color,
+          folderIcon: alarmObj?.icon,
+          icon: updateData.icon,
         };
-        await fnCreateAlarm(newAlarm, data.folderSelected);
-        fnSetAlarmShow(false);
+        console.log("alarmData: ", alarmData);
+        await fnUpdateAlarm(
+          alarmData,
+          data.folderSelected,
+          updateData.folderSelected,
+          alarmId,
+        );
         notifications.show({
           id: crypto.randomUUID(),
           color: "#2BDD66",
@@ -128,6 +157,7 @@ export default function CreateAlarmLayout() {
           autoClose: 1000,
           withCloseButton: true,
         });
+        fnSetEditAlarmShow(false);
         reset(initialValues);
       }
     } catch (err) {
@@ -146,7 +176,7 @@ export default function CreateAlarmLayout() {
         gap={6}
       >
         <Stack gap={6}>
-          <TitleSimpleLayout title="Crear Alarma" />
+          <TitleSimpleLayout title="Editar Alarma" />
           <HorizontalInputLayout
             errorDescription={errors.title?.message}
             register={register}
@@ -251,7 +281,7 @@ export default function CreateAlarmLayout() {
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={() => {
-                fnSetAlarmShow(false);
+                fnSetEditAlarmShow(false);
                 reset(initialValues);
               }}
               fullWidth
@@ -271,7 +301,7 @@ export default function CreateAlarmLayout() {
               type="submit"
               fullWidth
               variant="filled"
-              leftSection={<BiBellPlus />}
+              leftSection={<MdOutlineAlarmOn />}
               classNames={{
                 root:
                   colorScheme === "light"
@@ -295,7 +325,7 @@ export default function CreateAlarmLayout() {
                 }
               }}
             >
-              Crear Alarma
+              Guardar Cambios
             </Button>
           </Flex>
         </Stack>

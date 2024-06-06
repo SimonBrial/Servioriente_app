@@ -14,6 +14,7 @@ import {
   Center,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import dayjs from "dayjs";
 import React from "react";
 
 export default function DeleteFolderItem({
@@ -46,11 +47,7 @@ export default function DeleteFolderItem({
       }}
     >
       <Stack gap={2} onClick={toggle} style={{ cursor: "pointer" }}>
-        <Flex
-          gap={5}
-          justify={"space-between"}
-          align={"center"}
-        >
+        <Flex gap={5} justify={"space-between"} align={"center"}>
           <Flex
             gap={5}
             justify={"start"}
@@ -139,65 +136,106 @@ export default function DeleteFolderItem({
         w={"100%"}
         style={{ cursor: "default", margin: "0.2rem 0" }}
       >
-        <Flex justify={"space-between"} align={"center"}>
-          <Flex gap={4} align={"center"}>
-            <Text
-              size="1rem"
-              styles={(theme) => ({
-                root: {
-                  color:
-                    colorScheme === "light"
-                      ? theme.colors.lightTheme[3]
-                      : theme.colors.darkTheme[2],
-                },
-              })}
-            >
-              Creado:
-            </Text>
-            <Text
-              size="sm"
-              styles={(theme) => ({
-                root: {
-                  lineHeight: "15px",
-                  color:
-                    colorScheme === "light"
-                      ? theme.colors.lightTheme[6]
-                      : theme.colors.darkTheme[1],
-                },
-              })}
-            >
-              {createAt}
-            </Text>
-          </Flex>
-          <Flex gap={4} align={"center"}>
-            <Text
-              size="1rem"
-              styles={(theme) => ({
-                root: {
-                  color:
-                    colorScheme === "light"
-                      ? theme.colors.lightTheme[3]
-                      : theme.colors.darkTheme[2],
-                },
-              })}
-            >
-              Para:
-            </Text>
-            <Text
-              size="sm"
-              styles={(theme) => ({
-                root: {
-                  lineHeight: "15px",
-                  color:
-                    colorScheme === "light"
-                      ? theme.colors.lightTheme[6]
-                      : theme.colors.darkTheme[1],
-                },
-              })}
-            >
-              {createdTo}
-            </Text>
-          </Flex>
+        <Flex px={4} gap={4} align={"center"} justify={"space-between"}>
+          <Text
+            size="1rem"
+            styles={(theme) => ({
+              root: {
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[3]
+                    : theme.colors.darkTheme[2],
+              },
+            })}
+          >
+            Creado:
+          </Text>
+          <Text
+            size="sm"
+            styles={(theme) => ({
+              root: {
+                lineHeight: "15px",
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[6]
+                    : theme.colors.darkTheme[1],
+              },
+            })}
+          >
+            {dayjs(createAt).format("DD/MM/YYYY - hh: mm A")}
+          </Text>
+        </Flex>
+        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
+      </Stack>
+      <Stack
+        gap={2}
+        w={"100%"}
+        style={{ cursor: "default", margin: "0.2rem 0" }}
+      >
+        <Flex px={4} gap={4} align={"center"} justify={"space-between"}>
+          <Text
+            size="1rem"
+            styles={(theme) => ({
+              root: {
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[3]
+                    : theme.colors.darkTheme[2],
+              },
+            })}
+          >
+            Para:
+          </Text>
+          <Text
+            size="sm"
+            styles={(theme) => ({
+              root: {
+                lineHeight: "15px",
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[6]
+                    : theme.colors.darkTheme[1],
+              },
+            })}
+          >
+            {dayjs(createAt).format("DD/MM/YYYY - hh: mm A")}
+          </Text>
+        </Flex>
+        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
+      </Stack>
+      <Stack
+        gap={2}
+        w={"100%"}
+        style={{ cursor: "default", margin: "0.2rem 0" }}
+      >
+        <Flex px={4} gap={4} align={"center"} justify={"space-between"}>
+          <Text
+            size="1rem"
+            styles={(theme) => ({
+              root: {
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[3]
+                    : theme.colors.darkTheme[2],
+              },
+            })}
+          >
+            Usuario:
+          </Text>
+          <Text
+            size="sm"
+            styles={(theme) => ({
+              root: {
+                lineHeight: "15px",
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[6]
+                    : theme.colors.darkTheme[1],
+              },
+            })}
+          >
+            {createdTo}
+          </Text>
         </Flex>
         <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>

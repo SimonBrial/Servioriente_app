@@ -98,9 +98,11 @@ import {
   MdOutlineEventNote,
   MdOutlineCategory,
   MdOutlinePercent,
+  MdOutlineAlarmOn,
   MdOutlineTitle,
   MdOutlinePlace,
   MdOutlineSell,
+  MdAlarmAdd,
   MdNumbers,
   MdHistory,
   MdCircle,
@@ -114,7 +116,13 @@ import {
   AiOutlinePlus,
   AiOutlineCar,
 } from "react-icons/ai";
-import { BiMailSend, BiBellPlus, BiCrown, BiTask, BiAlarmOff  } from "react-icons/bi";
+import {
+  BiMailSend,
+  BiBellPlus,
+  BiCrown,
+  BiTask,
+  BiAlarmOff,
+} from "react-icons/bi";
 import { PiRobot, PiFolderSimpleDashed } from "react-icons/pi";
 import { FaFacebookF, FaChartLine, FaChartColumn } from "react-icons/fa6";
 
@@ -166,6 +174,7 @@ export {
   IoWarningOutline,
   IoChevronForward,
   LuChevronsUpDown,
+  MdOutlineAlarmOn,
   CgCornerUpRight,
   HiOutlineSearch,
   HiOutlineLogout,
@@ -209,6 +218,7 @@ export {
   BiMailSend,
   LuListTodo,
   BiAlarmOff,
+  MdAlarmAdd,
   MdHistory,
   HiHashtag,
   IoIosSend,

@@ -11,13 +11,15 @@ import {
   Title,
   Flex,
   Text,
+  Button,
 } from "@mantine/core";
 import DeleteFolderItem from "./DeleteFolderItem";
 import { AlarmFolderArray, AlarmObj } from "@/interface/interface";
 import { useAlarmStore } from "@/store/alarm-store";
 import { useEffect, useState } from "react";
-import { PiFolderSimpleDashed } from "@/icons";
+import { HiOutlineTrash, PiFolderSimpleDashed } from "@/icons";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import BtnDeleteAllAlarms from "../buttons/BtnDeleteAllAlarms";
 
 export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
   const { colorScheme } = useMantineColorScheme();
@@ -101,6 +103,8 @@ export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
                 })}
               </Stack>
             </ScrollArea>
+            <GeneralDivider orientation="horizontal" />
+            <BtnDeleteAllAlarms folderId={idFolder} />
           </Container>
         );
       }
@@ -132,10 +136,7 @@ export default function DeleteFolderLayout({ idFolder }: { idFolder: string }) {
 
   return (
     <>
-      <TitleSimpleLayout
-        title="Eliminar Carpeta"
-        key={crypto.randomUUID()}
-      />
+      <TitleSimpleLayout title="Eliminar Carpeta" key={crypto.randomUUID()} />
       <Container
         styles={(theme) => ({
           root: {

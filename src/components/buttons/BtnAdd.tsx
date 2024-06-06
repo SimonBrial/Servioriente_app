@@ -7,7 +7,7 @@ import {
   LuCalendarPlus,
   TbTemplate,
   TbMailPlus,
-  BiBellPlus,
+  MdAlarmAdd,
   LuGoal,
 } from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
@@ -54,7 +54,7 @@ export default function BtnAdd({
     },
     {
       tag: "add",
-      icon: <BiBellPlus />,
+      icon: <MdAlarmAdd />,
     },
     {
       tag: "folder",

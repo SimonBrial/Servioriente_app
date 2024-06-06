@@ -16,7 +16,7 @@ import { AlarmObj } from "@/interface/interface";
 import { useAlarmStore } from "@/store/alarm-store";
 
 export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
-  console.log(obj);
+  // console.log(obj);
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
   const { fnDeleteAlarm } = useAlarmStore();

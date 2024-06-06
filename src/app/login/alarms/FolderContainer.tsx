@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  Center,
-  Flex,
-  ScrollArea,
-  Stack,
-  Text,
   useMantineColorScheme,
+  ScrollArea,
+  Center,
+  Stack,
+  Flex,
+  Text,
 } from "@mantine/core";
 import AlarmFolder from "./AlarmFolder";
 import { ContainerInside } from "@/components/container/ContainerInside";
