@@ -15,7 +15,14 @@ import BtnAdd from "@/components/buttons/BtnAdd";
 import { useDataBaseStore } from "@/store/db-store";
 
 export default function DBContainer() {
-  const { fnSetShow, showRegisterLayout } = useDataBaseStore();
+  const {
+    showRegisterLayout,
+    setSearchTerm,
+    searchTerm,
+    setResults,
+    fnSetShow,
+    data,
+  } = useDataBaseStore();
   return (
     <ListLayout>
       <Flex
@@ -29,7 +36,12 @@ export default function DBContainer() {
           iconSection={<HiOutlineUserCircle />}
           description="Total de Usuarios"
         />
-        <AutoCompleteInput />
+        <AutoCompleteInput
+          fnSearchTerm={setSearchTerm}
+          fnResults={setResults}
+          dataFilter={data}
+          term={searchTerm}
+        />
         <BtnFilter>
           <GeneralFilterLayout />
         </BtnFilter>

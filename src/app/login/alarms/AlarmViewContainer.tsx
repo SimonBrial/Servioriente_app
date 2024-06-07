@@ -17,6 +17,9 @@ export default function AlarmViewContainer() {
     fnSetFolderShow,
     showAlarmLayout,
     fnSetAlarmShow,
+    searchTerm,
+    setResults,
+    setSearchTerm,
   } = useAlarmStore();
   // To show the total of alarms
   const getTotalAlarm = (): number => {
@@ -40,7 +43,7 @@ export default function AlarmViewContainer() {
           iconSection={<MdOutlineAccessAlarms />}
           description="Total de Alarmas"
         />
-        <AutoCompleteInput />
+        <AutoCompleteInput dataFilter={alarmFolderArray} fnResults={setResults} fnSearchTerm={setSearchTerm} term={searchTerm} />
         <Box>
           <BtnAdd
             fnShow={fnSetFolderShow}

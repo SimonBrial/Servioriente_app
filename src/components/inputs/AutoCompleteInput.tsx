@@ -3,20 +3,37 @@
 import { useMantineColorScheme, TextInput, Center, Flex } from "@mantine/core";
 import { HiOutlineSearch } from "@/icons";
 import classes from "@/styles/general-styles.module.css";
-import { useDataBaseStore } from "@/store/db-store";
 import { filterData } from "@/utils/filterData";
+import { useDebouncedValue } from "@mantine/hooks";
+import { useEffect } from "react";
 
-export function AutoCompleteInput(): JSX.Element {
-  const { searchTerm, setSearchTerm, setResults, data } = useDataBaseStore();
+interface AutoCompleteInputProps {
+  fnSearchTerm: (term: string) => void;
+  fnResults: (results: any[]) => void;
+  term: string;
+  dataFilter: any[];
+}
+export function AutoCompleteInput({
+  fnSearchTerm,
+  dataFilter,
+  fnResults,
+  term,
+}: AutoCompleteInputProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
+  const [debounced] = useDebouncedValue(term, 200);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
-    setSearchTerm(term);
-    // Suponiendo que `data` es la colección de datos donde quieres buscar
-    const filteredResults = filterData(data, term);
-    setResults(filteredResults);
+    fnSearchTerm(term);
   };
+
+  useEffect(() => {
+    if (debounced) {
+      // Realizar la búsqueda con el término debounced
+      const filteredResults = filterData(dataFilter, debounced);
+      fnResults(filteredResults);
+    }
+  }, [debounced, dataFilter]);
 
   return (
     <Flex
@@ -30,7 +47,8 @@ export function AutoCompleteInput(): JSX.Element {
       </Center>
       <TextInput
         size="xs"
-        value={searchTerm}
+        /// defaultValue={value}
+        value={term}
         onChange={handleSearch}
         style={{ width: "100%" }}
         placeholder="Buscar Informacion del usuario"

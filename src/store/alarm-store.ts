@@ -30,8 +30,13 @@ interface AlarmStoreProps {
   showAlarmLayout: boolean;
   showEditAlarmLayout: boolean;
   showFolderToDelete: boolean;
+  searchTerm: string;
+  results: any[];
   // Fake properties
   // -------------------- Functions --------------------
+
+  setSearchTerm: (term: string) => void;
+  setResults: (results: any[]) => void;
   // Alarm Functions
   fnSetAlarmShow: (stateValue: boolean) => void;
   fnSetEditAlarmShow: (stateValue: boolean) => void;
@@ -69,8 +74,12 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
     showFolderToDelete: false,
     showAlarmLayout: false,
     showEditAlarmLayout: false,
+    searchTerm: "",
+    results: [],
 
     // ------------ Funtions to manipulate the data ------------
+    setSearchTerm: (term: string) => set({ searchTerm: term }),
+    setResults: (results: any[]) => set({ results }),
     fnSetFolderShow: (stateValue: boolean) =>
       set({
         showFolderLayout: stateValue,
@@ -230,7 +239,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
           alarmFolderArray[newFolderIndex].alarmsArray.push(updatedAlarm);
 
           // Actualiza el estado o la variable que contiene alarmFolderArray
-          console.log("alarmFolderArray: ", alarmFolderArray)
+          console.log("alarmFolderArray: ", alarmFolderArray);
           await set({ alarmFolderArray });
         }
       }

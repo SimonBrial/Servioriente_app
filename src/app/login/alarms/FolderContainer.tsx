@@ -12,12 +12,23 @@ import AlarmFolder from "./AlarmFolder";
 import { ContainerInside } from "@/components/container/ContainerInside";
 import { useAlarmStore } from "@/store/alarm-store";
 import { PiFolderSimpleDashed } from "@/icons";
+import { useEffect, useState } from "react";
+import { AlarmFolderArray } from "@/interface/interface";
 
 export default function FolderContainer(): JSX.Element {
-  const { alarmFolderArray } = useAlarmStore();
+  const { alarmFolderArray, searchTerm, results } = useAlarmStore();
   const { colorScheme } = useMantineColorScheme();
+
+  const [showData, setShowData] = useState<AlarmFolderArray[]>(alarmFolderArray);
+
+  useEffect(() => {
+    // Establece los datos mostrados basado en si searchTerm está vacío o no
+    setShowData(searchTerm !== "" ? results : alarmFolderArray);
+    console.log("inside the useEffect: ", searchTerm)
+  }, [searchTerm, alarmFolderArray, results]);
+  console.log("outside the useEffect: ", searchTerm)
   function folderArray() {
-    if (alarmFolderArray.length > 0) {
+    if (showData.length > 0) {
       return (
         <ScrollArea
           h={"100%"}
@@ -26,7 +37,7 @@ export default function FolderContainer(): JSX.Element {
           offsetScrollbars
         >
           <Stack gap={12}>
-            {alarmFolderArray.map((folder) => {
+            {showData.map((folder) => {
               const {
                 alarmsArray,
                 description,

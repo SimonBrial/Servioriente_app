@@ -73,7 +73,7 @@ export default function AlarmDescription(): JSX.Element {
       setDescriptionAlarm(showDescription());
     }
   }, [alarmFolderArray, hiddenAlarm]);
-  console.log(hiddenAlarm);
+  // console.log(hiddenAlarm);
 
   function showDescription() {
     if (alarmFolderArray.length > 0) {
@@ -110,10 +110,7 @@ export default function AlarmDescription(): JSX.Element {
             <ActionIcon
               variant="transparent"
               size="lg"
-              onClick={() => {
-                console.log("Alarm");
-                setHiddenAlarm((v) => !v);
-              }}
+              onClick={() => setHiddenAlarm((v) => !v)}
               styles={(theme) => ({
                 root: {
                   color:

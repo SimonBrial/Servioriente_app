@@ -1,4 +1,6 @@
-export const filterData = (data: any[], searchValue: string) => {
+export function filterData(data: any[], searchValue: string) {
+  console.log(data)
+  console.log(searchValue)
   if (searchValue.trim() !== "") {
     return data.filter((item) =>
       Object.values(item).some(
@@ -8,6 +10,8 @@ export const filterData = (data: any[], searchValue: string) => {
           value.toString().toLowerCase().includes(searchValue.toLowerCase()),
       ),
     );
+    /* console.log(test)
+    return test */
   }
   return data;
-};
+}

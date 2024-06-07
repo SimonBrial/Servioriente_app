@@ -37,48 +37,19 @@ export default function ListDataBase(): JSX.Element {
   const [showData, setShowData] = useState<ListDBProps[]>(data);
   const [filters, setFilters] = useState<string[]>(defaultFiltersValue);
 
-  function generateTableField(jsxElement: JSX.Element, value: string) {
-    if (filters.includes(value)) {
-      return jsxElement;
-    }
-    return null;
-  }
-
-  useEffect(() => {
-    const test = filterDataByFields(data, defaultFiltersValue);
-    console.log(test);
-    // console.log("filterFields: ", filterFields);
-    if (filterFields.length > 0) {
-      filterFields.map((field) => {
-        console.log(field);
-      });
-    }
-    // console.log(filterFields);
-  }, [filterFields.length]);
-  /* useEffect(() => {
-    setShowData(data);
-    if (searchTerm !== "") {
-      setShowData(results);
-    }
-  }, [searchTerm, data, results]);
-
-  useEffect(() => {
-    if (
-      filterFields.length >= 1 ||
-      filterFields.length < filterFields.length - 1
-    ) {
-      setFilters(filterFields);
-    } else {
-      setFilters(defaultFiltersValue);
-    }
-  }, [filterFields.length]); */
-
   useEffect(() => {
     // Establece los datos mostrados basado en si searchTerm está vacío o no
     setShowData(searchTerm !== "" ? results : data);
     // Establece los filtros basado en la longitud de filterFields
     setFilters(filterFields.length ? filterFields : defaultFiltersValue);
   }, [searchTerm, data, results, filterFields, defaultFiltersValue]);
+
+  function generateTableField(jsxElement: JSX.Element, value: string) {
+    if (filters.includes(value)) {
+      return jsxElement;
+    }
+    return null;
+  }
 
   const rows = showData.map((element, index) => (
     <Table.Tr
@@ -169,7 +140,7 @@ export default function ListDataBase(): JSX.Element {
   ));
 
   return (
-    <Stack gap={10}>
+    <Stack gap={10} mt={-8}>
       <ScrollArea
         w={"90vw"}
         className={heightClasses.DB_container}
