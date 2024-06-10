@@ -32,11 +32,13 @@ interface AlarmStoreProps {
   showFolderToDelete: boolean;
   searchTerm: string;
   results: any[];
+  closeDescription: boolean;
   // Fake properties
   // -------------------- Functions --------------------
 
   setSearchTerm: (term: string) => void;
   setResults: (results: any[]) => void;
+  setCloseDescription: (stateValue: boolean) => void;
   // Alarm Functions
   fnSetAlarmShow: (stateValue: boolean) => void;
   fnSetEditAlarmShow: (stateValue: boolean) => void;
@@ -76,10 +78,13 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
     showEditAlarmLayout: false,
     searchTerm: "",
     results: [],
+    closeDescription: false,
 
     // ------------ Funtions to manipulate the data ------------
     setSearchTerm: (term: string) => set({ searchTerm: term }),
     setResults: (results: any[]) => set({ results }),
+    setCloseDescription: (stateValue: boolean) =>
+      set({ closeDescription: stateValue }),
     fnSetFolderShow: (stateValue: boolean) =>
       set({
         showFolderLayout: stateValue,
@@ -187,13 +192,13 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
         );
 
         if (folderIndex !== -1) {
-          console.log(folderIndex);
+          // console.log(folderIndex);
           // console.log(newAlarm);
           alarmFolderArray[folderIndex].alarmsArray.push(newAlarm);
 
           /* console.log(updateFolder.push(newAlarm));
           console.log(alarmFolderArray); */
-          console.log(alarmFolderArray);
+          // console.log(alarmFolderArray);
           set({ alarmFolderArray });
         }
       } catch (err) {
@@ -209,9 +214,9 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
     ) => {
       const { alarmFolderArray, fnGetfolderByName } = get();
       // Search the folder by name
-      const test = fnGetfolderByName(newFolderName);
-      console.log("oldFolderName: ", oldFolderName);
-      console.log("newFolderName: ", newFolderName);
+      // const test = fnGetfolderByName(newFolderName);
+      // console.log("oldFolderName: ", oldFolderName);
+      // console.log("newFolderName: ", newFolderName);
       // Encuentra el índice de la carpeta antigua y la nueva
       const oldFolderIndex = alarmFolderArray.findIndex(
         (folder) => folder.title === oldFolderName,
@@ -235,11 +240,11 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
           // Actualiza la alarma si es necesario
           const updatedAlarm = { ...removedAlarm, ...alarmData };
 
-          // Añade la alarma actualizada a la nueva carpeta
+          // Añade la alarma actualizada a la nueva carpeta pero en la ultima posición
           alarmFolderArray[newFolderIndex].alarmsArray.push(updatedAlarm);
 
           // Actualiza el estado o la variable que contiene alarmFolderArray
-          console.log("alarmFolderArray: ", alarmFolderArray);
+          // console.log("alarmFolderArray: ", alarmFolderArray);
           await set({ alarmFolderArray });
         }
       }
@@ -306,7 +311,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
             ...updateFolder[folderIndex],
             ...folderData,
           };
-          console.log("from fnUpdateFolder --> updateFolder: ", updateFolder);
+          // console.log("from fnUpdateFolder --> updateFolder: ", updateFolder);
           await set({ alarmFolderArray: updateFolder });
         }
       } catch (err) {

@@ -16,19 +16,45 @@ import { useEffect, useState } from "react";
 import { AlarmFolderArray } from "@/interface/interface";
 
 export default function FolderContainer(): JSX.Element {
-  const { alarmFolderArray, searchTerm, results } = useAlarmStore();
   const { colorScheme } = useMantineColorScheme();
-
-  const [showData, setShowData] = useState<AlarmFolderArray[]>(alarmFolderArray);
+  const { alarmFolderArray, searchTerm, results } = useAlarmStore();
+  const [showData, setShowData] =
+    useState<AlarmFolderArray[]>(alarmFolderArray);
 
   useEffect(() => {
     // Establece los datos mostrados basado en si searchTerm está vacío o no
     setShowData(searchTerm !== "" ? results : alarmFolderArray);
-    console.log("inside the useEffect: ", searchTerm)
   }, [searchTerm, alarmFolderArray, results]);
-  console.log("outside the useEffect: ", searchTerm)
+
   function folderArray() {
     if (showData.length > 0) {
+      const searchingFolder = showData.some(
+        (data) => data.title.toLowerCase() === searchTerm.toLowerCase(),
+      );
+      // console.log(searchingFolder);
+      if (searchTerm !== "" && searchingFolder) {
+        return (
+          <Flex
+            gap={8}
+            align={"center"}
+            justify={"center"}
+            styles={(theme) => ({
+              root: {
+                height: "100%",
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[3]
+                    : theme.colors.darkTheme[2],
+              },
+            })}
+          >
+            <Center>
+              <PiFolderSimpleDashed style={{ fontSize: "4.5rem" }} />
+            </Center>
+            <Text size="3rem">La busqueda no fue encontrada</Text>
+          </Flex>
+        );
+      }
       return (
         <ScrollArea
           h={"100%"}

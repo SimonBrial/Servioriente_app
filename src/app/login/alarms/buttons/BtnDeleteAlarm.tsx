@@ -19,10 +19,11 @@ export default function BtnDeleteAlarm({ obj }: { obj: AlarmObj }) {
   // console.log(obj);
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
-  const { fnDeleteAlarm } = useAlarmStore();
+  const { fnDeleteAlarm, setCloseDescription } = useAlarmStore();
 
   const handleDeleteAlarm = async () => {
     try {
+      setCloseDescription(true);
       await fnDeleteAlarm(obj.id, obj.folderAssigned);
       await close();
       await notifications.show({

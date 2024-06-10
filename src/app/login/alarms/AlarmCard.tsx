@@ -38,11 +38,14 @@ export default function AlarmCard({
 }: AlarmCardProps): JSX.Element {
   // console.log(folderAssigned);
   const { colorScheme } = useMantineColorScheme();
-  const { fnGetAlarm } = useAlarmStore();
+  const { fnGetAlarm, setCloseDescription } = useAlarmStore();
   return (
     <>
       <Container
-        onClick={() => fnGetAlarm(id, folderAssigned)}
+        onClick={() => {
+          setCloseDescription(false)
+          fnGetAlarm(id, folderAssigned)
+        }}
         p={10}
         style={{
           border: `1px solid ${themeColor}`,

@@ -16,7 +16,7 @@ import { useDisclosure } from "@mantine/hooks";
 
 export default function BtnDeleteAllAlarms({ folderId }: { folderId: string }) {
   const [opened, { close, open }] = useDisclosure(false);
-  const {fnDeleteAllAlarms} = useAlarmStore()
+  const { fnDeleteAllAlarms, setCloseDescription } = useAlarmStore();
   return (
     <Box
       py={8}
@@ -70,7 +70,10 @@ export default function BtnDeleteAllAlarms({ folderId }: { folderId: string }) {
               Cancelar
             </Button>
             <Button
-              onClick={() => fnDeleteAllAlarms(folderId)}
+              onClick={() => {
+                fnDeleteAllAlarms(folderId);
+                setCloseDescription(true);
+              }}
               color="#2BDD66"
               fullWidth
               leftSection={<HiOutlineCheck />}

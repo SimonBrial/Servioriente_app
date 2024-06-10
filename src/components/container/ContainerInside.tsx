@@ -16,6 +16,7 @@ export const ContainerInside = ({
   width: string;
 }): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
+  // console.log("From ContainerInside")
   return (
     <Container
       styles={(theme) => ({

@@ -69,6 +69,7 @@ export default function UpdateAlarmLayout({
   const [data, setData] = useState<IEditAlarmProps>(initialValues);
   const [alarmObj, setAlarmObj] = useState<AlarmObj | null>(null);
   const {
+    setCloseDescription,
     fnSetEditAlarmShow,
     fnGetfolderByName,
     alarmFolderArray,
@@ -97,6 +98,7 @@ export default function UpdateAlarmLayout({
       }
     }
   }, []);
+  console.log("data: ", data)
 
   const {
     formState: { errors },
@@ -141,7 +143,7 @@ export default function UpdateAlarmLayout({
           folderIcon: alarmObj?.icon,
           icon: updateData.icon,
         };
-        console.log("alarmData: ", alarmData);
+        // console.log("alarmData: ", alarmData);
         await fnUpdateAlarm(
           alarmData,
           data.folderSelected,
@@ -158,6 +160,7 @@ export default function UpdateAlarmLayout({
           withCloseButton: true,
         });
         fnSetEditAlarmShow(false);
+        setCloseDescription(true);
         reset(initialValues);
       }
     } catch (err) {

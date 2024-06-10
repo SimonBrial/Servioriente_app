@@ -53,66 +53,70 @@ export const AutomatedInput = ({
           Automatizado:
         </Title>
         <Flex align={"center"} gap={5}>
-          {checked ? (
-            <Center
-              styles={(theme) => ({
-                root: {
-                  fontSize: "1.3rem",
-                  color:
-                    colorScheme === "light"
-                      ? `${theme.colors.lightTheme[3]}`
-                      : `${theme.colors.darkTheme[2]}`,
-                },
-              })}
-            >
-              <PiRobot />
-            </Center>
-          ) : (
-            <></>
-          )}
           <Controller
             name={label}
             control={control}
-            render={({ field: { onChange, onBlur, value } }) => {
+            render={({ field: { onChange, onBlur, value, ref } }) => {
               return (
-                <Checkbox
-                  error={errorDescription}
-                  onBlur={onBlur}
-                  value={value}
-                  onChange={onChange}
-                  color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
-                  onClick={(event: any) => {
-                    setChecked(event.target.checked);
-                    if (!checked) {
-                      notifications.show({
-                        id: crypto.randomUUID(),
-                        color: "#2BDD66",
-                        title: "Recordatorio Automatizado",
-                        message:
-                          "El recordatorio ha sido automatizado satisfactoriamente 🤖!",
-                        autoClose: 1000,
-                        withCloseButton: true,
-                      });
-                    } else {
-                      notifications.show({
-                        id: crypto.randomUUID(),
-                        color: "#115dfe",
-                        title: "Automatizacion Eliminada",
-                        message:
-                          "La automatizacion del recordatorio ha sido eliminada satisfactoriamente 🤖!",
-                        autoClose: 1000,
-                        withCloseButton: true,
-                      });
-                    }
-                  }}
-                  style={{ marginTop: "-5px" }}
-                  classNames={{
-                    input:
-                      colorScheme === "light"
-                        ? classes.checkbox
-                        : classes.checkbox_dark,
-                  }}
-                />
+                <Flex align={"center"} gap={5}>
+                  {value ? (
+                    <Center
+                      styles={(theme) => ({
+                        root: {
+                          fontSize: "1.3rem",
+                          color:
+                            colorScheme === "light"
+                              ? `${theme.colors.lightTheme[3]}`
+                              : `${theme.colors.darkTheme[2]}`,
+                        },
+                      })}
+                    >
+                      <PiRobot />
+                    </Center>
+                  ) : (
+                    <></>
+                  )}
+                  <Checkbox
+                    ref={ref}
+                    error={errorDescription}
+                    onBlur={onBlur}
+                    value={value}
+                    checked={value}
+                    color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
+                    onChange={(e: any) => {
+                      onChange(e.currentTarget.checked);
+                      setChecked(e.currentTarget.checked);
+                      if (!checked) {
+                        notifications.show({
+                          id: crypto.randomUUID(),
+                          color: "#2BDD66",
+                          title: "Recordatorio Automatizado",
+                          message:
+                            "El recordatorio ha sido automatizado satisfactoriamente 🤖!",
+                          autoClose: 1000,
+                          withCloseButton: true,
+                        });
+                      } else {
+                        notifications.show({
+                          id: crypto.randomUUID(),
+                          color: "#115dfe",
+                          title: "Automatizacion Eliminada",
+                          message:
+                            "La automatizacion del recordatorio ha sido eliminada satisfactoriamente 🤖!",
+                          autoClose: 1000,
+                          withCloseButton: true,
+                        });
+                      }
+                    }}
+                    style={{ marginTop: "-5px" }}
+                    classNames={{
+                      input:
+                        colorScheme === "light"
+                          ? classes.checkbox
+                          : classes.checkbox_dark,
+                    }}
+                  />
+                </Flex>
               );
             }}
           />

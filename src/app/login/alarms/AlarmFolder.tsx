@@ -22,6 +22,7 @@ import AlarmCard from "./AlarmCard";
 import { PiFolderSimpleDashed } from "@/icons";
 import BtnFolderActions from "./buttons/BtnFolderActions";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { useAlarmStore } from "@/store/alarm-store";
 
 export default function AlarmFolder({
   alarmsArray,

@@ -39,14 +39,17 @@ export default function AlarmDescription(): JSX.Element {
     fnSetEditAlarmShow,
     alarmDescription,
     alarmFolderArray,
+    closeDescription,
+    fnUpdateAlarm,
   } = useAlarmStore();
 
   const { colorScheme } = useMantineColorScheme();
   const { height } = useViewportSize();
   const [hiddenAlarm, setHiddenAlarm] = useState(false);
   const [descriptionAlarm, setDescriptionAlarm] = useState<JSX.Element>();
+
   useEffect(() => {
-    if (hiddenAlarm) {
+    if (hiddenAlarm || closeDescription) {
       setDescriptionAlarm(
         <Stack
           h={"100%"}
@@ -72,8 +75,14 @@ export default function AlarmDescription(): JSX.Element {
     } else {
       setDescriptionAlarm(showDescription());
     }
-  }, [alarmFolderArray, hiddenAlarm]);
-  // console.log(hiddenAlarm);
+  }, [
+    alarmFolderArray,
+    alarmFolderArray.length,
+    closeDescription,
+    alarmDescription,
+    fnUpdateAlarm,
+    hiddenAlarm,
+  ]);
 
   function showDescription() {
     if (alarmFolderArray.length > 0) {
@@ -326,7 +335,6 @@ export default function AlarmDescription(): JSX.Element {
                 buttonStyles="normal"
               >
                 <UpdateAlarmLayout folderName={folderAssigned} alarmId={id} />
-                {/* <Button onClick={() => fnSetEditAlarmShow(false)}>close</Button> */}
               </BtnEdit>
             </Flex>
           </Stack>
@@ -347,7 +355,7 @@ export default function AlarmDescription(): JSX.Element {
         >
           <TbClick />
           <Text size="2.5rem" style={{ textAlign: "center" }}>
-            Selecciona un recordatorio
+            Selecciona una Alarma
           </Text>
         </Stack>
       );
@@ -370,13 +378,13 @@ export default function AlarmDescription(): JSX.Element {
       >
         <BiAlarmOff />
         <Text size="2.5rem" style={{ textAlign: "center" }}>
-          Debe crear recordatorios para visualizarlos aqui
+          Debe crear Alarmas para visualizarlos aqui
         </Text>
       </Stack>
     );
   }
 
-  // console.log(alarmDescription);
+  // console.log("alarmDescription");
 
   return (
     <ContainerInside allWhite={false} width="30%" withBorder>
