@@ -363,7 +363,10 @@ interface MailDataProps {
   description: string;
   date: Dayjs;
   photo?: string;
-  mailStatus: MailStatus;
+  mailRead: boolean;
+  mailFavority: boolean;
+  mailArchived: boolean;
+  // mailStatus: MailStatus;
   idMail: string;
 }
 

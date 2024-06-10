@@ -2,14 +2,23 @@
 
 import { LuFolderOutput, LuFolderInput } from "@/icons";
 import { Center, UnstyledButton, useMantineColorScheme } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "@/styles/btn-styles.module.css";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
 
-export default function BtnArchive() {
-  const [readMail, setReadMail] = useState<boolean>(false);
+export default function BtnArchive({
+  status,
+  mailId,
+  path,
+}: {
+  status: boolean;
+  mailId: string;
+  path: string;
+}) {
+  const [readMail, setReadMail] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
+
   return (
     <TooltipLayout
       label={!readMail ? "Archivar" : "Desarchivar"}
@@ -44,8 +53,8 @@ export default function BtnArchive() {
                   ? theme.colors.lightTheme[6]
                   : theme.colors.darkTheme[1]
                 : colorScheme === "light"
-                  ? theme.colors.lightTheme[3]
-                  : theme.colors.darkTheme[2],
+                ? theme.colors.lightTheme[3]
+                : theme.colors.darkTheme[2],
             },
           })}
         >

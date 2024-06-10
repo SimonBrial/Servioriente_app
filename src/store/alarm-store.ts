@@ -241,7 +241,7 @@ export const useAlarmStore = create<AlarmStoreProps>()((set, get) => {
           const updatedAlarm = { ...removedAlarm, ...alarmData };
 
           // Añade la alarma actualizada a la nueva carpeta pero en la ultima posición
-          alarmFolderArray[newFolderIndex].alarmsArray.push(updatedAlarm);
+          alarmFolderArray[newFolderIndex].alarmsArray.unshift(updatedAlarm);
 
           // Actualiza el estado o la variable que contiene alarmFolderArray
           // console.log("alarmFolderArray: ", alarmFolderArray);

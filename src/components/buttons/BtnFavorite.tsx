@@ -9,8 +9,8 @@ import { notifications } from "@mantine/notifications";
 
 type sizeType = "small" | "medium" | "large";
 
-export const BtnFavorite = ({ size }: { size: sizeType }) => {
-  const [colorState, setColorState] = useState<boolean>(false);
+export const BtnFavorite = ({ size, status }: { size: sizeType; status: boolean }) => {
+  const [colorState, setColorState] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
 
   if (size === "large") {

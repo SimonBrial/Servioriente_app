@@ -3,48 +3,63 @@
 
 import React, { useEffect, useState } from "react";
 import MailItem from "./MailItem";
-import { ScrollArea, Stack } from "@mantine/core";
+import {
+  Center,
+  ScrollArea,
+  Stack,
+  Title,
+  useMantineColorScheme,
+} from "@mantine/core";
 import { ContainerInside } from "@/components/container/ContainerInside";
 import BtnMail from "@/components/buttons/BtnMail";
 import { useMailStore } from "@/store/mail-store";
 import { usePathname } from "next/navigation";
 import { MailDataProps } from "@/interface/interface";
+import { LuMailX } from "@/icons";
+import BtnDeleteMails from "./buttons/BtnDeleteMails";
 
 export const AsideMailContainer = () => {
-  const { selectData } = useMailStore();
+  const { colorScheme } = useMantineColorScheme();
+  const { fnSelectData, mailReceived } = useMailStore();
+  // Url Path
   const path = usePathname();
+  // Data to show
   const [dataMails, setDataMails] = useState<MailDataProps[]>();
   useEffect(() => {
-    const data = selectData(path);
+    const data = fnSelectData(path);
     setDataMails(data);
-  }, [path]);
+  }, [path, mailReceived.length]);
 
-  return (
-    <ContainerInside width="35%" allWhite={false} withBorder>
-      <Stack gap={4} style={{ height: "100%" }}>
-        <BtnMail />
-        <ScrollArea
-          h={"100%"}
-          style={{ borderRadius: "6px" }}
-          offsetScrollbars
-          scrollbarSize={2}
-        >
-          {dataMails !== undefined &&
-            dataMails.map((item: MailDataProps, i: number) => {
+  function showMailArray() {
+    if (dataMails !== undefined) {
+      if (dataMails.length > 0) {
+        return (
+          <ScrollArea
+            h={"100%"}
+            style={{ borderRadius: "6px" }}
+            offsetScrollbars
+            scrollbarSize={2}
+          >
+            {dataMails.map((item: MailDataProps, i: number) => {
               const {
+                mailArchived,
+                mailFavority,
                 description,
-                mailStatus,
                 userName,
+                mailRead,
                 idMail,
                 title,
                 photo,
                 mail,
                 date,
-              } = item;
+              } = item as MailDataProps;
               return (
                 <MailItem
+                  path={path}
                   description={description}
-                  mailStatus={mailStatus}
+                  mailArchived={mailArchived}
+                  mailFavority={mailFavority}
+                  mailRead={mailRead}
                   userName={userName}
                   idMail={idMail}
                   photo={photo}
@@ -55,7 +70,40 @@ export const AsideMailContainer = () => {
                 />
               );
             })}
-        </ScrollArea>
+          </ScrollArea>
+        );
+      }
+      return (
+        <Stack
+          align="center"
+          justify="center"
+          styles={(theme) => ({
+            root: {
+              height: "100%",
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+            },
+          })}
+        >
+          <Center style={{ fontSize: "5rem" }}>
+            <LuMailX />
+          </Center>
+          <Title style={{ textAlign: "center" }}>
+            No hay correos disponibles
+          </Title>
+        </Stack>
+      );
+    }
+  }
+
+  return (
+    <ContainerInside width="35%" allWhite={false} withBorder>
+      <Stack gap={4} style={{ height: "100%" }}>
+        <BtnMail />
+        {showMailArray()}
+        <BtnDeleteMails />
       </Stack>
     </ContainerInside>
   );

@@ -71,6 +71,7 @@ import {
   LuFolderInput,
   LuListTodo,
   LuFolder,
+  LuMailX,
   LuGoal,
 } from "react-icons/lu";
 import {
@@ -234,6 +235,7 @@ export {
   TbClick,
   BiCrown,
   TbWorld,
+  LuMailX,
   TbStar,
   BiTask,
   LuGoal,

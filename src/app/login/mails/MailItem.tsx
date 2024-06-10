@@ -18,17 +18,24 @@ import { BtnFavorite } from "@/components/buttons/BtnFavorite";
 import BtnReadMail from "@/components/buttons/BtnReadMail";
 import BtnArchive from "@/components/buttons/BtnArchive";
 import { MailDataProps } from "@/interface/interface";
+import { useMailStore } from "@/store/mail-store";
 
+interface MailItemProps extends MailDataProps {
+  path: string;
+}
 export default function MailItem({
+  mailFavority,
+  mailArchived,
   description,
-  mailStatus,
+  mailRead,
   userName,
   idMail,
   title,
   photo,
+  path,
   mail,
   date,
-}: MailDataProps): JSX.Element {
+}: MailItemProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const { hovered, ref } = useHover();
   const [checked, setChecked] = useState<boolean>(false);
@@ -107,9 +114,9 @@ export default function MailItem({
                   },
                 })}
               >
-                <BtnReadMail />
-                <BtnFavorite size={"small"} />
-                <BtnArchive />
+                <BtnReadMail status={mailRead} mailId={idMail} path={path} />
+                <BtnFavorite size={"small"} status={mailFavority} />
+                <BtnArchive status={mailArchived} mailId={idMail} path={path} />
               </Flex>
             </Flex>
             <Flex
@@ -159,11 +166,7 @@ export default function MailItem({
               {description.slice(0, 25)}...
             </Text>
           </Stack>
-          <BtnMailTrash
-          /* toDelete={toDelete}
-            toDeleteFn={() => setToDelete(toDelete => !toDelete)} */
-          // key={crypto.randomUUID()}
-          />
+          <BtnMailTrash mailId={idMail} path={path} />
         </Flex>
       </Group>
     );
