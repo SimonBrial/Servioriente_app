@@ -18,13 +18,16 @@ interface MailStoreProps {
   mailTemplates: MailDataProps[];
   mailArchived: MailDataProps[];
   mailSectionArray: MailSections[];
-  // mailGlobalStaus: boolean;
+  itemChecked: MailDataProps[];
+  mailGlobalStaus: boolean;
   // Fake properties
 
   // Functionalities
   fnReadMark: (mailId: string, section: string) => void;
   fnDeleteMail: (mailId: string, section: string) => void;
   fnDeleteMailFromTrash: (mailId: string) => MailDataProps;
+  fnCheckMail: (mailId: string, path: string, checked: boolean) => void;
+  fnDeleteMailChecked: (path: string) => void;
   // Secondary functions
   fnSelectData: (currentSection: string) => MailDataProps[] | undefined;
   // setMailGlobalStatus: (stateValue: boolean) => void;
@@ -33,6 +36,8 @@ interface MailStoreProps {
 export const useMailStore = create<MailStoreProps>()((set, get) => {
   return {
     // Data
+    mailGlobalStaus: false,
+    itemChecked: [],
     mailReceived: mailReceivedFake,
     mailSent: mailReceivedFake.slice(0, 4),
     mailFavorities: mailReceivedFake.slice(0, 5),
@@ -87,14 +92,27 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       }
     },
     fnDeleteMail: (mailId: string, section: string) => {
-      const { fnSelectData, mailDeleted } = get();
+      const { fnSelectData, mailDeleted, itemChecked } = get();
       const dataArray = fnSelectData(section);
+      // Looking for if the element is in the itemChecked array.
       if (dataArray) {
-        const mailFounded = dataArray.filter((mail) => mail.idMail === mailId);
-        const mailFounded2 = dataArray.filter((mail) => mail.idMail !== mailId);
-        // console.log(mailFounded);
-        set({ mailReceived: [...mailFounded2] });
-        set({ mailDeleted: [...mailDeleted, ...mailFounded] });
+        const newMailDeleted = dataArray.filter(
+          (mail) => mail.idMail === mailId,
+        );
+
+        if (newMailDeleted !== undefined) {
+          const deletedFromItemChecked = itemChecked.filter(
+            (mail) => mail.idMail !== mailId,
+          );
+          set({ mailGlobalStaus: true });
+          set({ itemChecked: deletedFromItemChecked });
+        }
+        const newMailReceived = dataArray.filter(
+          (mail) => mail.idMail !== mailId,
+        );
+        // console.log(newMailDelete);
+        set({ mailReceived: [...newMailReceived] });
+        set({ mailDeleted: [...mailDeleted, ...newMailDeleted] });
         //console.log(mailDeleted);
       }
     },
@@ -103,12 +121,12 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       const mailToDeletedIndex = mailDeleted.findIndex(
         (mail) => mail.idMail === mailId,
       );
-      return mailDeleted[mailToDeletedIndex]
+      return mailDeleted[mailToDeletedIndex];
     },
     // Received mails
 
     // Secondary functions
-    fnSelectData(currentSection: string): MailDataProps[] | undefined {
+    fnSelectData: (currentSection: string): MailDataProps[] | undefined => {
       const {
         mailFavorities,
         mailTemplates,
@@ -148,5 +166,74 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       );
       return dataMailFounded?.dataArr;
     },
+    fnCheckMail: (mailId: string, path: string, checked: boolean) => {
+      const { itemChecked, fnSelectData } = get();
+      const currentSectionArray = fnSelectData(path);
+      // search the element by id
+      if (currentSectionArray !== undefined) {
+        // If the checkbox value is TRUE
+        if (!checked) {
+          // if the element was found and not it's undefined
+          const elementAdded = currentSectionArray.find(
+            (element) => element.idMail === mailId,
+          );
+
+          if (
+            elementAdded !== undefined &&
+            !itemChecked.some((e) => e.idMail === mailId)
+          ) {
+            set({ itemChecked: [...itemChecked, elementAdded] });
+          }
+        } else {
+          // If the checkbox value is FALSE
+          const removeElement = itemChecked.filter(
+            (element) => element.idMail !== mailId,
+          );
+          set({ itemChecked: removeElement });
+        }
+      }
+
+      /* if (elementAdded !== undefined && itemChecked.length > 1) {
+        // Is the element in the array?
+        const uniqueElement = itemChecked.find(
+          (element) => element.idMail !== elementAdded.idMail,
+        )
+        console.log(uniqueElement)
+        if(uniqueElement){
+          set({ itemChecked: [...itemChecked, uniqueElement] });
+        }
+        set({ itemChecked: [...itemChecked] });
+      } */
+      console.log(mailId);
+      console.log(itemChecked);
+      // console.log(currentSectionArray);
+    },
+    fnDeleteMailChecked: (path: string) => {
+      const { itemChecked, mailDeleted } = get();
+      if (!path.includes("erased")) {
+        // If item.dir !== path, the user isn't on the erased section
+        // const newDeletedArray = itemChecked.forEach((item) => )
+        set({
+          mailDeleted: [...mailDeleted, ...itemChecked],
+        });
+      }
+      if (itemChecked.length > 0) {
+        set({ itemChecked: [] });
+      }
+    },
   };
 });
+
+/* const newMailsArray = currentSectionArray
+            .map((mail) => {
+              const elementFound = itemChecked.find((itemcheck) => {
+                if (mail.idMail !== itemcheck.idMail) {
+                  return mail;
+                }
+              });
+              return elementFound;
+            })
+            .filter((mail) => mail !== undefined);
+          if (newMailsArray.length > 0) {
+            set({ mailReceived: newMailsArray });
+          } */

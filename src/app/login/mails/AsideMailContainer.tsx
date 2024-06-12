@@ -20,7 +20,7 @@ import BtnDeleteMails from "./buttons/BtnDeleteMails";
 
 export const AsideMailContainer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { fnSelectData, mailReceived } = useMailStore();
+  const { fnSelectData, mailReceived, itemChecked } = useMailStore();
   // Url Path
   const path = usePathname();
   // Data to show
@@ -28,7 +28,7 @@ export const AsideMailContainer = () => {
   useEffect(() => {
     const data = fnSelectData(path);
     setDataMails(data);
-  }, [path, mailReceived.length]);
+  }, [path, mailReceived.length, itemChecked]);
 
   function showMailArray() {
     if (dataMails !== undefined) {
@@ -103,7 +103,7 @@ export const AsideMailContainer = () => {
       <Stack gap={4} style={{ height: "100%" }}>
         <BtnMail />
         {showMailArray()}
-        <BtnDeleteMails />
+        {itemChecked.length > 0 && <BtnDeleteMails />}
       </Stack>
     </ContainerInside>
   );

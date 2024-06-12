@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import BtnMailTrash from "./BtnMailTrash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BtnFavorite } from "@/components/buttons/BtnFavorite";
 import BtnReadMail from "@/components/buttons/BtnReadMail";
 import BtnArchive from "@/components/buttons/BtnArchive";
@@ -38,8 +38,16 @@ export default function MailItem({
 }: MailItemProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const { hovered, ref } = useHover();
+  const { fnCheckMail, itemChecked, mailGlobalStaus } = useMailStore();
   const [checked, setChecked] = useState<boolean>(false);
-  // const [toDelete, setToDelete] = useState<boolean>(false);
+
+  useEffect(() => {
+    const mailCheckedFound = itemChecked.find(
+      (item) => item.idMail === idMail,
+    );
+    // if(mailGlobalStaus) setChecked(true)
+    console.log(mailCheckedFound)
+  }, [itemChecked]);
 
   if (checked || hovered) {
     return (
@@ -57,6 +65,8 @@ export default function MailItem({
               colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
             borderRadius: "6px",
             transition: "all 0.3s ease-in-out",
+            cursor: "pointer",
+            width: "100%",
             // boxShadow: "0px 10px 12px -10px rgba(27, 27, 27, 0.4)",
           },
         })}
@@ -72,7 +82,13 @@ export default function MailItem({
         >
           <Center px={9}>
             <Checkbox
-              onChange={(event) => setChecked(event.currentTarget.checked)}
+              onClick={() => {
+                console.log(!checked ? "yes" : "no");
+                fnCheckMail(idMail, path, checked);
+              }}
+              onChange={(event) => {
+                setChecked(event.currentTarget.checked);
+              }}
               checked={checked}
               color="blue"
             />

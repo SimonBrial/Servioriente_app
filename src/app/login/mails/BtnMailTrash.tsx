@@ -18,28 +18,28 @@ export default function BtnMailTrash({
 }) {
   const { fnDeleteMail, fnDeleteMailFromTrash } = useMailStore();
   const [opened, { open, close }] = useDisclosure(false);
-  const [mailObj, setMailObj] = useState<MailDataProps | {}>({})
+  const [mailObj, setMailObj] = useState<MailDataProps | {}>({});
 
   function handleMailDelete() {
-    if (path !== "/login/mails/erased") {
-      fnDeleteMail(mailId, path);
-      notifications.show({
-        id: crypto.randomUUID(),
-        color: "#115dfe",
-        title: "Correo eliminado",
-        message: "El correo ha sido eliminado satistactoriamente!",
-        autoClose: 1000,
-        withCloseButton: true,
-      });
+    if (path.includes("erased")) {
+      open();
+      setMailObj(fnDeleteMailFromTrash(mailId));
     }
-    open();
-    setMailObj(fnDeleteMailFromTrash(mailId))
+    fnDeleteMail(mailId, path);
+    notifications.show({
+      id: crypto.randomUUID(),
+      color: "#115dfe",
+      title: "Correo eliminado",
+      message: "El correo ha sido eliminado satistactoriamente!",
+      autoClose: 1000,
+      withCloseButton: true,
+    });
   }
 
   return (
     <>
       <Modal opened={opened} onClose={close} centered>
-        <DeleteMailLayout mailObj={mailObj as MailDataProps}/>
+        <DeleteMailLayout mailObj={mailObj as MailDataProps} />
       </Modal>
       <UnstyledButton
         onClick={handleMailDelete}
