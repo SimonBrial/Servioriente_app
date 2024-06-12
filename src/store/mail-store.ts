@@ -209,13 +209,22 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       // console.log(currentSectionArray);
     },
     fnDeleteMailChecked: (path: string) => {
-      const { itemChecked, mailDeleted } = get();
+      const { itemChecked, mailDeleted, fnSelectData } = get();
       if (!path.includes("erased")) {
         // If item.dir !== path, the user isn't on the erased section
-        // const newDeletedArray = itemChecked.forEach((item) => )
-        set({
-          mailDeleted: [...mailDeleted, ...itemChecked],
-        });
+        // if itemChecked.length < currentSectionArray.length
+        const currentSectionArray = fnSelectData(path);
+        if (currentSectionArray !== undefined) {
+          const newDeletedArray = currentSectionArray.filter(
+            (element) =>
+              !itemChecked.find((item) => item.idMail === element.idMail),
+          );
+          console.log(newDeletedArray)
+          set({
+            mailDeleted: [...mailDeleted, ...itemChecked],
+            mailReceived: newDeletedArray,
+          });
+        }
       }
       if (itemChecked.length > 0) {
         set({ itemChecked: [] });
