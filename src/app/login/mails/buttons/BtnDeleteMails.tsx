@@ -13,7 +13,7 @@ export default function BtnDeleteMails() {
   const [itemLength, setItemLength] = useState<number>(0);
   useEffect(() => {
     setItemLength(itemChecked.length);
-    console.log(itemChecked);
+    // console.log(itemChecked);
   }, [itemChecked.length]);
 
   return (

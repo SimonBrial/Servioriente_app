@@ -39,12 +39,18 @@ export default function MailItem({
 }: MailItemProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const { hovered, ref } = useHover();
-  const { fnCheckMail, itemChecked, mailReceived } = useMailStore();
+  const { fnCheckMail, itemChecked, mailReceived, allMailsChecked } =
+    useMailStore();
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
     const mailCheckedFound = itemChecked.find((item) => item.idMail === idMail);
     console.log(mailCheckedFound);
+    if (allMailsChecked) {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
   }, [itemChecked, mailRead, mailArchived, mailFavority, mailReceived]);
 
   if (checked || hovered) {

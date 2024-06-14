@@ -13,6 +13,7 @@ import { PillFilter } from "../PillFilter";
 import { AutoCompleteData } from "@/interface/interface";
 import classes from "@/styles/general-styles.module.css";
 import { GeneralDivider } from "../GeneralDivider";
+import BtnCheckAllMails from "@/app/login/mails/buttons/BtnCheckAllMails";
 
 export default function AutoCompleteFilterContainer({
   label,
@@ -42,15 +43,7 @@ export default function AutoCompleteFilterContainer({
       <Stack style={{ width: "100%" }} gap={4}>
         <Flex justify="space-between" align="center">
           <Flex justify="flex-start" align="center" gap={"xs"}>
-            <Checkbox
-              color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
-              classNames={{
-                input:
-                  colorScheme === "light"
-                    ? classes.checkbox
-                    : classes.checkbox_dark,
-              }}
-            />
+            <BtnCheckAllMails />
             <Title
               order={5}
               styles={(theme) => ({
@@ -68,7 +61,7 @@ export default function AutoCompleteFilterContainer({
           </Flex>
           <BadgeClose status={true} />
         </Flex>
-        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
+        <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>
     </Container>
   );

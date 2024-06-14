@@ -19,6 +19,7 @@ interface MailStoreProps {
   mailArchived: MailDataProps[];
   mailSectionArray: MailSections[];
   itemChecked: MailDataProps[];
+  allMailsChecked: boolean;
   // Fake properties
 
   // Functionalities
@@ -28,7 +29,10 @@ interface MailStoreProps {
   fnDeleteMail: (mailId: string, section: string) => void;
   fnDeleteMailFromTrash: (mailId: string) => MailDataProps;
   fnCheckMail: (mailId: string, path: string, checked: boolean) => void;
+  fnCheckAllMails: (path: string, checked: boolean) => void;
   fnDeleteMailChecked: (path: string) => void;
+  fnCheckReadMails: (path: string, checked: boolean) => void;
+  fnCheckNoReadMails: (path: string, checked: boolean) => void;
   // Secondary functions
   fnSelectData: (currentSection: string) => MailDataProps[] | undefined;
   // setMailGlobalStatus: (stateValue: boolean) => void;
@@ -37,13 +41,14 @@ interface MailStoreProps {
 export const useMailStore = create<MailStoreProps>()((set, get) => {
   return {
     // Data
+    allMailsChecked: false,
     itemChecked: [],
     mailReceived: mailReceivedFake,
     mailSent: mailReceivedFake.slice(0, 4),
     mailFavorities: [],
-    mailDeleted: /* mailReceivedFake.slice(0, 2) */ [],
-    mailTemplates: mailReceivedFake.slice(0, 3),
-    mailArchived: mailReceivedFake.slice(0, 1),
+    mailDeleted: [],
+    mailTemplates: [],
+    mailArchived: [],
     mailSectionArray: [
       {
         dir: "/login/mails",
@@ -158,9 +163,6 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       );
       return mailDeleted[mailToDeletedIndex];
     },
-    // Received mails
-
-    // Secondary functions
     fnSelectData: (currentSection: string): MailDataProps[] | undefined => {
       const {
         mailFavorities,
@@ -226,6 +228,44 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
           );
           set({ itemChecked: removeElement });
         }
+      }
+    },
+    fnCheckAllMails: (path: string, checked: boolean) => {
+      // 1. Detecting the current section DONE
+      // 2. Getting the corresponding array. DONE
+      // 3. Adding the all elements to the itemChecked array DONE
+      // NOTE: All elements should be indicated in the UI.
+      const { fnSelectData } = get();
+      const currentSectionArray = fnSelectData(path);
+      if (currentSectionArray !== undefined) {
+        set({ itemChecked: currentSectionArray, allMailsChecked: true });
+      }
+      if (!checked) {
+        set({ itemChecked: [], allMailsChecked: false });
+      }
+    },
+    fnCheckReadMails: (path: string, checked: boolean) => {
+      const { fnSelectData } = get();
+      const currentSectionArray = fnSelectData(path);
+      if (currentSectionArray !== undefined) {
+        // if the mail is read, it is will add to the itemChecked array
+        const allReadMails = currentSectionArray.filter(
+          (mail) => mail.mailRead,
+        );
+        console.log(allReadMails);
+        set({ itemChecked: allReadMails, allMailsChecked: true });
+      }
+    },
+    fnCheckNoReadMails: (path: string, checked: boolean) => {
+      const { fnSelectData } = get();
+      const currentSectionArray = fnSelectData(path);
+      if (currentSectionArray !== undefined) {
+        // if the mail is read, it is will add to the itemChecked array
+        const allReadMails = currentSectionArray.filter(
+          (mail) => !mail.mailRead,
+        );
+        console.log(allReadMails);
+        set({ itemChecked: allReadMails, allMailsChecked: true });
       }
     },
     fnDeleteMailChecked: (path: string) => {

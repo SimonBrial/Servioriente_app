@@ -4,9 +4,13 @@
 import React, { useEffect, useState } from "react";
 import MailItem from "./MailItem";
 import {
+  Badge,
+  Box,
   Center,
+  Group,
   ScrollArea,
   Stack,
+  Text,
   Title,
   useMantineColorScheme,
 } from "@mantine/core";
@@ -101,9 +105,40 @@ export const AsideMailContainer = () => {
   return (
     <ContainerInside width="35%" allWhite={false} withBorder>
       <Stack gap={4} style={{ height: "100%" }}>
-        <BtnMail />
-        {showMailArray()}
+        {itemChecked.length > 0 ? null : <BtnMail />}
         {itemChecked.length > 0 && <BtnDeleteMails />}
+        {showMailArray()}
+        <Group
+          align="center"
+          justify="center"
+          styles={(theme) => ({
+            root: {
+              color:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
+              border:
+                colorScheme === "light"
+                  ? `2px solid ${theme.colors.lightTheme[2]}`
+                  : `2px solid ${theme.colors.darkTheme[6]}`,
+              borderRadius: "6px",
+              padding: "0.5rem",
+              backgroundColor:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[1]
+                  : theme.colors.darkTheme[8],
+              cursor: "default",
+            },
+          })}
+        >
+          <Title order={5}>Correos Totales</Title>{" "}
+          <Badge
+            radius={"sm"}
+            color={colorScheme === "light" ? "#115dfe" : "#52a5e0"}
+          >
+            {dataMails?.length}
+          </Badge>
+        </Group>
       </Stack>
     </ContainerInside>
   );

@@ -36,7 +36,7 @@ export const theme = createTheme({
       "#696969", // --> Text Edit Bar/50% - Dashboard Color Title
       "#2BDD66",
       "#4F23C0",
-      "#115dfe", // --> Principal Theme Color
+      "#115dfe", // --> Principal Theme Color --> 7
       "#52a5e0",
       "#033EB2", // --> Theme hover
       "#F018E8",
