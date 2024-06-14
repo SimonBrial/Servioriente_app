@@ -14,11 +14,12 @@ import {
 import { useHover } from "@mantine/hooks";
 import BtnMailTrash from "./BtnMailTrash";
 import { useEffect, useState } from "react";
-import { BtnFavorite } from "@/components/buttons/BtnFavorite";
 import BtnReadMail from "@/components/buttons/BtnReadMail";
 import BtnArchive from "@/components/buttons/BtnArchive";
 import { MailDataProps } from "@/interface/interface";
 import { useMailStore } from "@/store/mail-store";
+import dayjs from "dayjs";
+import BtnFavorities from "@/components/buttons/BtnFavorities";
 
 interface MailItemProps extends MailDataProps {
   path: string;
@@ -38,16 +39,13 @@ export default function MailItem({
 }: MailItemProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const { hovered, ref } = useHover();
-  const { fnCheckMail, itemChecked, mailGlobalStaus } = useMailStore();
+  const { fnCheckMail, itemChecked, mailReceived } = useMailStore();
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    const mailCheckedFound = itemChecked.find(
-      (item) => item.idMail === idMail,
-    );
-    // if(mailGlobalStaus) setChecked(true)
-    console.log(mailCheckedFound)
-  }, [itemChecked]);
+    const mailCheckedFound = itemChecked.find((item) => item.idMail === idMail);
+    console.log(mailCheckedFound);
+  }, [itemChecked, mailRead, mailArchived, mailFavority, mailReceived]);
 
   if (checked || hovered) {
     return (
@@ -59,15 +57,17 @@ export default function MailItem({
             padding: "0.4rem 0.8rem",
             border:
               colorScheme === "light"
-                ? `1px solid ${theme.colors.lightTheme[2]}`
-                : `1px solid ${theme.colors.darkTheme[6]}`,
+                ? !mailRead
+                  ? `2px solid ${theme.colors.lightTheme[6]}`
+                  : `1px solid ${theme.colors.lightTheme[3]}`
+                : !mailRead
+                ? `2px solid ${theme.colors.darkTheme[1]}`
+                : `1px solid ${theme.colors.darkTheme[2]}`,
             backgroundColor:
               colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
             borderRadius: "6px",
-            transition: "all 0.3s ease-in-out",
-            cursor: "pointer",
+            cursor: "default",
             width: "100%",
-            // boxShadow: "0px 10px 12px -10px rgba(27, 27, 27, 0.4)",
           },
         })}
       >
@@ -76,7 +76,7 @@ export default function MailItem({
           gap={"md"}
           style={{
             width: "100%",
-            cursor: "pointer",
+            cursor: "default",
             padding: "0.2rem",
           }}
         >
@@ -131,7 +131,12 @@ export default function MailItem({
                 })}
               >
                 <BtnReadMail status={mailRead} mailId={idMail} path={path} />
-                <BtnFavorite size={"small"} status={mailFavority} />
+                <BtnFavorities
+                  status={mailFavority}
+                  mailId={idMail}
+                  size={"small"}
+                  path={path}
+                />
                 <BtnArchive status={mailArchived} mailId={idMail} path={path} />
               </Flex>
             </Flex>
@@ -164,7 +169,8 @@ export default function MailItem({
                   },
                 })}
               >
-                {date.format("DD")}/{date.format("MM")}/{date.format("YYYY")}
+                {dayjs(date).format("DD")}/{dayjs(date).format("MM")}/
+                {dayjs(date).format("YYYY")}
               </Text>
             </Flex>
             <Text
@@ -196,12 +202,17 @@ export default function MailItem({
           padding: "0.4rem 0.8rem",
           border:
             colorScheme === "light"
-              ? `1px solid ${theme.colors.lightTheme[2]}`
-              : `1px solid ${theme.colors.darkTheme[6]}`,
+              ? !mailRead
+                ? `2px solid ${theme.colors.lightTheme[6]}`
+                : `1px solid ${theme.colors.lightTheme[3]}`
+              : !mailRead
+              ? `2px solid ${theme.colors.darkTheme[1]}`
+              : `1px solid ${theme.colors.darkTheme[2]}`,
           backgroundColor:
             colorScheme === "light" ? "#fff" : theme.colors.darkTheme[7],
           borderRadius: "6px",
-          boxShadow: "0px 10px 12px -10px rgba(27, 27, 27, 0.4)",
+          boxShadow: "0px 10px 12px -10px #1b1b1b66",
+          cursor: "default",
         },
       })}
     >
@@ -223,7 +234,10 @@ export default function MailItem({
         />
 
         <Stack gap={0} style={{ width: "100%" }}>
-          <Flex justify={"space-between"} style={{ margin: "-0.2rem" }}>
+          <Flex
+            justify={"space-between"}
+            style={{ margin: "-0.2rem", position: "relative" }}
+          >
             <Title
               order={5}
               styles={(theme) => ({
@@ -237,6 +251,36 @@ export default function MailItem({
             >
               {title}
             </Title>
+            <Flex
+              p={0}
+              gap={1}
+              align={"center"}
+              justify={"end"}
+              styles={(theme) => ({
+                root: {
+                  position: "absolute",
+                  right: "2.6rem",
+                  top: "-3px",
+                  padding: "0",
+                  color:
+                    colorScheme === "light"
+                      ? theme.colors.lightTheme[3]
+                      : theme.colors.darkTheme[2],
+                },
+              })}
+            >
+              {mailFavority ? (
+                <BtnFavorities
+                  status={mailFavority}
+                  mailId={idMail}
+                  size={"small"}
+                  path={path}
+                />
+              ) : null}
+              {mailArchived ? (
+                <BtnArchive status={mailArchived} mailId={idMail} path={path} />
+              ) : null}
+            </Flex>
           </Flex>
           <Flex gap={53.5} style={{ margin: "-0.1rem" }} align={"center"}>
             <Text
@@ -263,7 +307,8 @@ export default function MailItem({
                 },
               })}
             >
-              {date.format("DD")}/{date.format("MM")}/{date.format("YYYY")}
+              {dayjs(date).format("DD")}/{dayjs(date).format("MM")}/
+              {dayjs(date).format("YYYY")}
             </Text>
           </Flex>
           <Text

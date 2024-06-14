@@ -361,7 +361,7 @@ interface MailDataProps {
   mail: string | string[];
   title: string;
   description: string;
-  date: Dayjs;
+  date: Date;
   photo?: string;
   mailRead: boolean;
   mailFavority: boolean;

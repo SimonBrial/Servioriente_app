@@ -28,7 +28,7 @@ export const AsideMailContainer = () => {
   useEffect(() => {
     const data = fnSelectData(path);
     setDataMails(data);
-  }, [path, mailReceived.length, itemChecked]);
+  }, [path, mailReceived.length, mailReceived, itemChecked]);
 
   function showMailArray() {
     if (dataMails !== undefined) {

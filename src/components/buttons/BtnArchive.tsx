@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import classes from "@/styles/btn-styles.module.css";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
+import { useMailStore } from "@/store/mail-store";
 
 export default function BtnArchive({
   status,
@@ -18,6 +19,7 @@ export default function BtnArchive({
 }) {
   const [readMail, setReadMail] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
+  const { fnArchivedMark } = useMailStore();
 
   return (
     <TooltipLayout
@@ -32,6 +34,7 @@ export default function BtnArchive({
             colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
         }}
         onClick={() => {
+          fnArchivedMark(mailId, path);
           setReadMail(!readMail);
           notifications.show({
             color: !readMail ? "#115dfe" : "#2BDD66",

@@ -19,9 +19,17 @@ export default function BtnReadMail({
 }) {
   const [readMail, setReadMail] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
-  const { fnReadMark } = useMailStore();
+  const { fnReadMark, mailReceived } = useMailStore();
 
-  useEffect(() => setReadMail(status),[status])
+  useEffect(() => {
+    // setReadMail(status)
+    const mailFound = mailReceived.find((mail) => mail.idMail === mailId);
+    if (mailFound !== undefined) { 
+      setReadMail(mailFound.mailRead);
+    }
+    setReadMail(status)
+    
+  },[status, fnReadMark])
   return (
     <TooltipLayout
       label={!readMail ? "Marcar como Leido" : "Marcar como No Leido"}

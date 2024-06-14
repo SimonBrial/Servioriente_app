@@ -21,7 +21,7 @@ import {
 } from "@/icons";
 import classes from "@/styles/btn-styles.module.css";
 import TooltipLayout from "@/components/TooltipLayout";
-import { BtnFavorite } from "@/components/buttons/BtnFavorite";
+import BtnFavorities from "@/components/buttons/BtnFavorities";
 
 export default function MailReadView(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
@@ -61,7 +61,7 @@ export default function MailReadView(): JSX.Element {
                 justify={"end"}
                 gap={2}
               >
-                <BtnFavorite size="medium" key={crypto.randomUUID()} />
+                <BtnFavorities size="medium" status mailId="" path="" />
                 <TooltipLayout
                   label="Responder"
                   position="bottom"

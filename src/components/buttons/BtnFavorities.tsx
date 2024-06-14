@@ -6,12 +6,24 @@ import React, { useState } from "react";
 import classes from "@/styles/btn-styles.module.css";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
+import { useMailStore } from "@/store/mail-store";
 
 type sizeType = "small" | "medium" | "large";
 
-export const BtnFavorite = ({ size, status }: { size: sizeType; status: boolean }) => {
+export default function BtnFavorities({
+  status,
+  mailId,
+  size,
+  path,
+}: {
+  size: sizeType;
+  status: boolean;
+  mailId?: string;
+  path?: string;
+}) {
   const [colorState, setColorState] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
+  const { fnFavorityMark } = useMailStore();
 
   if (size === "large") {
     return (
@@ -85,8 +97,8 @@ export const BtnFavorite = ({ size, status }: { size: sizeType; status: boolean 
                     ? `${theme.colors.lightTheme[6]}`
                     : `${theme.colors.darkTheme[1]}`
                   : colorScheme === "light"
-                    ? theme.colors.lightTheme[3]
-                    : theme.colors.darkTheme[2],
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
               },
             })}
           >
@@ -109,6 +121,9 @@ export const BtnFavorite = ({ size, status }: { size: sizeType; status: boolean 
               colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
           }}
           onClick={() => {
+            if (mailId !== undefined && path !== undefined) {
+              fnFavorityMark(mailId, path);
+            }
             setColorState(!colorState);
             notifications.show({
               color: colorState ? "#115dfe" : "#2BDD66",
@@ -130,8 +145,8 @@ export const BtnFavorite = ({ size, status }: { size: sizeType; status: boolean 
                     ? theme.colors.lightTheme[6]
                     : theme.colors.darkTheme[1]
                   : colorScheme === "light"
-                    ? theme.colors.lightTheme[3]
-                    : theme.colors.darkTheme[2],
+                  ? theme.colors.lightTheme[3]
+                  : theme.colors.darkTheme[2],
               },
             })}
           >
@@ -141,4 +156,4 @@ export const BtnFavorite = ({ size, status }: { size: sizeType; status: boolean 
       </TooltipLayout>
     );
   }
-};
+}

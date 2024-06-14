@@ -1,23 +1,22 @@
 import { MailDataProps } from "@/interface/interface";
-import dayjs from "dayjs";
 
 export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
     mailFavority: false,
-    mailRead: false,
+    mailRead: true,
     title: "Mail Title 1",
     photo: "",
   },
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 2",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
@@ -29,7 +28,7 @@ export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 3",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
@@ -41,7 +40,7 @@ export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 4",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
@@ -53,19 +52,19 @@ export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 5",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
     mailFavority: false,
-    mailRead: false,
+    mailRead: true,
     title: "Mail Title 5",
     photo: "",
   },
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 6",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
@@ -77,7 +76,7 @@ export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 7",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
@@ -89,7 +88,7 @@ export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 8",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
@@ -101,7 +100,7 @@ export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 9",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
@@ -113,7 +112,7 @@ export const mailReceivedFake: MailDataProps[] = [
   {
     idMail: crypto.randomUUID(),
     userName: "simon briceño 10",
-    date: dayjs(),
+    date: new Date(),
     description: "lorem ipsum dolor sit amet, consectetur adip",
     mail: "correo@mail.com",
     mailArchived: false,
