@@ -23,7 +23,7 @@ export default function BtnFavorities({
 }) {
   const [colorState, setColorState] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
-  const { fnFavorityMark } = useMailStore();
+  const { fnFavoriteMark } = useMailStore();
 
   if (size === "large") {
     return (
@@ -122,7 +122,7 @@ export default function BtnFavorities({
           }}
           onClick={() => {
             if (mailId !== undefined && path !== undefined) {
-              fnFavorityMark(mailId, path);
+              fnFavoriteMark(mailId, path, !colorState);
             }
             setColorState(!colorState);
             notifications.show({

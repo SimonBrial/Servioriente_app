@@ -19,11 +19,11 @@ export default function BtnReadMail({
 }) {
   const [readMail, setReadMail] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
-  const { fnReadMark, mailReceived } = useMailStore();
+  const { fnReadMark, mailGlobalArray } = useMailStore();
 
   useEffect(() => {
     // setReadMail(status)
-    const mailFound = mailReceived.find((mail) => mail.idMail === mailId);
+    const mailFound = mailGlobalArray.find((mail) => mail.idMail === mailId);
     if (mailFound !== undefined) { 
       setReadMail(mailFound.mailRead);
     }

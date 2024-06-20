@@ -24,15 +24,25 @@ import BtnDeleteMails from "./buttons/BtnDeleteMails";
 
 export const AsideMailContainer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { fnSelectData, mailReceived, itemChecked } = useMailStore();
+  const { fnGetData, mailGlobalArray, itemChecked, fnGetAllData } =
+    useMailStore();
   // Url Path
   const path = usePathname();
   // Data to show
   const [dataMails, setDataMails] = useState<MailDataProps[]>();
   useEffect(() => {
-    const data = fnSelectData(path);
+    const data = fnGetAllData(path);
+    // const data2 = fnGetAllData(path);
+    console.log("fnGetAllData: ", data);
+    console.log("path: ", path);
     setDataMails(data);
-  }, [path, mailReceived.length, mailReceived, itemChecked]);
+  }, [
+    mailGlobalArray.length,
+    dataMails?.length,
+    mailGlobalArray,
+    itemChecked,
+    path,
+  ]);
 
   function showMailArray() {
     if (dataMails !== undefined) {

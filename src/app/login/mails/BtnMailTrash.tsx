@@ -2,12 +2,13 @@
 
 import { HiOutlineTrash } from "@/icons";
 import { useMailStore } from "@/store/mail-store";
-import { Center, Modal, UnstyledButton } from "@mantine/core";
+import { Center, Modal, UnstyledButton, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import DeleteMailLayout from "./layout/DeleteMailLayout";
 import { useState } from "react";
 import { MailDataProps } from "@/interface/interface";
+import classes from "@/styles/btn-styles.module.css";
 
 export default function BtnMailTrash({
   mailId,
@@ -19,6 +20,7 @@ export default function BtnMailTrash({
   const { fnDeleteMail, fnDeleteMailFromTrash } = useMailStore();
   const [opened, { open, close }] = useDisclosure(false);
   const [mailObj, setMailObj] = useState<MailDataProps | {}>({});
+  const { colorScheme } = useMantineColorScheme();
 
   function handleMailDelete() {
     if (path.includes("erased")) {
@@ -43,13 +45,9 @@ export default function BtnMailTrash({
       </Modal>
       <UnstyledButton
         onClick={handleMailDelete}
-        styles={{
-          root: {
-            backgroundColor: "#ff00004c",
-            color: "red",
-            fontSize: "1.2rem",
-            borderRadius: "0 6px 6px 0",
-          },
+        classNames={{
+          root:
+            colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
         }}
       >
         <Center px={4}>

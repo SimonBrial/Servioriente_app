@@ -20,16 +20,16 @@ export default function MailLayout({
     { value: "Recibidos", icon: <IoMailUnreadOutline />, dir: "/login/mails" },
     { value: "Enviados", icon: <BiMailSend />, dir: "/login/mails/sent" },
     {
-      value: "Favoritos",
-      icon: <HiOutlineStar />,
-      dir: "/login/mails/favorities",
-    },
-    { value: "Borrados", icon: <HiOutlineTrash />, dir: "/login/mails/erased" },
-    {
       value: "Plantillas",
       icon: <HiOutlineDocumentText />,
       dir: "/login/mails/formats",
     },
+    {
+      value: "Favoritos",
+      icon: <HiOutlineStar />,
+      dir: "/login/mails/favorities",
+    },
+    { value: "Papelera", icon: <HiOutlineTrash />, dir: "/login/mails/erased" },
     {
       value: "Archivados",
       icon: <HiOutlineSave />,
@@ -43,7 +43,12 @@ export default function MailLayout({
       <AutoCompleteFilterContainer
         label={["correo@correo.com", "correo2@correo.com"]}
       />
-      <InsideContainer offset={155} withBackground={false} withBorder={false} key={crypto.randomUUID()}>
+      <InsideContainer
+        offset={155}
+        withBackground={false}
+        withBorder={false}
+        key={crypto.randomUUID()}
+      >
         {children}
       </InsideContainer>
     </ListLayout>

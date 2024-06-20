@@ -25,7 +25,7 @@ export default function BtnCheckAllMails() {
       setChecked(false);
     }
   }, [itemChecked.length]);
-  console.log("itemChecked: ", itemChecked);
+  // console.log("itemChecked: ", itemChecked);
 
   return (
     <Menu

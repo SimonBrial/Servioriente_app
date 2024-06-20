@@ -127,6 +127,7 @@ import {
 } from "react-icons/bi";
 import { PiRobot, PiFolderSimpleDashed } from "react-icons/pi";
 import { FaFacebookF, FaChartLine, FaChartColumn } from "react-icons/fa6";
+import { RiDeviceRecoverLine } from "react-icons/ri";
 
 export {
   AiOutlineFundProjectionScreen,
@@ -150,6 +151,7 @@ export {
   IoChevronDownOutline,
   IoCloseCircleOutline,
   HiOutlineExclamation,
+  RiDeviceRecoverLine,
   IoMailUnreadOutline,
   HiOutlineUserCircle,
   HiDevicePhoneMobile,
