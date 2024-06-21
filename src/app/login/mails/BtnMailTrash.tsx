@@ -2,7 +2,12 @@
 
 import { HiOutlineTrash } from "@/icons";
 import { useMailStore } from "@/store/mail-store";
-import { Center, Modal, UnstyledButton, useMantineColorScheme } from "@mantine/core";
+import {
+  Center,
+  Modal,
+  UnstyledButton,
+  useMantineColorScheme,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import DeleteMailLayout from "./layout/DeleteMailLayout";
@@ -50,7 +55,7 @@ export default function BtnMailTrash({
             colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
         }}
       >
-        <Center px={4}>
+        <Center px={4} style={{ fontSize: "1.1rem" }}>
           <HiOutlineTrash />
         </Center>
       </UnstyledButton>

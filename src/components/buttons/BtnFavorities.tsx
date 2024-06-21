@@ -2,7 +2,7 @@
 
 import { HiOutlineStar, TbStarFilled } from "@/icons";
 import { Center, UnstyledButton, useMantineColorScheme } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "@/styles/btn-styles.module.css";
 import TooltipLayout from "../TooltipLayout";
 import { notifications } from "@mantine/notifications";
@@ -22,8 +22,12 @@ export default function BtnFavorities({
   path?: string;
 }) {
   const [colorState, setColorState] = useState<boolean>(status);
+  // console.log("status: ", status);
+  // console.log("mailId: ", mailId);
   const { colorScheme } = useMantineColorScheme();
   const { fnFavoriteMark } = useMailStore();
+
+  useEffect(() => setColorState(status), [status]);
 
   if (size === "large") {
     return (
@@ -77,6 +81,9 @@ export default function BtnFavorities({
               colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
           }}
           onClick={() => {
+            if (mailId !== undefined && path !== undefined) {
+              fnFavoriteMark(mailId, path, !colorState);
+            }
             setColorState(!colorState);
             notifications.show({
               color: colorState ? "#115dfe" : "#2BDD66",

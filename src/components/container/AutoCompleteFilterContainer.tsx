@@ -14,6 +14,7 @@ import { AutoCompleteData } from "@/interface/interface";
 import classes from "@/styles/general-styles.module.css";
 import { GeneralDivider } from "../GeneralDivider";
 import BtnCheckAllMails from "@/app/login/mails/buttons/BtnCheckAllMails";
+import BtnReload from "@/app/login/mails/buttons/BtnReload";
 
 export default function AutoCompleteFilterContainer({
   label,
@@ -43,6 +44,7 @@ export default function AutoCompleteFilterContainer({
       <Stack style={{ width: "100%" }} gap={4}>
         <Flex justify="space-between" align="center">
           <Flex justify="flex-start" align="center" gap={"xs"}>
+            <BtnReload />
             <BtnCheckAllMails />
             <Title
               order={5}

@@ -1,30 +1,27 @@
-/* eslint-disable @typescript-eslint/prefer-optional-chain */
 "use client";
 
 import React, { useEffect, useState } from "react";
 import MailItem from "./MailItem";
 import {
-  Badge,
-  Box,
-  Center,
-  Group,
-  ScrollArea,
-  Stack,
-  Text,
-  Title,
   useMantineColorScheme,
+  ScrollArea,
+  Center,
+  Badge,
+  Stack,
+  Group,
+  Title,
 } from "@mantine/core";
 import { ContainerInside } from "@/components/container/ContainerInside";
 import BtnMail from "@/components/buttons/BtnMail";
 import { useMailStore } from "@/store/mail-store";
 import { usePathname } from "next/navigation";
 import { MailDataProps } from "@/interface/interface";
-import { LuMailX } from "@/icons";
+import { HiOutlineDocumentText, LuMailX } from "@/icons";
 import BtnDeleteMails from "./buttons/BtnDeleteMails";
 
 export const AsideMailContainer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { fnGetData, mailGlobalArray, itemChecked, fnGetAllData } =
+  const { mailGlobalArray, itemChecked, fnGetAllData } =
     useMailStore();
   // Url Path
   const path = usePathname();
@@ -33,8 +30,8 @@ export const AsideMailContainer = () => {
   useEffect(() => {
     const data = fnGetAllData(path);
     // const data2 = fnGetAllData(path);
-    console.log("fnGetAllData: ", data);
-    console.log("path: ", path);
+    // console.log("fnGetAllData: ", data);
+    // console.log("path: ", path);
     setDataMails(data);
   }, [
     mailGlobalArray.length,
@@ -101,12 +98,25 @@ export const AsideMailContainer = () => {
             },
           })}
         >
-          <Center style={{ fontSize: "5rem" }}>
-            <LuMailX />
-          </Center>
-          <Title style={{ textAlign: "center" }}>
-            No hay correos disponibles
-          </Title>
+          {path.includes("formats") ? (
+            <>
+              <Center style={{ fontSize: "5rem" }}>
+                <HiOutlineDocumentText />
+              </Center>
+              <Title style={{ textAlign: "center" }}>
+                No hay Formatos disponibles
+              </Title>
+            </>
+          ) : (
+            <>
+              <Center style={{ fontSize: "5rem" }}>
+                <LuMailX />
+              </Center>
+              <Title style={{ textAlign: "center" }}>
+                No hay correos disponibles
+              </Title>
+            </>
+          )}
         </Stack>
       );
     }

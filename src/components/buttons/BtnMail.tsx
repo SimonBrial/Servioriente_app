@@ -12,10 +12,12 @@ import BtnSend from "./BtnSend";
 import { BtnCancel } from "./BtnCancel";
 import NewEmailLayout from "@/app/login/mails/NewEmailLayout";
 import { BiMailSend, HiOutlinePencil } from "@/icons";
+import { usePathname } from "next/navigation";
 
 export default function BtnMail() {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
+  const path = usePathname();
   return (
     <>
       <Drawer
@@ -55,7 +57,7 @@ export default function BtnMail() {
           root: colorScheme === "light" ? classes.btnAdd : classes.btnAdd_dark,
         }}
       >
-        Redactar Correo
+        {path.includes("formats") ? <>Crear Nuevo Formato</> : <>Crear Nuevo Correo</>}
       </Button>
     </>
   );

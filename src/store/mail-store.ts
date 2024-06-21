@@ -20,6 +20,7 @@ interface MailStoreProps {
   mailSectionArray: MailSections[];
   itemChecked: MailDataProps[];
   allMailsChecked: boolean;
+  mailShow: MailDataProps | {};
   // Fake properties
 
   // Functionalities
@@ -45,6 +46,7 @@ interface MailStoreProps {
     mailsArray: MailDataProps[],
   ) => MailDataProps[] | undefined;
   fnRecoverMail: (mailId: string) => void;
+  fnShowMail: (mailId: string, path: string) => void;
   // setMailGlobalStatus: (stateValue: boolean) => void;
 }
 
@@ -54,7 +56,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
     allMailsChecked: false,
     itemChecked: [],
     mailGlobalArray: mailReceivedFake,
-    mailSent: mailReceivedFake.slice(0, 4),
+    mailSent: [],
     mailFavorities: [],
     mailDeleted: [],
     mailTemplates: [],
@@ -90,9 +92,10 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         dataArr: [],
       },
     ],
+    mailShow: {},
 
     // Funtions to manipulate the data
-    fnReadMark: (mailId: string, path: string) => {
+    fnReadMark: (mailId, path) => {
       const { fnGetData, mailGlobalArray } = get();
       const dataArray = fnGetData(path); // Get the section's array currently
       if (mailGlobalArray.length > 0) {
@@ -108,7 +111,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         }
       }
     },
-    fnFavoriteMark: (mailId: string, path: string, checked: boolean) => {
+    fnFavoriteMark: (mailId, path, checked) => {
       const { mailFavorities, mailGlobalArray } = get();
       // const dataArray = fnGetData(path); // Get the section's array currently
       // Actualizar mailGlobalArray
@@ -139,7 +142,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         mailFavorities: newMailFavorities,
       });
     },
-    fnArchivedMark: (mailId: string, path: string) => {
+    fnArchivedMark: (mailId, path) => {
       const { mailArchived, mailGlobalArray } = get();
       if (mailGlobalArray.length > 0) {
         const newMailArchivedArray = mailGlobalArray.map((mail) => {
@@ -164,8 +167,8 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         }
       }
     },
-    fnDeleteMail: (mailId: string, path: string) => {
-      const { fnGetData, mailDeleted, itemChecked } = get();
+    fnDeleteMail: (mailId, path) => {
+      const { fnGetData, mailDeleted, itemChecked, mailShow } = get();
       const dataArray = fnGetData(path);
       // Looking for if the element is in the itemChecked array.
       if (dataArray) {
@@ -182,26 +185,37 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         const newMailReceived = dataArray.filter(
           (mail) => mail.idMail !== mailId,
         );
+        if (mailShow && (mailShow as MailDataProps).idMail === mailId) {
+          set({ mailShow: {} });
+        }
+        if (path.includes("erased")) {
+          set({ mailShow: mailShow });
+        }
+
         // console.log(newMailDelete);
-        set({ mailGlobalArray: [...newMailReceived] });
-        set({ mailDeleted: [...mailDeleted, ...newMailDeleted] });
+        set({
+          mailGlobalArray: [...newMailReceived],
+          mailDeleted: [...mailDeleted, ...newMailDeleted],
+        });
         //console.log(mailDeleted);
       }
     },
-    fnDeleteMailFromTrash: (mailId: string) => {
+    fnDeleteMailFromTrash: (mailId) => {
       const { mailDeleted } = get();
       const mailToDeletedIndex = mailDeleted.findIndex(
         (mail) => mail.idMail === mailId,
       );
       return mailDeleted[mailToDeletedIndex];
     },
-    fnGetAllData: (path: string) => {
+    fnGetAllData: (path) => {
       const {
         mailSectionArray,
         mailGlobalArray,
         fnGetFavorites,
         fnGetArchived,
+        mailTemplates,
         mailDeleted,
+        mailSent,
       } = get();
       const currentSection = mailSectionArray.find(
         (section) => section.dir === path,
@@ -220,9 +234,15 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         if (path.includes("erased")) {
           return mailDeleted;
         }
+        if (path.includes("sent")) {
+          return mailSent;
+        }
+        if (path.includes("formats")) {
+          return mailTemplates;
+        }
       }
     },
-    fnGetData: (currentSection: string): MailDataProps[] | undefined => {
+    fnGetData: (currentSection): MailDataProps[] | undefined => {
       const {
         mailGlobalArray,
         mailFavorities,
@@ -262,7 +282,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       );
       return dataMailFounded?.dataArr;
     },
-    fnGetFavorites: (path: string, mailsArray: MailDataProps[]) => {
+    fnGetFavorites: (path, mailsArray) => {
       // In this function I'm going to implmented a filter to show only the mail with the favorite property in true
       if (path.includes("/login/mails/favorities")) {
         if (mailsArray !== undefined) {
@@ -272,7 +292,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         }
       }
     },
-    fnGetArchived: (path: string, mailsArray: MailDataProps[]) => {
+    fnGetArchived: (path, mailsArray) => {
       // In this function I'm going to implmented a filter to show only the mail with the favorite property in true
       if (path.includes("archived")) {
         if (mailsArray !== undefined) {
@@ -282,7 +302,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       }
       // return mailsArray;
     },
-    fnRecoverMail: (mailId: string) => {
+    fnRecoverMail: (mailId) => {
       const { mailDeleted, mailGlobalArray } = get();
       // console.log("mailDeleted: ", mailDeleted);
       const mailFound = mailDeleted.filter((mail) => mail.idMail === mailId);
@@ -297,7 +317,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         set({ mailGlobalArray });
       }
     },
-    fnCheckMail: (mailId: string, path: string, checked: boolean) => {
+    fnCheckMail: (mailId, path, checked) => {
       const { itemChecked, fnGetData } = get();
       const currentSectionArray = fnGetData(path);
       // search the element by id
@@ -324,7 +344,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         }
       }
     },
-    fnCheckAllMails: (path: string, checked: boolean) => {
+    fnCheckAllMails: (path, checked) => {
       // 1. Detecting the current section DONE
       // 2. Getting the corresponding array. DONE
       // 3. Adding the all elements to the itemChecked array DONE
@@ -338,19 +358,19 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         set({ itemChecked: [], allMailsChecked: false });
       }
     },
-    fnCheckReadMails: (path: string, checked: boolean) => {
-      const { fnGetData } = get();
+    fnCheckReadMails: (path, checked) => {
+      const { fnGetData, mailGlobalArray } = get();
       const currentSectionArray = fnGetData(path);
-      if (currentSectionArray !== undefined) {
+      if (mailGlobalArray.length > 0) {
         // if the mail is read, it is will add to the itemChecked array
-        const allReadMails = currentSectionArray.filter(
+        const allReadMails = mailGlobalArray.filter(
           (mail) => mail.mailRead,
         );
         console.log(allReadMails);
-        set({ itemChecked: allReadMails, allMailsChecked: true });
+        set({ itemChecked: allReadMails/* , allMailsChecked: true */ });
       }
     },
-    fnCheckNoReadMails: (path: string, checked: boolean) => {
+    fnCheckNoReadMails: (path, checked) => {
       const { fnGetData } = get();
       const currentSectionArray = fnGetData(path);
       if (currentSectionArray !== undefined) {
@@ -362,7 +382,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         set({ itemChecked: allReadMails, allMailsChecked: true });
       }
     },
-    fnDeleteMailChecked: (path: string) => {
+    fnDeleteMailChecked: (path) => {
       const { itemChecked, mailDeleted, fnGetData } = get();
       if (!path.includes("erased")) {
         // If item.dir !== path, the user isn't on the erased section
@@ -382,6 +402,21 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       }
       if (itemChecked.length > 0) {
         set({ itemChecked: [] });
+      }
+    },
+    fnShowMail: (mailId, path) => {
+      const { fnGetAllData } = get();
+      const currentSectionArray = fnGetAllData(path);
+      if (currentSectionArray !== undefined) {
+        // console.log("mailId: ", mailId);
+        const mailSelected = currentSectionArray.find(
+          (mail) => mail.idMail === mailId,
+        );
+        if (mailSelected !== undefined) {
+          // console.log(mailSelected);
+          set({ mailShow: mailSelected });
+        }
+        // set({ mailShow: {} });
       }
     },
   };
