@@ -21,8 +21,7 @@ import BtnDeleteMails from "./buttons/BtnDeleteMails";
 
 export const AsideMailContainer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { mailGlobalArray, itemChecked, fnGetAllData } =
-    useMailStore();
+  const { mailGlobalArray, itemChecked, fnGetAllData } = useMailStore();
   // Url Path
   const path = usePathname();
   // Data to show
@@ -53,8 +52,8 @@ export const AsideMailContainer = () => {
           >
             {dataMails.map((item: MailDataProps, i: number) => {
               const {
-                mailArchived,
-                mailFavority,
+                mailArchive,
+                mailFavorite,
                 description,
                 userName,
                 mailRead,
@@ -68,8 +67,8 @@ export const AsideMailContainer = () => {
                 <MailItem
                   path={path}
                   description={description}
-                  mailArchived={mailArchived}
-                  mailFavority={mailFavority}
+                  mailArchive={mailArchive}
+                  mailFavorite={mailFavorite}
                   mailRead={mailRead}
                   userName={userName}
                   idMail={idMail}

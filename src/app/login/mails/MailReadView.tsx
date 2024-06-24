@@ -17,6 +17,7 @@ import {
   CgCornerDoubleUpLeft,
   CgCornerUpRight,
   CgCornerUpLeft,
+  IoMailUnreadOutline,
 } from "@/icons";
 import classes from "@/styles/btn-styles.module.css";
 import TooltipLayout from "@/components/TooltipLayout";
@@ -25,10 +26,12 @@ import { useMailStore } from "@/store/mail-store";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MailDataProps } from "@/interface/interface";
+import BtnOthersFunctions from "./buttons/BtnOthersFunctions";
 
 export default function MailReadView(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
-  const { mailShow, mailGlobalArray, mailFavorities } = useMailStore();
+  const { mailShow, mailGlobalArray, mailFavorities, closeMailDescription, mailArchived } =
+    useMailStore();
   const path = usePathname();
   const [mailToShow, setMailToShow] = useState<MailDataProps | {}>({});
 
@@ -37,11 +40,13 @@ export default function MailReadView(): JSX.Element {
       setMailToShow(mailShow);
     }
     // console.log("useEffect mailShow: ", mailShow)
-  }, [mailShow, path, mailGlobalArray, mailFavorities]);
+  }, [mailShow, path, mailGlobalArray, mailFavorities, closeMailDescription]);
+
+  console.log(mailArchived)
 
   return (
     <>
-      {(mailToShow as MailDataProps).idMail ? (
+      {(mailToShow as MailDataProps).idMail && !closeMailDescription ? (
         <>
           <Container
             styles={{
@@ -68,7 +73,7 @@ export default function MailReadView(): JSX.Element {
                       },
                     })}
                   >
-                    {mailToShow && (mailToShow as MailDataProps).title}
+                    {(mailToShow as MailDataProps).title}
                   </Title>
                   <Flex
                     style={{ marginBottom: "-0.25rem" }}
@@ -78,7 +83,7 @@ export default function MailReadView(): JSX.Element {
                   >
                     <BtnFavorities
                       size="medium"
-                      status={(mailToShow as MailDataProps).mailFavority}
+                      status={(mailToShow as MailDataProps).mailFavorite}
                       mailId={(mailToShow as MailDataProps).idMail}
                       path={path}
                     />
@@ -136,24 +141,9 @@ export default function MailReadView(): JSX.Element {
                         </Center>
                       </UnstyledButton>
                     </TooltipLayout>
-                    <TooltipLayout
-                      label="Otros"
-                      position="bottom"
-                      key={crypto.randomUUID()}
-                    >
-                      <UnstyledButton
-                        classNames={{
-                          root:
-                            colorScheme === "light"
-                              ? classes.btnMail
-                              : classes.btnMail_dark,
-                        }}
-                      >
-                        <Center style={{ fontSize: "1.5rem" }}>
-                          <HiOutlineDotsVertical />
-                        </Center>
-                      </UnstyledButton>
-                    </TooltipLayout>
+                    <BtnOthersFunctions
+                      mailId={(mailToShow as MailDataProps).idMail}
+                    />
                   </Flex>
                 </Flex>
                 <Flex justify={"space-between"} w={"100%"}>
@@ -180,7 +170,7 @@ export default function MailReadView(): JSX.Element {
                         },
                       })}
                     >
-                      {mailToShow && (mailToShow as MailDataProps).mail}
+                      {(mailToShow as MailDataProps).mail}
                     </Text>
                   </Flex>
                   <Flex align={"center"} gap={4}>
@@ -206,7 +196,7 @@ export default function MailReadView(): JSX.Element {
                         },
                       })}
                     >
-                      userApp.{mailToShow && (mailToShow as MailDataProps).mail}
+                      userApp.{(mailToShow as MailDataProps).mail}
                     </Text>
                   </Flex>
                 </Flex>
@@ -236,56 +226,14 @@ export default function MailReadView(): JSX.Element {
               offsetScrollbars
               scrollbarSize={2}
             >
-              {mailToShow && (mailToShow as MailDataProps).description}
+              {(mailToShow as MailDataProps).description}
             </ScrollArea>
           </Container>
         </>
       ) : (
         <Container style={{ height: "100%" }}>
           <Stack align="center" justify="center" style={{ height: "100%" }}>
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              style={{ fontSize: "7rem" }}
-            >
-              <g
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-width="2"
-              >
-                <rect
-                  width="18"
-                  height="14"
-                  x="3"
-                  y="5"
-                  stroke-dasharray="64"
-                  stroke-dashoffset="64"
-                  rx="1"
-                >
-                  <animate
-                    fill="freeze"
-                    attributeName="stroke-dashoffset"
-                    dur="0.6s"
-                    values="64;0"
-                  />
-                </rect>
-                <path
-                  stroke-dasharray="24"
-                  stroke-dashoffset="24"
-                  d="M3 6.5L12 12L21 6.5"
-                >
-                  <animate
-                    fill="freeze"
-                    attributeName="stroke-dashoffset"
-                    begin="0.6s"
-                    dur="0.4s"
-                    values="24;0"
-                  />
-                </path>
-              </g>
-            </svg>
+            <IoMailUnreadOutline style={{ fontSize: "8rem" }}/>
             <Title style={{ textAlign: "center" }}>
               Selecciona un correo para leer su Descripción!
             </Title>

@@ -8,7 +8,13 @@ import {
   Flex,
 } from "@mantine/core";
 import classes from "@/styles/general-styles.module.css";
-import { MdArrowDropDown, HiOutlineMail, HiOutlineMailOpen } from "@/icons";
+import {
+  MdArrowDropDown,
+  HiOutlineMail,
+  HiOutlineMailOpen,
+  TbStarFilled,
+  HiOutlineSave,
+} from "@/icons";
 import { useMailStore } from "@/store/mail-store";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -16,8 +22,16 @@ import { usePathname } from "next/navigation";
 export default function BtnCheckAllMails() {
   const path = usePathname();
   const { colorScheme } = useMantineColorScheme();
-  const { fnCheckAllMails, itemChecked, fnCheckReadMails, fnCheckNoReadMails } =
-    useMailStore();
+  const {
+    fnCheckNoReadMails,
+    fnFavoriteAllMails,
+    fnArchivedAllMails,
+    fnNotReadAllMails,
+    fnCheckReadMails,
+    fnCheckAllMails,
+    fnReadAllMails,
+    itemChecked,
+  } = useMailStore();
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -31,6 +45,7 @@ export default function BtnCheckAllMails() {
     <Menu
       shadow="md"
       width={200}
+      withArrow
       position="bottom-start"
       styles={(theme) => ({
         item: {
@@ -80,15 +95,42 @@ export default function BtnCheckAllMails() {
       </Flex>
 
       <Menu.Dropdown>
+        <Menu.Label>Seleccionar correos</Menu.Label>
+        <Menu.Divider />
         <Menu.Item
           onClick={() => fnCheckReadMails(path, !checked)}
           leftSection={<HiOutlineMailOpen />}
         >
           Leidos
         </Menu.Item>
-        <Menu.Divider />
         <Menu.Item
           onClick={() => fnCheckNoReadMails(path, !checked)}
+          leftSection={<HiOutlineMail />}
+        >
+          No Leidos
+        </Menu.Item>
+        <Menu.Label>Marcar todos</Menu.Label>
+        <Menu.Divider />
+        <Menu.Item
+          onClick={() => fnFavoriteAllMails()}
+          leftSection={<TbStarFilled />}
+        >
+          Favoritos
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => fnArchivedAllMails()}
+          leftSection={<HiOutlineSave />}
+        >
+          Archivados
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => fnReadAllMails()}
+          leftSection={<HiOutlineMailOpen />}
+        >
+          Leidos
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => fnNotReadAllMails()}
           leftSection={<HiOutlineMail />}
         >
           No Leidos

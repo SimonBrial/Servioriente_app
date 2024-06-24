@@ -1,0 +1,50 @@
+import { HiOutlineDotsVertical, HiOutlineSave, IoClose } from "@/icons";
+import {
+  useMantineColorScheme,
+  UnstyledButton,
+  Center,
+  Menu,
+} from "@mantine/core";
+import classes from "@/styles/btn-styles.module.css";
+import { usePathname } from "next/navigation";
+import { useMailStore } from "@/store/mail-store";
+
+export default function BtnOthersFunctions({ mailId }: { mailId: string }) {
+  const { colorScheme } = useMantineColorScheme();
+  const path = usePathname();
+  const { setMailDescription, closeMailDescription, fnArchivedMark } =
+    useMailStore();
+  console.log(closeMailDescription);
+  return (
+    <Menu position="bottom-end" offset={4}>
+      <Menu.Target>
+        <UnstyledButton
+          classNames={{
+            root:
+              colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
+          }}
+        >
+          <Center style={{ fontSize: "1.5rem" }}>
+            <HiOutlineDotsVertical />
+          </Center>
+        </UnstyledButton>
+      </Menu.Target>
+      <Menu.Dropdown>
+        <Menu.Item
+          color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
+          leftSection={<HiOutlineSave />}
+          onClick={() => fnArchivedMark(mailId, path)}
+        >
+          Archivar
+        </Menu.Item>
+        <Menu.Item
+          color="red"
+          leftSection={<IoClose />}
+          onClick={() => setMailDescription(true)}
+        >
+          Cerrar Descripción
+        </Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
+  );
+}

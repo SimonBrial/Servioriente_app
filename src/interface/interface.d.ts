@@ -364,8 +364,8 @@ interface MailDataProps {
   date: Date;
   photo?: string;
   mailRead: boolean;
-  mailFavority: boolean;
-  mailArchived: boolean;
+  mailFavorite: boolean;
+  mailArchive: boolean;
   // mailStatus: MailStatus;
   idMail: string;
 }

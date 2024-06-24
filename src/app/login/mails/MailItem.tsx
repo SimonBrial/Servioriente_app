@@ -25,8 +25,8 @@ interface MailItemProps extends MailDataProps {
   path: string;
 }
 export default function MailItem({
-  mailFavority,
-  mailArchived,
+  mailFavorite,
+  mailArchive,
   description,
   mailRead,
   userName,
@@ -40,6 +40,7 @@ export default function MailItem({
   const { colorScheme } = useMantineColorScheme();
   const {
     mailGlobalArray,
+    mailArchived,
     allMailsChecked,
     fnCheckMail,
     itemChecked,
@@ -60,7 +61,13 @@ export default function MailItem({
       console.log(mailFavority);
       console.log(idMail);
     } */
-  }, [itemChecked, mailRead, mailArchived, mailGlobalArray]);
+  }, [
+    itemChecked,
+    mailRead,
+    mailArchived,
+    mailGlobalArray,
+    mailArchived as MailDataProps[],
+  ]);
 
   return (
     <Group
@@ -153,15 +160,15 @@ export default function MailItem({
             >
               <BtnReadMail status={mailRead} mailId={idMail} path={path} />
               <BtnFavorities
-                status={mailFavority}
+                status={mailFavorite}
                 mailId={idMail}
                 size={"small"}
                 path={path}
               />
-              <BtnArchive status={mailArchived} mailId={idMail} path={path} />
+              <BtnArchive status={mailArchive} mailId={idMail} path={path} />
               {path.includes("erased") ? (
                 <BtnRecoverMail
-                  status={mailArchived}
+                  status={mailArchive}
                   mailId={idMail}
                   path={path}
                 />
