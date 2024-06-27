@@ -94,6 +94,7 @@
   border: 2px solid #cdcdcd;
   padding: 0.5rem;
 }
+
 .containercolumns_dark {
   width: 100%;
   background-color: #9a90ef1a;
@@ -101,6 +102,12 @@
   border: 2px solid #29363f;
   padding: 0.5rem;
 }
+.columns:hover {
+  background-color: #f8f8f8;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
 .espera:hover {
   background-color: #e5db004d;
   transition: all 0.3s ease-in-out;

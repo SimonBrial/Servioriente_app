@@ -31,14 +31,29 @@ export default function BtnCheckAllMails() {
     fnCheckAllMails,
     fnReadAllMails,
     itemChecked,
+    mailGlobalArray,
   } = useMailStore();
   const [checked, setChecked] = useState(false);
+  const [middleStatus, setMiddleStatus] = useState(false);
 
   useEffect(() => {
     if (itemChecked.length === 0) {
       setChecked(false);
     }
-  }, [itemChecked.length]);
+
+    if (itemChecked.length > 0) {
+      setMiddleStatus(true);
+    } else if (
+      itemChecked.length > 0 &&
+      itemChecked.length < mailGlobalArray.length
+    ) {
+      setMiddleStatus(true);
+    }
+
+    if (itemChecked.length === mailGlobalArray.length) {
+      setMiddleStatus(false);
+    }
+  }, [itemChecked.length, itemChecked]);
   // console.log("itemChecked: ", itemChecked);
 
   return (
@@ -61,6 +76,7 @@ export default function BtnCheckAllMails() {
     >
       <Flex gap={4} align={"center"}>
         <Checkbox
+          indeterminate={middleStatus}
           onChange={(e) => {
             setChecked(e.currentTarget.checked);
             fnCheckAllMails(path, !checked);

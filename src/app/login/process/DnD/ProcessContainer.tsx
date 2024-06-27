@@ -33,30 +33,12 @@ import { useProcessStore } from "@/store/process-store";
 
 export function ProcessContainer() {
   // Global State Management
-  const ProcessData = useProcessStore((state) => state.data);
+  const { data } = useProcessStore();
 
   const DNDid = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [containers, setContainers] = useState<DNDType[]>(ProcessData);
+  const [containers, setContainers] = useState<DNDType[]>(data);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-
-  /* const [cardsArray, setCardsArray] = useState<CardProcessProps[]>(ProcessData.map(c => c.items)); */
-
-  // --> This code's block is for change the drag section od the card item container
-  /* function changeProperty(
-    id: string,
-    arr: CardProcessProps[],
-  ): CardProcessProps[] {
-    arr.forEach((arrCards) => {
-      if (arrCards.columnId !== id) {
-        arrCards.columnId = id;
-      }
-    });
-    return arr;
-  } */
-  /* useEffect(() => {
-    setCardsArray(changeProperty(id, cardArray));
-  }, [cardArray.length]); */
 
   // Find the value of the items
   function findValueOfItems(id: UniqueIdentifier | undefined, type: string) {
@@ -142,6 +124,8 @@ export function ProcessContainer() {
           activeitemIndex,
           1,
         );
+        removeditem.columnId = overContainer.title.toLowerCase();
+        // console.log("removeditem: ", removeditem.columnId);
         newItems[overContainerIndex].items.splice(
           overitemIndex,
           0,
@@ -150,6 +134,8 @@ export function ProcessContainer() {
         setContainers(newItems);
       }
     }
+
+    // TODO: This block code it doesn't working
 
     // Handling Item Drop Into a Container
     if (
@@ -185,6 +171,7 @@ export function ProcessContainer() {
         activeitemIndex,
         1,
       );
+      console.log("Handling Item Drop Into a Container --> removeditem", removeditem)
       newItems[overContainerIndex].items.push(removeditem);
       setContainers(newItems);
     }
@@ -193,27 +180,8 @@ export function ProcessContainer() {
   // This is the function that handles the sorting of the containers and items when the user is done dragging.
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
-
-    // Handling Container Sorting
-    if (
-      active.id.toString().includes("container") &&
-      over?.id.toString().includes("container") &&
-      active &&
-      over &&
-      active.id !== over.id
-    ) {
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === active.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === over.id,
-      );
-      // Swap the active and over container
-      let newItems = [...containers];
-      newItems = arrayMove(newItems, activeContainerIndex, overContainerIndex);
-      setContainers(newItems);
-    }
+    // console.log("active: ", active);
+    // console.log("over: ", over);
 
     // Handling item Sorting
     if (
@@ -229,6 +197,7 @@ export function ProcessContainer() {
 
       // If the active or over container is not found, return
       if (!activeContainer || !overContainer) return;
+
       // Find the index of the active and over container
       const activeContainerIndex = containers.findIndex(
         (container) => container.id === activeContainer.id,
@@ -246,7 +215,12 @@ export function ProcessContainer() {
 
       // In the same container
       if (activeContainerIndex === overContainerIndex) {
+        /* console.log("activeContainerIndex: ", activeContainerIndex)
+        console.log("overContainerIndex: ", overContainerIndex)
+        console.log("activeContainer: ", activeContainer)
+        console.log("overContainer: ", overContainer) */
         let newItems = [...containers];
+        console.log("newItems: ", newItems);
         newItems[activeContainerIndex].items = arrayMove(
           newItems[activeContainerIndex].items,
           activeitemIndex,
@@ -256,6 +230,7 @@ export function ProcessContainer() {
       } else {
         // In different containers
         let newItems = [...containers];
+        console.log("newItems: ", newItems);
         const [removeditem] = newItems[activeContainerIndex].items.splice(
           activeitemIndex,
           1,
@@ -295,7 +270,7 @@ export function ProcessContainer() {
       );
 
       let newItems = [...containers];
-      console.log("newItems: ", newItems);
+      // console.log("newItems: ", newItems);
       const [removeditem] = newItems[activeContainerIndex].items.splice(
         activeitemIndex,
         1,
@@ -313,7 +288,7 @@ export function ProcessContainer() {
       collisionDetection={closestCorners}
       onDragStart={handleDragStart}
       onDragMove={handleDragMove}
-      onDragEnd={handleDragEnd}
+      // onDragEnd={handleDragEnd}
     >
       <Grid
         style={{

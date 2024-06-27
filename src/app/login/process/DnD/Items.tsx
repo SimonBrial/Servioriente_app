@@ -33,8 +33,9 @@ export function Items({
 }: CardProcessProps) {
   const { colorScheme } = useMantineColorScheme();
 
-  // Doesn't delete this
-  const [colorDivider, setColorDivider] = useState<string>("red");
+  // Don't delete this
+  const [colorDivider, setColorDivider] = useState<string>(columnId);
+  // console.log(columnId)
 
   useEffect(() => {
     setColorDivider(columnId);

@@ -76,7 +76,7 @@ export const AsideMailContainer = () => {
                   title={title}
                   date={date}
                   mail={mail}
-                  key={i}
+                  key={idMail}
                 />
               );
             })}

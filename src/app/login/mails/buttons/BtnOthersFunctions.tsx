@@ -1,4 +1,8 @@
-import { HiOutlineDotsVertical, HiOutlineSave, IoClose } from "@/icons";
+import {
+  HiOutlineDotsVertical,
+  HiOutlineSave,
+  IoClose,
+} from "@/icons";
 import {
   useMantineColorScheme,
   UnstyledButton,
@@ -9,12 +13,16 @@ import classes from "@/styles/btn-styles.module.css";
 import { usePathname } from "next/navigation";
 import { useMailStore } from "@/store/mail-store";
 
-export default function BtnOthersFunctions({ mailId }: { mailId: string }) {
+export default function BtnOthersFunctions({
+  mailId
+}: {
+  mailId: string;
+}) {
   const { colorScheme } = useMantineColorScheme();
   const path = usePathname();
-  const { setMailDescription, closeMailDescription, fnArchivedMark } =
+  const { setMailDescription, fnArchivedMark } =
     useMailStore();
-  console.log(closeMailDescription);
+
   return (
     <Menu position="bottom-end" offset={4}>
       <Menu.Target>

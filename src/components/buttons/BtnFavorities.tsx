@@ -22,8 +22,6 @@ export default function BtnFavorities({
   path?: string;
 }) {
   const [colorState, setColorState] = useState<boolean>(status);
-  // console.log("status: ", status);
-  // console.log("mailId: ", mailId);
   const { colorScheme } = useMantineColorScheme();
   const { fnFavoriteMark } = useMailStore();
 

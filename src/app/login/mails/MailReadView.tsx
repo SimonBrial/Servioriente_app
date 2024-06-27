@@ -27,11 +27,17 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MailDataProps } from "@/interface/interface";
 import BtnOthersFunctions from "./buttons/BtnOthersFunctions";
+import TextEditorShow from "../../../components/TextEditorShow";
 
 export default function MailReadView(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
-  const { mailShow, mailGlobalArray, mailFavorities, closeMailDescription, mailArchived } =
-    useMailStore();
+  const {
+    mailShow,
+    mailGlobalArray,
+    mailFavorities,
+    closeMailDescription,
+    mailArchived,
+  } = useMailStore();
   const path = usePathname();
   const [mailToShow, setMailToShow] = useState<MailDataProps | {}>({});
 
@@ -40,9 +46,17 @@ export default function MailReadView(): JSX.Element {
       setMailToShow(mailShow);
     }
     // console.log("useEffect mailShow: ", mailShow)
-  }, [mailShow, path, mailGlobalArray, mailFavorities, closeMailDescription]);
+  }, [
+    /* closeMailDescription, */
+    mailGlobalArray,
+    mailFavorities,
+    mailArchived,
+    mailShow,
+    path,
+  ]);
 
-  console.log(mailArchived)
+  console.log("mailArchived: ", mailArchived);
+  console.log("mailFavorities: ", mailFavorities);
 
   return (
     <>
@@ -226,14 +240,54 @@ export default function MailReadView(): JSX.Element {
               offsetScrollbars
               scrollbarSize={2}
             >
-              {(mailToShow as MailDataProps).description}
+              {/* {(mailToShow as MailDataProps).description} */}
+              {/* <TextEditorShow textToShow={(mailToShow as MailDataProps).description} /> */}
+              {/*// TODO: lOOK THIS, THE TEXT SHOWING IS NOT THE CORRECT ONE */}
+              <h2>Welcome to Mantine Simon Briceño</h2>
+              <p>
+                <code>RichTextEditor</code> component focuses on usability and
+                is designed to be as simple as possible to bring a familiar
+                editing experience to regular users. <code>RichTextEditor</code>{" "}
+                is based on{" "}
+                <a
+                  href="https://tiptap.dev/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Tiptap.dev
+                </a>{" "}
+                and supports all of its features:
+              </p>
+              <ul>
+                <li>
+                  General text formatting: <strong>bold</strong>,{" "}
+                  <em>italic</em>, <u>underline</u>, <s>strike-through</s>{" "}
+                </li>
+                <li>Headings (h1-h6)</li>
+                <li>
+                  Sub and super scripts (<sup>&lt;sup /&gt;</sup> and{" "}
+                  <sub>&lt;sub /&gt;</sub> tags)
+                </li>
+                <li>Ordered and bullet lists</li>
+                <li>Text align&nbsp;</li>
+                <li>
+                  And all{" "}
+                  <a
+                    href="https://tiptap.dev/extensions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    other extensions
+                  </a>
+                </li>
+              </ul>
             </ScrollArea>
           </Container>
         </>
       ) : (
         <Container style={{ height: "100%" }}>
           <Stack align="center" justify="center" style={{ height: "100%" }}>
-            <IoMailUnreadOutline style={{ fontSize: "8rem" }}/>
+            <IoMailUnreadOutline style={{ fontSize: "8rem" }} />
             <Title style={{ textAlign: "center" }}>
               Selecciona un correo para leer su Descripción!
             </Title>

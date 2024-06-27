@@ -21,6 +21,10 @@ export default function BtnArchive({
   const { colorScheme } = useMantineColorScheme();
   const { fnArchivedMark } = useMailStore();
 
+  useEffect(() => setReadMail(status), [status]);
+
+  // TODO: Forzar a que segun la seccion se mantenga el icono
+
   return (
     <TooltipLayout
       label={!readMail ? "Archivar" : "Desarchivar"}

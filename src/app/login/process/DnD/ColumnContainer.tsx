@@ -94,8 +94,7 @@ export function ColumnContainer({
       ref={setNodeRef}
       style={{ padding: "0.3rem 0.5rem" }}
       className={`${heightClasses.column_process_parent} ${
-        bgContainersSelected(title)?.classSelected
-      }`}
+        classes.columns}`}
     >
       <Stack gap={0}>
         <Flex gap={5} justify={"center"} align={"center"}>

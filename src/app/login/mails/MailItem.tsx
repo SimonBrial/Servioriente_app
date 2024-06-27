@@ -3,7 +3,6 @@
 import {
   useMantineColorScheme,
   Checkbox,
-  Avatar,
   Center,
   Group,
   Title,
@@ -20,6 +19,7 @@ import { MailDataProps } from "@/interface/interface";
 import { useMailStore } from "@/store/mail-store";
 import dayjs from "dayjs";
 import { BtnRecoverMail } from "./buttons/BtnRecoverMail";
+import convertHtmlToString from "@/utils/ConvertHtmlToString";
 
 interface MailItemProps extends MailDataProps {
   path: string;
@@ -41,7 +41,6 @@ export default function MailItem({
   const {
     mailGlobalArray,
     mailArchived,
-    allMailsChecked,
     fnCheckMail,
     itemChecked,
     fnReadMark,
@@ -50,24 +49,27 @@ export default function MailItem({
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    const mailCheckedFound = itemChecked.find((item) => item.idMail === idMail);
-    console.log(mailCheckedFound);
-    /* if (allMailsChecked) {
-      setChecked(true);
-    } else {
-      setChecked(false);
-    } */
-    /* if (path.includes("favorities")) {
-      console.log(mailFavority);
-      console.log(idMail);
-    } */
+    if (itemChecked.length > 0) {
+      itemChecked.find((item) => {
+        if (item.idMail === idMail) {
+          setChecked(!checked);
+        }
+      });
+    }
+    if (itemChecked.length === 0) { 
+      setChecked(checked);
+    }
   }, [
     itemChecked,
+    itemChecked.length,
     mailRead,
     mailArchived,
     mailGlobalArray,
     mailArchived as MailDataProps[],
   ]);
+
+  // console.log("checked from MailItem component: ", checked);
+  // console.log("itemChecked from MailItem component: ", itemChecked);
 
   return (
     <Group
@@ -102,13 +104,13 @@ export default function MailItem({
       >
         <Center px={9}>
           <Checkbox
-            onClick={() => {
+            /* onClick={() => {
               console.log(!checked ? "yes" : "no");
               fnCheckMail(idMail, path, checked);
-            }}
+            }} */
             onChange={(event) => {
               setChecked(event.target.checked);
-              // fnCheckMail(idMail, path, checked);
+              fnCheckMail(idMail, path, checked);
             }}
             checked={checked}
             color="blue"
@@ -193,7 +195,7 @@ export default function MailItem({
               })}
               size="sm"
             >
-              {description.slice(0, 25)}...
+              {convertHtmlToString(description).slice(0, 25)}...
             </Text>
             <Text
               size="xs"
