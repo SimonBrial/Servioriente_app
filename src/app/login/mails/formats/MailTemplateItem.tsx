@@ -13,6 +13,7 @@ import {
 import dayjs from "dayjs";
 import { usePathname } from "next/navigation";
 import BtnDeleteTemplate from "../BtnDeleteTemplate";
+import { useMailStore } from "@/store/mail-store";
 
 interface MailTemplateItemProps extends MailTemplateProps {
   templateFavorite: boolean;
@@ -31,6 +32,7 @@ export default function MailTemplateItem({
 }: MailTemplateItemProps) {
   const { colorScheme } = useMantineColorScheme();
   const path = usePathname();
+  const { fnShowMail } = useMailStore();
   return (
     <Group
       mb={5}
@@ -59,6 +61,9 @@ export default function MailTemplateItem({
         <Stack gap={0} style={{ width: "100%" }}>
           <Flex align={"center"} justify={"space-between"}>
             <Title
+              onClick={() => {
+                fnShowMail(id, path);
+              }}
               order={5}
               styles={(theme) => ({
                 root: {

@@ -2,14 +2,18 @@
 
 import TooltipLayout from "@/components/TooltipLayout";
 import { TbReload } from "@/icons";
+import { useMailStore } from "@/store/mail-store";
 import { ActionIcon, useMantineColorScheme } from "@mantine/core";
+import { usePathname } from "next/navigation";
 
 export default function BtnReload() {
   const { colorScheme } = useMantineColorScheme();
+  const { fnGetAllData } = useMailStore();
+  const path = usePathname();
   return (
     <TooltipLayout label="Actualizar Imbox" position="top">
       <ActionIcon
-        onClick={() => console.log("Reloading...")}
+        onClick={() => fnGetAllData(path)}
         size={22}
         variant="default"
         styles={(theme) => ({

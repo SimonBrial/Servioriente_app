@@ -22,7 +22,7 @@ interface MailStoreProps {
   mailSectionArray: MailSections[];
   itemChecked: MailDataProps[];
   allMailsChecked: boolean;
-  mailShow: MailDataProps | {};
+  mailShow: MailDataProps | MailTemplateProps | {};
   closeMailDescription: boolean;
   // Fake properties
 
@@ -286,8 +286,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       return mailDeleted[mailToDeletedIndex];
     },
     fnGetAllData: (path) => {
-      console.log("path: ", path);
-      const test = path.split("/");
+      //console.log("path: ", path);
       const {
         fnGetFavoritiesTemplate,
         fnGetDeletedTemplate,
@@ -302,16 +301,22 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       const currentSection = mailSectionArray.find(
         (section) => section.dir === path,
       );
-      console.log(currentSection);
+      // console.log(currentSection);
       if (currentSection) {
         if (path === "/login/mails") {
+          set({ mailGlobalArray: mailGlobalArray });
           return mailGlobalArray;
         }
         if (path.includes("favorities")) {
           return fnGetFavorites(path, mailGlobalArray);
         }
         if (path.includes("archived")) {
-          return fnGetArchived(path, mailGlobalArray);
+          const archived = fnGetArchived(path, mailGlobalArray);
+          if (archived) {
+            set({ mailArchived: archived });
+            return archived;
+          }
+          return [];
         }
         if (path.includes("erased")) {
           return mailDeleted;
@@ -559,11 +564,21 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
     fnShowMail: (mailId, path) => {
       const { fnGetAllData } = get();
       const currentSectionArray = fnGetAllData(path);
-      if (currentSectionArray !== undefined) {
+      if (currentSectionArray !== undefined && !path.includes("formats")) {
         // console.log("mailId: ", mailId);
         const mailSelected = currentSectionArray.find(
           (mail) => (mail as MailDataProps).idMail === mailId,
-        );
+        ) as MailDataProps;
+        if (mailSelected === undefined) {
+          // console.log(mailSelected);
+          set({ mailShow: {} });
+        }
+        set({ mailShow: mailSelected, closeMailDescription: false });
+      }
+      if (path.includes("formats") && currentSectionArray !== undefined) {
+        const mailSelected = currentSectionArray.find(
+          (mail) => (mail as MailTemplateProps).id === mailId,
+        ) as MailTemplateProps;
         if (mailSelected === undefined) {
           // console.log(mailSelected);
           set({ mailShow: {} });

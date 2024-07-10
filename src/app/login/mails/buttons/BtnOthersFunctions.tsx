@@ -1,8 +1,4 @@
-import {
-  HiOutlineDotsVertical,
-  HiOutlineSave,
-  IoClose,
-} from "@/icons";
+import { HiOutlineDotsVertical, HiOutlineSave, IoClose } from "@/icons";
 import {
   useMantineColorScheme,
   UnstyledButton,
@@ -13,15 +9,10 @@ import classes from "@/styles/btn-styles.module.css";
 import { usePathname } from "next/navigation";
 import { useMailStore } from "@/store/mail-store";
 
-export default function BtnOthersFunctions({
-  mailId
-}: {
-  mailId: string;
-}) {
+export default function BtnOthersFunctions({ mailId }: { mailId: string }) {
   const { colorScheme } = useMantineColorScheme();
   const path = usePathname();
-  const { setMailDescription, fnArchivedMark } =
-    useMailStore();
+  const { setMailDescription, fnArchivedMark } = useMailStore();
 
   return (
     <Menu position="bottom-end" offset={4}>
@@ -38,13 +29,16 @@ export default function BtnOthersFunctions({
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item
-          color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
-          leftSection={<HiOutlineSave />}
-          onClick={() => fnArchivedMark(mailId, path)}
-        >
-          Archivar
-        </Menu.Item>
+        {!path.includes("formats") ? (
+          <Menu.Item
+            color={colorScheme === "light" ? "#115dfe" : "#52A5E0"}
+            leftSection={<HiOutlineSave />}
+            onClick={() => fnArchivedMark(mailId, path)}
+          >
+            Archivar
+          </Menu.Item>
+        ) : null}
+
         <Menu.Item
           color="red"
           leftSection={<IoClose />}

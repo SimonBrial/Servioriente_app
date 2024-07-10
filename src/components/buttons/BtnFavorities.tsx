@@ -16,9 +16,9 @@ export default function BtnFavorities({
   size,
   path,
 }: {
-  size: sizeType;
   status: boolean;
   mailId?: string;
+  size: sizeType;
   path?: string;
 }) {
   const [colorState, setColorState] = useState<boolean>(status);
