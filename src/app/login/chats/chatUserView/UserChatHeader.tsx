@@ -14,7 +14,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import { SearchInChat } from "./SearchInChat";
-import { BtnFavorite } from "@/components/buttons/BtnFavorite";
+import BtnFavorities from "@/components/buttons/BtnFavorities";
 
 interface UserChatHeaderProps {
   colorUser: CardContainerHeader;
@@ -89,7 +89,7 @@ export default function UserChatHeader({
         </Stack>
       </Flex>
       <Flex align={"center"}>
-        <BtnFavorite size="large" key={crypto.randomUUID()} />
+        <BtnFavorities status size="large" key={crypto.randomUUID()} />
         <Divider
           orientation="vertical"
           style={{ margin: "0 0.2rem" }}

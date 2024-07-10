@@ -23,9 +23,41 @@ export default function BtnFavorities({
 }) {
   const [colorState, setColorState] = useState<boolean>(status);
   const { colorScheme } = useMantineColorScheme();
-  const { fnFavoriteMark } = useMailStore();
+  const { fnFavoriteMark, fnFavoriteMarkTemplate } = useMailStore();
 
   useEffect(() => setColorState(status), [status]);
+
+  const handleFavorites = () => {
+    if (!path?.includes("formats")) {
+      if (mailId !== undefined && path !== undefined) {
+        fnFavoriteMark(mailId, path, !colorState);
+      }
+      setColorState(!colorState);
+      notifications.show({
+        color: colorState ? "#115dfe" : "#2BDD66",
+        message: colorState
+          ? "Correo eliminado de favoritos satisfactoriamente!"
+          : "Correo agregado a favoritos satisfactoriamente!",
+        id: crypto.randomUUID(),
+        title: colorState ? "Correo Eliminado" : "Correo Agregado",
+      });
+    }
+    if (path?.includes("formats")) {
+      if (mailId !== undefined && path !== undefined) {
+        fnFavoriteMarkTemplate(mailId)
+      }
+      setColorState(!colorState);
+      notifications.show({
+        color: colorState ? "#115dfe" : "#2BDD66",
+        message: colorState
+          ? "Formato eliminado de favoritos satisfactoriamente!"
+          : "Formato agregado a favoritos satisfactoriamente!",
+        id: crypto.randomUUID(),
+        title: colorState ? "Formato Eliminado" : "Formato Agregado",
+      });
+    }
+    
+  };
 
   if (size === "large") {
     return (
@@ -125,20 +157,7 @@ export default function BtnFavorities({
             root:
               colorScheme === "light" ? classes.btnMail : classes.btnMail_dark,
           }}
-          onClick={() => {
-            if (mailId !== undefined && path !== undefined) {
-              fnFavoriteMark(mailId, path, !colorState);
-            }
-            setColorState(!colorState);
-            notifications.show({
-              color: colorState ? "#115dfe" : "#2BDD66",
-              message: colorState
-                ? "Correo eliminado de favoritos satisfactoriamente!"
-                : "Correo agregado a favoritos satisfactoriamente!",
-              id: crypto.randomUUID(),
-              title: colorState ? "Correo Eliminado" : "Correo Agregado",
-            });
-          }}
+          onClick={handleFavorites}
         >
           <Center
             styles={(theme) => ({

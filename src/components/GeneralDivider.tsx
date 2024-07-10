@@ -11,6 +11,7 @@ export const GeneralDivider = ({
   const { colorScheme } = useMantineColorScheme();
   return (
     <Divider
+      w={"100%"}
       color={colorScheme === "light" ? "#cdcdcd" : "#f8f8f8"}
       orientation={orientation}
     />

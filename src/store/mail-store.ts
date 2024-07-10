@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { MailDataProps } from "@/interface/interface";
-import { mailReceivedFake } from "@/data";
+import { MailDataProps, MailTemplateProps } from "@/interface/interface";
+import { mailReceivedFake, mailTemplateFake } from "@/data/mailData";
 
 /* Functionalities of this section
  */
@@ -15,7 +15,9 @@ interface MailStoreProps {
   mailSent: MailDataProps[];
   mailFavorities: MailDataProps[];
   mailDeleted: MailDataProps[];
-  mailTemplates: MailDataProps[];
+  mailTemplates: MailTemplateProps[];
+  mailTemplatesFavorites: MailTemplateProps[];
+  mailTemplatesDeleted: MailTemplateProps[];
   mailArchived: MailDataProps[];
   mailSectionArray: MailSections[];
   itemChecked: MailDataProps[];
@@ -39,9 +41,18 @@ interface MailStoreProps {
   fnDeleteMailChecked: (path: string) => void;
   fnCheckReadMails: (path: string, checked: boolean) => void;
   fnCheckNoReadMails: (path: string, checked: boolean) => void;
+  fnFavoriteMarkTemplate: (mailId: string) => void;
+  fnGetFavoritiesTemplate: () => MailTemplateProps[];
+  fnGetDeletedTemplate: () => MailTemplateProps[];
+  fnDeleteTemplate: (mailId: string) => void;
+  fnGetAllTemplates: (path: string) => void;
   // Secondary functions
-  fnGetAllData: (path: string) => MailDataProps[] | undefined;
-  fnGetData: (currentSection: string) => MailDataProps[] | undefined;
+  fnGetAllData: (
+    path: string,
+  ) => MailDataProps[] | MailTemplateProps[] | undefined;
+  fnGetData: (
+    currentSection: string,
+  ) => MailDataProps[] | MailTemplateProps[] | undefined;
   fnGetFavorites: (
     path: string,
     mailsArray: MailDataProps[],
@@ -64,7 +75,9 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
     mailSent: [],
     mailFavorities: [],
     mailDeleted: [],
-    mailTemplates: [],
+    mailTemplates: mailTemplateFake,
+    mailTemplatesFavorites: [],
+    mailTemplatesDeleted: [],
     mailArchived: [],
     mailSectionArray: [
       {
@@ -240,8 +253,8 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       // Looking for if the element is in the itemChecked array.
       if (dataArray) {
         const newMailDeleted = dataArray.filter(
-          (mail) => mail.idMail === mailId,
-        );
+          (mail) => (mail as MailDataProps).idMail === mailId,
+        ) as MailDataProps[];
         if (newMailDeleted !== undefined) {
           const deletedFromItemChecked = itemChecked.filter(
             (mail) => mail.idMail !== mailId,
@@ -249,8 +262,8 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
           set({ itemChecked: deletedFromItemChecked });
         }
         const newMailReceived = dataArray.filter(
-          (mail) => mail.idMail !== mailId,
-        );
+          (mail) => (mail as MailDataProps).idMail !== mailId,
+        ) as MailDataProps[];
         if (mailShow && (mailShow as MailDataProps).idMail === mailId) {
           set({ mailShow: {} });
         }
@@ -266,14 +279,18 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       }
     },
     fnDeleteMailFromTrash: (mailId) => {
-      const { mailDeleted } = get();
+      const { mailDeleted, fnGetFavoritiesTemplate } = get();
       const mailToDeletedIndex = mailDeleted.findIndex(
         (mail) => mail.idMail === mailId,
       );
       return mailDeleted[mailToDeletedIndex];
     },
     fnGetAllData: (path) => {
+      console.log("path: ", path);
+      const test = path.split("/");
       const {
+        fnGetFavoritiesTemplate,
+        fnGetDeletedTemplate,
         mailSectionArray,
         mailGlobalArray,
         fnGetFavorites,
@@ -285,8 +302,8 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       const currentSection = mailSectionArray.find(
         (section) => section.dir === path,
       );
-      if (currentSection !== undefined) {
-        // const currentSectionArray = fnGetData(path);
+      console.log(currentSection);
+      if (currentSection) {
         if (path === "/login/mails") {
           return mailGlobalArray;
         }
@@ -306,8 +323,18 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
           return mailTemplates;
         }
       }
+      // Specific urls
+      if (path.includes("formats/favorites")) {
+        return fnGetFavoritiesTemplate();
+      }
+      if (path.includes("formats/deleted")) {
+        return fnGetDeletedTemplate();
+      }
+      return [];
     },
-    fnGetData: (currentSection): MailDataProps[] | undefined => {
+    fnGetData: (
+      currentSection,
+    ): MailDataProps[] | MailTemplateProps[] | undefined => {
       const {
         mailGlobalArray,
         mailFavorities,
@@ -348,7 +375,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       return dataMailFounded?.dataArr;
     },
     fnGetFavorites: (path, mailsArray) => {
-      // In this function I'm going to implmented a filter to show only the mail with the favorite property in true
+      // In this function I'm going to implement a filter to show only the mail with the favorite property in true
       if (path.includes("/login/mails/favorities")) {
         if (mailsArray !== undefined) {
           const mailsFavorites = mailsArray.filter((mail) => mail.mailFavorite);
@@ -358,7 +385,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       }
     },
     fnGetArchived: (path, mailsArray) => {
-      // In this function I'm going to implmented a filter to show only the mail with the favorite property in true
+      // In this function I'm going to implemented a filter to show only the mail with the favorite property in true
       if (path.includes("archived")) {
         if (mailsArray !== undefined) {
           const mailsArchived = mailsArray.filter((mail) => mail.mailArchive);
@@ -391,8 +418,8 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         if (!checked) {
           // if the element was found and not it's undefined
           const elementAdded = currentSectionArray.find(
-            (element) => element.idMail === mailId,
-          );
+            (element) => (element as MailDataProps).idMail === mailId,
+          ) as MailDataProps;
 
           if (
             elementAdded !== undefined &&
@@ -415,7 +442,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       // 3. Adding the all elements to the itemChecked array DONE
       // NOTE: All elements should be indicated in the UI.
       const { fnGetData } = get();
-      const currentSectionArray = fnGetData(path);
+      const currentSectionArray = fnGetData(path) as MailDataProps[];
       if (currentSectionArray !== undefined) {
         set({ itemChecked: currentSectionArray, allMailsChecked: true });
       }
@@ -438,11 +465,71 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       /* const currentSectionArray = fnGetData(path); */
       if (mailGlobalArray.length > 0) {
         // if the mail is read, it is will add to the itemChecked array
-        const allReadMails = mailGlobalArray.filter(
-          (mail) => !mail.mailRead,
-        );
+        const allReadMails = mailGlobalArray.filter((mail) => !mail.mailRead);
         console.log(allReadMails);
         set({ itemChecked: allReadMails, allMailsChecked: true });
+      }
+    },
+    fnFavoriteMarkTemplate: (mailId) => {
+      const { mailTemplates } = get();
+      const newTemplatesArray = mailTemplates.map((mail) => {
+        if ((mail as MailTemplateProps).id === mailId) {
+          return {
+            ...mail,
+            templateFavorite: !(mail as MailTemplateProps).templateFavorite,
+          };
+        }
+        return mail;
+      });
+      console.log("newTemplatesArray: ", newTemplatesArray);
+      set({ mailTemplates: newTemplatesArray });
+    },
+    fnGetFavoritiesTemplate: () => {
+      const { mailTemplates } = get();
+
+      const newFavoritiesTemplateArray: MailTemplateProps[] =
+        mailTemplates.filter(
+          (mail) => (mail as MailTemplateProps).templateFavorite,
+        );
+      // console.log("showFavoritiesTemplate: ", showFavoritiesTemplate);
+      set({ mailTemplatesFavorites: newFavoritiesTemplateArray });
+      return newFavoritiesTemplateArray;
+    },
+    fnGetDeletedTemplate: () => {
+      const { mailTemplatesDeleted } = get();
+      // const newDeletedTemplateArray: MailTemplateProps[];
+
+      if (mailTemplatesDeleted.length > 0) {
+        return mailTemplatesDeleted;
+      }
+      return [];
+    },
+    fnDeleteTemplate: (mailId) => {
+      const { mailTemplates, mailTemplatesDeleted } = get();
+
+      const templateToDeleted = mailTemplates.find(
+        (mail) => mail.id === mailId,
+      );
+
+      if (templateToDeleted) {
+        set({
+          mailTemplatesDeleted: [...mailTemplatesDeleted, templateToDeleted],
+        });
+      }
+
+      const newTemplateArray = mailTemplates.filter(
+        (mail) => mail.id !== mailId,
+      );
+      set({ mailTemplates: newTemplateArray });
+    },
+    fnGetAllTemplates: (path) => {
+      const { mailTemplates, fnGetAllData } = get();
+      console.log("mailTemplates: ", mailTemplates);
+      const dataToShow = fnGetAllData(path);
+      if (dataToShow !== undefined) {
+        console.log("mailTemplates: ", mailTemplates);
+        console.log("dataToShow: ", dataToShow);
+        set({ mailTemplates: dataToShow as MailTemplateProps[] });
       }
     },
     fnDeleteMailChecked: (path) => {
@@ -454,8 +541,10 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
         if (currentSectionArray !== undefined) {
           const newDeletedArray = currentSectionArray.filter(
             (element) =>
-              !itemChecked.find((item) => item.idMail === element.idMail),
-          );
+              !itemChecked.find(
+                (item) => item.idMail === (element as MailDataProps).idMail,
+              ),
+          ) as MailDataProps[];
           console.log(newDeletedArray);
           set({
             mailDeleted: [...mailDeleted, ...itemChecked],
@@ -473,7 +562,7 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       if (currentSectionArray !== undefined) {
         // console.log("mailId: ", mailId);
         const mailSelected = currentSectionArray.find(
-          (mail) => mail.idMail === mailId,
+          (mail) => (mail as MailDataProps).idMail === mailId,
         );
         if (mailSelected === undefined) {
           // console.log(mailSelected);

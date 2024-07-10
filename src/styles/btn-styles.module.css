@@ -39,7 +39,7 @@
 }
 
 .btnAdd:hover {
-  background-color: #52a5e0;
+  background-color: #0055cc;
   transition: all 0.2s ease-in-out;
 }
 .btnAdd_dark {
@@ -49,7 +49,7 @@
 }
 
 .btnAdd_dark:hover {
-  background-color: #033eb2;
+  background-color: #6ab6f0;
   transition: all 0.2s ease-in-out;
 }
 .btnCancel {
@@ -59,6 +59,7 @@
   /* height: 100%; */
 }
 .btnCancel:hover {
+  color: #004ee5;
   background-color: #eff3f5;
   transition: all 0.2s ease-in-out;
 }
@@ -69,7 +70,8 @@
   /* height: 100%; */
 }
 .btnCancel_dark:hover {
-  background-color: #c8cdd0;
+  color: #52a5e0;
+  background-color: #eff3f5;
   transition: all 0.2s ease-in-out;
 }
 .btnEdit_folder {

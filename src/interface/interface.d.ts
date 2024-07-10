@@ -375,6 +375,18 @@ interface MailSelectedArray {
   dir: string;
 }
 
+interface MailTemplateProps {
+  id: string;
+  title: string;
+  shortDescription: string;
+  bodyDescription: string;
+  createdAt: Date;
+  updatedAt: Date;
+  userCreatedAt: string;
+  userUpdatedAt: string;
+  templateFavorite: boolean;
+}
+
 interface TaskDayCardProps {
   idTask: string;
   title: string;
@@ -450,6 +462,7 @@ export type {
   NotitifacionProps,
   RegisterInfoProps,
   BoardSectionProps,
+  MailTemplateProps,
   SortableItemProps,
   AlarmFolderArray,
   StateSelectProps,

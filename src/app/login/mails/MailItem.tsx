@@ -19,7 +19,7 @@ import { MailDataProps } from "@/interface/interface";
 import { useMailStore } from "@/store/mail-store";
 import dayjs from "dayjs";
 import { BtnRecoverMail } from "./buttons/BtnRecoverMail";
-import convertHtmlToString from "@/utils/ConvertHtmlToString";
+import convertHtmlToString from "@/utils/convertHtmlToString";
 
 interface MailItemProps extends MailDataProps {
   path: string;

@@ -6,39 +6,51 @@ import {
   useMantineColorScheme,
   ScrollArea,
   Center,
+  Button,
   Badge,
   Stack,
   Group,
   Title,
+  Flex,
 } from "@mantine/core";
 import { ContainerInside } from "@/components/container/ContainerInside";
-import BtnMail from "@/components/buttons/BtnMail";
 import { useMailStore } from "@/store/mail-store";
 import { usePathname } from "next/navigation";
-import { MailDataProps } from "@/interface/interface";
+import { MailDataProps, MailTemplateProps } from "@/interface/interface";
 import { HiOutlineDocumentText, LuMailX } from "@/icons";
 import BtnDeleteMails from "./buttons/BtnDeleteMails";
+import BtnCreateMail from "@/components/buttons/BtnCreateMail";
+import classes from "@/styles/btn-styles.module.css";
+import Link from "next/link";
+import MailTemplateItem from "./formats/MailTemplateItem";
+import { FilterMailTemplate } from "./formats/FilterMailTemplate";
 
 export const AsideMailContainer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { mailGlobalArray, itemChecked, fnGetAllData } = useMailStore();
+  const { mailGlobalArray, itemChecked, fnGetAllData, mailTemplates, fnFavoriteMarkTemplate } =
+    useMailStore();
   // Url Path
   const path = usePathname();
   // Data to show
-  const [dataMails, setDataMails] = useState<MailDataProps[]>();
+  const [dataMails, setDataMails] = useState<
+    MailDataProps[] | MailTemplateProps[]
+  >();
   useEffect(() => {
     const data = fnGetAllData(path);
-    // const data2 = fnGetAllData(path);
-    // console.log("fnGetAllData: ", data);
-    // console.log("path: ", path);
+    console.log(path)
     setDataMails(data);
   }, [
+    fnFavoriteMarkTemplate,
     mailGlobalArray.length,
+    mailTemplates.length,
     dataMails?.length,
     mailGlobalArray,
+    mailTemplates,
     itemChecked,
     path,
   ]);
+
+  console.log(dataMails);
 
   function showMailArray() {
     if (dataMails !== undefined) {
@@ -50,33 +62,61 @@ export const AsideMailContainer = () => {
             offsetScrollbars
             scrollbarSize={2}
           >
-            {dataMails.map((item: MailDataProps, i: number) => {
+            {dataMails.map((item: MailDataProps | MailTemplateProps) => {
+              if (!path.includes("formats")) {
+                const {
+                  mailArchive,
+                  mailFavorite,
+                  description,
+                  userName,
+                  mailRead,
+                  idMail,
+                  title,
+                  photo,
+                  mail,
+                  date,
+                } = item as MailDataProps;
+                return (
+                  <MailItem
+                    path={path}
+                    description={description}
+                    mailArchive={mailArchive}
+                    mailFavorite={mailFavorite}
+                    mailRead={mailRead}
+                    userName={userName}
+                    idMail={idMail}
+                    photo={photo}
+                    title={title}
+                    date={date}
+                    mail={mail}
+                    key={idMail}
+                  />
+                );
+              }
+
               const {
-                mailArchive,
-                mailFavorite,
-                description,
-                userName,
-                mailRead,
-                idMail,
+                templateFavorite,
+                shortDescription,
+                bodyDescription,
+                userCreatedAt,
+                userUpdatedAt,
+                createdAt,
+                updatedAt,
                 title,
-                photo,
-                mail,
-                date,
-              } = item as MailDataProps;
+                id,
+              } = item as MailTemplateProps;
               return (
-                <MailItem
-                  path={path}
-                  description={description}
-                  mailArchive={mailArchive}
-                  mailFavorite={mailFavorite}
-                  mailRead={mailRead}
-                  userName={userName}
-                  idMail={idMail}
-                  photo={photo}
+                <MailTemplateItem
+                  templateFavorite={templateFavorite}
+                  bodyDescription={bodyDescription}
+                  shortDescription={shortDescription}
+                  userCreatedAt={userCreatedAt}
+                  userUpdatedAt={userUpdatedAt}
+                  createdAt={createdAt}
+                  updatedAt={updatedAt}
                   title={title}
-                  date={date}
-                  mail={mail}
-                  key={idMail}
+                  id={id}
+                  key={id}
                 />
               );
             })}
@@ -124,7 +164,34 @@ export const AsideMailContainer = () => {
   return (
     <ContainerInside width="35%" allWhite={false} withBorder>
       <Stack gap={4} style={{ height: "100%" }}>
-        {itemChecked.length > 0 ? null : <BtnMail />}
+        {itemChecked.length > 0 ? null : path.includes("formats") ? (
+          <Flex align={"center"} gap={8}>
+            <Link
+              href={"/login/mails/formats/create"}
+              style={{ width: "100%", maxWidth: "100%" }}
+            >
+              <Button
+                fullWidth
+                leftSection={<HiOutlineDocumentText />}
+                styles={{
+                  section: { fontSize: "1.2rem" },
+                  root: { padding: "0.5rem" },
+                }}
+                classNames={{
+                  root:
+                    colorScheme === "light"
+                      ? classes.btnAdd
+                      : classes.btnAdd_dark,
+                }}
+              >
+                Crear Nuevo Formato
+              </Button>
+            </Link>
+            <FilterMailTemplate />
+          </Flex>
+        ) : (
+          <BtnCreateMail />
+        )}
         {itemChecked.length > 0 && <BtnDeleteMails />}
         {showMailArray()}
         <Group

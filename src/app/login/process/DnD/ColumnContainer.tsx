@@ -42,38 +42,6 @@ export function ColumnContainer({
     },
   });
 
-  function bgContainersSelected(bgColor: string) {
-    const colorsArray = [
-      {
-        degreeStr: "Espera",
-        classSelected: classes.espera,
-      },
-      {
-        degreeStr: "Generacion",
-        classSelected: classes.generacion,
-      },
-      {
-        degreeStr: "Pagado",
-        classSelected: classes.pagado,
-      },
-      {
-        degreeStr: "Entregado",
-        classSelected: classes.entregado,
-      },
-      {
-        degreeStr: "Rechazado",
-        classSelected: classes.rechazado,
-      },
-    ];
-
-    const colorSelected = colorsArray.find(
-      (colorDegree) =>
-        colorDegree.degreeStr.toLowerCase() === bgColor.toLowerCase(),
-    );
-
-    return colorSelected;
-  }
-
   /* function changeProperty(
     columnTitle: string,
     arr: CardProcessProps[],
