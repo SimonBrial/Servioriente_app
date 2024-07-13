@@ -19,11 +19,11 @@ export default function MailLayout({
   const mailSections = [
     { value: "Recibidos", icon: <IoMailUnreadOutline />, dir: "/login/mails" },
     { value: "Enviados", icon: <BiMailSend />, dir: "/login/mails/sent" },
-    {
+    /* {
       value: "Plantillas",
       icon: <HiOutlineDocumentText />,
       dir: "/login/mails/formats",
-    },
+    }, */
     {
       value: "Favoritos",
       icon: <HiOutlineStar />,

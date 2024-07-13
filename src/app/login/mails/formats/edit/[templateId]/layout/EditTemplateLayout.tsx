@@ -25,16 +25,12 @@ import { templateSchema } from "@/schema/TemplateSchema";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
 import { HiOutlineDocumentAdd, IoClose, MdTitle } from "@/icons";
 import TextEditor from "@/components/TextEditor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { notifications } from "@mantine/notifications";
 import convertHtmlToString from "@/utils/convertHtmlToString";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { MailTemplateProps } from "@/interface/interface";
-
-/* const content =
-  '<h2 style="text-align: center;">Welcome to Mantine rich text editor</h2><p><code>RichTextEditor</code> component focuses on usability and is designed to be as simple as possible to bring a familiar editing experience to regular users. <code>RichTextEditor</code> is based on <a href="https://tiptap.dev/" rel="noopener noreferrer" target="_blank">Tiptap.dev</a> and supports all of its features:</p><ul><li>General text formatting: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strike-through</s> </li><li>Headings (h1-h6)</li><li>Sub and super scripts (<sup>&lt;sup /&gt;</sup> and <sub>&lt;sub /&gt;</sub> tags)</li><li>Ordered and bullet lists</li><li>Text align&nbsp;</li><li>And all <a href="https://tiptap.dev/extensions" target="_blank" rel="noopener noreferrer">other extensions</a></li></ul>'; */
-
-
+import { useMailStore } from "@/store/mail-store";
 
 const initialValues: MailTemplateProps = {
   templateFavorite: false,
@@ -48,37 +44,69 @@ const initialValues: MailTemplateProps = {
   userUpdatedAt: "Simon Briceño",
 };
 
-export default function CreateTemplateLayout() {
+export default function EditTemplateLayout() {
   const [editorError, setEditorError] = useState("");
+  const [templateEdit, setTemplateEdit] = useState<MailTemplateProps | {}>({});
   const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
+  const { fnGetTemplateById } = useMailStore();
+  const path = usePathname();
+
+  useEffect(() => {
+    const pathId = path.split("/");
+    const dataTemplate = fnGetTemplateById(pathId[pathId.length - 1]);
+    // console.log("PathId: ", pathId[pathId.length - 1])
+    // console.log("dataTemplate: ", dataTemplate)
+    if (!dataTemplate) {
+      setTemplateEdit({});
+    }
+    setTemplateEdit(dataTemplate);
+  }, [path]);
+
+  console.log("templateEdit: ", templateEdit);
 
   const {
     formState: { errors },
     handleSubmit,
     register,
+    setValue,
     control,
-    watch,
     reset,
   } = useForm<MailTemplateProps>({
     mode: "onChange",
     resolver: zodResolver(templateSchema),
-    defaultValues: initialValues,
+    defaultValues: templateEdit
+      ? {
+          bodyDescription: (templateEdit as MailTemplateProps).bodyDescription,
+          createdAt: (templateEdit as MailTemplateProps).createdAt,
+          id: (templateEdit as MailTemplateProps).id,
+          shortDescription: (templateEdit as MailTemplateProps)
+            .shortDescription,
+          templateFavorite: (templateEdit as MailTemplateProps)
+            .templateFavorite,
+          title: (templateEdit as MailTemplateProps).title,
+          updatedAt: (templateEdit as MailTemplateProps).updatedAt,
+          userCreatedAt: (templateEdit as MailTemplateProps).userCreatedAt,
+          userUpdatedAt: (templateEdit as MailTemplateProps).userUpdatedAt,
+        }
+      : {},
+    values: templateEdit
+      ? {
+          bodyDescription: (templateEdit as MailTemplateProps).bodyDescription,
+          createdAt: (templateEdit as MailTemplateProps).createdAt,
+          id: (templateEdit as MailTemplateProps).id,
+          shortDescription: (templateEdit as MailTemplateProps)
+            .shortDescription,
+          templateFavorite: (templateEdit as MailTemplateProps)
+            .templateFavorite,
+          title: (templateEdit as MailTemplateProps).title,
+          updatedAt: (templateEdit as MailTemplateProps).updatedAt,
+          userCreatedAt: (templateEdit as MailTemplateProps).userCreatedAt,
+          userUpdatedAt: (templateEdit as MailTemplateProps).userUpdatedAt,
+        }
+      : initialValues,
   });
 
-  // const shortDescription = watch("shortDescription");
-  // const [dataTemplate, setDataTemplate] = useState(shortDescription);
-  // console.log(s);
-
-  /* const handleEditorContent = (html: string) => {
-    console.log("html: ", html);
-    if (html) {
-      setDataTemplate(html);
-    }
-  }; */
-  // console.log("dataTemplate: ", dataTemplate);
-  const body = watch("bodyDescription");
-  console.log(body);
   const onSubmit = async (data: MailTemplateProps) => {
     try {
       // TODO: The request should be validated before pushing to the template section.
@@ -92,33 +120,36 @@ export default function CreateTemplateLayout() {
       }
       setEditorError("");
 
-      const dataTemplate: MailTemplateProps = {
-        ...data,
-        id: initialValues.id,
-        createdAt: initialValues.createdAt,
-        updatedAt: initialValues.updatedAt,
-        userCreatedAt: initialValues.userCreatedAt,
-        userUpdatedAt: initialValues.userUpdatedAt,
-      };
-      notifications.show({
-        id: crypto.randomUUID(),
-        color: "#2BDD66",
-        title: "La Plantilla fue creada 📄",
-        message:
-          "Se ha creado la plantilla para los correos satisfactoriamente 😎!",
-        autoClose: 1000,
-        withCloseButton: true,
-      });
+      if (!templateEdit) {
+        console.log("Somthing went wrong");
+      }
 
-      console.log(dataTemplate);
-      // return dataTemplate;
-      reset(initialValues);
-      router.push("/login/mails/formats");
+      if (templateEdit && data) {
+        const dataTemplate: MailTemplateProps = {
+          ...data,
+          id: (templateEdit as MailTemplateProps).id,
+          createdAt: (templateEdit as MailTemplateProps).createdAt,
+          updatedAt: (templateEdit as MailTemplateProps).updatedAt,
+          userCreatedAt: (templateEdit as MailTemplateProps).userCreatedAt,
+          userUpdatedAt: (templateEdit as MailTemplateProps).userUpdatedAt,
+        };
+        notifications.show({
+          id: crypto.randomUUID(),
+          color: "#2BDD66",
+          title: "La Plantilla fue Editada 📄",
+          message:
+            "Se ha editado la plantilla para los correos satisfactoriamente 😎!",
+          autoClose: 1000,
+          withCloseButton: true,
+        });
+        console.log(dataTemplate);
+        // reset(initialValues);
+        // router.push("/login/mails/formats");
+      }
     } catch (err) {
       console.log(err);
     }
   };
-
   return (
     <ContainerInside width="100%" allWhite={false} withBorder>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -193,13 +224,16 @@ export default function CreateTemplateLayout() {
             <Controller
               name={"bodyDescription"}
               control={control}
-              render={({ field: { value, onChange } }) => (
-                <TextEditor
-                  errorDescription={errors.bodyDescription?.message}
-                  onEditorContent={onChange}
-                  description={value}
-                />
-              )}
+              render={({ field: { value, onChange } }) => {
+                console.log("value: ", value);
+                return (
+                  <TextEditor
+                    errorDescription={errors.bodyDescription?.message}
+                    onEditorContent={(html) => setValue("bodyDescription", html)}
+                    description={value}
+                  />
+                );
+              }}
             />
           </ScrollArea>
           {/* <Text size="sm">{errors.bodyDescription?.message}</Text> */}
@@ -212,7 +246,7 @@ export default function CreateTemplateLayout() {
               fullWidth
               color="red"
               onClick={() => {
-                reset(initialValues);
+                // reset(initialValues);
                 router.push("/login/mails/formats");
               }}
               leftSection={<IoClose />}
@@ -249,23 +283,4 @@ export default function CreateTemplateLayout() {
       </form>
     </ContainerInside>
   );
-}
-
-{
-  /* <FileButton
-                onChange={(payload) => {
-                  setFile(payload);
-                  console.log(payload)
-                  if (payload && editor) {
-                    editor.chain().focus().setImage({ src: payload.name }).run();
-                  }
-                }}
-                accept="image/png,image/jpeg"
-              >
-                {(props) => (
-                  <ActionIcon {...props} variant="default">
-                    <LuImagePlus />
-                  </ActionIcon>
-                )}
-              </FileButton> */
 }

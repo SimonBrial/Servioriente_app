@@ -12,8 +12,9 @@ import {
 } from "@mantine/core";
 import dayjs from "dayjs";
 import { usePathname } from "next/navigation";
-import BtnDeleteTemplate from "../BtnDeleteTemplate";
+import BtnDeleteTemplate from "../buttons/BtnDeleteTemplate";
 import { useMailStore } from "@/store/mail-store";
+import BtnEditMailTemplate from "../buttons/BtnEditMailTemplate";
 
 interface MailTemplateItemProps extends MailTemplateProps {
   templateFavorite: boolean;
@@ -84,6 +85,7 @@ export default function MailTemplateItem({
                 mailId={id}
                 path={path}
               />
+              <BtnEditMailTemplate templateId={id} />
               <BtnDeleteTemplate mailId={id} path={path} />
             </Flex>
           </Flex>

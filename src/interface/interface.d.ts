@@ -357,6 +357,7 @@ interface AlarmFolderArray {
 }
 
 interface MailDataProps {
+  idMail: string;
   userName: string;
   mail: string | string[];
   title: string;
@@ -366,8 +367,8 @@ interface MailDataProps {
   mailRead: boolean;
   mailFavorite: boolean;
   mailArchive: boolean;
+  docs?: string | string[];
   // mailStatus: MailStatus;
-  idMail: string;
 }
 
 interface MailSelectedArray {

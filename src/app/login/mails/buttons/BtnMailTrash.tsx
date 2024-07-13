@@ -10,10 +10,10 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import DeleteMailLayout from "./layout/DeleteMailLayout";
 import { useState } from "react";
 import { MailDataProps } from "@/interface/interface";
 import classes from "@/styles/btn-styles.module.css";
+import DeleteMailLayout from "../layout/DeleteMailLayout";
 
 export default function BtnMailTrash({
   mailId,

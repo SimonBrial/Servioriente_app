@@ -1,3 +1,5 @@
+"use client";
+
 import { HiOutlineTrash } from "@/icons";
 import { Center, UnstyledButton, useMantineColorScheme } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";

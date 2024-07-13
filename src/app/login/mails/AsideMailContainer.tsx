@@ -17,7 +17,7 @@ import { ContainerInside } from "@/components/container/ContainerInside";
 import { useMailStore } from "@/store/mail-store";
 import { usePathname } from "next/navigation";
 import { MailDataProps, MailTemplateProps } from "@/interface/interface";
-import { HiOutlineDocumentText, LuMailX } from "@/icons";
+import { HiOutlineDocumentText, HiOutlinePencil, LuMailX } from "@/icons";
 import BtnDeleteMails from "./buttons/BtnDeleteMails";
 import BtnCreateMail from "@/components/buttons/BtnCreateMail";
 import classes from "@/styles/btn-styles.module.css";
@@ -27,8 +27,13 @@ import { FilterMailTemplate } from "./formats/FilterMailTemplate";
 
 export const AsideMailContainer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { mailGlobalArray, itemChecked, fnGetAllData, mailTemplates, fnFavoriteMarkTemplate } =
-    useMailStore();
+  const {
+    mailGlobalArray,
+    itemChecked,
+    fnGetAllData,
+    mailTemplates,
+    fnFavoriteMarkTemplate,
+  } = useMailStore();
   // Url Path
   const path = usePathname();
   // Data to show
@@ -37,7 +42,7 @@ export const AsideMailContainer = () => {
   >();
   useEffect(() => {
     const data = fnGetAllData(path);
-    console.log(path)
+    console.log(path);
     setDataMails(data);
   }, [
     fnFavoriteMarkTemplate,
@@ -190,7 +195,20 @@ export const AsideMailContainer = () => {
             <FilterMailTemplate />
           </Flex>
         ) : (
-          <BtnCreateMail />
+          <Link href={"/login/mails/create"}>
+              <Button
+                fullWidth
+              leftSection={<HiOutlinePencil />}
+              classNames={{
+                root:
+                  colorScheme === "light"
+                    ? classes.btnAdd
+                    : classes.btnAdd_dark,
+              }}
+            >
+              Crear Nuevo Correo
+            </Button>
+          </Link>
         )}
         {itemChecked.length > 0 && <BtnDeleteMails />}
         {showMailArray()}

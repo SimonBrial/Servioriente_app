@@ -51,7 +51,8 @@ TextEditorProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   // console.log("description: ", convertHtmlToString(description));
   // console.log("description: ", convertHtmlToString(description).length);
-
+  // console.log("From TextEditor Component: ", description)
+  
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -71,9 +72,12 @@ TextEditorProps): JSX.Element {
     autofocus: false,
     onUpdate: ({ editor }) => {
       onEditorContent(editor.getHTML());
-      // onUpdate(editor.getHTML());
+      // console.log(editor.getHTML());
     },
   });
+  // console.log("Editor: ", editor)
+  // console.log("From TextEditor Component: ", description)
+
 
   /* const handleEditor = () => {
     if (!editor) {

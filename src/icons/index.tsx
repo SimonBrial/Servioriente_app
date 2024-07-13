@@ -96,6 +96,7 @@ import {
   MdOutlineMarkChatUnread,
   MdOutlineDragIndicator,
   MdOutlineAccessAlarms,
+  MdOutlineVideoLibrary,
   MdOutlineEmojiEvents,
   MdOutlineEventNote,
   MdOutlineCategory,
@@ -128,8 +129,10 @@ import {
   BiAlarmOff,
 } from "react-icons/bi";
 import { PiRobot, PiFolderSimpleDashed } from "react-icons/pi";
-import { FaFacebookF, FaChartLine, FaChartColumn } from "react-icons/fa6";
+import { FaFacebookF, FaChartLine, FaChartColumn, FaRegFilePowerpoint, FaAt } from "react-icons/fa6";
 import { RiDeviceRecoverLine } from "react-icons/ri";
+import { GrDocumentExcel } from "react-icons/gr";
+import { FaQuestion } from "react-icons/fa6";
 
 export {
   AiOutlineFundProjectionScreen,
@@ -142,6 +145,7 @@ export {
   MdOutlineInsertEmoticon,
   MdOutlineAlternateEmail,
   MdOutlineDragIndicator,
+  MdOutlineVideoLibrary,
   HiOutlineDotsVertical,
   HiOutlineDocumentText,
   MdOutlineAccessAlarms,
@@ -153,6 +157,7 @@ export {
   IoChevronDownOutline,
   IoCloseCircleOutline,
   HiOutlineExclamation,
+  FaRegFilePowerpoint,
   RiDeviceRecoverLine,
   IoMailUnreadOutline,
   HiOutlineUserCircle,
@@ -187,6 +192,7 @@ export {
   HiOutlinePencil,
   AiOutlineIdcard,
   MdArrowDropDown,
+  GrDocumentExcel,
   IoLogoInstagram,
   MdOutlineTitle,
   MdOutlineImage,
@@ -221,6 +227,7 @@ export {
   HiPaperClip,
   BsMoonStars,
   BiBellPlus,
+  FaQuestion,
   TbTemplate,
   TbMailPlus,
   BiMailSend,
@@ -251,4 +258,5 @@ export {
   HiLink,
   HiMenu,
   IoSend,
+  FaAt,
 };

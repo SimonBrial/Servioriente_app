@@ -46,6 +46,7 @@ interface MailStoreProps {
   fnGetDeletedTemplate: () => MailTemplateProps[];
   fnDeleteTemplate: (mailId: string) => void;
   fnGetAllTemplates: (path: string) => void;
+  fnGetTemplateById: (mailId: string) => MailTemplateProps | {};
   // Secondary functions
   fnGetAllData: (
     path: string,
@@ -529,13 +530,23 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
     },
     fnGetAllTemplates: (path) => {
       const { mailTemplates, fnGetAllData } = get();
-      console.log("mailTemplates: ", mailTemplates);
+      // console.log("mailTemplates: ", mailTemplates);
       const dataToShow = fnGetAllData(path);
       if (dataToShow !== undefined) {
-        console.log("mailTemplates: ", mailTemplates);
-        console.log("dataToShow: ", dataToShow);
+        // console.log("mailTemplates: ", mailTemplates);
+        // console.log("dataToShow: ", dataToShow);
         set({ mailTemplates: dataToShow as MailTemplateProps[] });
       }
+    },
+    fnGetTemplateById: (templateId) => {
+      // console.log(templateId)
+      const { mailTemplates } = get();
+      const templateFounded = mailTemplates.find((template) => template.id === templateId);
+      // console.log("templateFounded: ", templateFounded);
+      if (!templateFounded) {
+        return {}
+      }
+      return templateFounded;
     },
     fnDeleteMailChecked: (path) => {
       const { itemChecked, mailDeleted, fnGetData } = get();

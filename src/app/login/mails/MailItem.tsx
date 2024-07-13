@@ -14,12 +14,12 @@ import { useEffect, useState } from "react";
 import BtnReadMail from "@/components/buttons/BtnReadMail";
 import BtnArchive from "@/components/buttons/BtnArchive";
 import BtnFavorities from "@/components/buttons/BtnFavorities";
-import BtnMailTrash from "./BtnMailTrash";
 import { MailDataProps } from "@/interface/interface";
 import { useMailStore } from "@/store/mail-store";
 import dayjs from "dayjs";
 import { BtnRecoverMail } from "./buttons/BtnRecoverMail";
 import convertHtmlToString from "@/utils/convertHtmlToString";
+import BtnMailTrash from "./buttons/BtnMailTrash";
 
 interface MailItemProps extends MailDataProps {
   path: string;

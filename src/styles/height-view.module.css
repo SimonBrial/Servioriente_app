@@ -197,6 +197,16 @@
     height: 44vh;
   }
 }
+@media (min-width: 1280px) {
+  .archives_scroll_container {
+    height: 41vh;
+  }
+}
+@media (min-width: 1281px) {
+  .archives_scroll_container {
+    height: 28vh;
+  }
+}
 /* -------------------------- Calendar Section -------------------------- */
 @media (min-width: 1280px) {
   .calendarColumn__right_container {

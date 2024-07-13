@@ -32,7 +32,7 @@ export default function BtnCreateMail() {
         }}
       >
         <Stack gap={8}>
-          <NewEmailLayout />
+          {/* <NewEmailLayout /> */}
           <Flex gap={4}>
             <BtnCancel fnCancel={close} key={crypto.randomUUID()} />
             <BtnSend

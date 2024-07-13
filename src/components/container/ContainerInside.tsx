@@ -23,7 +23,7 @@ export const ContainerInside = ({
         root: {
           width: "100%",
           maxWidth: "100%",
-          height: "100%",
+          // height: "100%",
           border: withBorder
             ? colorScheme === "light"
               ? `1px solid ${theme.colors.lightTheme[2]}`
