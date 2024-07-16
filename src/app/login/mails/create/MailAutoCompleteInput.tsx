@@ -398,7 +398,7 @@ export default function MailAutoCompleteInput({
               leftSection={<FaAt />}
               error={
                 errorDescription ? null : (
-                  <Text size={"xs"} color="red">
+                  <Text size={"xs"} style={{ color: "red" }}>
                     No se pueden enviar a mas de 5 correos
                   </Text>
                 )

@@ -52,7 +52,7 @@ export default function BtnAlarmAction({
         }}
       >
         <Stack>
-          <DeleteAlarmLayout />
+          <DeleteAlarmLayout alarmId={id} folderName="" />
           <Flex align={"center"} gap={"sm"} style={{ height: "2.25rem" }}>
             <Button
               onClick={close}

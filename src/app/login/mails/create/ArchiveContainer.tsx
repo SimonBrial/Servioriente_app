@@ -25,15 +25,22 @@ const CloseIcon: FileInputProps["valueComponent"] = ({ value }) => {
   return <></>;
 };
 
-export default function ArchiveContainer({ arr }: { arr: File[] }) {
+export default function ArchiveContainer({
+  arr,
+  setDocs,
+}: {
+  arr: File[];
+  setDocs: (arr: File[]) => void;
+}) {
   const [files, setFiles] = useState<File[]>([]);
   const { colorScheme } = useMantineColorScheme();
 
   useEffect(() => {
     setFiles(arr);
+    // setDocs(files);
   }, [arr]);
 
-  console.log(files.length);
+  // console.log("files Form archive container: ", files);
 
   const deleteElement = (archiveName: string) => {
     if (files.length > 0) {
@@ -107,7 +114,11 @@ export default function ArchiveContainer({ arr }: { arr: File[] }) {
         <FileInput
           valueComponent={CloseIcon}
           value={files}
-          onChange={setFiles}
+          onChange={(event) => {
+            // console.log("event: ", event)
+            setFiles(event);
+            setDocs(event);
+          }}
           leftSection={<HiPaperClip />}
           multiple
           leftSectionPointerEvents="none"
@@ -138,7 +149,10 @@ export default function ArchiveContainer({ arr }: { arr: File[] }) {
                 <ActionIcon
                   color="#F0185C"
                   variant="subtle"
-                  onClick={() => setFiles([])}
+                  onClick={() => {
+                    setFiles([]);
+                    setDocs([]);
+                  }}
                 >
                   <HiOutlineTrash />
                 </ActionIcon>

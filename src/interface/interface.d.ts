@@ -367,7 +367,7 @@ interface MailDataProps {
   mailRead: boolean;
   mailFavorite: boolean;
   mailArchive: boolean;
-  docs?: string | string[];
+  docs?: File | File[];
   // mailStatus: MailStatus;
 }
 

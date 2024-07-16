@@ -1,6 +1,6 @@
 "use client";
 
-import { IoClose, IoIosSend, MdOutlineImage, MdTitle } from "@/icons";
+import { FaAt, IoClose, IoIosSend, MdOutlineImage, MdTitle } from "@/icons";
 import {
   useMantineColorScheme,
   ScrollArea,
@@ -24,58 +24,92 @@ import ArchiveContainer from "../ArchiveContainer";
 import TextEditor from "@/components/TextEditor";
 import heightClasses from "@/styles/height-view.module.css";
 import MailAutoCompleteInput from "../MailAutoCompleteInput";
-
 import z from "zod";
+import { useRouter } from "next/navigation";
+import { notifications } from "@mantine/notifications";
+
+const initialValues: MailDataProps = {
+  date: new Date(),
+  description: "<p></p>",
+  idMail: crypto.randomUUID(),
+  mail: [""],
+  mailArchive: false,
+  mailFavorite: false,
+  mailRead: true,
+  title: "",
+  userName: "",
+  photo: "",
+  docs: [],
+};
 
 export default function CreateMailLayout() {
-  const [editorError, setEditorError] = useState("");
-  const [mails, setMails] = useState<string | string[]>([]);
+  // const [mails, setMails] = useState<string | string[]>([]);
   const [docs, setDocs] = useState<File[]>([]);
   const { colorScheme } = useMantineColorScheme();
-
-  const exampleSchema = z
-    .string()
-    .array()
-    .max(3, { message: "Maximo 10 correos" });
+  const router = useRouter();
 
   const {
     formState: { errors },
     handleSubmit,
     register,
     control,
-    watch,
     reset,
   } = useForm<MailDataProps>({
     mode: "onChange",
     resolver: zodResolver(mailSchema),
-    defaultValues: {},
+    defaultValues: initialValues,
   });
 
-  const m = watch("mail");
-  console.log(mails);
-  console.log(exampleSchema.safeParse(mails));
-  console.log(exampleSchema.safeParse(m));
-
-  const handleMailsChange = (newMails: string | string[]) => {
+  /* const handleMailsChange = (newMails: string | string[]) => {
     setMails(newMails);
-  };
-  return (
-    <ContainerInside width="100%" allWhite={false} withBorder>
-      <form onSubmit={handleSubmit((data) => {
+  }; */
+
+  const fnSubmit = async (data: MailDataProps) => {
+    try {
+      /* if (Object.keys(errors).length > 0) {
+        notifications.show({
+          id: crypto.randomUUID(),
+          color: "#F0185C",
+          title: "Errores Existentes",
+          message:
+            "Hay errores existentes en el formulario, por favor corregirlos",
+          autoClose: 1000,
+          withCloseButton: true,
+        });
+      } */
+      if (data !== undefined && Object.keys(errors).length === 0) {
         const dataComplete: MailDataProps = {
           date: new Date(),
           description: data.description,
           idMail: crypto.randomUUID(),
-          mail: mails,
+          mail:
+            typeof data.mail === "string" ? data.mail.split(",") : data.mail,
           mailArchive: false,
           mailFavorite: false,
           mailRead: false,
           title: data.title,
-          userName: data.userName,
-          docs: data.docs
-        }
-        console.log(dataComplete)
-      })}>
+          userName: initialValues.userName,
+          docs: docs,
+        };
+        console.log(dataComplete);
+        notifications.show({
+          id: crypto.randomUUID(),
+          color: "#2BDD66",
+          title: "Correo Enviado 📨",
+          message: "Correo enviado satisfactoriamente!",
+          autoClose: 1000,
+          withCloseButton: true,
+        });
+        reset(initialValues);
+        router.push("/login/mails");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return (
+    <ContainerInside width="100%" allWhite={false} withBorder>
+      <form onSubmit={handleSubmit(fnSubmit)}>
         <Stack gap={"sm"} align="end">
           <HorizontalInputLayout
             asterisk
@@ -91,18 +125,11 @@ export default function CreateMailLayout() {
             title="Asunto"
           />
           <GeneralDivider orientation="horizontal" />
-
-          <MailAutoCompleteInput
-            handleMails={handleMailsChange}
-            errorDescription={exampleSchema.safeParse(mails).success}
-          />
-          {/* {!exampleSchema.safeParse(mails).success ? <>error</> : null} */}
-          {/* <GeneralDivider orientation="horizontal" />
           <HorizontalInputLayout
             asterisk
             control={control}
             errorDescription={errors.mail?.message}
-            icon={<MdTitle />}
+            icon={<FaAt />}
             inputSize="82%"
             label="mail"
             max={20}
@@ -110,11 +137,12 @@ export default function CreateMailLayout() {
             register={register}
             required
             title="Destinatarios"
-          /> */}
+          />
           <GeneralDivider orientation="horizontal" />
           <Flex style={{ width: "100%", position: "relative" }} gap={8}>
             <Stack align={"space-between"} style={{ width: "100%" }}>
               <Flex
+                align={"end"}
                 gap={10}
                 style={{
                   width: "100%",
@@ -124,7 +152,6 @@ export default function CreateMailLayout() {
                   order={4}
                   styles={(theme) => ({
                     root: {
-                      // width: "100%",
                       color:
                         colorScheme === "light"
                           ? theme.colors.lightTheme[3]
@@ -134,8 +161,8 @@ export default function CreateMailLayout() {
                 >
                   Cuerpo del Correo
                 </Title>
-                <Text size="xs" style={{ color: "#F0185C" }}>
-                  {editorError}
+                <Text size="xs" style={{ color: "red" }}>
+                  {errors.description?.message}
                 </Text>
               </Flex>
               <Flex gap={8} style={{ height: "100%" }}>
@@ -171,11 +198,11 @@ export default function CreateMailLayout() {
                     )}
                   />
                 </ScrollArea>
-                <ArchiveContainer arr={docs} />
+                <ArchiveContainer arr={docs} setDocs={setDocs} />
               </Flex>
             </Stack>
           </Flex>
-          {/* <Text size="sm">{errors.bodyDescription?.message}</Text> */}
+          {/* <Text size="sm">{errors.description?.message}</Text> */}
           <Flex
             gap={8}
             style={{ width: "40%", marginRight: "0" }}
@@ -184,10 +211,10 @@ export default function CreateMailLayout() {
             <Button
               fullWidth
               color="red"
-              /* onClick={() => {
+              onClick={() => {
                 reset(initialValues);
                 router.push("/login/mails/formats");
-              }} */
+              }}
               leftSection={<IoClose />}
               styles={(theme) => ({
                 section: {
