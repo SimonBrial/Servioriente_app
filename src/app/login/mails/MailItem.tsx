@@ -39,6 +39,7 @@ export default function MailItem({
 }: MailItemProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const {
+    allMailsChecked,
     mailGlobalArray,
     mailArchived,
     fnCheckMail,
@@ -49,24 +50,28 @@ export default function MailItem({
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (itemChecked.length > 0) {
+    if (itemChecked.length > 0 /* && allMailsChecked */) {
       itemChecked.find((item) => {
         if (item.idMail === idMail) {
-          setChecked(!checked);
+          // console.log("from MailItem (useEffect) --> itemChecked: ", itemChecked);
+          setChecked(true);
         }
       });
     }
-    if (itemChecked.length === 0) { 
-      setChecked(checked);
+
+    if (itemChecked.length === 0 && !allMailsChecked) {
+      setChecked(false);
     }
   }, [
-    itemChecked,
-    itemChecked.length,
-    mailRead,
-    mailArchived,
-    mailGlobalArray,
     mailArchived as MailDataProps[],
+    // itemChecked.length,
+    itemChecked,
+    allMailsChecked,
+    mailGlobalArray,
+    mailArchived,
+    mailRead,
   ]);
+  // console.log("from MailItem --> itemChecked: ", itemChecked);
 
   // console.log("checked from MailItem component: ", checked);
   // console.log("itemChecked from MailItem component: ", itemChecked);
@@ -108,9 +113,9 @@ export default function MailItem({
               console.log(!checked ? "yes" : "no");
               fnCheckMail(idMail, path, checked);
             }} */
-            onChange={(event) => {
-              setChecked(event.target.checked);
-              fnCheckMail(idMail, path, checked);
+            onChange={(e) => {
+              setChecked(e.currentTarget.checked);
+              fnCheckMail(idMail, path, e.currentTarget.checked);
             }}
             checked={checked}
             color="blue"
@@ -160,7 +165,10 @@ export default function MailItem({
                 },
               })}
             >
-              <BtnReadMail status={mailRead} mailId={idMail} path={path} />
+              {!path.includes("mails/sent") ? (
+                <BtnReadMail status={mailRead} mailId={idMail} path={path} />
+              ) : null}
+
               <BtnFavorities
                 status={mailFavorite}
                 mailId={idMail}

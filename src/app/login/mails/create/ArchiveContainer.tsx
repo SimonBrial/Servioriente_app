@@ -3,20 +3,21 @@
 import { ContainerInside } from "@/components/container/ContainerInside";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import {
+  useMantineColorScheme,
+  FileInputProps,
   ScrollArea,
   ActionIcon,
+  FileInput,
   Stack,
   Title,
   Flex,
-  FileInput,
-  useMantineColorScheme,
-  FileInputProps,
 } from "@mantine/core";
 import ArchiveItem from "./ArchiveItem";
 import { HiPaperClip, HiOutlineTrash } from "@/icons";
 import TooltipLayout from "@/components/TooltipLayout";
 import { useEffect, useState } from "react";
 import heightClass from "@/styles/height-view.module.css";
+import { useMailStore } from "@/store/mail-store";
 
 const CloseIcon: FileInputProps["valueComponent"] = ({ value }) => {
   if (value === null) {
@@ -37,7 +38,6 @@ export default function ArchiveContainer({
 
   useEffect(() => {
     setFiles(arr);
-    // setDocs(files);
   }, [arr]);
 
   // console.log("files Form archive container: ", files);
@@ -46,6 +46,7 @@ export default function ArchiveContainer({
     if (files.length > 0) {
       const filesFiltered = files.filter((file) => file.name !== archiveName);
       setFiles(filesFiltered);
+      setDocs(filesFiltered);
     }
   };
 
@@ -54,6 +55,7 @@ export default function ArchiveContainer({
     const sizeFormated = (totalSize / 1024 / 1024).toFixed(2);
 
     if (parseFloat(sizeFormated) < 25.0) {
+      // fnReadyToSendMail(true);
       return (
         <Flex
           gap={6}
@@ -78,6 +80,8 @@ export default function ArchiveContainer({
         </Flex>
       );
     }
+
+    // fnReadyToSendMail(false);
     return (
       <Flex
         gap={6}

@@ -1,4 +1,4 @@
-export function filterData(data: any[], searchValue: string) {
+export function filterData(data: any[], searchValue: string): any[] {
   // console.log(data)
   // console.log(searchValue)
   if (searchValue.trim() !== "") {

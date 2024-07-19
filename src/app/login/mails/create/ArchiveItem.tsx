@@ -19,7 +19,9 @@ import {
   MdOutlineImage,
   FaQuestion,
   IoClose,
+  IoOpenOutline,
 } from "@/icons";
+import Link from "next/link";
 
 export default function ArchiveItem({
   handleDelete,
@@ -69,79 +71,103 @@ export default function ArchiveItem({
   };
   return (
     <TooltipLayout label={doc.name} position="top-end">
-      <Group
-        align="center"
-        justify="center"
-        styles={(theme) => ({
-          root: {
-            borderRadius: "6px",
-            backgroundColor:
-              colorScheme === "light"
-                ? theme.colors.lightTheme[1]
-                : theme.colors.darkTheme[9],
-            border:
-              colorScheme === "light"
-                ? `1px solid ${theme.colors.lightTheme[2]}`
-                : `1px solid ${theme.colors.darkTheme[6]}`,
-            padding: "0.5rem",
-            width: "70px",
-            height: "70px",
-            position: "relative",
-            color:
-              colorScheme === "light"
-                ? theme.colors.lightTheme[6]
-                : theme.colors.darkTheme[1],
-          },
-        })}
-      >
-        <ActionIcon
-          variant="subtle"
-          radius="xl"
-          size={15}
-          aria-label="close"
+      <Link href={doc.name}>
+        <Group
+          align="center"
+          justify="center"
           styles={(theme) => ({
             root: {
-              position: "absolute",
-              top: "0.1rem",
-              right: "0.1rem",
+              borderRadius: "6px",
+              backgroundColor:
+                colorScheme === "light"
+                  ? theme.colors.lightTheme[1]
+                  : theme.colors.darkTheme[9],
+              border:
+                colorScheme === "light"
+                  ? `1px solid ${theme.colors.lightTheme[2]}`
+                  : `1px solid ${theme.colors.darkTheme[6]}`,
+              padding: "0.5rem",
+              width: "70px",
+              height: "70px",
+              position: "relative",
               color:
                 colorScheme === "light"
                   ? theme.colors.lightTheme[6]
                   : theme.colors.darkTheme[1],
             },
           })}
-          onClick={() => handleDelete(doc.name)}
         >
-          <IoClose />
-        </ActionIcon>
-        <Stack gap={0} justify="center">
-          <Center style={{ fontSize: "2rem" }}>{selectIcon()}</Center>
-          <Flex
-            justify={"space-between"}
-            align={"center"}
-            style={{
-              position: "absolute",
-              bottom: "0rem",
-              right: "0.2rem",
-            }}
+          {/* <Link
+            href={doc.name}
+            target="_blank"
+            style={{ position: "absolute", top: "0rem", left: "0.1rem" }}
           >
-            <Pill
-              size="xs"
+            <ActionIcon
+              variant="subtle"
+              radius="xl"
+              size={15}
+              aria-label="close"
               styles={(theme) => ({
                 root: {
                   color:
                     colorScheme === "light"
                       ? theme.colors.lightTheme[6]
                       : theme.colors.darkTheme[1],
-                  border: "none",
                 },
               })}
             >
-              {docSizeCalc(doc.size)}
-            </Pill>
-          </Flex>
-        </Stack>
-      </Group>
+              <IoOpenOutline />
+            </ActionIcon>
+          </Link> */}
+          <ActionIcon
+            variant="subtle"
+            radius="xl"
+            size={15}
+            aria-label="close"
+            styles={(theme) => ({
+              root: {
+                position: "absolute",
+                top: "0.1rem",
+                right: "0.1rem",
+                color:
+                  colorScheme === "light"
+                    ? theme.colors.lightTheme[6]
+                    : theme.colors.darkTheme[1],
+              },
+            })}
+            onClick={() => handleDelete(doc.name)}
+          >
+            <IoClose />
+          </ActionIcon>
+          <Stack gap={0} justify="center">
+            <Center style={{ fontSize: "2rem" }}>{selectIcon()}</Center>
+            <Flex
+              justify={"space-between"}
+              align={"center"}
+              style={{
+                position: "absolute",
+                bottom: "0rem",
+                right: "0.2rem",
+              }}
+            >
+              <Pill
+                size="xs"
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? theme.colors.lightTheme[6]
+                        : theme.colors.darkTheme[1],
+                    border: "none",
+                  },
+                })}
+              >
+                {docSizeCalc(doc.size)}
+              </Pill>
+            </Flex>
+          </Stack>
+        </Group>
+      </Link>
     </TooltipLayout>
   );
 }

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { MailDataProps, MailTemplateProps } from "@/interface/interface";
 import { mailReceivedFake, mailTemplateFake } from "@/data/mailData";
+import { mailSchema } from "@/schema/MailSchema";
 
 /* Functionalities of this section
  */
@@ -47,7 +48,6 @@ interface MailStoreProps {
   fnDeleteTemplate: (mailId: string) => void;
   fnGetAllTemplates: (path: string) => void;
   fnGetTemplateById: (mailId: string) => MailTemplateProps | {};
-  // Secondary functions
   fnGetAllData: (
     path: string,
   ) => MailDataProps[] | MailTemplateProps[] | undefined;
@@ -64,6 +64,7 @@ interface MailStoreProps {
   ) => MailDataProps[] | undefined;
   fnRecoverMail: (mailId: string) => void;
   fnShowMail: (mailId: string, path: string) => void;
+  fnSaveMailSent: (mailData: MailDataProps) => Promise<void>;
   setMailDescription: (stateValue: boolean) => void;
 }
 
@@ -421,24 +422,35 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       // search the element by id
       if (currentSectionArray !== undefined) {
         // If the checkbox value is TRUE
-        if (!checked) {
+        if (checked) {
+          // console.log("from fnCheckMail --> checked: 1", checked);
+          // console.log("from fnCheckMail --> mailId: 1", mailId);
           // if the element was found and not it's undefined
           const elementAdded = currentSectionArray.find(
             (element) => (element as MailDataProps).idMail === mailId,
           ) as MailDataProps;
-
+          
           if (
             elementAdded !== undefined &&
             !itemChecked.some((e) => e.idMail === mailId)
           ) {
             set({ itemChecked: [...itemChecked, elementAdded] });
           }
+          // console.log("checked: TRUE", elementAdded);
+          // console.log("from fnCheckMail --> itemChecked: 1", itemChecked);
         } else {
+          // console.log("from fnCheckMail --> checked: 2", checked);
+          // console.log("from fnCheckMail --> mailId: 2", mailId);
           // If the checkbox value is FALSE
           const removeElement = itemChecked.filter(
             (element) => element.idMail !== mailId,
           );
+          /* console.log(
+            "checked: FALSE",
+            itemChecked.filter((element) => element.idMail === mailId),
+          ); */
           set({ itemChecked: removeElement });
+          // console.log("from fnCheckMail --> itemChecked: 2", itemChecked);
         }
       }
     },
@@ -447,33 +459,52 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
       // 2. Getting the corresponding array. DONE
       // 3. Adding the all elements to the itemChecked array DONE
       // NOTE: All elements should be indicated in the UI.
-      const { fnGetData } = get();
+      const { fnGetData, itemChecked } = get();
       const currentSectionArray = fnGetData(path) as MailDataProps[];
-      if (currentSectionArray !== undefined) {
-        set({ itemChecked: currentSectionArray, allMailsChecked: true });
-      }
+      console.log("from store --> itemChecked 1: ", itemChecked);
+
       if (!checked) {
         set({ itemChecked: [], allMailsChecked: false });
       }
+
+      if (checked && itemChecked.length === 0) {
+        console.log("currentSectionArray: ", currentSectionArray);
+        console.log("from store --> itemChecked 2: ", itemChecked);
+        set({
+          itemChecked: currentSectionArray,
+          allMailsChecked: true,
+        });
+      }
+      console.log("from store --> itemChecked 3: ", itemChecked);
     },
     fnCheckReadMails: (path, checked) => {
-      const { fnGetData, mailGlobalArray } = get();
+      const { itemChecked, mailGlobalArray } = get();
       /* const currentSectionArray = fnGetData(path); */
       if (mailGlobalArray.length > 0) {
         // if the mail is read, it is will add to the itemChecked array
         const allReadMails = mailGlobalArray.filter((mail) => mail.mailRead);
-        console.log(allReadMails);
-        set({ itemChecked: allReadMails /* , allMailsChecked: true */ });
+        // console.log(allReadMails);
+        set({
+          itemChecked: [
+            ...itemChecked,
+            ...allReadMails,
+          ] /* , allMailsChecked: true */,
+        });
       }
     },
     fnCheckNoReadMails: (path, checked) => {
-      const { fnGetData, mailGlobalArray } = get();
+      const { itemChecked, mailGlobalArray } = get();
       /* const currentSectionArray = fnGetData(path); */
       if (mailGlobalArray.length > 0) {
-        // if the mail is read, it is will add to the itemChecked array
-        const allReadMails = mailGlobalArray.filter((mail) => !mail.mailRead);
-        console.log(allReadMails);
-        set({ itemChecked: allReadMails, allMailsChecked: true });
+        // if the mail is read, it is will adds to the itemChecked array
+        const allNoReadMails = mailGlobalArray.filter((mail) => !mail.mailRead);
+        console.log(allNoReadMails);
+        set({
+          itemChecked: [
+            ...itemChecked,
+            ...allNoReadMails,
+          ] /* , allMailsChecked: true */,
+        });
       }
     },
     fnFavoriteMarkTemplate: (mailId) => {
@@ -541,10 +572,12 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
     fnGetTemplateById: (templateId) => {
       // console.log(templateId)
       const { mailTemplates } = get();
-      const templateFounded = mailTemplates.find((template) => template.id === templateId);
+      const templateFounded = mailTemplates.find(
+        (template) => template.id === templateId,
+      );
       // console.log("templateFounded: ", templateFounded);
       if (!templateFounded) {
-        return {}
+        return {};
       }
       return templateFounded;
     },
@@ -595,6 +628,22 @@ export const useMailStore = create<MailStoreProps>()((set, get) => {
           set({ mailShow: {} });
         }
         set({ mailShow: mailSelected, closeMailDescription: false });
+      }
+    },
+    fnSaveMailSent: async (mailData) => {
+      try {
+        const { mailSent } = get();
+        if (mailData) {
+          const validateData = mailSchema.safeParse(mailData);
+          if (!validateData.success) {
+            console.log(validateData.error);
+          }
+          const newMailSent = [...mailSent, mailData];
+
+          set({ mailSent: newMailSent });
+        }
+      } catch (err) {
+        console.log(err);
       }
     },
   };

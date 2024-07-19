@@ -28,11 +28,11 @@ import { FilterMailTemplate } from "./formats/FilterMailTemplate";
 export const AsideMailContainer = () => {
   const { colorScheme } = useMantineColorScheme();
   const {
-    mailGlobalArray,
-    itemChecked,
-    fnGetAllData,
-    mailTemplates,
     fnFavoriteMarkTemplate,
+    mailGlobalArray,
+    mailTemplates,
+    fnGetAllData,
+    itemChecked,
   } = useMailStore();
   // Url Path
   const path = usePathname();
@@ -42,7 +42,7 @@ export const AsideMailContainer = () => {
   >();
   useEffect(() => {
     const data = fnGetAllData(path);
-    console.log(path);
+    // console.log(path);
     setDataMails(data);
   }, [
     fnFavoriteMarkTemplate,
@@ -55,7 +55,7 @@ export const AsideMailContainer = () => {
     path,
   ]);
 
-  console.log(dataMails);
+  // console.log("dataMails: ", dataMails);
 
   function showMailArray() {
     if (dataMails !== undefined) {
@@ -80,21 +80,23 @@ export const AsideMailContainer = () => {
                   photo,
                   mail,
                   date,
+                  docs,
                 } = item as MailDataProps;
                 return (
                   <MailItem
-                    path={path}
+                    mailFavorite={mailFavorite}
                     description={description}
                     mailArchive={mailArchive}
-                    mailFavorite={mailFavorite}
                     mailRead={mailRead}
                     userName={userName}
                     idMail={idMail}
                     photo={photo}
                     title={title}
+                    key={idMail}
                     date={date}
                     mail={mail}
-                    key={idMail}
+                    path={path}
+                    docs={docs}
                   />
                 );
               }
@@ -196,8 +198,8 @@ export const AsideMailContainer = () => {
           </Flex>
         ) : (
           <Link href={"/login/mails/create"}>
-              <Button
-                fullWidth
+            <Button
+              fullWidth
               leftSection={<HiOutlinePencil />}
               classNames={{
                 root:

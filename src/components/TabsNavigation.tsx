@@ -61,6 +61,9 @@ export default function TabsNavigation({
         tab: classes.tab_item,
       }} */
       styles={{
+        root: {
+          width: "100%",
+        },
         tabSection: {
           fontSize: "1.2rem",
         },
