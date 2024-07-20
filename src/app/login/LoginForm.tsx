@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "@mantine/form";
+import { useForm } from "react-hook-form";
 import {
   useMantineColorScheme,
   PasswordInput,
@@ -15,20 +15,52 @@ import {
 } from "@mantine/core";
 import React from "react";
 import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/schema/loginSchemas";
+import { useRouter } from "next/navigation";
+
+interface LoginUserProps {
+  email: string;
+  password: string;
+}
+
+const initialValues: LoginUserProps = {
+  email: "",
+  password: "",
+};
 
 export default function LoginForm() {
   const { colorScheme } = useMantineColorScheme();
-  const form = useForm({
-    initialValues: {
-      password: "",
-      email: "",
-    },
-    validate: {
-      password: (value) =>
-        value.length < 2 ? "La contraseña o el password son invalidos" : null,
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Correo Invalido"),
-    },
+  const router = useRouter();
+
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<LoginUserProps>({
+    mode: "onChange",
+    resolver: zodResolver(loginSchema),
+    defaultValues: initialValues,
   });
+
+  const fnSubmit = async (data: LoginUserProps) => {
+    try {
+      if (data) {
+        const dataComplete: LoginUserProps = {
+          email: data.email,
+          password: data.password,
+        };
+        // TODO: if the data is ready to be sending, the user will navigate to the dashboard or any confirmation section?
+        console.log(dataComplete);
+        reset(initialValues);
+        router.push("/login/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Box
       style={{
@@ -42,13 +74,14 @@ export default function LoginForm() {
       mx="auto"
     >
       <Title order={3}>Bienvenido a ServiOriente</Title>
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form onSubmit={handleSubmit(fnSubmit)}>
         <Stack gap={4}>
           <TextInput
+            error={errors.email?.message}
             mt="sm"
             label="Correo"
             placeholder="Correo"
-            {...form.getInputProps("email")}
+            {...register("email", { required: true })}
             styles={(theme) => ({
               input: {
                 backgroundColor:
@@ -58,9 +91,10 @@ export default function LoginForm() {
             })}
           />
           <PasswordInput
+            error={errors.password?.message}
             label="Contraseña"
             placeholder="Contraseña"
-            {...form.getInputProps("password")}
+            {...register("password", { required: true })}
             styles={(theme) => ({
               input: {
                 backgroundColor:
@@ -75,11 +109,9 @@ export default function LoginForm() {
             <Text>Recodar mi contraseña</Text>
           </Flex>
           <Stack gap={4} align="end">
-            <Link href={"login/dashboard"} style={{ width: "100%" }}>
-              <Button type="submit" mt="sm" fullWidth color="#115dfe">
+          <Button type="submit" mt="sm" fullWidth color="#115dfe">
                 Iniciar Sesion
               </Button>
-            </Link>
             <Flex
               align={"center"}
               justify={"space-between"}

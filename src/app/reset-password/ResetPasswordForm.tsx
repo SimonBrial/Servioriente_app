@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "@mantine/form";
+import { useForm } from "react-hook-form";
 import {
   useMantineColorScheme,
   PasswordInput,
@@ -12,26 +12,59 @@ import {
   Text,
   Box,
   Center,
+  TextInput,
 } from "@mantine/core";
 import React from "react";
 import Link from "next/link";
 import { IoArrowBackOutline } from "@/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { restPasswordSchema } from "@/schema/loginSchemas";
+import { useRouter } from "next/navigation";
+
+interface ResetPasswordProps {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const initialValues: ResetPasswordProps = {
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 export default function ResetPasswordForm() {
   const { colorScheme } = useMantineColorScheme();
-  const form = useForm({
-    initialValues: {
-      newPassword: "",
-      repeatNewPassword: "",
-    },
-    validate: {
-      newPassword: (value) =>
-        value.length < 2 ? "La contraseña o el password son invalidos" : null,
-      repeatNewPassword: (value) =>
-        value.length < 2 ? "La contraseña o el password son invalidos" : null,
-    },
+  const router = useRouter();
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<ResetPasswordProps>({
+    mode: "onChange",
+    resolver: zodResolver(restPasswordSchema),
+    defaultValues: initialValues,
   });
-  // console.log(form)
+
+  const fnSubmit = async (data: ResetPasswordProps) => {
+    try {
+      if (data) {
+        const dataComplete: ResetPasswordProps = {
+          email: data.email,
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+        };
+        // TODO: if the data is ready to be sending, the user will navigate to the dashboard or any confirmation section?
+        console.log(dataComplete);
+        reset(initialValues);
+        // router.push("/login/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Box
       style={{
@@ -46,70 +79,78 @@ export default function ResetPasswordForm() {
     >
       <Title order={3}>Bienvenido a ServiOriente</Title>
       <Text style={{ fontSize: "0.8rem" }}>Restauracion de la Contraseña</Text>
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form onSubmit={handleSubmit(fnSubmit)}>
         <Stack gap={4}>
-          <Stack gap={2} py={"0.5rem"}>
-            <Flex justify={"space-between"}>
-              <Text style={{ fontSize: "1rem" }}>Usuario:</Text>
-              <Text style={{ fontSize: "1.2rem", color: "#115dfe" }}>
-                Mario Hurtado
-              </Text>
+          <Stack gap={4}>
+            <TextInput
+              error={errors.email?.message}
+              mt="sm"
+              label="Correo"
+              placeholder="Correo"
+              {...register("email", { required: true })}
+              styles={(theme) => ({
+                input: {
+                  backgroundColor:
+                    colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
+                  color: `${theme.colors.lightTheme[3]}`,
+                },
+              })}
+            />
+            <PasswordInput
+              error={errors.password?.message}
+              label="Nueva Contraseña"
+              placeholder="Nueva Contraseña"
+              {...register("password", { required: true })}
+              styles={(theme) => ({
+                input: {
+                  backgroundColor:
+                    colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
+                  color: theme.colors.lightTheme[3],
+                },
+                visibilityToggle: { color: theme.colors.lightTheme[3] },
+              })}
+            />
+            <PasswordInput
+              error={errors.confirmPassword?.message}
+              label="Repetir Contraseña"
+              placeholder="Repetir Contraseña"
+              {...register("confirmPassword", { required: true })}
+              styles={(theme) => ({
+                input: {
+                  backgroundColor:
+                    colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
+                  color: theme.colors.lightTheme[3],
+                },
+                visibilityToggle: { color: theme.colors.lightTheme[3] },
+              })}
+            />
+            <Flex align={"center"} gap={6}>
+              <Checkbox color="#115dfe" />
+              <Text>Recodar mi contraseña</Text>
             </Flex>
-          </Stack>
-          <PasswordInput
-            label="Nueva Contraseña"
-            placeholder="Nueva Contraseña"
-            {...form.getInputProps("newPassword")}
-            styles={(theme) => ({
-              input: {
-                backgroundColor:
-                  colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
-                color: theme.colors.lightTheme[3],
-              },
-              visibilityToggle: { color: theme.colors.lightTheme[3] },
-            })}
-          />
-          <PasswordInput
-            label="Repetir Contraseña"
-            placeholder="Repetir Contraseña"
-            {...form.getInputProps("repeatNewPassword")}
-            styles={(theme) => ({
-              input: {
-                backgroundColor:
-                  colorScheme === "light" ? "#FFFFFF" : "#FFFFFF",
-                color: theme.colors.lightTheme[3],
-              },
-              visibilityToggle: { color: theme.colors.lightTheme[3] },
-            })}
-          />
-          <Flex align={"center"} gap={6}>
-            <Checkbox color="#115dfe" />
-            <Text>Recodar mi contraseña</Text>
-          </Flex>
-          <Stack gap={4} align="end">
-            <Link href={"/login/dashboard"} style={{ width: "100%" }}>
+            <Stack gap={4} align="end">
               <Button type="submit" mt="sm" fullWidth color="#115dfe">
                 Restaurar Contraseña
               </Button>
-            </Link>
-            <Link href={"/"}>
-              <Flex align={"center"} gap={6}>
-                <Center style={{ fontSize: "1rem", marginTop: "0.2rem" }}>
-                  <IoArrowBackOutline />
-                </Center>
-                <Text
-                  style={{
-                    fontSize: "0.8rem",
-                    cursor: "pointer",
-                    marginTop: "0.2rem",
-                    color: "#FFFFFF",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Volver
-                </Text>
-              </Flex>
-            </Link>
+              <Link href={"/"}>
+                <Flex align={"center"} gap={6}>
+                  <Center style={{ fontSize: "1rem", marginTop: "0.2rem" }}>
+                    <IoArrowBackOutline />
+                  </Center>
+                  <Text
+                    style={{
+                      fontSize: "0.8rem",
+                      cursor: "pointer",
+                      marginTop: "0.2rem",
+                      color: "#FFFFFF",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Volver
+                  </Text>
+                </Flex>
+              </Link>
+            </Stack>
           </Stack>
         </Stack>
       </form>

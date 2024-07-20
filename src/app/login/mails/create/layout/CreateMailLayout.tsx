@@ -1,25 +1,15 @@
 "use client";
 
-import {
-  FaAt,
-  IoClose,
-  IoIosSend,
-  IoWarningOutline,
-  MdOutlineImage,
-  MdTitle,
-} from "@/icons";
+import { FaAt, IoClose, IoIosSend, MdTitle } from "@/icons";
 import {
   useMantineColorScheme,
   ScrollArea,
   Button,
-  Drawer,
+  Modal,
   Stack,
   Title,
   Flex,
   Text,
-  Modal,
-  Box,
-  Alert,
 } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";
 import { ContainerInside } from "@/components/container/ContainerInside";
@@ -33,8 +23,6 @@ import { mailSchema } from "@/schema/MailSchema";
 import ArchiveContainer from "../ArchiveContainer";
 import TextEditor from "@/components/TextEditor";
 import heightClasses from "@/styles/height-view.module.css";
-import MailAutoCompleteInput from "../MailAutoCompleteInput";
-import z from "zod";
 import { useRouter } from "next/navigation";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";

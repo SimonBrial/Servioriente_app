@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "@mantine/form";
+import { useForm } from "react-hook-form";
 import {
   useMantineColorScheme,
   PasswordInput,
@@ -15,26 +15,61 @@ import {
 } from "@mantine/core";
 import React from "react";
 import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createAccountSchema } from "@/schema/loginSchemas";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { useRouter } from "next/navigation";
+
+interface CreateUserProps {
+  name: string;
+  email: string;
+  password: string;
+}
+
+const initialValues: CreateUserProps = {
+  name: "",
+  email: "",
+  password: "",
+};
 
 export default function CreateAccountForm() {
   const { colorScheme } = useMantineColorScheme();
-  const form = useForm({
-    initialValues: {
-      password: "",
-      email: "",
-      name: "",
-    },
-    validate: {
-      password: (value) =>
-        value.length < 2 ? "La contraseña o el password son invalidos" : null,
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Correo Invalido"),
-      name: (value) =>
-        value.length < 3
-          ? "Nombre de usuario aceptable"
-          : "Nombre de usuario debe contenener mas de 3 letras",
-    },
+  const router = useRouter();
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<CreateUserProps>({
+    mode: "onChange",
+    resolver: zodResolver(createAccountSchema),
+    defaultValues: initialValues,
   });
   // console.log(form)
+
+  const fnSubmit = async (data: CreateUserProps) => {
+    try {
+      if (data) {
+        const nameFormat = data.name
+          .split(" ")
+          .map((word) => {
+            return capitalizeFirstLetter(word);
+          })
+          .join(" ");
+        const dataComplete: CreateUserProps = {
+          name: nameFormat,
+          email: data.email,
+          password: data.password,
+        };
+        // TODO: if the data is ready to be sending, the user will navigate to the dashboard or any confirmation section?
+        console.log(dataComplete);
+        reset(initialValues);
+        router.push("/login/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Box
       style={{
@@ -43,7 +78,7 @@ export default function CreateAccountForm() {
         borderRadius: "6px",
         padding: "1.8rem 1.2rem",
         boxShadow: "0px 10px 12px -5px rgba(255,255,255,0.4)",
-        cursor: "default"
+        cursor: "default",
       }}
       mx="auto"
     >
@@ -51,13 +86,14 @@ export default function CreateAccountForm() {
       <Text style={{ fontSize: "0.8rem" }}>
         Inserte los datos para crear la cuenta
       </Text>
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form onSubmit={handleSubmit(fnSubmit)}>
         <Stack gap={4}>
           <TextInput
+            error={errors.name?.message}
             mt="sm"
             label="Nombre de Usuario"
             placeholder="Nombre de Usuario"
-            {...form.getInputProps("name")}
+            {...register("name", { required: true })}
             styles={(theme) => ({
               input: {
                 backgroundColor:
@@ -67,9 +103,10 @@ export default function CreateAccountForm() {
             })}
           />
           <TextInput
+            error={errors.email?.message}
             label="Correo"
             placeholder="Correo"
-            {...form.getInputProps("email")}
+            {...register("email", { required: true })}
             styles={(theme) => ({
               input: {
                 backgroundColor:
@@ -79,9 +116,10 @@ export default function CreateAccountForm() {
             })}
           />
           <PasswordInput
+            error={errors.password?.message}
             label="Contraseña"
             placeholder="Contraseña"
-            {...form.getInputProps("password")}
+            {...register("password", { required: true })}
             styles={(theme) => ({
               input: {
                 backgroundColor:
@@ -96,11 +134,9 @@ export default function CreateAccountForm() {
             <Text>Recodar mi contraseña</Text>
           </Flex>
           <Stack gap={4} align="end">
-            <Link href={"/login/dashboard"} style={{ width: "100%" }}>
-              <Button type="submit" mt="sm" fullWidth color="#115dfe">
-                Crear Usuario
-              </Button>
-            </Link>
+            <Button type="submit" mt="sm" fullWidth color="#115dfe">
+              Crear Usuario
+            </Button>
             <Flex gap={6}>
               <Text
                 style={{
