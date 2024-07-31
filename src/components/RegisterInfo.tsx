@@ -3,6 +3,7 @@
 import { RegisterInfoProps } from "@/interface/interface";
 import { Box, Flex, Title, useMantineColorScheme } from "@mantine/core";
 import { GeneralDivider } from "./GeneralDivider";
+import dayjs from "dayjs";
 
 export default function RegisterInfo({
   keyInput,
@@ -25,7 +26,11 @@ export default function RegisterInfo({
         })}
       >
         <Title order={5}>{keyInput}</Title>
-        <Title order={5}>{valueInput}</Title>
+        <Title order={5}>
+          {valueInput instanceof Date
+            ? dayjs(valueInput).format("DD/MM/YYYY")
+            : valueInput}
+        </Title>
       </Flex>
       <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
     </Box>

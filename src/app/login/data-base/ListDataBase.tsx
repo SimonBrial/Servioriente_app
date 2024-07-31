@@ -12,12 +12,12 @@ import {
 import { useEffect, useState } from "react";
 import classes from "@/styles/list-styles.module.css";
 import heightClasses from "@/styles/height-view.module.css";
-import PaginationLayout from "./PaginationLayout";
+import PaginationLayout from "./layout/PaginationLayout";
 // import HeaderRowItem from "./HeaderRowItem";
 import BtnDelete from "@/components/buttons/BtnDelete";
 import BtnSee from "@/components/buttons/BtnSee";
-import UserDeleteLayout from "./UserDeleteLayout";
-import UserDescriptionLayout from "./UserDescriptionLayout";
+import UserDeleteLayout from "./layout/UserDeleteLayout";
+import UserDescriptionLayout from "./layout/UserDescriptionLayout";
 import { useDataBaseStore } from "@/store/db-store";
 import BtnEditUser from "./buttons/BtnEditUser";
 import StatusBadge from "@/components/badge/StatusBadge";

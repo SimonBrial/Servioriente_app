@@ -31,7 +31,7 @@ export default function BtnEditAlarm({ editRef }: { editRef: any }) {
         }}
       >
         <Stack gap={4}>
-          <CreateFolderLayout title="Editar Carpeta" />
+          <CreateFolderLayout /* title="Editar Carpeta" */ />
           {/* <BtnActions
             icon={<HiOutlineSave />}
             title="Guardar"

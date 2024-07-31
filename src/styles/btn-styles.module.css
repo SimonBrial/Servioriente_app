@@ -9,6 +9,7 @@
 
 .btnFilter:hover {
   background-color: #efefef;
+  color: #696969;
   transition: background-color 0.3s ease-in-out;
   cursor: pointer;
 }
@@ -23,6 +24,7 @@
 /* Corregir los colores cuando se le haga hover */
 .btnFilter_dark:hover {
   background-color: #3a4c5a;
+  color: #eff3f5;
   transition: background-color 0.3s ease-in-out;
   cursor: pointer;
 }

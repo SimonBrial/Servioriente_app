@@ -50,7 +50,7 @@ export default function StateSelect({
             leftSection={<MdOutlinePlace />}
             defaultValue={stateArray[0]}
             w={inputSize}
-            placeholder="Seleccione un Estado de Venezuela"
+            placeholder="Seleccione un Estado"
             data={stateArray}
             styles={(theme) => ({
               input: {

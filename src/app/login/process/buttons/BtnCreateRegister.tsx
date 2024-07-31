@@ -4,8 +4,6 @@ import {
   HiOutlineDocumentAdd,
   HiOutlineDatabase,
   HiOutlineUserAdd,
-  HiOutlineSave,
-  IoClose,
 } from "@/icons";
 import {
   useMantineColorScheme,
@@ -13,28 +11,26 @@ import {
   Drawer,
   Portal,
   Stack,
-  Flex,
   Menu,
 } from "@mantine/core";
 import Link from "next/link";
 import classes from "@/styles/btn-styles.module.css";
 import { usePathname } from "next/navigation";
-import { notifications } from "@mantine/notifications";
-import { useState } from "react";
 import CreateClientLayout from "../layouts/CreateClientLayout";
+import { useProcessStore } from "@/store/process-store";
 
 export default function BtnCreateRegister() {
   const { colorScheme } = useMantineColorScheme();
-  const [showDrawer, setShowDrawer] = useState<boolean>(false);
+  const { showClientLayout, setShowCreateClient } = useProcessStore();
   const path = usePathname();
   return (
     <>
       <Portal>
         <Drawer
-          onClose={() => setShowDrawer(false)}
+          onClose={() => setShowCreateClient(false)}
           closeOnClickOutside={false}
           withCloseButton={false}
-          opened={showDrawer}
+          opened={showClientLayout}
           position="right"
           styles={{
             content: {
@@ -44,7 +40,7 @@ export default function BtnCreateRegister() {
         >
           <Stack justify="space-between" style={{ height: "95vh" }}>
             <CreateClientLayout />
-            <Flex
+            {/* <Flex
               align={"center"}
               gap={"sm"}
               style={{ height: "2.25rem", padding: "0 16px" }}
@@ -92,7 +88,7 @@ export default function BtnCreateRegister() {
               >
                 Guardar
               </Button>
-            </Flex>
+            </Flex> */}
           </Stack>
         </Drawer>
       </Portal>
@@ -114,7 +110,7 @@ export default function BtnCreateRegister() {
             }}
             key={crypto.randomUUID()}
           >
-            Crear Registro
+            Crear RCV
           </Button>
         </Menu.Target>
 
@@ -131,7 +127,7 @@ export default function BtnCreateRegister() {
             leftSection={<HiOutlineUserAdd />}
             color={colorScheme === "light" ? "#696969" : "#52a5e0"}
             disabled={path === "/login/process/user-selection"}
-            onClick={() => setShowDrawer((drawer) => !drawer)}
+            onClick={() => setShowCreateClient(true)}
           >
             Crear Nuevo Registro
           </Menu.Item>

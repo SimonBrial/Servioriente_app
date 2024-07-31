@@ -129,8 +129,8 @@ import {
   BiTask,
   BiAlarmOff,
 } from "react-icons/bi";
-import { PiRobot, PiFolderSimpleDashed } from "react-icons/pi";
-import { FaFacebookF, FaChartLine, FaChartColumn, FaRegFilePowerpoint, FaAt } from "react-icons/fa6";
+import { PiRobot, PiFolderSimpleDashed, PiStepsBold, PiWarningCircleBold  } from "react-icons/pi";
+import { FaFacebookF, FaChartLine, FaChartColumn, FaRegFilePowerpoint, FaAt, FaDollarSign } from "react-icons/fa6";
 import { RiDeviceRecoverLine } from "react-icons/ri";
 import { GrDocumentExcel } from "react-icons/gr";
 import { FaQuestion } from "react-icons/fa6";
@@ -158,6 +158,7 @@ export {
   IoChevronDownOutline,
   IoCloseCircleOutline,
   HiOutlineExclamation,
+  PiWarningCircleBold,
   FaRegFilePowerpoint,
   RiDeviceRecoverLine,
   IoMailUnreadOutline,
@@ -222,7 +223,9 @@ export {
   HiOutlineEye,
   HiOutlineSun,
   TbStarFilled,
+  FaDollarSign,
   FaFacebookF,
+  PiStepsBold,
   FaChartLine,
   IoChevronUp,
   BsTelephone,

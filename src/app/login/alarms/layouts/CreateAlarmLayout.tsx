@@ -225,8 +225,9 @@ export default function CreateAlarmLayout() {
             userName=""
           />
           <SelectInput
+            searchable
             errorDescription={errors.folderSelected?.message}
-            periodeArr={alarmFolderArray.map((folder) => folder.title)}
+            dataArr={alarmFolderArray.map((folder) => folder.title)}
             title="Carpeta"
             control={control}
             inputSize="200px"

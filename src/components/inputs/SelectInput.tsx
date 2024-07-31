@@ -4,8 +4,9 @@ import { Select, Flex, Title, useMantineColorScheme } from "@mantine/core";
 import { Controller, Path } from "react-hook-form";
 
 interface SelectInputProps {
+  searchable : boolean
   errorDescription: string | undefined;
-  periodeArr: string[];
+  dataArr: string[];
   inputSize: string;
   asterisk: boolean;
   label: Path<any>;
@@ -15,9 +16,10 @@ interface SelectInputProps {
 
 export default function SelectInput({
   errorDescription,
-  periodeArr,
+  searchable,
   inputSize,
   asterisk,
+  dataArr,
   control,
   title,
   label,
@@ -49,10 +51,10 @@ export default function SelectInput({
             onBlur={onBlur}
             onChange={onChange}
             value={value}
-            searchable
+            searchable={searchable}
             error={errorDescription}
             placeholder={title}
-            data={periodeArr}
+            data={dataArr}
             maxDropdownHeight={200}
             allowDeselect={false}
             w={inputSize}

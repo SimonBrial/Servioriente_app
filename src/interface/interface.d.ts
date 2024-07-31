@@ -13,7 +13,6 @@ import {
   MailStatus,
   cardSize,
 } from "../types/types";
-import { Dayjs } from "dayjs";
 import { Path, UseFormRegister } from "react-hook-form";
 
 interface NavIconProps {
@@ -101,8 +100,33 @@ interface CardProcessProps {
   clientName: string;
   columnId: string;
   vehicle: string;
-  date: string;
+  date: date; // Creation Date
   tag: number;
+}
+interface RCVPrice {
+  NSeats: number | string;
+  LCapacity: number;
+  CValue: number;
+  services: boolean[];
+}
+
+interface ClientRegisterProcessProps extends CardProcessProps {
+  id: string | UniqueIdentifier;
+  phonePost: string | number;
+  typeStatus: processTitle;
+  birthday?: date | string;
+  instagram?: string;
+  firstName: string;
+  facebook?: string;
+  lastName: string;
+  phonePre: string;
+  vehicle: string;
+  carID: string;
+  state: string;
+  mail?: string;
+  tag: RCVPrice;
+
+  // [key: string]: any;
 }
 
 interface CardProps {
@@ -144,7 +168,7 @@ interface NotificationIconsProps {
 
 interface RegisterInfoProps {
   keyInput: string;
-  valueInput: string | JSX.Element;
+  valueInput: string | JSX.Element | undefined | Date;
 }
 
 interface TabsSectionesProps {
@@ -336,7 +360,7 @@ interface ListDBProps {
   phonePost: string | number; // required ✅
   typeStatus: processTitle; // required ✅
   mail?: string; // ✅
-  birthday?: string | Date | Dayjs;
+  birthday?: string | Date;
   facebook?: string; // ✅
   instagram?: string; // ✅
   [key: string]: any;
@@ -399,7 +423,7 @@ interface TaskDayCardProps {
 
 interface TaskListPerDaysProps {
   id: string;
-  dateTitle: string | Dayjs;
+  dateTitle: string;
   taskToday: TaskDayCardProps[];
 }
 
@@ -415,14 +439,14 @@ interface FormatCardProps {
   id: string;
   title: string;
   userCreator: string;
-  date: Dayjs;
+  date: Date;
   description: string;
 }
 
 // ---------------------------- Metrics Data Interface ------------------------------------
 interface DayItem {
   value: number | string;
-  label: Dayjs;
+  label: Date;
 }
 
 interface MonthItems {
@@ -445,6 +469,7 @@ interface DataProps {
 
 export type {
   ProcessedConversationItemProps,
+  ClientRegisterProcessProps,
   DashboardProcessListItems,
   DefaultFiltersValueProps,
   NotificationIconsProps,

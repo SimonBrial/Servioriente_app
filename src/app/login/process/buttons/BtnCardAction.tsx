@@ -37,7 +37,7 @@ export default function BtnCardAction({
   columnId: string;
 }) {
   // Global State Management
-  const { deleteCard } = useProcessStore();
+  const { fnDeleteCard } = useProcessStore();
 
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
@@ -45,7 +45,7 @@ export default function BtnCardAction({
 
   // Functions for manipulate each card (delete or edit)
   function handleDeleteCard() {
-    deleteCard(idCard, columnId);
+    fnDeleteCard(idCard, columnId);
     notifications.show({
       id: crypto.randomUUID(),
       color: "#115dfe",
@@ -121,9 +121,9 @@ export default function BtnCardAction({
             },
           }}
         >
-          <Stack justify="space-between" style={{ height: "96vh" }}>
-            <EditCardLayout />
-            <Flex
+          <Stack justify="space-between" style={{ height: "95vh" }}>
+            <EditCardLayout onShow={setShowDrawer} />
+            {/* <Flex
               align={"center"}
               gap={"sm"}
               style={{ height: "2.25rem", padding: "0 16px" }}
@@ -171,7 +171,7 @@ export default function BtnCardAction({
               >
                 Guardar
               </Button>
-            </Flex>
+            </Flex> */}
           </Stack>
         </Drawer>
       </Portal>
@@ -209,7 +209,7 @@ export default function BtnCardAction({
         <Menu.Dropdown>
           <Menu.Item
             color="#F06418"
-            onClick={() => setShowDrawer((drawer) => !drawer)}
+            onClick={() => setShowDrawer((showDrawer) => !showDrawer)}
           >
             <Flex gap={6}>
               <Center style={{ fontSize: "1.2rem" }}>

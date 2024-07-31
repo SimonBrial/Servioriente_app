@@ -26,7 +26,12 @@ export default function ProcessLayout({
             iconSection={<HiOutlineUserCircle />}
             description="Total de usuario"
           />
-          <AutoCompleteInput />
+          <AutoCompleteInput
+            /* fnSearchTerm={() => null}
+            fnResults={() => null}
+            dataFilter={[]}
+            term="" */
+          />
           <BtnFilter>
             <GeneralFilterLayout />
           </BtnFilter>
@@ -48,19 +53,4 @@ export default function ProcessLayout({
       </Stack>
     </Container>
   );
-}
-
-{
-  /* <BtnAdd
-      iconTag="add-user"
-      label="Nuevo Cliente"
-      key={crypto.randomUUID()}
-      id={crypto.randomUUID()}
-      labelBtn="Crear Registro"
-      color="green"
-      title="El registro ha sido creado 📄"
-      description="La tarjeta del registro para la generacion de la RCV, ha sido creado satisfactoriamente 😎!"
-    >
-      <CreateClientLayout />
-    </BtnAdd> */
 }

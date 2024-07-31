@@ -47,9 +47,10 @@ export default function CalendarNewEventLayout() {
       <Stack gap={6}>
         <SelectInput
           inputSize="250px"
-          periodeArr={["Mario Hurtado", "Simon Briceño"]}
+          dataArr={["Mario Hurtado", "Simon Briceño"]}
           title="Asignado a"
-          key={crypto.randomUUID()}
+          asterisk
+          
         />
         <GeneralDivider orientation="horizontal" key={crypto.randomUUID()} />
       </Stack>

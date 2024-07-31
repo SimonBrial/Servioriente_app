@@ -3,20 +3,20 @@
 
 import {
   useMantineColorScheme,
+  ScrollArea,
   Button,
   Title,
   Stack,
   Flex,
-  ScrollArea,
 } from "@mantine/core";
 import {
+  MdOutlineAlternateEmail,
   HiOutlineUserAdd,
   IoLogoInstagram,
   IoLogoFacebook,
   HiOutlineUser,
   AiOutlineCar,
   IoClose,
-  MdOutlineAlternateEmail,
 } from "@/icons";
 import classesBtn from "@/styles/btn-styles.module.css";
 import heightClass from "@/styles/height-view.module.css";
@@ -37,18 +37,18 @@ import dayjs from "dayjs";
 import { useDataBaseStore } from "@/store/db-store";
 
 const initialValues: ListDBProps = {
-  firstName: "",
-  lastName: "",
-  vehicle: "",
-  state: "",
-  typeStatus: "Espera",
-  phonePre: "",
-  phonePost: "",
-  facebook: "",
-  instagram: "",
   birthday: dayjs(new Date()),
-  carID: "",
   id: crypto.randomUUID(),
+  typeStatus: "Espera",
+  firstName: "",
+  phonePost: "",
+  instagram: "",
+  lastName: "",
+  facebook: "",
+  phonePre: "",
+  vehicle: "",
+  carID: "",
+  state: "",
   mail: "",
 };
 export default function CreateRegisterLayout() {
@@ -65,10 +65,10 @@ export default function CreateRegisterLayout() {
     resolver: zodResolver(userSchema),
     defaultValues: initialValues,
   });
-  console.log("Control: ", control)
+  // console.log("Control: ", control);
 
   const { fnCreateUser, fnSetShow } = useDataBaseStore();
-  console.log(errors);
+  // console.log(errors);
   const onSubmit = async (data: ListDBProps) => {
     try {
       if (Object.keys(errors).length === 0) {

@@ -92,6 +92,31 @@
   }
 }
 
+@media (min-width: 1280px) {
+  .processLayout {
+    height: 85vh;
+    padding: 0.1rem;
+  }
+}
+@media (min-width: 1281px) {
+  .processLayout {
+    height: 78vh;
+    padding: 0.1rem;
+  }
+}
+@media (min-width: 1280px) {
+  .processRegisterDescriptionContainer {
+    height: 67vh;
+    padding: 0.1rem;
+  }
+}
+@media (min-width: 1281px) {
+  .processRegisterDescriptionContainer {
+    height: 60vh;
+    padding: 0.1rem;
+  }
+}
+
 /* -------------------------- Chat Section -------------------------- */
 @media (min-width: 1280px) {
   .chatCard_container {
