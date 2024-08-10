@@ -95,14 +95,14 @@ interface DNDType {
   title: string | processTitle;
   items: CardProcessProps[];
 }
-interface CardProcessProps {
-  id: UniqueIdentifier;
-  clientName: string;
-  columnId: string;
-  vehicle: string;
-  date: date; // Creation Date
-  tag: number;
-}
+/* interface CardProcessProps {
+  // id: UniqueIdentifier;
+  // clientName: string;
+  // columnId: string;
+  // vehicle: string;
+  // date: Date; // Creation Date
+  // tag: number;
+} */
 interface RCVPrice {
   NSeats: number | string;
   LCapacity: number;
@@ -110,16 +110,18 @@ interface RCVPrice {
   services: boolean[];
 }
 
-interface ClientRegisterProcessProps extends CardProcessProps {
+interface CardProcessProps {
   id: string | UniqueIdentifier;
   phonePost: string | number;
-  typeStatus: processTitle;
-  birthday?: date | string;
+  birthday?: Date | string;
+  columnId: processTitle | string;
   instagram?: string;
   firstName: string;
   facebook?: string;
   lastName: string;
   phonePre: string;
+  createdAt: Date;
+  updatedAt: Date;
   vehicle: string;
   carID: string;
   state: string;

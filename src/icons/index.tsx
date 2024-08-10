@@ -129,11 +129,25 @@ import {
   BiTask,
   BiAlarmOff,
 } from "react-icons/bi";
-import { PiRobot, PiFolderSimpleDashed, PiStepsBold, PiWarningCircleBold  } from "react-icons/pi";
-import { FaFacebookF, FaChartLine, FaChartColumn, FaRegFilePowerpoint, FaAt, FaDollarSign } from "react-icons/fa6";
+import {
+  PiRobot,
+  PiFolderSimpleDashed,
+  PiStepsBold,
+  PiWarningCircleBold,
+} from "react-icons/pi";
+import {
+  FaFacebookF,
+  FaChartLine,
+  FaChartColumn,
+  FaRegFilePowerpoint,
+  FaAt,
+  FaDollarSign,
+} from "react-icons/fa6";
 import { RiDeviceRecoverLine } from "react-icons/ri";
 import { GrDocumentExcel } from "react-icons/gr";
 import { FaQuestion } from "react-icons/fa6";
+import { RxDragHandleDots2 } from "react-icons/rx";
+import { LiaIdCard } from "react-icons/lia";
 
 export {
   AiOutlineFundProjectionScreen,
@@ -173,6 +187,7 @@ export {
   AiOutlinePaperClip,
   HiOutlineUserGroup,
   HiOutlineFaceSmile,
+  RxDragHandleDots2,
   HiOutlineLockOpen,
   HiOutlineDatabase,
   HiOutlineEmojiSad,
@@ -244,6 +259,7 @@ export {
   IoIosSend,
   TbStarOff,
   MdNumbers,
+  LiaIdCard,
   TbReload,
   BsFilter,
   MdCircle,

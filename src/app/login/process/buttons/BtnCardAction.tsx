@@ -196,7 +196,7 @@ export default function BtnCardAction({
             }
             styles={{
               root: {
-                position: "absolute",
+                // position: "absolute",
                 right: "0.4rem",
                 top: "0.5rem",
                 fontSize: "0.9rem",

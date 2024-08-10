@@ -14,6 +14,9 @@ import {
   Text,
   Box,
   Drawer,
+  Center,
+  Badge,
+  Group,
 } from "@mantine/core";
 // Others
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
@@ -26,20 +29,41 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import ShowCardDescriptionLayout from "../layouts/ShowCardDescriptionLayout";
 import { useDisclosure } from "@mantine/hooks";
+import { processTitle } from "@/types/types";
+import { RxDragHandleDots2 } from "@/icons";
+import { GeneralDivider } from "@/components/GeneralDivider";
+
+interface CardProps {
+  card: CardProcessProps;
+}
 
 export function Items({
-  clientName,
-  columnId,
-  vehicle,
-  date,
-  tag,
-  id,
-}: CardProcessProps) {
+  card: {
+    phonePost,
+    firstName,
+    createdAt,
+    instagram,
+    updatedAt,
+    phonePre,
+    columnId,
+    lastName,
+    facebook,
+    birthday,
+    vehicle,
+    carID,
+    state,
+    mail,
+    tag,
+    id,
+  },
+}: CardProps) {
   const { colorScheme } = useMantineColorScheme();
   const [opened, { open, close }] = useDisclosure(false);
 
   // Don't delete this
-  const [colorDivider, setColorDivider] = useState<string>(columnId);
+  const [colorDivider, setColorDivider] = useState<processTitle | string>(
+    columnId,
+  );
   // console.log(columnId)
 
   useEffect(() => {
@@ -83,122 +107,109 @@ export function Items({
             ? `${classes.card_container} ${heightClasses.card_process}`
             : `${classes.card_container_dark} ${heightClasses.card_process}`
         }
-        py={5}
-        pl={22}
-        pr={10}
+        p={6}
+        h={"100%"}
+        w={"100%"}
       >
-        <Flex align={"center"} justify={"space-between"} gap={0}>
-          <Divider
-            {...listeners}
-            orientation="vertical"
-            size="8px"
-            color={underScoreColor(capitalizeFirstLetter(colorDivider))}
-            style={{ height: "78%" }}
-            className={classes.card_divider}
-          />
-          <Flex align={"center"} justify={"center"} gap={6}>
-            <Avatar
-              src={null}
-              alt="no image here"
-              color="blue"
-              size={"md"}
-              style={{
-                cursor: "pointer",
-              }}
+        <Flex align={"center"} gap={6} style={{ height: "100%" }}>
+          <Center {...listeners}>
+            <RxDragHandleDots2
+              className={
+                colorScheme === "light"
+                  ? classes.card_drag_icon
+                  : classes.card_drag_icon_dark
+              }
             />
-            <Stack align="start" gap={0} onClick={open}>
-              <Title
-                order={5}
-                styles={(theme) => ({
-                  root: {
-                    color:
-                      colorScheme === "light"
-                        ? `${theme.colors.lightTheme[3]}`
-                        : `${theme.colors.darkTheme[2]}`,
-                  },
-                })}
-              >
-                {clientName}
-              </Title>
-              <Stack gap={0}>
-                <Text
-                  size={"sm"}
-                  styles={(theme) => ({
-                    root: {
-                      color:
-                        colorScheme === "light"
-                          ? `${theme.colors.lightTheme[6]}`
-                          : `${theme.colors.darkTheme[1]}`,
-                      marginBottom: "-0.3rem",
-                      textAlign: "start",
-                    },
-                  })}
-                >
-                  {capitalizeFirstLetter(vehicle)}
-                </Text>
-                <Text
-                  size={"sm"}
-                  styles={(theme) => ({
-                    root: {
-                      color:
-                        colorScheme === "light"
-                          ? `${theme.colors.lightTheme[3]}`
-                          : `${theme.colors.darkTheme[2]}`,
-                    },
-                  })}
-                >
-                  Tarifa: {tag}$
-                </Text>
-              </Stack>
-            </Stack>
-          </Flex>
-          <Stack justify="space-between" align="end">
-            {/* <Menu
-            closeOnClickOutside
-            withArrow
-            shadow="md"
-            closeOnItemClick
-            zIndex={0}
-          >
-            <Menu.Target>
-              <Center
-                className={classes.verticalDots}
-                styles={(theme) => ({
-                  root: {
-                    color:
-                      colorScheme === "light"
-                        ? `${theme.colors.lightTheme[3]}`
-                        : `${theme.colors.darkTheme[2]}`,
-                  },
-                })}
-              >
-                <HiOutlineDotsVertical />
-              </Center>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item color="#F06418">
-                <BtnEditCard editRef={editRef} key={crypto.randomUUID()} />
-              </Menu.Item>
-              <Menu.Item color="#F0185C">
-                <BtnDeleteCard />
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu> */}
-            <BtnCardAction idCard={id} columnId={columnId} />
-            {/* <UnstyledButton className={classes.verticalDots}></UnstyledButton> */}
-            <Text
-              size={"xs"}
-              styles={(theme) => ({
-                root: {
-                  color:
-                    colorScheme === "light"
-                      ? `${theme.colors.lightTheme[3]}`
-                      : `${theme.colors.darkTheme[2]}`,
-                },
-              })}
+          </Center>
+          <GeneralDivider orientation="vertical" />
+          <Stack align="start" gap={2} style={{ width: "100%" }}>
+            <Flex
+              align="start"
+              justify={"space-between"}
+              style={{ width: "100%" }}
             >
-              {dayjs(date).format("DD/MM/YYYY")}
-            </Text>
+              <Title
+                lineClamp={1}
+                onClick={open}
+                order={6}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[3]}`
+                        : `${theme.colors.darkTheme[2]}`,
+                  },
+                })}
+              >
+                {firstName.length + lastName.length > 25
+                  ? `${`${firstName} ${lastName}`.slice(0, 20)}...`
+                  : `${firstName} ${lastName}`}
+              </Title>
+              <BtnCardAction idCard={id} columnId={columnId} />
+            </Flex>
+            <Flex
+              onClick={open}
+              align="start"
+              justify={"space-between"}
+              style={{ width: "100%" }}
+            >
+              <Text
+                size={"sm"}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[6]}`
+                        : `${theme.colors.darkTheme[1]}`,
+                    marginBottom: "-0.3rem",
+                    textAlign: "start",
+                  },
+                })}
+              >
+                {capitalizeFirstLetter(vehicle).length > 25
+                  ? `${`${capitalizeFirstLetter(vehicle)}`.slice(0, 20)}...`
+                  : `${capitalizeFirstLetter(vehicle)}`}
+              </Text>
+              <Text
+                size={"xs"}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[3]}`
+                        : `${theme.colors.darkTheme[2]}`,
+                  },
+                })}
+              >
+                {dayjs(createdAt).format("DD/MM/YYYY")}
+              </Text>
+            </Flex>
+            <Flex
+              onClick={open}
+              align="start"
+              justify={"space-between"}
+              style={{ width: "100%" }}
+            >
+              <Text
+                size={"sm"}
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? `${theme.colors.lightTheme[3]}`
+                        : `${theme.colors.darkTheme[2]}`,
+                  },
+                })}
+              >
+                Tarifa: {tag.CValue}$
+              </Text>
+              <Badge
+                size="sm"
+                color={underScoreColor(capitalizeFirstLetter(colorDivider))}
+              >
+                {colorDivider}
+              </Badge>
+            </Flex>
           </Stack>
         </Flex>
       </Box>

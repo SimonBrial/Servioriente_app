@@ -5,13 +5,15 @@ import React from "react";
 
 export const GeneralDivider = ({
   orientation,
+  wdth,
 }: {
   orientation: "horizontal" | "vertical";
+  wdth?: string | number;
 }) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Divider
-      w={"100%"}
+      w={wdth}
       color={colorScheme === "light" ? "#cdcdcd" : "#f8f8f8"}
       orientation={orientation}
     />

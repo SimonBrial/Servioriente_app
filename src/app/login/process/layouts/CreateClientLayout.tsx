@@ -8,7 +8,6 @@ import {
   HiOutlineUser,
   HiOutlineSave,
   AiOutlineCar,
-  FaDollarSign,
   IoClose,
 } from "@/icons";
 import PhoneInputLayout from "@/components/inputs/PhoneInputLayout";
@@ -19,17 +18,13 @@ import {
   Stack,
   Title,
   Flex,
-  Box,
   Text,
+  Box,
 } from "@mantine/core";
 import { useForm } from "react-hook-form";
-import {
-  CardProcessProps,
-  ClientRegisterProcessProps,
-} from "@/interface/interface";
+import { CardProcessProps } from "@/interface/interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { processCardSchema } from "@/schema/ProcessCardSchema";
-import { NumberHorizontalInput } from "@/components/inputs/NumberHorizontalInput";
 import classes from "@/styles/btn-styles.module.css";
 import { notifications } from "@mantine/notifications";
 import StateSelect from "@/components/inputs/StateSelect";
@@ -39,13 +34,12 @@ import heightClass from "@/styles/height-view.module.css";
 import StatusBadge from "@/components/badge/StatusBadge";
 import { useProcessStore } from "@/store/process-store";
 
-const initialValues: ClientRegisterProcessProps = {
+const initialValues: CardProcessProps = {
   id: crypto.randomUUID(),
-  typeStatus: "Espera",
   birthday: new Date(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
   columnId: "Espera",
-  date: new Date(),
-  clientName: "",
   phonePost: "",
   firstName: "",
   instagram: "",
@@ -74,13 +68,13 @@ export default function CreateClientLayout(): JSX.Element {
     control,
     reset,
     watch,
-  } = useForm<ClientRegisterProcessProps>({
+  } = useForm<CardProcessProps>({
     mode: "onChange",
     resolver: zodResolver(processCardSchema),
     defaultValues: initialValues,
   });
 
-  const fnSubmit = async (data: ClientRegisterProcessProps) => {
+  const fnSubmit = async (data: CardProcessProps) => {
     try {
       console.log(data);
       if (Object.keys(errors).length === 0) {
