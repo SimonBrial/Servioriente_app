@@ -77,6 +77,7 @@ export default function ResetPasswordForm() {
       }}
       mx="auto"
     >
+      I've to add a tooltip here with the password structure
       <Title order={3}>Bienvenido a ServiOriente</Title>
       <Text style={{ fontSize: "0.8rem" }}>Restauracion de la Contraseña</Text>
       <form onSubmit={handleSubmit(fnSubmit)}>

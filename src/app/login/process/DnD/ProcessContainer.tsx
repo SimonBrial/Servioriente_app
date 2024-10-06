@@ -15,6 +15,9 @@ import {
   DndContext,
   useSensors,
   useSensor,
+  defaultDropAnimation,
+  DropAnimation,
+  DragOverEvent,
 } from "@dnd-kit/core";
 import {
   sortableKeyboardCoordinates,
@@ -22,7 +25,7 @@ import {
   arrayMove,
 } from "@dnd-kit/sortable";
 // Mantine
-import { useMantineColorScheme, Grid } from "@mantine/core";
+import { useMantineColorScheme, Grid, Container, Flex } from "@mantine/core";
 // Others
 import classes from "@/styles/card-process.module.css";
 // import heightClasses from "@/styles/height-view.module.css";
@@ -30,19 +33,104 @@ import { CardProcessProps, DNDType } from "@/interface/interface";
 import { Items } from "./Items";
 import { ColumnContainer } from "./ColumnContainer";
 import { useProcessStore } from "@/store/process-store";
+import { dataFakeCard2 } from "@/data/initialCards";
+import { processTitle } from "@/types/types";
+
+// export type Status = "espera" | "generacion" | "pagado" | "entregado";
+
+export type Task = {
+  id: UniqueIdentifier;
+  title: string;
+  description: string;
+  status: processTitle;
+};
+
+export type BoardSectionsType = {
+  [name: string]: CardProcessProps[];
+};
+
+const initializeBoard = (tasks: CardProcessProps[]) => {
+  const boardSections: BoardSectionsType = {};
+
+  console.log("tasks", tasks);
+  Object.keys(BOARD_SECTIONS).forEach((boardSectionKey) => {
+    console.log(`"getTasksByStatus(
+      tasks,
+      boardSectionKey as processTitle,
+    )"`, getTasksByStatus(
+      tasks,
+      boardSectionKey as processTitle,
+    ));
+    boardSections[boardSectionKey] = getTasksByStatus(
+      tasks,
+      boardSectionKey as processTitle,
+    );
+  });
+
+  console.log("boardSections", boardSections);
+
+  return boardSections;
+};
+
+const findBoardSectionContainer = (
+  boardSections: BoardSectionsType,
+  id: string,
+) => {
+  if (id in boardSections) {
+    return id;
+  }
+
+  const container = Object.keys(boardSections).find((key) =>
+    boardSections[key].find((item) => item.id as string === id),
+  );
+  return container;
+};
+const getStatusFromContainer = (container: string): processTitle => {
+  const statusArray: processTitle[] = ["Entregado", "Espera", "Generacion", "Pagado"];
+  if (!statusArray.includes(container as processTitle)) {
+    return "Espera";
+  }
+  return container as processTitle;
+};
+
+const BOARD_SECTIONS: Record<string, processTitle> = {
+  espera: "Espera",
+  generacion: "Generacion",
+  pagado: "Pagado",
+  entregado: "Entregado",
+};
+
+export const getTasksByStatus = (tasks: CardProcessProps[], status: processTitle) => {
+  console.log(tasks)
+  console.log("status", status)
+  return tasks.filter((task) => task.columnId.toLowerCase() === status);
+};
+
+export const getTaskById = (tasks: CardProcessProps[], id: string) => {
+  return tasks.find((task) => task.id === id);
+};
 
 export function ProcessContainer() {
   // Global State Management
-  const { data } = useProcessStore();
+  // const { data } = useProcessStore();
 
   const DNDid = useId();
   const { colorScheme } = useMantineColorScheme();
-  const [containers, setContainers] = useState<DNDType[]>(data);
+  /* const [containers, setContainers] =
+    useState<CardProcessProps[]>(dataFakeCard2);
   const [activeCard, setActiveCard] = useState<CardProcessProps[]>();
-  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null); */
 
+  const tasks = dataFakeCard2;
+  const initialBoardSections = initializeBoard(dataFakeCard2);
+  const [boardSections, setBoardSections] =
+    useState<BoardSectionsType>(initialBoardSections);
+  const [activeTaskId, setActiveTaskId] = useState<null | string>(null);
+
+
+  console.log("initialBoardSections", initialBoardSections);
   // Find the value of the items
-  function findValueOfItems(id: UniqueIdentifier | undefined, type: string) {
+  /* function findValueOfItems(id: UniqueIdentifier | undefined, type: string) {
     if (type === "container") {
       return containers.find((item) => item.id === id);
     }
@@ -51,9 +139,8 @@ export function ProcessContainer() {
         container.items.find((item) => item.id === id),
       );
     }
-  }
+  } */
 
-  // DND Handlers
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -61,444 +148,406 @@ export function ProcessContainer() {
     }),
   );
 
-  function handleDragStart(event: DragStartEvent) {
-    const { active } = event;
-    const { id } = active;
-    setActiveId(id);
-  }
+  const dropAnimation: DropAnimation = {
+    ...defaultDropAnimation,
+  };
 
-  function handleDragMove(event: DragMoveEvent) {
-    const { active, over } = event;
-
-    // Handle Items Sorting
+  // ✅ When the user drag the item, this function is called
+  const handleDragStart = ({ active }: DragStartEvent) => {
+    // console.log("from handleDragStart", active);
+    setActiveTaskId(active.id as string);
+  };
+  // When the user is on the container (same container or next container), this function is called
+  const handleDragOver = ({ active, over }: DragOverEvent) => {
+    // 1. Find the containers
+    const activeContainer = findBoardSectionContainer(
+      boardSections,
+      active.id as string,
+    );
+    const overContainer = findBoardSectionContainer(
+      boardSections,
+      over?.id as string,
+    );
+    // if the item didn't move to a new container
     if (
-      active.id.toString().includes("item") &&
-      over?.id.toString().includes("item") &&
-      active &&
-      over &&
-      active.id !== over.id
+      !activeContainer ||
+      !overContainer ||
+      activeContainer === overContainer
     ) {
-      // Find the active container and over container
-      const activeContainer = findValueOfItems(active.id, "item");
-      const overContainer = findValueOfItems(over.id, "item");
+      return;
+    }
 
-      // If the active or over container is not found, return
-      if (!activeContainer || !overContainer) return;
-
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === activeContainer.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === overContainer.id,
-      );
-
-      // Find the index of the active and over item
-      const activeItemIndex = activeContainer.items.findIndex(
+    // 2. Update the container status
+    setBoardSections((boardSection) => {
+      const activeItems = boardSections[activeContainer];
+      const overItems = boardSections[overContainer];
+      // Find the index for the items
+      const activeIndex = activeItems.findIndex(
         (item) => item.id === active.id,
       );
-      console.log("activeitemIndex: ", activeItemIndex);
-      const overitemIndex = overContainer.items.findIndex(
-        (item) => item.id === over.id,
-      );
-      console.log("overitemIndex: ", overitemIndex);
-      // In the same container
-      if (activeContainerIndex === overContainerIndex) {
-        let newItems = [...containers];
-        newItems[activeContainerIndex].items = arrayMove(
-          newItems[activeContainerIndex].items,
-          activeItemIndex,
-          overitemIndex,
-        );
+      const overIndex = overItems.findIndex((item) => item.id !== over?.id);
 
-        setContainers(newItems);
-      } else {
-        // In different containers
-        let newItems = [...containers];
-        const [removeditem] = newItems[activeContainerIndex].items.splice(
-          activeItemIndex,
-          1,
-        );
-        console.log(newItems);
-        // console.log("removeditem: ", removeditem);
-        removeditem.columnId = overContainer.title;
+      const updatedTask = {
+        ...boardSection[activeContainer][activeIndex],
+        status: getStatusFromContainer(overContainer), // Function to get the new state
+      };
+      // TODO: console.log(updatedTask) --> When the app needs to send the information about the user that had updated, with this variable can do it.
+      return {
+        ...boardSection,
+        [activeContainer]: [
+          ...boardSection[activeContainer].filter(
+            (item) => item.id !== active.id,
+          ),
+        ],
+        [overContainer]: [
+          ...boardSection[overContainer].slice(0, overIndex),
+          updatedTask,
+          ...boardSection[overContainer].slice(
+            overIndex,
+            boardSection[overContainer].length,
+          ),
+        ],
+      };
+    });
+  };
 
-        // console.log(removeditem.columnId);
-        // console.log("removeditem: ", removeditem.columnId);
-        newItems[overContainerIndex].items.splice(
-          overitemIndex,
-          0,
-          removeditem,
-        );
-        setActiveCard([removeditem]);
-        setContainers(newItems);
-      }
-    }
-
-    // TODO: This block code it doesn't working
-
-    // Handling Item Drop Into a Container
+  // When the user is on the container (same container or next container) and drag the item in the another container, this function is called
+  const handleDragEnd = ({ active, over }: DragEndEvent) => {
+    const activeContainer = findBoardSectionContainer(
+      boardSections,
+      active.id as string,
+    );
+    const overContainer = findBoardSectionContainer(
+      boardSections,
+      over?.id as string,
+    );
     if (
-      active.id.toString().includes("item") &&
-      over?.id.toString().includes("container") &&
-      active &&
-      over &&
-      active.id !== over.id
+      !activeContainer ||
+      !overContainer ||
+      activeContainer !== overContainer
     ) {
-      // Find the active and over container
-      const activeContainer = findValueOfItems(active.id, "item");
-      const overContainer = findValueOfItems(over.id, "container");
-
-      // If the active or over container is not found, return
-      if (!activeContainer || !overContainer) return;
-
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === activeContainer.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === overContainer.id,
-      );
-
-      // Find the index of the active and over item
-      const activeitemIndex = activeContainer.items.findIndex(
-        (item) => item.id === active.id,
-      );
-
-      // Remove the active item from the active container and add it to the over container
-      let newItems = [...containers];
-      const [removeditem] = newItems[activeContainerIndex].items.splice(
-        activeitemIndex,
-        1,
-      );
-      /* console.log(
-        "Handling Item Drop Into a Container --> removeditem",
-        removeditem,
-      ); */
-      newItems[overContainerIndex].items.push(removeditem);
-      setContainers(newItems);
+      return;
     }
-  }
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-
-    // Handling Container Sorting
-    if (
-      active.id.toString().includes("container") &&
-      over?.id.toString().includes("container") &&
-      active &&
-      over &&
-      active.id !== over.id
-    ) {
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === active.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === over.id,
-      );
-      // Swap the active and over container
-      let newItems = [...containers];
-      newItems = arrayMove(newItems, activeContainerIndex, overContainerIndex);
-      setContainers(newItems);
+    // Item active inside the container/ Item dragging
+    const activeIndex = boardSections[activeContainer].findIndex(
+      (item: CardProcessProps) => item.id === active.id,
+    );
+    // Item that inside the containers being flown over
+    const overIndex = boardSections[overContainer].findIndex(
+      (item: CardProcessProps) => item.id === over?.id,
+    );
+    if (activeIndex !== overIndex) {
+      // If the item change the position in the container, the postion in the array will be updated
+      setBoardSections((boardSection) => ({
+        ...boardSection,
+        [overContainer]: arrayMove(
+          boardSection[overContainer],
+          activeIndex,
+          overIndex,
+        ),
+      }));
     }
 
-    // Handling item Sorting
-    if (
-      active.id.toString().includes("item") &&
-      over?.id.toString().includes("item") &&
-      active &&
-      over &&
-      active.id !== over.id
-    ) {
-      // Find the active and over container
-      const activeContainer = findValueOfItems(active.id, "item");
-      const overContainer = findValueOfItems(over.id, "item");
-
-      // If the active or over container is not found, return
-      if (!activeContainer || !overContainer) return;
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === activeContainer.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === overContainer.id,
-      );
-      // Find the index of the active and over item
-      const activeitemIndex = activeContainer.items.findIndex(
-        (item) => item.id === active.id,
-      );
-      const overitemIndex = overContainer.items.findIndex(
-        (item) => item.id === over.id,
-      );
-
-      // In the same container
-      if (activeContainerIndex === overContainerIndex) {
-        let newItems = [...containers];
-        newItems[activeContainerIndex].items = arrayMove(
-          newItems[activeContainerIndex].items,
-          activeitemIndex,
-          overitemIndex,
-        );
-        setContainers(newItems);
-      } else {
-        // In different containers
-        let newItems = [...containers];
-        const [removeditem] = newItems[activeContainerIndex].items.splice(
-          activeitemIndex,
-          1,
-        );
-        newItems[overContainerIndex].items.splice(
-          overitemIndex,
-          0,
-          removeditem,
-        );
-        setContainers(newItems);
-      }
-    }
-    // Handling item dropping into Container
-    if (
-      active.id.toString().includes("item") &&
-      over?.id.toString().includes("container") &&
-      active &&
-      over &&
-      active.id !== over.id
-    ) {
-      // Find the active and over container
-      const activeContainer = findValueOfItems(active.id, "item");
-      const overContainer = findValueOfItems(over.id, "container");
-      console.log("Here");
-      // If the active or over container is not found, return
-      if (!activeContainer || !overContainer) return;
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === activeContainer.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === overContainer.id,
-      );
-      // Find the index of the active and over item
-      const activeitemIndex = activeContainer.items.findIndex(
-        (item) => item.id === active.id,
-      );
-
-      let newItems = [...containers];
-      const [removeditem] = newItems[activeContainerIndex].items.splice(
-        activeitemIndex,
-        1,
-      );
-      newItems[overContainerIndex].items.push(removeditem);
-      setContainers(newItems);
-    }
-    setActiveId(null);
-  }
-
-  const dragCard = activeId ? activeCard : null;
+    setActiveTaskId(null);
+  };
+  const dragCard = activeTaskId ? getTaskById(tasks, activeTaskId) : null;
 
   console.log("dragCard", dragCard);
   return (
-    <DndContext
-      id={DNDid}
-      sensors={sensors}
-      collisionDetection={closestCorners}
-      onDragStart={handleDragStart}
-      onDragMove={handleDragMove}
-      onDragEnd={handleDragEnd}
+    <Container
+      className={
+        colorScheme === "light"
+          ? classes.containercolumns
+          : classes.containercolumns_dark
+      }
+      style={{ width: "100%", maxWidth: "100%" }}
     >
-      <Grid
-        style={{
-          width: "100%",
-          maxWidth: "100%",
-        }}
-        className={
-          colorScheme === "light"
-            ? classes.containercolumns
-            : classes.containercolumns_dark
-        }
+      <DndContext
+        id={DNDid}
+        sensors={sensors}
+        collisionDetection={closestCorners}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
       >
-        {containers.map((container) => (
-          <Grid.Col key={container.id} span={3}>
-            <ColumnContainer
-              cardArray={container.items}
-              title={container.title}
-              id={container.id}
-            />
-            {/* <SortableContext items={container.items.map((i) => i.id)}>
-                {container.items.map((rcv) => {
-                  console.log("rcv: ", rcv.columnId);
-                  console.log("container.title: ", container.title);
-                  console.log(
-                    "container.items.length: ",
-                    container.items.length,
-                  );
-                  return <Items card={rcv} key={rcv.id} />;
-                })}
-              </SortableContext>
-            </ColumnContainer> */}
-          </Grid.Col>
-        ))}
-      </Grid>
-      <DragOverlay adjustScale={false}>
-        {/* Drag Overlay For item Item */}
-        {activeId &&
-          activeId.toString().includes("item") &&
-          dragCard !== undefined && (
+        {/* <Grid
+          style={{
+            width: "100%",
+            maxWidth: "100%",
+          }}
+          className={
+            colorScheme === "light"
+              ? classes.containercolumns
+              : classes.containercolumns_dark
+          }
+        >
+          
+        </Grid> */}
+        <Flex gap={8}>
+          {Object.keys(boardSections).map((columnKey) => {
+            {
+              /* <Grid.Col key={columnKey} span={3}>
+              
+              </Grid.Col> */
+            }
+            console.log(boardSections[columnKey])
+            return (
+              <ColumnContainer
+                key={columnKey}
+                cardArray={boardSections[columnKey]}
+                title={columnKey}
+                id={columnKey}
+              />
+            );
+          })}
+        </Flex>
+        <DragOverlay dropAnimation={dropAnimation}>
+          {dragCard ? (
             <Items
-              card={
-                dragCard
-                  ? dragCard[0]
-                  : {
-                      columnId: "Entregado",
-                      id: `item-${crypto.randomUUID()}`,
-                      vehicle: "servioriente",
-                      carID: "123asd",
-                      createdAt: new Date(),
-                      firstName: "Servi",
-                      lastName: "Oriente",
-                      phonePost: "5986342",
-                      phonePre: "0412",
-                      state: "Carabobo",
-                      updatedAt: new Date(),
-                      birthday: new Date(),
-                      facebook: "servioriente",
-                      instagram: "servioriente_117",
-                      mail: "servioriente@correo.com",
-                      tag: {
-                        CValue: 0,
-                        LCapacity: 0,
-                        NSeats: 0,
-                        services: [false, false, false, false],
-                      },
-                    }
-              }
+              card={{
+                columnId: "Entregado",
+                id: `item-${crypto.randomUUID()}`,
+                vehicle: "servioriente",
+                carID: "123asd",
+                createdAt: new Date(),
+                firstName: "Servi",
+                lastName: "Oriente",
+                phonePost: "5986342",
+                phonePre: "0412",
+                state: "Carabobo",
+                updatedAt: new Date(),
+                birthday: new Date(),
+                facebook: "servioriente",
+                instagram: "servioriente_117",
+                mail: "servioriente@correo.com",
+                tag: {
+                  CValue: 0,
+                  LCapacity: 0,
+                  NSeats: 0,
+                  services: [false, false, false, false],
+                },
+              }}
             />
-          )}
-      </DragOverlay>
-    </DndContext>
+          ) : null}
+          {/* Drag Overlay For item Item */}
+          {/* {activeId &&
+            activeId.toString().includes("item") &&
+            dragCard !== undefined && (
+              <Items
+                card={
+                  dragCard
+                    ? dragCard[0]
+                    : {
+                        columnId: "Entregado",
+                        id: `item-${crypto.randomUUID()}`,
+                        vehicle: "servioriente",
+                        carID: "123asd",
+                        createdAt: new Date(),
+                        firstName: "Servi",
+                        lastName: "Oriente",
+                        phonePost: "5986342",
+                        phonePre: "0412",
+                        state: "Carabobo",
+                        updatedAt: new Date(),
+                        birthday: new Date(),
+                        facebook: "servioriente",
+                        instagram: "servioriente_117",
+                        mail: "servioriente@correo.com",
+                        tag: {
+                          CValue: 0,
+                          LCapacity: 0,
+                          NSeats: 0,
+                          services: [false, false, false, false],
+                        },
+                      }
+                }
+              />
+            )} */}
+        </DragOverlay>
+      </DndContext>
+    </Container>
   );
 }
 
-/* <div
-    className={
-      colorScheme === "light"
-        ? heightClasses.column_process_container
-        : heightClasses.column_process_container
-    }
-  >
-  </div> */
-
-/*
-  function findItemClientName(id: UniqueIdentifier | undefined) {
-    const container = findValueOfItems(id, "item");
-    if (!container) return "";
-    const item = container.items.find((item) => item.id === id);
-    if (!item) return "";
-    return item.firstName;
-  }
-*/
-
-// This is the function that handles the sorting of the containers and items when the user is done dragging.
-/* function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-    // console.log("active: ", active);
-    // console.log("over: ", over);
-
-    // Handling item Sorting
-    if (
-      active.id.toString().includes("item") &&
-      over?.id.toString().includes("item") &&
-      active &&
-      over &&
-      active.id !== over.id
-    ) {
-      // Find the active and over container
-      const activeContainer = findValueOfItems(active.id, "item");
-      const overContainer = findValueOfItems(over.id, "item");
-
-      // If the active or over container is not found, return
-      if (!activeContainer || !overContainer) return;
-
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === activeContainer.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === overContainer.id,
-      );
-      // Find the index of the active and over item
-      const activeitemIndex = activeContainer.items.findIndex(
-        (item) => item.id === active.id,
-      );
-      const overitemIndex = overContainer.items.findIndex(
-        (item) => item.id === over.id,
-      );
-
-      // In the same container
-      if (activeContainerIndex === overContainerIndex) {
-        console.log("activeContainerIndex: ", activeContainerIndex)
-        console.log("overContainerIndex: ", overContainerIndex)
-        console.log("activeContainer: ", activeContainer)
-        console.log("overContainer: ", overContainer)
-        let newItems = [...containers];
-        console.log("newItems: ", newItems);
-        newItems[activeContainerIndex].items = arrayMove(
-          newItems[activeContainerIndex].items,
-          activeitemIndex,
-          overitemIndex,
-        );
-        setContainers(newItems);
-      } else {
-        // In different containers
-        let newItems = [...containers];
-        // console.log("newItems: ", newItems);
-        const [removeditem] = newItems[activeContainerIndex].items.splice(
-          activeitemIndex,
-          1,
-        );
-        newItems[overContainerIndex].items.splice(
-          overitemIndex,
-          0,
-          removeditem,
-        );
-        setContainers(newItems);
-      }
-    }
-    // Handling item dropping into Container
-    if (
-      active.id.toString().includes("item") &&
-      over?.id.toString().includes("container") &&
-      active &&
-      over &&
-      active.id !== over.id
-    ) {
-      // Find the active and over container
-      const activeContainer = findValueOfItems(active.id, "item");
-      const overContainer = findValueOfItems(over.id, "container");
-
-      // console.log("activeContainer: ", activeContainer)
-      // console.log("overContainer: ", overContainer)
-      // If the active or over container is not found, return
-      if (!activeContainer || !overContainer) return;
-      // Find the index of the active and over container
-      const activeContainerIndex = containers.findIndex(
-        (container) => container.id === activeContainer.id,
-      );
-      const overContainerIndex = containers.findIndex(
-        (container) => container.id === overContainer.id,
-      );
-      // Find the index of the active and over item
-      const activeitemIndex = activeContainer.items.findIndex(
-        (item) => item.id === active.id,
-      );
-
-      let newItems = [...containers];
-      // console.log("newItems: ", newItems);
-      const [removeditem] = newItems[activeContainerIndex].items.splice(
-        activeitemIndex,
-        1,
-      );
-      newItems[overContainerIndex].items.push(removeditem);
-      setContainers(newItems);
-    }
-    setActiveId(null);
-  } */
+/* const DATA: Task[] = [
+  {
+    description: "description 1",
+    id: "1",
+    status: "Espera",
+    title: "title 1",
+  },
+  {
+    description: "description 2",
+    id: "2",
+    status: "Entregado",
+    title: "title 2",
+  },
+  {
+    description: "description 3",
+    id: "3",
+    status: "Generacion",
+    title: "title 3",
+  },
+  {
+    description: "description 4",
+    id: "4",
+    status: "pagado",
+    title: "title 4",
+  },
+  {
+    description: "description 5",
+    id: "5",
+    status: "entregado",
+    title: "title 5",
+  },
+  {
+    description: "description 6",
+    id: "6",
+    status: "entregado",
+    title: "title 6",
+  },
+  {
+    description: "description 7",
+    id: "7",
+    status: "entregado",
+    title: "title 7",
+  },
+  {
+    description: "description 8",
+    id: "8",
+    status: "entregado",
+    title: "title 8",
+  },
+  {
+    description: "description 9",
+    id: "9",
+    status: "entregado",
+    title: "title 9",
+  },
+  {
+    description: "description 10",
+    id: "10",
+    status: "entregado",
+    title: "title 10",
+  },
+  {
+    description: "description 11",
+    id: "11",
+    status: "entregado",
+    title: "title 11",
+  },
+  {
+    description: "description 12",
+    id: "12",
+    status: "entregado",
+    title: "title 12",
+  },
+  {
+    description: "description 13",
+    id: "13",
+    status: "entregado",
+    title: "title 13",
+  },
+  {
+    description: "description 14",
+    id: "14",
+    status: "entregado",
+    title: "title 14",
+  },
+  {
+    description: "description 15",
+    id: "15",
+    status: "entregado",
+    title: "title 15",
+  },
+  {
+    description: "description 16",
+    id: "16",
+    status: "entregado",
+    title: "title 16",
+  },
+  {
+    description: "description 17",
+    id: "17",
+    status: "entregado",
+    title: "title 17",
+  },
+  {
+    description: "description 18",
+    id: "18",
+    status: "entregado",
+    title: "title 18",
+  },
+  {
+    description: "description 19",
+    id: "19",
+    status: "entregado",
+    title: "title 19",
+  },
+  {
+    description: "description 20",
+    id: "20",
+    status: "entregado",
+    title: "title 20",
+  },
+  {
+    description: "description 21",
+    id: "21",
+    status: "entregado",
+    title: "title 21",
+  },
+  {
+    description: "description 22",
+    id: "22",
+    status: "entregado",
+    title: "title 22",
+  },
+  {
+    description: "description 23",
+    id: "23",
+    status: "entregado",
+    title: "title 23",
+  },
+  {
+    description: "description 24",
+    id: "24",
+    status: "entregado",
+    title: "title 24",
+  },
+  {
+    description: "description 25",
+    id: "25",
+    status: "entregado",
+    title: "title 25",
+  },
+  {
+    description: "description 26",
+    id: "26",
+    status: "entregado",
+    title: "title 26",
+  },
+  {
+    description: "description 27",
+    id: "27",
+    status: "entregado",
+    title: "title 27",
+  },
+  {
+    description: "description 28",
+    id: "28",
+    status: "entregado",
+    title: "title 28",
+  },
+  {
+    description: "description 29",
+    id: "29",
+    status: "entregado",
+    title: "title 29",
+  },
+  {
+    description: "description 30",
+    id: "30",
+    status: "entregado",
+    title: "title 30",
+  },
+]; */

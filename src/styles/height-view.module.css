@@ -263,16 +263,64 @@
     height: 65.5vh;
   }
 }
-@media (min-width: 1280px) {
+/* @media (max-width: 1280px) {
+  .calendarGrid_father_container {
+    height: 70.5vh; 
+  }
+} */
+/*71.5vh*/
+/* @media (min-width: 1281px) {
+  .calendarGrid_father_container {
+    height: 77.5vh; 
+  }
+} */
+/*65.5vh*/
+@media (max-width: 1280px) {
   .calendarGrid_container {
-    height: 71.5vh;
+    height: 800px; /*71.5vh*/
+    max-height: 100%;
   }
 }
 @media (min-width: 1281px) {
   .calendarGrid_container {
-    height: 65.5vh;
+    height: 750px; /*65.5vh*/
+    max-height: 100%;
   }
 }
+/*-------------------------------------------------------------------------*/
+@media (max-height: 400px) {
+  .calendarGrid_father_container {
+    background-color: blueviolet;
+    height: 70.5vh; /*71.5vh*/
+  }
+}
+@media (min-height: 400px) and (max-height: 599px) {
+  .calendarGrid_father_container {
+    height: 70.5vh;
+  }
+}
+@media (min-height: 600px) and (max-height: 799px) {
+  .calendarGrid_father_container {
+    height: 70.5vh;
+  }
+}
+@media (min-height: 800px) and (max-height: 999px) {
+  .calendarGrid_father_container {
+    height: 77.5vh;
+  }
+}
+@media (min-height: 1000px) and (max-height: 1199px) {
+  .calendarGrid_father_container {
+    height: 70.5vh;
+  }
+}
+@media (min-height: 1200px) {
+  .calendarGrid_father_container {
+    height: 70.5vh;
+  }
+}
+/*-------------------------------------------------------------------------*/
+
 /* -------------------------- Data Base Section -------------------------- */
 @media (min-width: 1280px) {
   .DB_container {

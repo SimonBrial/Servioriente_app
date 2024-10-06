@@ -36,7 +36,8 @@ export const DifusionListChat = (): JSX.Element => {
           p={0}
           className={heightClasses.difusionList_scroll_container}
         >
-          <TextEditor />
+          {/* <TextEditor /> */}
+          prueba
         </ScrollArea>
       </ContainerInside>
       <Flex gap={6} justify={"end"}>

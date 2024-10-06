@@ -23,7 +23,8 @@ export const FormatsContainer = () => {
           p={0}
           className={heightClasses.formats_scroll_container}
         >
-          <TextEditor />
+          {/* <TextEditor /> */}
+          prueba
         </ScrollArea>
       </ContainerInside>
       <Flex gap={4} justify={"flex-end"} style={{ width: "100%" }}>

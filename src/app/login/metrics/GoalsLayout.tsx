@@ -22,7 +22,7 @@ export const GoalsLayout = () => {
         <Stack>
           <TitleLayout color="" icon="" onText={false} title="Bases" />
           <Stack gap={6}>
-            <HorizontalInputLayout
+            {/* <HorizontalInputLayout
               asterisk={false}
               icon={<HiOutlineDocumentText />}
               inputSize="200px"
@@ -44,7 +44,7 @@ export const GoalsLayout = () => {
               title="Periodo"
               periodeArr={periodeGoals}
               inputSize="200px"
-            />
+            /> */}
           </Stack>
         </Stack>
         <Stack>
@@ -61,7 +61,7 @@ export const GoalsLayout = () => {
             <GeneralDivider orientation="horizontal" key={crypto.randomUUID()}/>
           </Stack>
           <Stack gap={6}>
-            <NumberHorizontalInput
+            {/* <NumberHorizontalInput
               asterisk={false}
               icon={<HiOutlineUser />}
               inputSize="200px"
@@ -78,7 +78,8 @@ export const GoalsLayout = () => {
               icon={<HiOutlineUser />}
               inputSize="200px"
               title="Manuel Manuel"
-            />
+            /> */}
+            prueba
           </Stack>
         </Stack>
       </Stack>

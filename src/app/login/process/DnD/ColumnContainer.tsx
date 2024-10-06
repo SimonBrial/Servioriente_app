@@ -1,7 +1,7 @@
 /* eslint-disable object-shorthand */
 "use client";
 // DnD
-import { UniqueIdentifier } from "@dnd-kit/core";
+import { UniqueIdentifier, useDroppable } from "@dnd-kit/core";
 import {
   SortableContext,
   useSortable,
@@ -18,6 +18,7 @@ import {
   Flex,
   Text,
   Center,
+  Container,
 } from "@mantine/core";
 // Others
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
@@ -32,7 +33,7 @@ interface ContainerProps {
   id: UniqueIdentifier;
   // children: React.ReactNode;
   title: string;
-  cardArray: CardProcessProps[];
+  cardArray: CardProcessProps[] | any[];
 }
 
 export function ColumnContainer({
@@ -43,11 +44,11 @@ export function ColumnContainer({
 }: ContainerProps) {
   // const [cardsArray, setCardsArray] = useState<CardProcessProps[]>(cardArray);
   const { colorScheme } = useMantineColorScheme();
-  const { setNodeRef } = useSortable({
+  const { setNodeRef } = useDroppable({
     id: id,
-    data: {
+    /* data: {
       type: "container",
-    },
+    }, */
   });
 
   /* function changeProperty(
@@ -66,8 +67,8 @@ export function ColumnContainer({
   }, [cardsArray.length]); */
 
   return (
-    <div
-      ref={setNodeRef}
+    <Container
+      // ref={setNodeRef}
       style={{
         padding: "0.3rem 0.5rem",
         border:
@@ -158,18 +159,23 @@ export function ColumnContainer({
               </Text>
             </Flex>
           ) : (
-            cardArray.map((rcv) => {
-              /* console.log("rcv: ", rcv.columnId);
-                  console.log("container.title: ", container.title);
-                  console.log(
-                    "container.items.length: ",
-                    container.items.length,
-                  ); */
-              return <Items card={rcv} key={rcv.id} />;
-            })
+            <Stack
+              className="w-full h-[95%] p-2 bg-cyan-300/30 rounded-md" // Inside the column
+              ref={setNodeRef}
+            >
+              {cardArray.map((rcv) => {
+                /* console.log("rcv: ", rcv.columnId);
+                        console.log("container.title: ", container.title);
+                        console.log(
+                          "container.items.length: ",
+                          container.items.length,
+                        ); */
+                return <Items card={rcv} key={rcv.id} />;
+              })}
+            </Stack>
           )}
         </ScrollArea>
       </SortableContext>
-    </div>
+    </Container>
   );
 }

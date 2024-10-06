@@ -89,25 +89,27 @@ export const UserContainer = ({ label }: { label: labelType }) => {
             </Flex>
             <Box h={40}>
               <BtnAdd
+                fnShow={() => {}}
+                showDrawer
                 iconTag="add-user"
                 label={
                   label === "Super Admin" ? "Nuevo Super Admin" : "Nuevo Admin"
                 }
-                addFn={toggle}
+                // addFn={toggle}
                 key={crypto.randomUUID()}
-                id={crypto.randomUUID()}
-                labelBtn="Crear Usuario"
-                color="green"
-                title={
+                // id={crypto.randomUUID()}
+                // labelBtn="Crear Usuario"
+                // color="green"
+                /* title={
                   label === "Super Admin"
                     ? "Creado Nuevo Super Admin"
                     : "Creado Nuevo Admin"
-                }
-                description={
+                } */
+                /* description={
                   label === "Super Admin"
                     ? "El registro del usuario (SUPER ADMIN), ha sido creado satisfactoriamente 😎!"
                     : "El registro del usuario (ADMIN), ha sido creado satisfactoriamente 😎!"
-                }
+                } */
               >
                 <SuperAdminUserLayout />
               </BtnAdd>

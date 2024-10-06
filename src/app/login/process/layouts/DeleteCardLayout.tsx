@@ -9,13 +9,12 @@ import {
   Flex,
   Text,
 } from "@mantine/core";
-import React from "react";
 
 export default function DeleteCardLayout() {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Stack gap={8}>
-      <TitleSimpleLayout title="Eliminar Registro" key={crypto.randomUUID()} />
+      <TitleSimpleLayout title="Eliminar Registro" />
       <Container
         styles={(theme) => ({
           root: {

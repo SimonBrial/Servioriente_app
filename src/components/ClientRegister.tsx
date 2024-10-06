@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 "use client";
 
-import {
-  useMantineColorScheme,
-  Title,
-  Stack,
-  Flex,
-} from "@mantine/core";
+import { useMantineColorScheme, Title, Stack, Flex } from "@mantine/core";
 import {
   IoLogoInstagram,
   IoLogoFacebook,
@@ -37,7 +32,7 @@ interface ClientFormProps {
 export default function ClientRegister(): JSX.Element {
   const { colorScheme } = useMantineColorScheme();
   const {
-    // formState: { errors },
+    formState: { errors },
     handleSubmit,
     register,
     control,
@@ -82,6 +77,7 @@ export default function ClientRegister(): JSX.Element {
           <Stack gap={"xs"}>
             <TitleSimpleLayout title="Crear Registro" />
             <HorizontalInputLayout
+              errorDescription={errors.firstName?.message}
               asterisk
               icon={<HiOutlineUser />}
               inputSize="200px"
@@ -94,6 +90,7 @@ export default function ClientRegister(): JSX.Element {
               control={control}
             />
             <HorizontalInputLayout
+              errorDescription={errors.lastName?.message}
               asterisk
               icon={<HiOutlineUser />}
               inputSize="200px"
@@ -106,6 +103,7 @@ export default function ClientRegister(): JSX.Element {
               control={control}
             />
             <HorizontalInputLayout
+              errorDescription={errors.vehicle?.message}
               asterisk
               icon={<AiOutlineCar />}
               inputSize="200px"
@@ -118,6 +116,7 @@ export default function ClientRegister(): JSX.Element {
               control={control}
             />
             <StateSelect
+              errorDescription={errors.state?.message}
               asterisk
               inputSize="200px"
               label="state"
@@ -128,6 +127,8 @@ export default function ClientRegister(): JSX.Element {
               control={control}
             />
             <StatusSelect
+              typeArray="process"
+              errorDescription={errors.typeStatus?.message}
               asterisk
               inputSize="200px"
               label="typeStatus"
@@ -138,6 +139,8 @@ export default function ClientRegister(): JSX.Element {
               control={control}
             />
             <PhoneInputLayout
+              errorDescription={errors.phonePre?.message}
+              errorCodePhone={errors.phonePost?.message}
               asterisk
               inputSize=""
               label=""
@@ -149,6 +152,7 @@ export default function ClientRegister(): JSX.Element {
             />
             <TitleSimpleLayout title="Redes Sociales" />
             <SocialMediaInput
+              errorDescription={errors.facebook?.message}
               asterisk={false}
               socialMediaIcon={<IoLogoFacebook />}
               socialMediaName="Facebook"
@@ -199,6 +203,7 @@ export default function ClientRegister(): JSX.Element {
               </Title>
             </Flex>
             <SocialMediaInput
+              errorDescription={errors.instagram?.message}
               asterisk={false}
               socialMediaIcon={<IoLogoInstagram />}
               socialMediaName="Instagram"

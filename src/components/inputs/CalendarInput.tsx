@@ -15,7 +15,6 @@ dayjs.extend(customParseFormat) */
 interface CalendarInputProps extends HorizontalLayoutProps {
   withTitle: boolean;
   title: string;
-  width: string;
 }
 
 export function CalendarInput({
@@ -28,7 +27,6 @@ export function CalendarInput({
   required,
   control,
   title,
-  width,
   label,
   icon,
   max,
@@ -65,7 +63,7 @@ export function CalendarInput({
               locale="es"
               valueFormat="DD MMMM YYYY"
               /* dateParser={(value) => dayjs(value, 'DD MMMM YYYY', "es").toDate()} */
-              w={width}
+              w={inputSize}
               size="sm"
               leftSection={<HiOutlineCalendar />}
               clearable

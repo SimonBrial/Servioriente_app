@@ -15,6 +15,7 @@ import {
 import classes from "@/styles/dashboard.module.css";
 import { TaskDayItem } from "./TaskDayItem";
 import { TaskDayCardProps } from "@/interface/interface";
+import React from "react";
 
 export default function TaskDaycontainer({
   taskToday,
@@ -60,12 +61,12 @@ export default function TaskDaycontainer({
             <>
               {taskToday.map((task) => {
                 const {
-                  admin,
-                  degree,
-                  description,
-                  idTask,
-                  title,
                   userToassign,
+                  description,
+                  degree,
+                  idTask,
+                  admin,
+                  title,
                 } = task;
                 return (
                   <TaskDayItem

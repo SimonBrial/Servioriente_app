@@ -1,10 +1,10 @@
 import { CalendarContainer } from "./CalendarContainer";
-import CalendarView from "./calendarLayout/CalendarView";
+import { CalendarGridView } from "./calendarLayout/CalendarGridView";
 
 export default function page(): JSX.Element {
   return (
     <CalendarContainer>
-      <CalendarView />
+      <CalendarGridView />
     </CalendarContainer>
   );
 }

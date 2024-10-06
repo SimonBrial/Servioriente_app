@@ -37,7 +37,7 @@ import dayjs from "dayjs";
 import { useDataBaseStore } from "@/store/db-store";
 
 const initialValues: ListDBProps = {
-  birthday: dayjs(new Date()),
+  birthday: new Date(),
   id: crypto.randomUUID(),
   typeStatus: "Espera",
   firstName: "",

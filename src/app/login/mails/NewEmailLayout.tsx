@@ -30,7 +30,7 @@ export default function NewEmailLayout() {
       />
 
       <Stack mb={5} gap={6}>
-        <HorizontalInputLayout
+        {/* <HorizontalInputLayout
           asterisk={false}
           icon={<HiOutlineMail />}
           inputSize="300px"
@@ -41,7 +41,7 @@ export default function NewEmailLayout() {
           icon={<MdOutlineTitle />}
           inputSize="300px"
           title="Titulo"
-        />
+        /> */}
         <Flex align={"center"} justify={"space-between"} w={"100%"}>
           <Title
             order={4}
@@ -103,7 +103,7 @@ export default function NewEmailLayout() {
           p={0}
           className={heightClasses.sendMail_scroll_container}
         >
-          <TextEditor />
+          {/* <TextEditor /> */} prueba
         </ScrollArea>
       </ContainerInside>
     </>

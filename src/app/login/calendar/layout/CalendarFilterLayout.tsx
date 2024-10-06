@@ -71,8 +71,8 @@ export default function CalendarFilterLayout() {
           })}
         />
       </Flex>
-      <CalendarInput title="Desde" width="200px" withTitle />
-      <CalendarInput title="Hasta" width="200px" withTitle />
+      {/* <CalendarInput title="Desde" width="200px" withTitle />
+      <CalendarInput title="Hasta" width="200px" withTitle /> */}
     </Stack>
   );
 }

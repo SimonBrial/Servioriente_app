@@ -32,6 +32,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { processTitle } from "@/types/types";
 import { RxDragHandleDots2 } from "@/icons";
 import { GeneralDivider } from "@/components/GeneralDivider";
+import { UniqueIdentifier } from "@dnd-kit/core";
 
 interface CardProps {
   card: CardProcessProps;
@@ -61,7 +62,7 @@ export function Items({
   const [opened, { open, close }] = useDisclosure(false);
 
   // Don't delete this
-  const [colorDivider, setColorDivider] = useState<processTitle | string>(
+  const [colorDivider, setColorDivider] = useState<processTitle>(
     columnId,
   );
   // console.log(columnId)

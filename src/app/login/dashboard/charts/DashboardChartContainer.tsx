@@ -120,7 +120,7 @@ export const DashboardChartContainer = ({
         </Flex>
         {!checked ? (
           <Box style={{ paddingTop: "1rem" }}>
-            <LineChart key={crypto.randomUUID()} />
+            <LineChart key={crypto.randomUUID()} dataToShow={dataArr} />
           </Box>
         ) : (
           <Box

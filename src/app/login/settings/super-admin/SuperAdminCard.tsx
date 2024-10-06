@@ -88,22 +88,24 @@ export const SuperAdminCard = ({ admin }: { admin: boolean }) => {
           >
             <SuperAdminDeleteLayout />
           </BtnDelete>
-          <BtnSee>
+          <BtnSee idToShow="">
             <SuperAdminDescription />
           </BtnSee>
           <BtnEdit
+            editLayout
+            fnShowEditLayout={() => {}}
             key={crypto.randomUUID()}
             id={crypto.randomUUID()}
             buttonStyles="special"
-            labelBtn="Guardar"
-            description="Los datos del usuario han sido edistados satisfactoriamente 😎!"
-            color="green"
-            title="Datos de Usuario Editados"
-            icon={
+            // labelBtn="Guardar"
+            // description="Los datos del usuario han sido edistados satisfactoriamente 😎!"
+            // color="green"
+            // title="Datos de Usuario Editados"
+            /* icon={
               <IconLayout>
                 <HiOutlineSave />
               </IconLayout>
-            }
+            } */
           >
             <SuperAdminUserLayout />
           </BtnEdit>

@@ -1,9 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-
-// import { weekDays } from "@/data/calendarDaysAndMonth";
-
-/* eslint-disable import/no-anonymous-default-export */
-export function range(end: number) {
+export const range = (end: number): number[] => {
   const { result } = Array.from({ length: end }).reduce(
     ({ result, current }) => ({
       result: [...result, current],
@@ -12,11 +7,11 @@ export function range(end: number) {
     { result: [], current: 1 },
   );
   return result;
-}
+};
 
-export function getDaysInMonth(month: number, year: number) {
+export const getDaysInMonth = (month: number, year: number): number => {
   return new Date(year, month + 1, 0).getDate();
-}
+};
 
 /* export function getSortedDays(month: number, year: number) {
   const dayIndex = new Date(year, month, 1).getDay();
@@ -25,23 +20,86 @@ export function getDaysInMonth(month: number, year: number) {
 // Entrega un array que contiene todos los dias del mes
 // getSortedDays() : number[]
 
-export const getSortedDays = (month: number, year: number) => {
-  const daysInMonth = range(getDaysInMonth(month, year));
-  const index = new Date(year, month, 1).getDay();
-  return [...Array(index === 0 ? 6 : index - 1), ...daysInMonth];
+export const getDaysMonth = (
+  month: number,
+  year: number,
+): Record<string, number> => {
+  const firstDayIndex = new Date(year, month, 1).getDay(); // Week's day of the first month's day
+  const prevMonthDays = getDaysInMonth(
+    month - 1 < 0 ? 11 : month - 1,
+    month - 1 < 0 ? year - 1 : year,
+  );
+  const nextMonthDays = getDaysInMonth(
+    month + 1 > 11 ? 0 : month + 1,
+    month + 1 > 11 ? year + 1 : year,
+  );
+
+  return {
+    prevMonthDays,
+    firstDayIndex,
+    nextMonthDays,
+  };
 };
 
-export function getDateObjet(day: number, month: number, year: number) {
-  return new Date(year, month, day);
-}
+export const getSortedDays = (month: number, year: number) => {
+  const daysInMonth = range(getDaysInMonth(month, year)); // Quantity of day in month
 
-export function areDateOnSameDay(first: Date, second: Date) {
-  return (
-    first.getFullYear() === second.getFullYear() &&
-    first.getMonth() === second.getMonth() &&
-    first.getDate() === second.getDate()
+  const { prevMonthDays, firstDayIndex, nextMonthDays } = getDaysMonth(
+    month,
+    year,
   );
-}
+
+  const prevMonthFill = Array.from(
+    { length: firstDayIndex === 0 ? 6 : firstDayIndex - 1 },
+    (_, i) =>
+      prevMonthDays - (firstDayIndex === 0 ? 6 : firstDayIndex - 1) + i + 1,
+  );
+  const nextMonthFill = Array.from(
+    { length: 42 - (prevMonthFill.length + daysInMonth.length) },
+    (_, i) => i + 1,
+  );
+
+  const prevMonthDates = prevMonthFill.map((day) => {
+    return getDateObjet(day, month - 1 < 0 ? 11 : month - 1, year);
+  });
+  const nextMonthDates = nextMonthFill.map((day) => {
+    return getDateObjet(day, month + 1 > 11 ? 0 : month + 1, year);
+  });
+
+  const currentMonthDates = daysInMonth.map((day) => {
+    return getDateObjet(day, month, year);
+  });
+
+  return {
+    monthArray: [...prevMonthFill, ...daysInMonth, ...nextMonthFill],
+    monthArrayDates: [
+      ...prevMonthDates,
+      ...currentMonthDates,
+      ...nextMonthDates,
+    ],
+    prevMonthDays: prevMonthDays,
+    nextMonthDays: nextMonthDays,
+    prevMonthDates: prevMonthDates,
+    nextMonthDates: nextMonthDates,
+    currentMonthDates: currentMonthDates,
+  };
+};
+
+export const getDateObjet = (
+  day: number,
+  month: number,
+  year: number,
+): Date => {
+  return new Date(year, month, day);
+};
+
+export const areDateOnSameDay = (first: Date, second: Date): boolean => {
+  return (
+    first.getDate() === second.getDate() &&
+    first.getMonth() === second.getMonth() &&
+    first.getFullYear() === second.getFullYear()
+  );
+};
 
 /* export const nextMonth = (date: Date, cb: (dt: Date) => void) => {
   const mon = date.getMonth();

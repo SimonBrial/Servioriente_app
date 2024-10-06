@@ -1,4 +1,3 @@
-import React from "react";
 import { EventCardProps } from "@/interface/interface";
 import { SmallEventCard } from "./SmallEventCard";
 import { EventCard } from "./EventCard";
@@ -6,7 +5,7 @@ import { BigEventCard } from "./BigEventCard";
 
 export const EventCardLayout = ({
   userToassign,
-  desription,
+  description,
   cardSize,
   degree,
   title,
@@ -14,14 +13,24 @@ export const EventCardLayout = ({
   id,
 }: EventCardProps) => {
   if (cardSize === "small") {
-    return <SmallEventCard degree={degree} title={title} date={date} />;
+    return (
+      <SmallEventCard
+        userToassign={userToassign}
+        description={description}
+        cardSize={cardSize}
+        degree={degree}
+        title={title}
+        date={date}
+        id={id}
+      />
+    );
   }
 
   if (cardSize === "medium") {
     return (
       <EventCard
         userToassign={userToassign}
-        desription={desription}
+        description={description}
         degree={degree}
         title={title}
       />
@@ -33,7 +42,7 @@ export const EventCardLayout = ({
       <BigEventCard
         admin
         userToassign={userToassign}
-        desription={desription}
+        description={description}
         degree={degree}
         title={title}
       />

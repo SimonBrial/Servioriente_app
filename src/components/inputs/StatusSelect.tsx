@@ -1,7 +1,10 @@
 "use client";
 
+import { HiOutlineExclamationTriangle } from "@/icons";
 import { StateSelectProps } from "@/interface/interface";
+import { degreeType } from "@/types/types";
 import { Flex, Select, Title, useMantineColorScheme } from "@mantine/core";
+import React from "react";
 import { Controller } from "react-hook-form";
 
 interface StatusSelectProps extends StateSelectProps {
@@ -27,12 +30,12 @@ export default function StatusSelect({
     "Entregado",
     "Rechazado",
   ];
-  const taskType = [
+  const taskType: degreeType[] = [
     "Muy Importante",
     "Importante",
     "Normal",
+    "Nada Importante",
     "Poco Importante",
-    "Muy Poco Importante",
   ];
   return (
     <Flex justify={"space-between"} align={"center"}>
@@ -57,6 +60,7 @@ export default function StatusSelect({
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
           <Select
+            leftSection={<HiOutlineExclamationTriangle />}
             allowDeselect={false}
             onChange={onChange}
             onBlur={onBlur}

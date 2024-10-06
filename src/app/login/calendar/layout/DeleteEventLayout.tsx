@@ -1,30 +1,22 @@
 "use client";
 
+import { PriorityBadge } from "@/components/badge/PriorityBadge";
 import { GeneralDivider } from "@/components/GeneralDivider";
 import TitleSimpleLayout from "@/components/layout/TitleSimpleLayout";
-import { FormatCardProps } from "@/interface/interface";
 import {
   useMantineColorScheme,
-  ScrollArea,
   Container,
   Stack,
   Flex,
   Text,
 } from "@mantine/core";
 import dayjs from "dayjs";
-import React from "react";
 
-export default function DeleteTemplateLayout({
-  userCreator,
-  description,
-  title,
-  date,
-  id,
-}: FormatCardProps) {
+export default function DeleteEventLayout() {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Stack gap={8}>
-      <TitleSimpleLayout title="Eliminar Formato" key={crypto.randomUUID()} />
+      <TitleSimpleLayout title="Eliminar Evento" />
       <Container
         styles={(theme) => ({
           root: {
@@ -56,7 +48,7 @@ export default function DeleteTemplateLayout({
                   },
                 })}
               >
-                Creado por:
+                Titulo:
               </Text>
               <Text
                 size="1.1rem"
@@ -69,7 +61,7 @@ export default function DeleteTemplateLayout({
                   },
                 })}
               >
-                {userCreator}
+                Event's title
               </Text>
             </Flex>
             <GeneralDivider
@@ -90,21 +82,9 @@ export default function DeleteTemplateLayout({
                   },
                 })}
               >
-                Titulo:
+                Prioridad:
               </Text>
-              <Text
-                size="1.1rem"
-                styles={(theme) => ({
-                  root: {
-                    color:
-                      colorScheme === "light"
-                        ? theme.colors.principalTheme[6]
-                        : theme.colors.principalTheme[7],
-                  },
-                })}
-              >
-                {title}
-              </Text>
+              <PriorityBadge title="Muy Importante" />
             </Flex>
             <GeneralDivider
               orientation="horizontal"
@@ -137,7 +117,7 @@ export default function DeleteTemplateLayout({
                   },
                 })}
               >
-                {dayjs(date).format("DD-MM-YYYY")}
+                {dayjs(new Date()).format("DD/MM/YYYY - hh: mm A")}
               </Text>
             </Flex>
             <GeneralDivider
@@ -145,8 +125,8 @@ export default function DeleteTemplateLayout({
               key={crypto.randomUUID()}
             />
           </Stack>
-          <Stack gap={4} w={"100%"}>
-            <Stack gap={4}>
+          <Stack gap={1} w={"100%"}>
+            <Flex align={"center"} gap={10}>
               <Text
                 size="1.1rem"
                 styles={(theme) => ({
@@ -158,44 +138,118 @@ export default function DeleteTemplateLayout({
                   },
                 })}
               >
-                Descripcion:
+                Asignado por:
               </Text>
-              <GeneralDivider
-                orientation="horizontal"
-                key={crypto.randomUUID()}
-              />
-            </Stack>
-            <Container
-              styles={(theme) => ({
-                root: {
-                  overflow: "hidden",
-                  border:
-                    colorScheme === "light"
-                      ? `1px solid ${theme.colors.lightTheme[2]}`
-                      : `1px solid ${theme.colors.darkTheme[6]}`,
-                  borderRadius: "6px",
-                },
-              })}
-              p={0}
-            >
-              <ScrollArea
-                scrollbarSize={2}
-                h={250}
+              <Text
+                size="1.1rem"
                 styles={(theme) => ({
                   root: {
-                    width: "100%",
-                    lineHeight: "16px",
-                    fontSize: "1rem",
+                    color:
+                      colorScheme === "light"
+                        ? theme.colors.principalTheme[6]
+                        : theme.colors.principalTheme[7],
+                  },
+                })}
+              >
+                Simon Briceño
+              </Text>
+            </Flex>
+            <GeneralDivider
+              orientation="horizontal"
+              key={crypto.randomUUID()}
+            />
+          </Stack>
+          <Stack gap={1} w={"100%"}>
+            <Flex align={"center"} gap={10}>
+              <Text
+                size="1.1rem"
+                styles={(theme) => ({
+                  root: {
                     color:
                       colorScheme === "light"
                         ? theme.colors.lightTheme[3]
                         : theme.colors.darkTheme[2],
-                    padding: "0.5rem",
                   },
                 })}
               >
-                {description}
-              </ScrollArea>
+                Asignado a:
+              </Text>
+              <Text
+                size="1.1rem"
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? theme.colors.principalTheme[6]
+                        : theme.colors.principalTheme[7],
+                  },
+                })}
+              >
+                Simon Briceño
+              </Text>
+            </Flex>
+            <GeneralDivider
+              orientation="horizontal"
+              key={crypto.randomUUID()}
+            />
+          </Stack>
+          <Stack gap={1} w={"100%"}>
+            <Text
+              size="1.1rem"
+              styles={(theme) => ({
+                root: {
+                  color:
+                    colorScheme === "light"
+                      ? theme.colors.lightTheme[3]
+                      : theme.colors.darkTheme[2],
+                },
+              })}
+            >
+              Descripcion
+            </Text>
+            <GeneralDivider
+              orientation="horizontal"
+              key={crypto.randomUUID()}
+            />
+            <Container
+              styles={(theme) => ({
+                root: {
+                  borderWidth: "1px",
+                  borderStyle: "solid",
+                  borderColor:
+                    colorScheme === "light"
+                      ? theme.colors.lightTheme[3]
+                      : theme.colors.darkTheme[2],
+                  borderRadius: "6px",
+                  width: "100%",
+                  padding: "0.5rem",
+                  marginTop: "0.4rem",
+                },
+              })}
+            >
+              <Text
+                size="0.9rem"
+                styles={(theme) => ({
+                  root: {
+                    color:
+                      colorScheme === "light"
+                        ? theme.colors.lightTheme[3]
+                        : theme.colors.darkTheme[2],
+                  },
+                })}
+              >
+                loremIt is a long established fact that a reader will be
+                distracted by the readable content of a page when looking at its
+                layout. The point of using Lorem Ipsum is that it has a
+                more-or-less normal distribution of letters, as opposed to using
+                'Content here, content here', making it look like readable
+                English. Many desktop publishing packages and web page editors
+                now use Lorem Ipsum as their default model text, and a search
+                for 'lorem ipsum' will uncover many web sites still in their
+                infancy. Various versions have evolved over the years, sometimes
+                by accident, sometimes on purpose (injected humour and the
+                like).
+              </Text>
             </Container>
           </Stack>
         </Stack>

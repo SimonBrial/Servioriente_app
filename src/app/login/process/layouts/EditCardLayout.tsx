@@ -21,7 +21,7 @@ import {
   Flex,
   Box,
 } from "@mantine/core";
-import { useForm } from "react-hook-form";
+import { FieldError, FieldErrorsImpl, Merge, useForm } from "react-hook-form";
 import {
   ClientRegisterProcessProps,
   CardProcessProps,
@@ -68,6 +68,16 @@ const initialValues: ClientRegisterProcessProps = {
     services: [false, false, false, false],
   },
 };
+
+function getErrorMessage(error: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined): string | undefined {
+  if (typeof error === 'string') {
+    return error;
+  }
+  if (error && typeof error.message === 'string') {
+    return error.message;
+  }
+  return undefined;
+}
 
 export default function EditCardLayout({onShow}: {onShow: (show: boolean) => void}) {
   const { colorScheme } = useMantineColorScheme();
@@ -135,7 +145,8 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
             {/* <UserPhoto userIconSize="6rem" /> */}
             <Stack gap={6} w={"100%"} style={{ height: "100%" }}>
               <HorizontalInputLayout
-                errorDescription={errors.firstName?.message}
+                // errorDescription={errors.firstName?.message}
+                errorDescription={getErrorMessage(errors.firstName?.message)}
                 icon={<HiOutlineUser />}
                 register={register}
                 label="firstName"
@@ -148,7 +159,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
                 min={3}
               />
               <HorizontalInputLayout
-                errorDescription={errors.lastName?.message}
+                errorDescription={getErrorMessage(errors.lastName?.message)}
                 icon={<HiOutlineUser />}
                 register={register}
                 label="lastName"
@@ -195,7 +206,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
                 </Box>
               </Flex>
               <HorizontalInputLayout
-                errorDescription={errors.vehicle?.message}
+                errorDescription={getErrorMessage(errors.vehicle?.message)}
                 asterisk
                 icon={<AiOutlineCar />}
                 inputSize="235px"
@@ -208,7 +219,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
                 control={control}
               />
               <HorizontalInputLayout
-                errorDescription={errors.carID?.message}
+                errorDescription={getErrorMessage(errors.carID?.message)}
                 asterisk
                 icon={<AiOutlineCar />}
                 inputSize="235px"
@@ -221,7 +232,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
                 control={control}
               />
               <StateSelect
-                errorDescription={errors.state?.message}
+                errorDescription={getErrorMessage(errors.state?.message)}
                 asterisk
                 inputSize="235px"
                 label="state"
@@ -232,7 +243,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
                 control={control}
               />
               <HorizontalInputLayout
-                errorDescription={errors.mail?.message}
+                errorDescription={getErrorMessage(errors.mail?.message)}
                 asterisk
                 icon={<MdOutlineAlternateEmail />}
                 inputSize="235px"
@@ -245,8 +256,8 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
                 control={control}
               />
               <PhoneInputLayout
-                errorCodePhone={errors.phonePre?.message}
-                errorDescription={errors.phonePost?.message}
+                errorCodePhone={getErrorMessage(errors.phonePre?.message)}
+                errorDescription={getErrorMessage(errors.phonePost?.message)}
                 asterisk
                 inputSize="235px"
                 label=""
@@ -258,7 +269,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
               />
               <TitleSimpleLayout title="Redes Sociales" />
               <SocialMediaInput
-                errorDescription={errors.facebook?.message}
+                errorDescription={getErrorMessage(errors.facebook?.message)}
                 asterisk={false}
                 socialMediaIcon={<IoLogoFacebook />}
                 socialMediaName="Facebook"
@@ -309,7 +320,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
                 )}
               </Flex>
               <SocialMediaInput
-                errorDescription={errors.instagram?.message}
+                errorDescription={getErrorMessage(errors.instagram?.message)}
                 asterisk={false}
                 socialMediaIcon={<IoLogoInstagram />}
                 socialMediaName="Instagram"
@@ -323,7 +334,7 @@ export default function EditCardLayout({onShow}: {onShow: (show: boolean) => voi
               />
               <TitleSimpleLayout title="Tarifa de la RCV" />
               <NumberHorizontalInput
-                errorDescription={errors.tag?.message}
+                errorDescription={getErrorMessage(errors.tag?.message)}
                 icon={<FaDollarSign />}
                 control={control}
                 inputSize="235px"

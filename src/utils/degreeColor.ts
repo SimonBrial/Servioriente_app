@@ -46,5 +46,6 @@ export default function degreeColor(degree: degreeType) {
       colorDegree.degreeStr.toLowerCase() === degree.toLowerCase(),
   );
   return colorSelected
-    ? [colorSelected.colorDegree, colorSelected.colorWithOpacity] : "#E53E3E";
+    ? [colorSelected.colorDegree, colorSelected.colorWithOpacity]
+    : "#E53E3E";
 }

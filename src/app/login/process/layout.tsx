@@ -27,10 +27,10 @@ export default function ProcessLayout({
             description="Total de usuario"
           />
           <AutoCompleteInput
-            /* fnSearchTerm={() => null}
+            fnSearchTerm={() => null}
             fnResults={() => null}
             dataFilter={[]}
-            term="" */
+            term=""
           />
           <BtnFilter>
             <GeneralFilterLayout />

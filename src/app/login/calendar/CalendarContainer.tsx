@@ -1,5 +1,4 @@
 import InsideContainer from "@/components/container/InsideContainer";
-import React from "react";
 
 export const CalendarContainer = ({
   children,
@@ -7,7 +6,7 @@ export const CalendarContainer = ({
   children: React.ReactNode;
 }): JSX.Element => {
   return (
-    <InsideContainer offset={182} withBackground={false} withBorder={false} key={crypto.randomUUID()}>
+    <InsideContainer offset={115} withBackground={false} withBorder={false} key={crypto.randomUUID()}>
       {children}
     </InsideContainer>
   );

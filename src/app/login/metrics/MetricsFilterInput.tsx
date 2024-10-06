@@ -91,14 +91,17 @@ export const MetricsFilterInput = ({
           {btnDisable ? (
             <Box>
               <BtnAdd
-                iconTag="add-event"
+                // iconTag="add-event"
                 label="Nueva Meta"
                 key={crypto.randomUUID()}
-                color="#2BDD66"
-                description="La meta ha sido creada y guardada satisfactoriamente 📈!"
-                id={crypto.randomUUID()}
-                labelBtn="Crear Meta"
-                title="Meta Creada"
+                fnShow={() => { }}
+                iconTag="goal"
+                showDrawer
+                // color="#2BDD66"
+                // description="La meta ha sido creada y guardada satisfactoriamente 📈!"
+                // id={crypto.randomUUID()}
+                // labelBtn="Crear Meta"
+                // title="Meta Creada"
               >
                 <GoalsLayout />
               </BtnAdd>

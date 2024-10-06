@@ -34,7 +34,7 @@ export default function EventEditLayout() {
       <TitleLayout title="Editar Tarea" icon="" color="" onText={false} />
       <Stack p={0} style={{ width: "100%" }} justify="space-between">
         <Stack p={0} style={{ width: "100%" }} gap={6}>
-          <HorizontalInputLayout
+          {/* <HorizontalInputLayout
             asterisk={false}
             icon={<MdOutlineTitle />}
             inputSize="250px"
@@ -47,7 +47,7 @@ export default function EventEditLayout() {
             inputSize="250px"
             title="Estado"
             key={crypto.randomUUID()}
-          />
+          /> */}
           <Flex align={"center"} justify={"space-between"}>
             <Title
               order={4}
@@ -118,7 +118,7 @@ export default function EventEditLayout() {
                 p={0}
                 className={heightClasses.metrics_event_container_edit}
               >
-                <TextEditor />
+                {/* <TextEditor /> */} prueba
               </ScrollArea>
             </ContainerInside>
           </Stack>

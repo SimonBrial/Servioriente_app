@@ -119,17 +119,18 @@ export default function ItemBigCardContainer() {
       <Table.Td>{element.date}</Table.Td>
       <Table.Td>
         <Flex gap={6}>
-          <BtnSee>
+          <BtnSee idToShow="">
             <EventDescriptionLayout />
           </BtnSee>
           <BtnEdit
-            key={crypto.randomUUID()}
-            id={crypto.randomUUID()}
+            editLayout={false}
+            fnShowEditLayout={() => { }}
+            id=""
             buttonStyles="special"
-            description="La Tarea ha sido editada satisfactoriamente 😎!"
-            labelBtn="Guardar"
-            color="#2BDD66"
-            title="Tarea Editada"
+            // description="La Tarea ha sido editada satisfactoriamente 😎!"
+            // labelBtn="Guardar"
+            // color="#2BDD66"
+            // title="Tarea Editada"
           >
             <EventEditLayout />
           </BtnEdit>

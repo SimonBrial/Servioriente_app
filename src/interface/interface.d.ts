@@ -114,7 +114,7 @@ interface CardProcessProps {
   id: string | UniqueIdentifier;
   phonePost: string | number;
   birthday?: Date | string;
-  columnId: processTitle | string;
+  columnId: processTitle;
   instagram?: string;
   firstName: string;
   facebook?: string;
@@ -264,7 +264,7 @@ interface NotitifacionProps {
 
 interface EventCardProps {
   userToassign: string;
-  desription: string;
+  description: string;
   degree: degreeType;
   cardSize: cardSize;
   title: string;
@@ -324,9 +324,12 @@ interface DonutChartDataProps {
 }
 
 interface EventsArray {
+  id: string;
   date: Date;
   title: string;
   degree: degreeType;
+  description: string;
+  userToassign: string;
 }
 
 /* interface EventCardProps {
@@ -337,6 +340,7 @@ interface EventsArray {
 } */
 
 interface SmallEventCardProps {
+  id: string;
   title: string;
   degree: degreeType;
   date: Date;

@@ -53,12 +53,11 @@ export const processCardSchema = z.object({
   facebook: z.string().nullable(),
   instagram: z.string().nullable(),
   // columnId: z.enum(processStatus, { message: "El estado es requerido." }),
-  tag: z
-    .number({
-      message:
-        "El tag es el costo de la RCV, es requerido El valor de la tarifa debe ser mayor a 0.",
-    })
-    /* .refine((value) => {
+  tag: z.number({
+    message:
+      "El tag es el costo de la RCV, es requerido El valor de la tarifa debe ser mayor a 0.",
+  }),
+  /* .refine((value) => {
       if (typeof value && value === 0) {
         throw new z.ZodError([
           {
@@ -68,7 +67,7 @@ export const processCardSchema = z.object({
           },
         ]);
       }
-    }) */,
+    }) */
 });
 
 /* if (value === 0) {

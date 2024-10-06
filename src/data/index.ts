@@ -8,7 +8,7 @@ import { MOCKEVENTS, months, weekDays } from "./calendarDaysAndMonth";
 import { listDB } from "./ListDB";
 import { dashboardProcessList } from "./dashboardDataFake";
 import { eventCardArray } from "./eventCardsData";
-import { INITIAL_CARDS, dataFakeCard } from "./initialCards";
+import { dataFakeCard2, dataFakeCard } from "./initialCards";
 import { mailReceivedFake } from "./mailData";
 import { chartData, tmrArray, tmrPerHour } from "./socialMediaData";
 import { VenezuelaStates } from "./venezuela";
@@ -25,7 +25,7 @@ export {
   alarmDataArray,
   eventCardArray,
   difusionArray,
-  INITIAL_CARDS,
+  dataFakeCard2,
   calendarData,
   dataFakeCard,
   tmrPerHour,

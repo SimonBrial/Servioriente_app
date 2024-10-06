@@ -104,10 +104,10 @@ export default function LoginForm() {
               visibilityToggle: { color: theme.colors.lightTheme[3] },
             })}
           />
-          <Flex align={"center"} gap={6}>
+          {/* <Flex align={"center"} gap={6}>
             <Checkbox color="#115dfe" />
             <Text>Recodar mi contraseña</Text>
-          </Flex>
+          </Flex> */}
           <Stack gap={4} align="end">
           <Button type="submit" mt="sm" fullWidth color="#115dfe">
                 Iniciar Sesion

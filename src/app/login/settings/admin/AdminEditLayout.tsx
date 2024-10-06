@@ -7,12 +7,12 @@ import { AgeInput } from "@/components/inputs/AgeInput";
 import { CalendarInput } from "@/components/inputs/CalendarInput";
 import HorizontalInputLayout from "@/components/inputs/HorizontalInputLayout";
 import { MunicipalitySelect } from "@/components/inputs/MunicipalitySelect";
-import { StateSelect } from "@/components/inputs/StateSelect";
 import { TitleLayout } from "@/components/layout/TitleLayout";
 import { HiOutlineMail, HiOutlineUser, IoClose } from "@/icons";
 import { Button, Flex, Stack, useMantineColorScheme } from "@mantine/core";
 import classes from "@/styles/btn-styles.module.css";
 import Link from "next/link";
+import StateSelect from "@/components/inputs/StateSelect";
 
 export function AdminEditLayout() {
   const { colorScheme } = useMantineColorScheme();
@@ -21,7 +21,7 @@ export function AdminEditLayout() {
       <Stack justify="space-between" style={{ height: "100%" }}>
         <Stack gap={6} style={{ padding: "0 1rem" }}>
           <TitleLayout color="" icon="" onText title="Datos del Usuario" />
-          <HorizontalInputLayout
+          {/* <HorizontalInputLayout
             inputSize="300px"
             asterisk={false}
             icon={<HiOutlineUser />}
@@ -43,10 +43,10 @@ export function AdminEditLayout() {
             title="Fecha de Cumpleaños"
             withTitle
             width={"300px"}
-          />
+          /> */}
           <AgeInput inputSize="300px" />
           <AdminTypeSelect inputSize="300px" />
-          <StateSelect inputSize="300px" />
+          {/* <StateSelect inputSize="300px"  /> */}
           <MunicipalitySelect estado="Amazonas" inputSize="300px" />
         </Stack>
         <Flex gap={6}>

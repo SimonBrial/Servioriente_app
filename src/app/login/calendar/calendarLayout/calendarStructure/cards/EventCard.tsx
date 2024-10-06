@@ -18,14 +18,14 @@ import { degreeType } from "@/types/types";
 
 interface EventCardProps {
   title: string;
-  desription: string;
+  description: string;
   degree: degreeType;
   userToassign: string;
 }
 
 export const EventCard = ({
   userToassign,
-  desription,
+  description,
   degree,
   title,
 }: EventCardProps) => {
@@ -92,7 +92,7 @@ export const EventCard = ({
             </Flex>
             <Divider color={degreeColor(degree)[0]} />
           </Stack>
-          <Text size="sm">{desription}</Text>
+          <Text size="sm">{description}</Text>
         </Container>
       </Collapse>
     </Box>

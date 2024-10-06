@@ -44,7 +44,7 @@ export const restPasswordSchema = z
       throw new z.ZodError([
         {
           path: ["confirmPassword"],
-          message: "Las contrañas no pueden estar vacias",
+          message: "Las contraseñas no pueden estar vacias",
           code: "custom",
         },
       ]);
