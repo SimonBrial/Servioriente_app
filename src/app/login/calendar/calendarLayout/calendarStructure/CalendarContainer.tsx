@@ -20,6 +20,7 @@ export default function CalendarContainer() {
     >
       <Container className={classes.calendarContainer}>
         <Stack style={{ width: "100%" }}>
+          prueba
           <DayNavCalendar />
           <DatesContainer />
         </Stack>
