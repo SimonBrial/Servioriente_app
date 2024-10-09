@@ -77,23 +77,22 @@ export const useCalendarStore = create<CalendarStoreProps>()((set, get) => {
     },
     fnEventListGenerator: (date) => {
       const { currentMonth, currentYear, eventsArray } = get();
-      return eventsArray
-        .map((event) => {
+      if (eventsArray.length > 0) {
+        return eventsArray.flatMap((event) => {
           if (
             date.getDate() === event.date.getDate() &&
-            date.getMonth() === event.date.getMonth()
+            date.getMonth() === event.date.getMonth() &&
+            areDateOnSameDay(
+              getDateObjet(date.getDate(), currentMonth, currentYear),
+              event.date,
+            )
           ) {
-            if (
-              areDateOnSameDay(
-                getDateObjet(date.getDate(), currentMonth, currentYear),
-                event.date,
-              )
-            ) {
-              return event;
-            }
+            return event;
           }
-        })
-        .filter((event) => event !== undefined);
+          return []; // Devuelve un array vacío en lugar de `undefined`
+        });
+      }
+      return [];
     },
     fnIsDateInCurrentMonth: (day, month, year) => {
       const date = new Date(year, month, day);

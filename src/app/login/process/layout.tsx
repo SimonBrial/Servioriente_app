@@ -26,12 +26,12 @@ export default function ProcessLayout({
             iconSection={<HiOutlineUserCircle />}
             description="Total de usuario"
           />
-          <AutoCompleteInput
+          {/* <AutoCompleteInput
             fnSearchTerm={() => null}
             fnResults={() => null}
             dataFilter={[]}
             term=""
-          />
+          /> */}
           <BtnFilter>
             <GeneralFilterLayout />
           </BtnFilter>
