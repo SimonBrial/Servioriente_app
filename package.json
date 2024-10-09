@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm install --legacy-peer-deps && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -39,8 +39,6 @@
     "@tiptap/starter-kit": "^2.8.0",
     "chart.js": "4.4.4",
     "dayjs": "^1.11.13",
-    "eslint": "^9.12.0",
-    "eslint-config-next": "^14.2.15",
     "faker": "^5.5.3",
     "html-react-parser": "^5.1.18",
     "next": "^14.2.15",
@@ -55,17 +53,18 @@
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
     "@next/eslint-plugin-next": "^14.2.15",
-    "@types/faker": "^6.6.9",
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/react-icons": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.8.1",
-    "eslint-config-standard-with-typescript": "^43.0.1",
+    "typescript": "^5",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.1",
+    "eslint": "^9.12.0",
+    "eslint-config-next": "^14.2.15",
+    "eslint-config-standard": "^17.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
     "eslint-plugin-n": "^17.10.3",
     "eslint-plugin-promise": "^7.1.0",
-    "eslint-plugin-react": "^7.37.1",
-    "typescript": "^5"
+    "eslint-config-standard-with-typescript": "^43.0.1"
   }
 }
