@@ -1,8 +1,4 @@
-import {
-  fakeAlarmDescription,
-  alarmFolderArray,
-  alarmDataArray,
-} from "./alarmData";
+
 import { calendarData } from "./calendarData";
 import { MOCKEVENTS, months, weekDays } from "./calendarDaysAndMonth";
 import { listDB } from "./ListDB";
@@ -14,6 +10,7 @@ import { chartData, tmrArray, tmrPerHour } from "./socialMediaData";
 import { VenezuelaStates } from "./venezuela";
 import { difusionArray } from "./chatsDatafake";
 import { MetricsDataFake } from "./metricsData";
+import { alarmDataArray, alarmFolderArray, fakeAlarmDescription } from "./AlarmData";
 
 export {
   fakeAlarmDescription,

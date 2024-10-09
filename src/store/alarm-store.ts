@@ -4,7 +4,7 @@ import {
   AlarmCardArray,
   AlarmObj,
 } from "@/interface/interface";
-import { alarmFolderArray, alarmDataArray } from "@/data/alarmData";
+import { alarmDataArray, alarmFolderArray } from "@/data/AlarmData";
 
 /* Functionalities of this section
   --> Folder Fn
